@@ -1,0 +1,9 @@
+export const SET_TAGSLIST = 'SET_TAGSLIST' //set tagsList列表
+export const CLEAR_TAGSLIST = 'CLEAR_TAGSLIST' //清空tagsList列表
+export const DELETE_TAGSLIST = 'DELETE_TAGSLIST' //根据下标删除tagsList中的某一个对象
+export const UPDATA_COLLAPSE = "UPDATA_COLLAPSE" //修改左侧导航栏隐藏状态
+export const UPDATE_ROLE_PURVIEW = "UPDATE_ROLE_PURVIEW" //修改用户权限
+export const ARRANGE_MENU = "ARRANGE_MENU" //整理菜单
+export const DELETE_MENU = "DELETE_MENU" //清空菜单
+export const SET_INCLUDE = "SET_INCLUDE" //存储页面缓存对象
+export const DELETE_INCLUDE = "DELETE_INCLUDE" //删除缓存对象

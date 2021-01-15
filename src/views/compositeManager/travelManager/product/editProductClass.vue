@@ -1,0 +1,14 @@
+<template>
+  <div>
+    <AddOrEdit></AddOrEdit>
+  </div>
+</template>
+<script>
+import AddOrEdit from "./component/addOrEditProductClass";
+export default {
+  name: "editProductClass",
+  components: {
+    AddOrEdit,
+  },
+};
+</script>

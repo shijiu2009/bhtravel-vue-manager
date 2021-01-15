@@ -1,0 +1,263 @@
+/* 表单样式修改 */
+.form_item {
+    width: 80%;
+}
+.edui-default .edui-editor{
+    width: 100%!important;
+    z-index: 2!important;
+    position: relative!important;
+}
+.el-form-item .el-cascader,
+.el-form-item .el-select {
+    width: 100%;
+}
+
+.timePicker {
+    width: 100%;
+}
+
+.timePicker .el-range-editor.el-input__inner {
+    width: 100%;
+}
+
+.info_box { 
+    width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.form-box .el-input,
+.form-box .timePicker {
+    width: 100%;
+    display: inline-block;
+}
+
+.form-box .el-alert {
+    width: 100%;
+    transition: all 0.4s ease;
+    line-height: 0;
+}
+
+.timePicker .el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+    width: 100%;
+}
+
+.el-row {
+    margin-bottom: 20px;
+}
+
+.el-col {
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+/* 图片上传 */
+.hide .el-upload--picture-card {
+    display: none;
+}
+
+.images_upload .el-upload-list__item {
+    transition: none !important;
+    /* none !important; */
+}
+
+/* 富文本框 */
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    height: 100%;
+    min-height: 400px;
+}
+
+/* table表格样式 */
+/* .el-table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+} */
+.handle-box {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.searChfactor {
+    display: inline-block;
+    margin: 0px 10px 10px 0 !important;
+}
+
+.input-box {
+    width: 200px;
+}
+
+.block {
+    display: inline-block;
+}
+
+.pagination {
+    position: fixed;
+    bottom: 10px;
+    transition: all 0.5;
+    animation: paginationShow 0.5s infinite;
+    -webkit-animation: paginationShow 0.5s infinite;
+    /*Safari and Chrome*/
+}
+
+.slide-top-enter-active .pagination {
+    display: none;
+}
+
+.el-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.cell_face.el-image {
+    display: block;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.noAvatar {
+    display: block;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    font-size: 12px;
+    line-height: 40px;
+    text-align: center;
+    background: #eee;
+}
+
+/* 小问号内容提示样式 */
+
+.input_tips {
+    cursor: pointer;
+    font-size: 14px;
+    color: red;
+    position: absolute;
+    right: -28px;
+    margin-left: 10px;
+    top: 12px;
+}
+.fingerTips {
+    position: fixed;
+    display: none;
+    transform: translate(calc(-50% + 8px), 30px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.fingerTips.show {
+    display: block;
+}
+.fingerTips.show_01 {
+    opacity: 1;
+}
+.fingerTips .fingerTips_item {
+    color: #666;
+    font-size: 14px;
+    border: 1px solid #333;
+    display: inline-block;
+    padding: 6px 8px;
+    border-radius: 4px;
+    text-align: center;
+    max-width: 420px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.fingerTips.show .fingerTips_item {
+    opacity: 1;
+}
+
+.fingerTips_arrow {
+    position: absolute;
+    left: calc(50% - 4px);
+    top: 0;
+    transform: translateY(-10px);
+}
+
+.fingerTips_arrow::before {
+    content: " ";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    transform: rotate(45deg);
+}
+
+/* 表单报错样式 */
+.report_error {
+    display: none;
+    position: relative;
+    opacity: 0;
+}
+.report_error_item {
+    padding: 8px 16px;
+    background-color: #fef0f0;
+    color: #f56c6c;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 1s ease;
+    align-items: center;
+    overflow: hidden;
+    line-height: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+}
+.report_error.show_01 .report_error_item {
+    opacity: 1;
+}
+.report_error .icon {
+    font-size: 16px;
+    width: 16px;
+}
+
+.report_error .content {
+    display: table-cell;
+    padding: 0 8px;
+}
+.report_error.show {
+    display: block;
+}
+.report_error.show_01 {
+    opacity: 1;
+}
+
+/* 抽屉按钮 */
+.confirmBtn {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    transform: translateY(50%);
+}
+
