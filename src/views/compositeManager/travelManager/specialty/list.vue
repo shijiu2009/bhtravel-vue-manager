@@ -163,7 +163,23 @@ export default {
             title: "特产名称",
           },
         ],
-        date: true,
+        select: [
+          {
+            name: "down",
+            title: "状态",
+            list: [
+              {
+                value: "0",
+                label: "上架",
+              },
+              {
+                value: "1",
+                label: "下架",
+              },
+            ],
+          },
+        ],
+        date: false,
       },
       //广告位置列表，用做筛选条件
       loctions: {

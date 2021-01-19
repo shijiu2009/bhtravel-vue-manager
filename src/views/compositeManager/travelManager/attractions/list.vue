@@ -77,6 +77,13 @@
             >
           </template>
         </el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+          sortable
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <div slot-scope="scope">
             <el-button
@@ -108,13 +115,6 @@
             ></el-button>
           </div>
         </el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="创建时间"
-          align="center"
-          show-overflow-tooltip
-          sortable
-        ></el-table-column>
       </el-table>
       <!-- 分页 -->
       <div class="pagination">
@@ -159,16 +159,16 @@ export default {
         ],
         select: [
           {
-            name: "isOpen",
-            title: "开放预定",
+            name: "down",
+            title: "状态",
             list: [
               {
                 value: "0",
-                label: "否",
+                label: "上架",
               },
               {
                 value: "1",
-                label: "是",
+                label: "下架",
               },
             ],
           },

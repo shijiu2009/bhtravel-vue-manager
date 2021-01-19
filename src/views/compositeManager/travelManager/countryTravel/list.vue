@@ -34,7 +34,6 @@
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="indexTip" label="首页提示语" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="address" label="地址" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="opening" label="开放时间" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip sortable></el-table-column>
@@ -126,7 +125,23 @@ export default {
             title: "乡村旅游名称",
           },
         ],
-        date: true,
+        select: [
+          {
+            name: "down",
+            title: "状态",
+            list: [
+              {
+                value: "0",
+                label: "上架",
+              },
+              {
+                value: "1",
+                label: "下架",
+              },
+            ],
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {

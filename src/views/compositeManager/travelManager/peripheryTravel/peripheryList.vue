@@ -44,13 +44,13 @@
         ></el-table-column>
         <el-table-column
           prop="title"
-          label="标题"
+          label="线路名称"
           align="center"
           show-overflow-tooltip
         ></el-table-column>
         <el-table-column
-          prop="createTime"
-          label="创建时间"
+          prop="todayPrice"
+          label="显示价格"
           align="center"
           show-overflow-tooltip
         ></el-table-column>
@@ -72,6 +72,12 @@
             >
           </template>
         </el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <el-button
@@ -132,7 +138,23 @@ export default {
             title: "线路名称",
           },
         ],
-        date: true,
+        select: [
+          {
+            name: "down",
+            title: "状态",
+            list: [
+              {
+                value: "0",
+                label: "上架",
+              },
+              {
+                value: "1",
+                label: "下架",
+              },
+            ],
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {

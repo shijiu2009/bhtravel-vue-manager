@@ -35,7 +35,17 @@
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="name" label="酒店名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column label="星级" width="60" align="center">
+          <template slot-scope="scope" >
+            <el-tag v-if="scope.row.stars='0'">无星级</el-tag>
+            <el-tag v-if="scope.row.stars='1'">一星级</el-tag>
+            <el-tag v-if="scope.row.stars='2'">二星级</el-tag>
+            <el-tag v-if="scope.row.stars='3'">三星级</el-tag>
+            <el-tag v-if="scope.row.stars='4'">四星级</el-tag>
+            <el-tag v-if="scope.row.stars='5'">五星级</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="address" label="酒店地址" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="开放预定" width="60" align="center">
           <template slot-scope="scope" >
             <el-tag
@@ -52,6 +62,7 @@
             >{{scope.row.down=="0"?"是":"否"}}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <el-button
@@ -112,7 +123,23 @@ export default {
             title: "酒店名称",
           },
         ],
-        date: true,
+        select: [
+          {
+            name: "down",
+            title: "状态",
+            list: [
+              {
+                value: "0",
+                label: "上架",
+              },
+              {
+                value: "1",
+                label: "下架",
+              },
+            ],
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {
