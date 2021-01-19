@@ -44,13 +44,7 @@
         <el-table-column
           prop="name"
           label="名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="indexTip"
-          label="首页提示语"
-          align="center"
+          align="center"  
           show-overflow-tooltip
         ></el-table-column>
         <el-table-column
@@ -64,13 +58,6 @@
           label="开放时间"
           align="center"
           show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="创建时间"
-          align="center"
-          show-overflow-tooltip
-          sortable
         ></el-table-column>
         <el-table-column label="开放预定">
           <template slot-scope="scope">
@@ -121,6 +108,13 @@
             ></el-button>
           </div>
         </el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+          sortable
+        ></el-table-column>
       </el-table>
       <!-- 分页 -->
       <div class="pagination">
@@ -163,7 +157,23 @@ export default {
             title: "景点名称",
           },
         ],
-        date: true,
+        select: [
+          {
+            name: "isOpen",
+            title: "开放预定",
+            list: [
+              {
+                value: "0",
+                label: "否",
+              },
+              {
+                value: "1",
+                label: "是",
+              },
+            ],
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {
