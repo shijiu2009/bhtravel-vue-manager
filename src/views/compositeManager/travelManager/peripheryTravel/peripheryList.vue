@@ -77,6 +77,7 @@
           label="创建时间"
           align="center"
           show-overflow-tooltip
+          sortable
         ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">

@@ -37,12 +37,12 @@
         <el-table-column prop="name" label="民宿名称" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="星级" width="60" align="center">
           <template slot-scope="scope" >
-            <el-tag v-if="scope.row.stars='0'">无星级</el-tag>
-            <el-tag v-if="scope.row.stars='1'">一星级</el-tag>
-            <el-tag v-if="scope.row.stars='2'">二星级</el-tag>
-            <el-tag v-if="scope.row.stars='3'">三星级</el-tag>
-            <el-tag v-if="scope.row.stars='4'">四星级</el-tag>
-            <el-tag v-if="scope.row.stars='5'">五星级</el-tag>
+            <el-tag v-if="scope.row.stars=='0'">无星级</el-tag>
+            <el-tag v-if="scope.row.stars=='1'">一星级</el-tag>
+            <el-tag v-if="scope.row.stars=='2'">二星级</el-tag>
+            <el-tag v-if="scope.row.stars=='3'">三星级</el-tag>
+            <el-tag v-if="scope.row.stars=='4'">四星级</el-tag>
+            <el-tag v-if="scope.row.stars=='5'">五星级</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="address" label="民宿地址" align="center" show-overflow-tooltip></el-table-column>
