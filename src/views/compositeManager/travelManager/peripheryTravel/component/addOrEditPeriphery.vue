@@ -408,16 +408,16 @@
           </el-col>
           <el-col :span="6">
             <label class="products-label">分类</label>
-            <el-select v-model="prodcutClass" placeholder="请选择">
-              <el-option :key="1" :label="美食" :value="1"></el-option>
-              <el-option :key="2" :label="特产" :value="2"></el-option>
+            <el-select v-model="productClass" placeholder="请选择">
+              <el-option :key="1" :label="'美食'" :value="1"></el-option>
+              <el-option :key="2" :label="'特产'" :value="2"></el-option>
             </el-select>
           </el-col>
           <el-col :span="6">
             <label class="products-label">是否上架</label>
             <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="上架" :value="1"></el-option>
-              <el-option :key="0" :label="下架" :value="0"></el-option>
+              <el-option :key="1" :label="'上架'" :value="1"></el-option>
+              <el-option :key="0" :label="'下架'" :value="0"></el-option>
             </el-select>
           </el-col>
           <el-col :span="6">
@@ -474,8 +474,9 @@
           small
           layout="prev, pager, next"
           :total="page.totalCount"
-          :page-sizes="page.rows"
-          @current-change="changePageProducts(index)"
+          :page-size="page.rows"
+          :current-page="page.page"
+          @current-change="changePageProducts"
         >
         </el-pagination>
         <div slot="footer" class="dialog-footer">
@@ -775,7 +776,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.products = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.products.forEach((product, i) => {
               this.selectProducts.forEach((selectProduct, j) => {
@@ -802,7 +803,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.products = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.products.forEach((product, i) => {
               this.selectProducts.forEach((selectProduct, j) => {
@@ -829,7 +830,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.products = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.products.forEach((product, i) => {
               this.selectProducts.forEach((selectProduct, j) => {
