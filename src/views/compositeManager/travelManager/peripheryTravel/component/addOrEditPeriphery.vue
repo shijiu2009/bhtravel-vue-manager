@@ -1138,15 +1138,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.products-label {
-  font-size: 14px;
-  display: inline-block;
-  margin-bottom: 6px;
-}
-.products-div {
-  display: flex;
-  align-items: flex-end;
-}
-</style>
