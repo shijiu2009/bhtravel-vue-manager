@@ -5,7 +5,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/': { // 配置的变量/api
-        target: 'http://192.168.31.151:8888', // 需要请求的第三方接口 https://travel.gxucreate.com/travelbh
+        target: 'https://travel.gxucreate.com/travelbh', // 需要请求的第三方接口 https://travel.gxucreate.com/travelbh
         changeOrigin: true, // 开启代理：
         pathRewrite: { // 这里重写路径，如果api本身不存在接口路径中，一定要写成空！！！
           '/': ''
