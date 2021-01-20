@@ -260,4 +260,14 @@
     left: 8px;
     transform: translateY(50%);
 }
+/* 表格 */
+.products-label {
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+.products-div {
+    display: flex;
+    align-items: flex-end;
+}
 
