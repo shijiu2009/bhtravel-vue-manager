@@ -245,17 +245,20 @@ export default {
         .getAllList(this.page)
         .then((result) => {
           this.loading = false; //关掉加载动画
-          this.products = result.rows;
+          this.tradingUsers = result.rows;
           this.page.totalCount = result.total;
           this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
+            this.tradingUsers.forEach((tradingUser, i) => {
+              this.selectTradingUsers.forEach((selectTradingUser, j) => {
                 if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
+                  this.tradingUsers[i] != null &&
+                  this.selectTradingUsers[j] != null &&
+                  this.tradingUsers[i].id == this.selectTradingUsers[j].id
                 ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                  this.$refs.tradingUsersTable.toggleRowSelection(
+                    this.tradingUsers[i],
+                    true
+                  );
                 }
               });
             });
@@ -272,17 +275,20 @@ export default {
         .getAllList(this.page)
         .then((result) => {
           this.loading = false; //关掉加载动画
-          this.products = result.rows;
+          this.tradingUsers = result.rows;
           this.page.totalCount = result.total;
           this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
+            this.tradingUsers.forEach((tradingUser, i) => {
+              this.selectTradingUsers.forEach((selectTradingUser, j) => {
                 if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
+                  this.tradingUsers[i] != null &&
+                  this.selectTradingUsers[j] != null &&
+                  this.tradingUsers[i].id == this.selectTradingUsers[j].id
                 ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                  this.$refs.tradingUsersTable.toggleRowSelection(
+                    this.tradingUsers[i],
+                    true
+                  );
                 }
               });
             });
