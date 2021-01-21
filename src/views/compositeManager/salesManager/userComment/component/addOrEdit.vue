@@ -31,11 +31,12 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="评论内容" :required="true">
+          <el-form-item label="评论内容" :required="true" >
             <el-input
               type="textarea"
               rows="10"
               maxlength="255"
+              disabled
               v-model="commentInfo.content"
             ></el-input>
           </el-form-item>

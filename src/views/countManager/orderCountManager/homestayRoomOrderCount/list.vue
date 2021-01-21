@@ -42,7 +42,7 @@
         ></el-table-column>
         <el-table-column
           prop="roomCount"
-          label="房间数"
+          label="购买房间数"
           align="center"
           show-overflow-tooltip
         ></el-table-column>
@@ -58,12 +58,12 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="status_-1"
           label="付款订单数"
           align="center"
           show-overflow-tooltip
-        ></el-table-column>
+        ></el-table-column> -->
         <el-table-column
           prop="priceSum"
           label="价格总和"
