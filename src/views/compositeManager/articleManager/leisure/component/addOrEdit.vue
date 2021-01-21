@@ -93,6 +93,16 @@
     </div>
     <!-- 对话框 -->
     <el-dialog title="关联商家" :visible.sync="dialogTableTradingUsers">
+      <el-row :gutter="20" class="products-div">
+        <el-col :span="12">
+          <label class="products-label">商家名称</label
+          ><el-input v-model="productName" placeholder="商家名称"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button type="primary" @click="searchProducts">搜 索</el-button>
+        </el-col>
+      </el-row>
+
       <el-table :data="tradingUsers" ref="tradingUsersTable">
         <el-table-column type="selection"> </el-table-column>
         <el-table-column property="username" label="登录名称" width="150">
@@ -161,6 +171,18 @@ export default {
         typeId: "",
       },
       myConfig: ueditor.myConfig,
+      //分页数据
+      page: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
+      //对话框选项
+      productName: "",
       //关联商家
       tradingUsers: [],
       selectTradingUsers: [],
@@ -214,6 +236,63 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
+    searchProducts: function () {
+      this.page.page = 1;
+      if (this.productName != null && this.productName != "") {
+        this.page["businessName"] = this.productName;
+      }
+      tApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.products = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageProducts(index) {
+      this.page.page = index;
+      tApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.products = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     addTradingUsers: function () {
       this.dialogTableTradingUsers = true;
       tApi

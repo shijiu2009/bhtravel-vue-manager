@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      
+      <Screen :screenCondition="screenCondition"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -37,7 +37,7 @@
         <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="type" label="车型" align="center" show-overflow-tooltip></el-table-column>
         <!-- <el-table-column prop="seat" label="座位" align="center" show-overflow-tooltip></el-table-column> -->
-        <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="level" label="级别" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="phone" label="电话" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -80,24 +80,31 @@
 <script>
 import api from "@/api/travelManager/rentcar.js";
 import { mapMutations } from "vuex";
-
+import Screen from "@/components/screen/screen.vue";
 export default {
   name: "rentcarList",
+  components: {
+    Screen
+  },
   data() {
     return {
       //加载
       loading: true,
       themeList: [],
 
-      //搜索信息
-      queryInfo: {
-        job: "",
-        name: "",
-        date: "",
-      },
-      //广告位置列表，用做筛选条件
-      loctions: {
-        options: [],
+      //搜索栏数据
+      screenCondition: {
+        input: [
+          {
+            name: "name",
+            title: "名称",
+          },
+          {
+            name: "level",
+            title: "级别",
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {
@@ -154,7 +161,38 @@ export default {
       setTagsList: "SET_TAGSLIST",
     }),
     //触发搜索按钮
-    handleSearch: function () {
+    handleSearch: function (data) {
+      if (data != null) {
+        if (data.date != null && data.date.length > 0) {
+          data["startTime"] = data.date[0];
+          data["endTime"] = data.date[1];
+        } else {
+          data["startTime"] = null;
+          data["endTime"] = null;
+        }
+        data["page"] = this.page.page;
+        data["totalCount"] = this.page.totalCount;
+        data["rows"] = this.page.rows;
+        this.searchDate = data;
+      } else {
+        data = this.page;
+      }
+      api
+        .getList(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.themeList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
     },
     //删除所有选中项(批量删除)
     delAllSelection: function () {

@@ -266,6 +266,30 @@
 
       <!-- 对话框 -->
       <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
+        <el-row :gutter="20" class="products-div">
+          <el-col :span="6">
+            <label class="products-label">产品名称</label
+            ><el-input v-model="productName" placeholder="产品名称"></el-input>
+          </el-col>
+          <el-col :span="6">
+            <label class="products-label">分类</label>
+            <el-select v-model="productClass" placeholder="请选择">
+              <el-option :key="1" :label="'美食'" :value="1"></el-option>
+              <el-option :key="2" :label="'特产'" :value="2"></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="6">
+            <label class="products-label">是否上架</label>
+            <el-select v-model="productDown" placeholder="请选择">
+              <el-option :key="1" :label="'上架'" :value="1"></el-option>
+              <el-option :key="0" :label="'下架'" :value="0"></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="6">
+            <el-button type="primary" @click="searchProducts">搜 索</el-button>
+          </el-col>
+        </el-row>
+
         <el-table :data="products" ref="productsTable">
           <el-table-column type="selection"> </el-table-column>
           <el-table-column property="name" label="名称" width="150">
@@ -311,7 +335,15 @@
           </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <el-pagination small layout="prev, pager, next" :total="total"> </el-pagination>
+        <el-pagination
+          small
+          layout="prev, pager, next"
+          :total="page.totalCount"
+          :page-size="page.rows"
+          :current-page="page.page"
+          @current-change="changePageProducts"
+        >
+        </el-pagination>
         <div slot="footer" class="dialog-footer">
           <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
           <el-button type="primary" @click="confirmProducts">确 定</el-button>
@@ -379,6 +411,16 @@ export default {
         qualityGrade: "",
       },
       myConfig: ueditor.myConfig,
+      //分页数据
+      page: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
       items: [],
       tickets: [],
       products: [],
@@ -619,6 +661,69 @@ export default {
     close: function () {
       this.$router.go(-1);
     },
+    searchProducts: function () {
+      this.page.page = 1;
+      if (this.productName != null && this.productName != "") {
+        this.page["name"] = this.productName;
+      }
+      if (this.productClass != null && this.productClass != "") {
+        this.page["classId"] = this.productClass;
+      }
+      if (this.productDown != null && this.productDown != "") {
+        this.page["down"] = this.productDown;
+      }
+      productApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.products = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageProducts(index) {
+      this.page.page = index;
+      productApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.products = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     addProducts: function () {
       console.log(this.page)
       this.dialogTableProducts = true;
@@ -627,7 +732,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.products = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.products.forEach((product, i) => {
               this.selectProducts.forEach((selectProduct, j) => {

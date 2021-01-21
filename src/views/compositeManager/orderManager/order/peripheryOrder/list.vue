@@ -153,8 +153,58 @@ export default {
       screenCondition: {
         input: [
           {
-            name: "checkNo",
-            title: "核验码",
+            name: "attrName",
+            title: "景点名称",
+          },
+          {
+            name: "orderNo",
+            title: "订单号",
+          },
+        ],
+        select: [
+          {
+            name: "status",
+            title: "状态",
+            list: [
+              {
+                value: "1",
+                label: "未付款",
+              },
+              {
+                value: "3",
+                label: "已确认",
+              },
+              {
+                value: "4",
+                label: "已完成",
+              },
+              {
+                value: "-1",
+                label: "已取消",
+              },
+            ],
+          },
+          {
+            name: "refund",
+            title: "退款状态",
+            list: [
+              {
+                value: "0",
+                label: "正常",
+              },
+              {
+                value: "2",
+                label: "已确认",
+              },
+              {
+                value: "3",
+                label: "已退款",
+              },
+              {
+                value: "-1",
+                label: "已取消",
+              },
+            ],
           },
         ],
         date: false,
