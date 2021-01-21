@@ -81,6 +81,8 @@ export default {
 </script>
 <style scoped>
 .content_box {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   left: 240px;
   right: 0;
@@ -91,14 +93,16 @@ export default {
   padding-top: 50px;
 }
 .content {
+  flex: 1;
   width: auto;
   position: relative;
-  padding: 10px 20px 20px;
+
+  padding: 10px 20px 0px;
   overflow-y: scroll;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 500px;
-  height: calc(100% - 30px);
+  /* height: calc(100% - 30px); */
 }
 
 .isCollapse {

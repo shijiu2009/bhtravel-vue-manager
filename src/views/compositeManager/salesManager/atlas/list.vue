@@ -1,58 +1,6 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="handle-box">
-      <div>
-        <!-- 可选择下拉搜索 -->
-        <div class="searChfactor">
-          <el-select
-            size="mini"
-            v-model="queryInfo.job"
-            clearable
-            filterable
-            placeholder="所处位置"
-          >
-            <el-option
-              size="mini"
-              v-for="item in loctions.options"
-              :key="item.id"
-              :label="item.codeName"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <!-- 输入搜索条件input框 -->
-        <div class="searChfactor input-box">
-          <el-input
-            v-model="queryInfo.name"
-            placeholder="名称"
-            class="handle-input mr10"
-            size="mini"
-            clearable
-          ></el-input>
-        </div>
-        <!-- 时间选择器 -->
-        <div class="block searChfactor">
-          <el-date-picker
-            v-model="queryInfo.date"
-            size="mini"
-            type="datetimerange"
-            :picker-options="timePicker.pickerOptions"
-            range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          ></el-date-picker>
-        </div>
-        <!-- 搜索确定按钮 -->
-        <el-button
-          class="searChfactor"
-          type="primary"
-          size="mini"
-          icon="el-icon-search"
-          @click="handleSearch"
-          >搜索</el-button
-        >
-      </div>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -84,9 +32,14 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
+          :index="indexMethod"
           width="50"
           align="center"
           label="序号"
@@ -104,7 +57,7 @@
             <div
               style="
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 flex-wrap: wrap;
                 height: 100%;
@@ -152,7 +105,9 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
@@ -179,6 +134,7 @@ export default {
   name: "atlasList",
   data() {
     return {
+      index:0,
       //加载
       loading: true,
       atlasList: [],
@@ -247,6 +203,9 @@ export default {
     ...mapMutations({
       setTagsList: "SET_TAGSLIST",
     }),
+    indexMethod(index) {
+      return index + 1 + this.index;
+    },
     //触发搜索按钮
     handleSearch: function () {
       console.log(this.queryInfo);
@@ -302,6 +261,7 @@ export default {
     //获取图集列表
     getAtlas: function () {
       this.loading = true;
+      // this.index = this.page.page - 1 * this.page.rows
       atlasApi
         .getAtlas(this.page)
         .then((result) => {
@@ -325,7 +285,9 @@ export default {
     },
     //点击分页按钮
     handlePageChange: function (index) {
+
       this.page.page = index;
+      this.index = (this.page.page - 1 )* this.page.rows
       this.getAtlas();
     },
   },
@@ -341,3 +303,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.data_list {
+  z-index: -1;
+}
+.data_list >>> .cell_face.el-image {
+  border-radius: 0%;
+}
+.iamge_tb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+}
+.pagination {
+  position: sticky;
+  bottom: 0px;
+  background-color: #fff;
+  z-index: 99;
+  padding: 10px 0px;
+}
+</style>
