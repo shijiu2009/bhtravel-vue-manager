@@ -3,8 +3,8 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="线路标题">
-            <el-input v-model="info.title" @change="infoChange"></el-input>
+          <el-form-item label="线路标题" style="width:500px">
+            <el-input v-model="info.title" @change="infoChange" style="width:400px"></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -23,11 +23,11 @@
           </el-form-item>
 
           <el-form-item label="线路副标题">
-            <el-input v-model="info.subtitle" @change="infoChange"></el-input>
+            <el-input v-model="info.subtitle" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
-          <el-form-item label="基本房间数">
+          <!-- <el-form-item label="基本房间数">
             <el-input-number v-model="info.countRooms" :min="0"></el-input-number>
-          </el-form-item>
+          </el-form-item> -->
           <!-- <el-form-item label="价格">
             <el-input v-model="info.todayPrice"></el-input>
           </el-form-item> -->
@@ -124,7 +124,7 @@
               :config="myConfig"
             ></vue-ueditor-wrap>
           </el-form-item>
-          <el-form-item label="详细行程">
+          <!-- <el-form-item label="详细行程">
             <el-button type="success" @click="addTrip">添加</el-button>
             <div style="margin-top: 10px">
               <div :gutter="20" v-for="(eItem, index) in trips" :key="index">
@@ -177,10 +177,10 @@
                 </el-row>
               </div>
             </div>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="线路套餐">
             <!-- <el-button type="success" @click="addSub">添加</el-button> -->
-            <div style="margin-top: 10px">
+            <div style="margin-top: 30px">
               <div :gutter="20" v-for="(eItem, index) in psubList" :key="index">
                 <el-row>
                   <!-- <el-col :span="10">
@@ -232,10 +232,10 @@
                       ></el-input>
                     </el-form-item>
                   </el-col> -->
-                  <div>
+                  <div style="margin-top: 10px">
                     {{ eItem.title }}
                   </div>
-                  <el-col :offset="2" :span="4">
+                  <el-col :offset="2" :span="4" style="margin-top:-18px">
                     <el-button
                       type="primary"
                       round
@@ -256,41 +256,41 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="关联产品">
+          <el-form-item label="关联产品" >
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <!-- <el-card class="box-card">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
-          </el-card>
+          </el-card> -->
 
-          <el-form-item label="热门推荐">
-            <el-radio-group v-model="info.indexRecommend">
+          <el-form-item label="热门推荐" class="buttom-con">
+            <el-radio-group v-model="info.indexRecommend" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="热门搜索">
-            <el-radio-group v-model="info.hotSearch">
+          <el-form-item label="热门搜索" class="buttom-con">
+            <el-radio-group v-model="info.hotSearch"  class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="开放预定">
-            <el-radio-group v-model="info.isOpen">
+          <el-form-item label="开放预定" class="buttom-con">
+            <el-radio-group v-model="info.isOpen"  class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="是否下架">
-            <el-radio-group v-model="info.down">
+          <el-form-item label="是否下架" class="buttom-con">
+            <el-radio-group v-model="info.down"  class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-row>
+          <!-- <el-row>
             <el-col :span="3">
               <el-form-item label="图片集合"></el-form-item>
             </el-col>
@@ -299,7 +299,7 @@
               ref="UploadFile"
               :uploadGroup="uploadGroupOne"
             ></UploadFile>
-          </el-row>
+          </el-row> -->
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -401,30 +401,6 @@
 
       <!-- 对话框 -->
       <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
-        <el-row :gutter="20" class="products-div">
-          <el-col :span="6">
-            <label class="products-label">产品名称</label
-            ><el-input v-model="productName" placeholder="产品名称"></el-input>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">分类</label>
-            <el-select v-model="productClass" placeholder="请选择">
-              <el-option :key="1" :label="'美食'" :value="1"></el-option>
-              <el-option :key="2" :label="'特产'" :value="2"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">是否上架</label>
-            <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="'上架'" :value="1"></el-option>
-              <el-option :key="0" :label="'下架'" :value="0"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <el-button type="primary" @click="searchProducts">搜 索</el-button>
-          </el-col>
-        </el-row>
-
         <el-table :data="products" ref="productsTable">
           <el-table-column type="selection"> </el-table-column>
           <el-table-column property="name" label="名称" width="150">
@@ -470,15 +446,7 @@
           </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="page.totalCount"
-          :page-size="page.rows"
-          :current-page="page.page"
-          @current-change="changePageProducts"
-        >
-        </el-pagination>
+        <el-pagination small layout="prev, pager, next" :total="total"> </el-pagination>
         <div slot="footer" class="dialog-footer">
           <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
           <el-button type="primary" @click="confirmProducts">确 定</el-button>
@@ -540,20 +508,6 @@ export default {
         salesPrice: "",
         countRooms: 0,
         // reviewStat: 0,
-      },
-      //对话框选项
-      productName: "",
-      productClass: "",
-      productDown: "",
-      //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 10,
       },
       myConfig: ueditor.myConfig,
       baiduInfo: {
@@ -760,69 +714,6 @@ export default {
       this.subPrices =
         this.cachePrices[index] == undefined ? [] : this.cachePrices[index];
     },
-    searchProducts: function () {
-      this.page.page = 1;
-      if (this.productName != null && this.productName != "") {
-        this.page["name"] = this.productName;
-      }
-      if (this.productClass != null && this.productClass != "") {
-        this.page["classId"] = this.productClass;
-      }
-      if (this.productDown != null && this.productDown != "") {
-        this.page["down"] = this.productDown;
-      }
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    changePageProducts(index) {
-      this.page.page = index;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
     addProducts: function () {
       this.dialogTableProducts = true;
       productApi
@@ -830,7 +721,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.products = result.rows;
-          this.page.totalCount = result.total;
+          this.total = result.total;
           this.$nextTick(function () {
             this.products.forEach((product, i) => {
               this.selectProducts.forEach((selectProduct, j) => {
@@ -1113,7 +1004,7 @@ export default {
           provinces: [],
           cities: [],
           countys: [],
-          isArea: true,
+          isArea: true
         };
         this.uploadGroupOne.fileList = [];
         this.uploadGroupTitle.fileList = [];
