@@ -421,6 +421,10 @@ export default {
         // 默认每页显示的条数（可修改）
         rows: 10,
       },
+      //对话框选项
+      productName: "",
+      productClass: "",
+      productDown: "",
       items: [],
       tickets: [],
       products: [],
