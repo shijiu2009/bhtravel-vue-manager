@@ -260,14 +260,24 @@
     left: 8px;
     transform: translateY(50%);
 }
-/* 表格 */
-.products-label {
-    font-size: 14px;
-    display: inline-block;
-    margin-bottom: 6px;
-  }
-.products-div {
-    display: flex;
-    align-items: flex-end;
+/* ---------------------------------------------------------------pzk */
+/* 富文本编辑框 */
+.el-form-item__content{
+    line-height: 0 !important;
 }
-
+.edui-toolbar div:nth-child(-n+98):nth-child(n+78){
+    display: none !important;
+    background-color: #f56c6c;
+}
+.edui-toolbar div:nth-child(-n+71):nth-child(n+63){
+    display: none !important;
+    background-color: #f56c6c;
+}
+.buttom-con{
+    display: flex;
+    align-items: center;
+}
+.buttom-con-son{
+    margin-left: -100px;
+}
+/* ---------------------------------------------------------------pzk */

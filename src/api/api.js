@@ -10,8 +10,15 @@ let api = {
         }
     },
     async post(url, data) {
+        let info = {}
+        if (data instanceof Array) {
+            info = { ...data }
+        }
+        else {
+            info = data
+        }
         try {
-            return await axios.post(url, {...data})
+            return await axios.post(url, info)
         } catch (err) {
             return err
         }
