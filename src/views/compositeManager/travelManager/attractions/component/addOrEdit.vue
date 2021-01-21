@@ -725,6 +725,7 @@ export default {
         });
     },
     addProducts: function () {
+      console.log(this.page)
       this.dialogTableProducts = true;
       productApi
         .getAllList(this.page)

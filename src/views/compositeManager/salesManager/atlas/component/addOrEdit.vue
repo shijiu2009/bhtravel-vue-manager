@@ -4,7 +4,7 @@
       <el-form ref="form" :model="atlasInfo" label-width="90px">
         <div class="form_item">
           <el-form-item label="名称">
-            <el-input v-model="atlasInfo.name" @change="infoChange"></el-input>
+            <el-input v-model="atlasInfo.name" @change="infoChange" style="width:400px"></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"

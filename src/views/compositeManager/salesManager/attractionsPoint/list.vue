@@ -1,39 +1,6 @@
 <template>
   <div>
     <div class="handle-box">
-      <div>
-        <!-- 输入搜索条件input框 -->
-        <div class="searChfactor input-box">
-          <el-input
-            v-model="queryInfo.name"
-            placeholder="名称"
-            class="handle-input mr10"
-            size="mini"
-            clearable
-          ></el-input>
-        </div>
-        <!-- 时间选择器 -->
-        <div class="block searChfactor">
-          <el-date-picker
-            v-model="queryInfo.date"
-            size="mini"
-            type="datetimerange"
-            :picker-options="timePicker.pickerOptions"
-            range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          ></el-date-picker>
-        </div>
-        <!-- 搜索确定按钮 -->
-        <el-button
-          class="searChfactor"
-          type="primary"
-          size="mini"
-          icon="el-icon-search"
-          @click="handleSearch"
-        >搜索</el-button>
-      </div>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -65,11 +32,11 @@
       >
         <el-table-column type="selection" width="52" align="center"></el-table-column>
 
-        <el-table-column prop="id" width="50" align="center" label="序号" sortable></el-table-column>
+        <el-table-column prop="id" width="100" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="title" label="标题" width="150" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="attractionsName" label="所属景点" width="150" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="sort" label="排序" width="150" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column label="二维码图片" align="center" show-overflow-tooltip>
+        <el-table-column prop="attractionsName" label="所属景点" width="200" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="sort" label="排序" width="200" align="center" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column label="二维码图片" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <el-image
               v-if="scope.row.qrcodeImg"
@@ -78,8 +45,8 @@
               :preview-src-list="[url+scope.row.qrcodeImg]"
             ></el-image>
           </template>
-        </el-table-column>
-        <el-table-column label="是否显示" width="60" align="center">
+        </el-table-column> -->
+        <el-table-column label="是否显示" width="100" align="center">
           <template slot-scope="scope" >
             <el-tag
               :type="scope.row.recommend=='1' ? 'success' : 'primary'"
@@ -87,7 +54,7 @@
             >{{scope.row.recommend=="1"?"是":"否"}}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
+        <el-table-column  label="操作" width="200">
           <template slot-scope="scope">
             <el-button
               type="primary"

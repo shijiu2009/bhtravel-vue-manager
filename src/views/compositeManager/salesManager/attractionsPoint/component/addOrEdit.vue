@@ -2,8 +2,8 @@
   <div class="info_box">
     <div class="form-box">
       <el-form ref="form" :model="attractionsPointInfo" label-width="90px">
-        <div class="form_item">
-          <el-form-item label="标题">
+        <div class="form_item" >
+          <el-form-item label="标题" style="width:400px">
             <el-input
               v-model="attractionsPointInfo.title"
               @change="infoChange"

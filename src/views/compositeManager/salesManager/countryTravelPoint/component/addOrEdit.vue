@@ -3,7 +3,7 @@
     <div class="form-box">
       <el-form ref="form" :model="countryTravelPointInfo" label-width="90px">
         <div class="form_item">
-          <el-form-item label="标题">
+          <el-form-item label="标题" style="width:400px">
             <el-input
               v-model="countryTravelPointInfo.title"
               @change="infoChange"
