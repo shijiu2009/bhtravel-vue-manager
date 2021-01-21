@@ -135,7 +135,7 @@ export default {
   position: relative;
   overflow: hidden;
   /* background: #fff; */
-  padding: 5px 10px 0px 10px;
+  padding: 5px 10px 5px 10px;
   border-bottom: 1px solid #e5e5e5;
   /* box-shadow: 0 5px 10px #ddd; */
 }

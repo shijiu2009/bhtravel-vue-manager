@@ -4,37 +4,22 @@
       <el-form ref="form" :model="commentInfo" label-width="108px">
         <div class="form_item">
           <el-form-item label="评论对象类别" :required="true">
-            <el-select
-              v-model="commentInfo.type"
-              reserve-keyword
-              clearable
-              placeholder="请选择"
-            >
-              <el-option
-                v-for="item in ctypeList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
+            <el-input v-model="ctypeList[commentInfo.type].label" style="width:400px" disabled></el-input>
           </el-form-item>
           <el-form-item label="评论对象id" :required="true">
-            <el-input v-model="commentInfo.objectId"></el-input>
+            <el-input v-model="commentInfo.objectId" style="width:400px" disabled></el-input>
           </el-form-item>
           <el-form-item label="评论对象名称" :required="true">
-            <el-input v-model="commentInfo.objectName"></el-input>
+            <el-input v-model="commentInfo.objectName" style="width:400px" disabled></el-input>
           </el-form-item>
           <el-form-item label="评论用户ID" :required="true">
-            <el-input v-model="commentInfo.userId"></el-input>
+            <el-input v-model="commentInfo.userId" style="width:400px" disabled></el-input>
           </el-form-item>
           <el-form-item label="评论用户账号" :required="true">
-            <el-input v-model="commentInfo.userName"></el-input>
+            <el-input v-model="commentInfo.userName" style="width:400px" disabled></el-input>
           </el-form-item>
-          <el-form-item label="评论用户openId" :required="true">
-            <el-input v-model="commentInfo.openId"></el-input>
-          </el-form-item>
-          <el-form-item label="星级" :required="true">
-            <el-rate v-model="commentInfo.star" show-text> </el-rate>
+          <el-form-item label="星级" :required="true" class="rank">
+            <el-rate v-model="commentInfo.star" show-text disabled> </el-rate>
           </el-form-item>
           <el-form-item label="审核" :required="true">
             <el-select v-model="commentInfo.reviewed" placeholder="请选择">
@@ -277,3 +262,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.rank{
+  display: flex;
+  align-items: center;
+}
+.rank >>> .el-form-item__content{
+  margin-left: 0px !important;
+}
+</style>>
+

@@ -620,6 +620,7 @@ export default {
       this.$router.go(-1);
     },
     addProducts: function () {
+      console.log(this.page)
       this.dialogTableProducts = true;
       productApi
         .getAllList(this.page)
