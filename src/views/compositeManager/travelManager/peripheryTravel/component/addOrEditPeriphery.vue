@@ -260,12 +260,11 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
           </el-card>
-
           <el-form-item label="热门推荐" class="buttom-con">
             <el-radio-group v-model="info.indexRecommend" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>

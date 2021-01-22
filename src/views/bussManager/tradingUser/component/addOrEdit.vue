@@ -1,25 +1,25 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="90px">
+      <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <el-form-item label="登录名称">
-            <el-input v-model="info.username"></el-input>
+            <el-input v-model="info.username" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="登录密码" v-show="isShow">
-            <el-input v-model="info.password"></el-input>
+            <el-input v-model="info.password"  style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="登录中文名">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model="info.name" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="联系电话">
-            <el-input v-model="info.mobile"></el-input>
+            <el-input v-model="info.mobile" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="电子邮箱">
-            <el-input v-model="info.email"></el-input>
+            <el-input v-model="info.email" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="商家名称">
-            <el-input v-model="info.businessName"></el-input>
+            <el-input v-model="info.businessName" style="width:400px"></el-input>
           </el-form-item>
 
           <el-form-item label="头像">
@@ -31,14 +31,15 @@
           </el-form-item>
 
           <el-row>
-            <el-col :span="8">
-              <el-form-item label="合作模式">
+            <el-col :span="8" >
+              <el-form-item label="合作模式" class="select-option" >
                 <el-radio-group
                   v-model="info.cooperationMode"
                   @change="cooperationChange"
+                  
                 >
-                  <el-radio :label="1">结算底价</el-radio>
-                  <el-radio :label="2">佣金比例</el-radio>
+                  <el-radio :label="1" >结算底价</el-radio>
+                  <el-radio :label="2" >佣金比例</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
@@ -54,7 +55,7 @@
             </el-col>
           </el-row>
 
-          <el-form-item label="商家分类">
+          <!-- <el-form-item label="商家分类">
             <el-button type="success" @click="addClasses">添加</el-button>
           </el-form-item>
 
@@ -63,12 +64,12 @@
               {{ o.name }}
             </span>
           </el-card>
-          <br />
+          <br /> -->
 
           <el-form-item label="关联用户">
             <el-button type="success" @click="addUsers">添加</el-button>
           </el-form-item>
-          <el-card class="box-card">
+          <el-card class="box-card" v-show="selectUsers.length>0" style="width:500px">
             <span v-for="o in selectUsers" :key="o.id" class="text item">
               {{ o.username }}
             </span>
@@ -1556,3 +1557,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.info_box >>> .el-form-item__content{
+  line-height: 40px !important;
+}
+.box-card{
+  margin-bottom: 20px;
+}
+</style>>
+

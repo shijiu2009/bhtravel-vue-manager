@@ -1,16 +1,28 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="90px">
+      <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <el-form-item label="投诉人id">
-            <el-input v-model="info.userid" :disabled="true"></el-input>
+            <el-input
+              v-model="info.userid"
+              :disabled="true"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="投诉人用户名称">
-            <el-input v-model="info.user" :disabled="true"></el-input>
+            <el-input
+              v-model="info.user"
+              :disabled="true"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="投诉人电话号码">
-            <el-input v-model="info.phoneNumber" :disabled="true"></el-input>
+            <el-input
+              v-model="info.phoneNumber"
+              :disabled="true"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="投诉内容">
             <vue-ueditor-wrap
@@ -19,10 +31,13 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="回复内容">
-            <vue-ueditor-wrap v-model="info.reply" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.reply"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="回复人员帐号">
-            <el-input v-model="info.replyname"></el-input>
+            <el-input v-model="info.replyname" disabled></el-input>
           </el-form-item>
           <el-form-item label="是否显示">
             <el-radio-group v-model="info.isShow">
@@ -31,7 +46,6 @@
             </el-radio-group>
           </el-form-item>
         </div>
-
         <!-- 操作按钮 -->
         <el-form-item>
           <el-button type="primary" @click="onSubmit">表单提交</el-button>
@@ -43,12 +57,20 @@
 </template>
 <script>
 import api from "@/api/travelManager/complaint.js";
+import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 export default {
   components: {
     VueUeditorWrap,
+  },
+  computed: {
+    ...mapState({
+      userName: function (state) {
+        return state.user.userName;
+      },
+    }),
   },
   name: "addOrEditComplaint",
   data() {
@@ -127,6 +149,9 @@ export default {
           .detailed({ id: this.$route.params.id })
           .then((result) => {
             this.info = result.complaint;
+            if(!result.complaint.status){
+              this.info.replyname = this.userName
+            }
           })
           .catch(() => {
             this.$message.error("数据获取失败");
@@ -143,3 +168,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form-box >>> .el-form-item__content{
+  line-height: 40px !important;
+}
+</style>

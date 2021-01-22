@@ -1,37 +1,21 @@
 <template>
   <div>
     <div class="handle-box">
-      
+      <Screen :screenCondition="screenCondition"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
-        <el-button
-          type="primary"
-          icon="el-icon-delete"
-          class="handle-del mr10"
-          size="mini"
-          @click="delAllSelection"
-        >批量删除</el-button>
+        <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" size="mini" @click="delAllSelection">
+          批量删除</el-button>
         <!-- 添加按钮 -->
-        <el-button
-          type="primary"
-          icon="el-icon-plus"
-          class="handle-del mr10"
-          size="mini"
-          @click="createOrEditBtn('')"
-        >添加</el-button>
+        <el-button type="primary" icon="el-icon-plus" class="handle-del mr10" size="mini" @click="createOrEditBtn('')">
+          添加</el-button>
       </div>
     </div>
+
     <div class="data_list">
-      <el-table
-        :data="knowCityList"
-        border
-        ref="multipleTable"
-        style="width: 100%"
-        v-loading="loading"
-        :max-height="this.$tableHeight"
-        @selection-change="handleSelectionChange"
-      >
+      <el-table :data="knowCityList" border ref="multipleTable" style="width: 100%" v-loading="loading"
+        :max-height="this.$tableHeight" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="title" label="标题" align="center" show-overflow-tooltip></el-table-column>
@@ -39,46 +23,25 @@
         <el-table-column prop="author" label="作者" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="是否展现">
           <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.isShow=='1' ? 'success' : 'primary'"
-              disable-transitions
-            >{{scope.row.isShow=="1"?"是":"否"}}</el-tag>
+            <el-tag :type="scope.row.isShow=='1' ? 'success' : 'primary'" disable-transitions>
+              {{scope.row.isShow=="1"?"是":"否"}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="browseNum" label="浏览次数" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              round
-              icon="el-icon-edit"
-              circle
-              size="small"
-              title="编辑"
-              @click="createOrEditBtn(scope.row.id)"
-            ></el-button>
-            <el-button
-              type="danger"
-              round
-              icon="el-icon-delete"
-              circle
-              size="small"
-              title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"
-            ></el-button>
+            <el-button type="primary" round icon="el-icon-edit" circle size="small" title="编辑"
+              @click="createOrEditBtn(scope.row.id)"></el-button>
+            <el-button type="danger" round icon="el-icon-delete" circle size="small" title="删除"
+              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"></el-button>
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页操作 -->
       <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
+        <el-pagination background layout="total, prev, pager, next,jumper" :page-size="page.rows"
+          :total="page.totalCount" @current-change="handlePageChange"></el-pagination>
       </div>
     </div>
   </div>
@@ -87,11 +50,40 @@
 <script>
 import api from "@/api/travelManager/knowCity.js";
 import { mapMutations } from "vuex";
-
+import Screen from "@/components/screen/screen.vue";
 export default {
   name: "knowCityList",
+  components: {
+    Screen,
+  },
   data() {
     return {
+      //搜索栏数据
+      screenCondition: {
+        input: [
+          {
+            name: "title",
+            title: "名称",
+          },
+        ],
+        date: false,
+        select: [
+          {
+            name: "isShow",
+            title: "是否展现",
+            list: [
+              {
+                value: "1",
+                label: "是",
+              },
+              {
+                value: "0",
+                label: "否",
+              },
+            ],
+          },
+        ],
+      },
       //加载
       loading: true,
       knowCityList: [],
@@ -154,6 +146,7 @@ export default {
       multipleSelection: [],
       url: this.$baseUrl.releaseUrl,
       imgList: [],
+      searchDate: {},
     };
   },
   methods: {
@@ -161,8 +154,31 @@ export default {
       setTagsList: "SET_TAGSLIST",
     }),
     //触发搜索按钮
-    handleSearch: function () {
-      console.log(this.queryInfo);
+    handleSearch: function (data) {
+      if (data != null) {
+        data["page"] = this.page.page;
+        data["totalCount"] = this.page.totalCount;
+        data["rows"] = this.page.rows;
+        this.searchDate = data;
+      } else {
+        data = this.page;
+      }
+      api
+        .getList(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.knowCityList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
     },
     //删除所有选中项(批量删除)
     delAllSelection: function () {
@@ -221,7 +237,7 @@ export default {
     //获取线路列表
     getList: function () {
       this.loading = true;
-      console.log("page"+this.page)
+      console.log("page" + this.page);
       api
         .getList(this.page)
         .then((result) => {
@@ -246,7 +262,7 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getList();
+      this.handleSearch(this.searchDate);
     },
   },
   created() {

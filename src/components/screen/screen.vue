@@ -5,15 +5,13 @@
       <div
         class="searChfactor input-box"
         v-for="(item) in screenCondition.input"
-        :key="item.name"
-      >
+        :key="item.name">
         <el-input
           v-model="screenInfo[item.name]"
           :placeholder="item.title"
           class="handle-input mr10"
           size="mini"
-          clearable
-        >
+          clearable>
         </el-input>
       </div>
       <!-- 下拉选择框 -->

@@ -47,7 +47,7 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column label="开放预定" width="60" align="center">
+        <!-- <el-table-column label="开放预定" width="60" align="center">
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
@@ -55,7 +55,7 @@
               >{{ scope.row.isOpen == "1" ? "是" : "否" }}</el-tag
             >
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="热门搜索" width="60" align="center">
           <template slot-scope="scope">
             <el-tag

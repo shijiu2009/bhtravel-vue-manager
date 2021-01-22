@@ -42,7 +42,7 @@
         ></el-table-column>
         <el-table-column
           prop="titcketCount"
-          label="门票数量"
+          label="购买门票数量"
           align="center"
           show-overflow-tooltip
         ></el-table-column>
@@ -52,12 +52,12 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="status_1"
           label="未付款订单数"
           align="center"
           show-overflow-tooltip
-        ></el-table-column>
+        ></el-table-column> -->
         <el-table-column
           prop="status_-1"
           label="取消订单数"
