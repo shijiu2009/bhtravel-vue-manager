@@ -1,7 +1,7 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="90px">
+      <el-form ref="form" :model="info" label-width="108px">
         <div class="form_item">
           <!-- <el-form-item label="所属分类" style="width: 50%">
             <el-radio :label="1">休闲</el-radio>
@@ -460,3 +460,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.el-rate {
+    display: inline-flex;
+}
+</style>

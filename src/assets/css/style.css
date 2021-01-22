@@ -1,6 +1,6 @@
 /* 表单样式修改 */
 .form_item {
-    width: 80%;
+    width: 70%;
 }
 .edui-default .edui-editor{
     width: 100%!important;
@@ -262,9 +262,7 @@
 }
 /* ---------------------------------------------------------------pzk */
 /* 富文本编辑框 */
-.el-form-item__content{
-    line-height: 0 !important;
-}
+
 .edui-toolbar div:nth-child(-n+98):nth-child(n+78){
     display: none !important;
     background-color: #f56c6c;
@@ -278,6 +276,18 @@
     align-items: center;
 }
 .buttom-con-son{
-    margin-left: -100px;
+    margin-left: -90px;
+}
+.xiaochengxushoujia{
+    /* 小程序售价、最晚预定时间等对齐样式 */
+    margin: 20px 0;
+}
+.xiaochengxushoujia .el-form-item__label{
+padding: 0;
+width: 0;
+margin-left:-12px;
+}
+.menmiandian{
+    margin: 20px 0;
 }
 /* ---------------------------------------------------------------pzk */
