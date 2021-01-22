@@ -252,16 +252,6 @@ export default {
         .then((result) => {
           if (result.status && result.data) {
             this.ridses = result.data;
-            this.ridses.forEach((item) => {
-              console.log(item);
-            });
-            // for (let i = 0; i < result.data.length; i++) {
-            //   this.ridses.push({
-            //     value: result.data[i].rid,
-            //     label: result.data[i].rname,
-            //   });
-            // }
-            // console.log(this.ridses);
           } else {
             this.$message.error("角色数据查询失败");
           }
