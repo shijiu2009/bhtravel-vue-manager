@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      
+      <Screen :screenCondition="screenCondition"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -94,25 +94,45 @@
 <script>
 import api from "@/api/travelManager/article.js";
 import { mapMutations } from "vuex";
-
+import Screen from "@/components/screen/screen.vue";
 export default {
   name: "articleList",
+  components: {
+    Screen,
+  },
   data() {
     return {
       //加载
       loading: true,
       articleList: [],
 
-      //搜索信息
-      queryInfo: {
-        job: "",
-        name: "",
-        date: "",
+      //搜索栏数据
+      screenCondition: {
+        input: [
+          {
+            name: "title",
+            title: "主题名称",
+          },
+        ],
+        date: false,
+        select: [
+          {
+            name: "isShow",
+            title: "是否显示",
+            list: [
+              {
+                value: "1",
+                label: "是",
+              },
+              {
+                value: "0",
+                label: "否",
+              },
+            ],
+          },
+        ],
       },
-      //广告位置列表，用做筛选条件
-      loctions: {
-        options: [],
-      },
+      searchDate: [],
       //时间选择器
       timePicker: {
         //   快捷选项
@@ -168,8 +188,31 @@ export default {
       setTagsList: "SET_TAGSLIST",
     }),
     //触发搜索按钮
-    handleSearch: function () {
-      console.log(this.queryInfo);
+    handleSearch: function (data) {
+      if (data != null) {
+        data["page"] = this.page.page;
+        data["totalCount"] = this.page.totalCount;
+        data["rows"] = this.page.rows;
+        this.searchDate = data;
+      } else {
+        data = this.page;
+      }
+      api
+        .getList(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.articleList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
     },
     //删除所有选中项(批量删除)
     delAllSelection: function () {
@@ -253,7 +296,7 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getList();
+      this.handleSearch(this.searchDate);
     },
   },
   created() {
