@@ -10,6 +10,6 @@ export default {
         serverUrl: "/travelbh/api/ueditor/exec",
         // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
         // UEDITOR_HOME_URL: "/travelbh/travelbh/UEditor/",
-        UEDITOR_HOME_URL: "/travelbh/travelbh/UEditor/",
+        UEDITOR_HOME_URL: "https://travel.gxucreate.com/travelbh/travelbh/UEditor/",
     },
 }
