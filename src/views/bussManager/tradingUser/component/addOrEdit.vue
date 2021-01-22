@@ -187,6 +187,30 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看景点" :visible.sync="dialogTableAttractions">
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="6">
+              <label class="products-label">景点名称</label
+              ><el-input v-model="attrName" placeholder="景点名称"></el-input>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否开放预定</label>
+              <el-select v-model="attrOpen" placeholder="请选择">
+                <el-option :key="'1'" :label="'是'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'否'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否上架</label>
+              <el-select v-model="attrDown" placeholder="请选择">
+                <el-option :key="'1'" :label="'上架'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'下架'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="searchAttrs">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table :data="attractions" ref="attractionsTable">
             <el-table-column type="selection"> </el-table-column>
             <el-table-column property="name" label="名称" width="150">
@@ -212,18 +236,25 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column label="是否下架">
+            <el-table-column label="是否上架">
               <template slot-scope="scope">
                 <el-tag
                   :type="scope.row.down == '1' ? 'success' : 'primary'"
                   disable-transitions
-                  >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                  >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
                 >
               </template>
             </el-table-column>
           </el-table>
           <!-- 分页 -->
-          <el-pagination small layout="prev, pager, next" :total="attractionTotal">
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="attrPage.totalCount"
+            :page-size="attrPage.rows"
+            :current-page="attrPage.page"
+            @current-change="changePageAttrs"
+          >
           </el-pagination>
           <div slot="footer" class="dialog-footer">
             <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
@@ -233,6 +264,30 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看农家乐" :visible.sync="dialogTableCountryTravels">
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="6">
+              <label class="products-label">农家乐名称</label
+              ><el-input v-model="ctName" placeholder="景点名称"></el-input>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否开放预定</label>
+              <el-select v-model="ctOpen" placeholder="请选择">
+                <el-option :key="'1'" :label="'是'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'否'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否上架</label>
+              <el-select v-model="ctDown" placeholder="请选择">
+                <el-option :key="'0'" :label="'上架'" :value="'0'"></el-option>
+                <el-option :key="'1'" :label="'下架'" :value="'1'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="searchCts">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table :data="countryTravels" ref="countryTravelsTable">
             <el-table-column type="selection"> </el-table-column>
             <el-table-column property="name" label="名称" width="150">
@@ -258,18 +313,25 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column label="是否下架">
+            <el-table-column label="是否上架">
               <template slot-scope="scope">
                 <el-tag
                   :type="scope.row.down == '1' ? 'success' : 'primary'"
                   disable-transitions
-                  >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                  >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
                 >
               </template>
             </el-table-column>
           </el-table>
           <!-- 分页 -->
-          <el-pagination small layout="prev, pager, next" :total="countryTravelTotal">
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="ctPage.totalCount"
+            :page-size="ctPage.rows"
+            :current-page="ctPage.page"
+            @current-change="changePageCts"
+          >
           </el-pagination>
           <div slot="footer" class="dialog-footer">
             <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
@@ -279,6 +341,31 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看酒店" :visible.sync="dialogTableHotels">
+
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="6">
+              <label class="products-label">酒店名称</label
+              ><el-input v-model="hName" placeholder="酒店名称"></el-input>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否开放预定</label>
+              <el-select v-model="hOpen" placeholder="请选择">
+                <el-option :key="'1'" :label="'是'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'否'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否上架</label>
+              <el-select v-model="hDown" placeholder="请选择">
+                <el-option :key="'0'" :label="'上架'" :value="'0'"></el-option>
+                <el-option :key="'1'" :label="'下架'" :value="'1'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="searchHs">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table :data="hotels" ref="hotelsTable">
             <el-table-column type="selection"> </el-table-column>
             <el-table-column property="name" label="名称" width="150">
@@ -304,18 +391,25 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column label="是否下架">
+            <el-table-column label="是否上架">
               <template slot-scope="scope">
                 <el-tag
                   :type="scope.row.down == '1' ? 'success' : 'primary'"
                   disable-transitions
-                  >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                  >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
                 >
               </template>
             </el-table-column>
           </el-table>
           <!-- 分页 -->
-          <el-pagination small layout="prev, pager, next" :total="hotelTotal">
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="hPage.totalCount"
+            :page-size="hPage.rows"
+            :current-page="hPage.page"
+            @current-change="changePageHs"
+          >
           </el-pagination>
           <div slot="footer" class="dialog-footer">
             <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
@@ -325,6 +419,31 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看民宿" :visible.sync="dialogTableHomestays">
+
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="6">
+              <label class="products-label">民宿名称</label
+              ><el-input v-model="hmName" placeholder="民宿名称"></el-input>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否开放预定</label>
+              <el-select v-model="hmOpen" placeholder="请选择">
+                <el-option :key="'1'" :label="'是'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'否'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否上架</label>
+              <el-select v-model="hmDown" placeholder="请选择">
+                <el-option :key="'0'" :label="'上架'" :value="'0'"></el-option>
+                <el-option :key="'1'" :label="'下架'" :value="'1'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="searchHms">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table :data="homestays" ref="homestaysTable">
             <el-table-column type="selection"> </el-table-column>
             <el-table-column property="name" label="名称" width="150">
@@ -350,18 +469,25 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column label="是否下架">
+            <el-table-column label="是否上架">
               <template slot-scope="scope">
                 <el-tag
                   :type="scope.row.down == '1' ? 'success' : 'primary'"
                   disable-transitions
-                  >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                  >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
                 >
               </template>
             </el-table-column>
           </el-table>
           <!-- 分页 -->
-          <el-pagination small layout="prev, pager, next" :total="homestayTotal">
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="hmPage.totalCount"
+            :page-size="hmPage.rows"
+            :current-page="hmPage.page"
+            @current-change="changePageHms"
+          >
           </el-pagination>
           <div slot="footer" class="dialog-footer">
             <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
@@ -371,6 +497,31 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看线路" :visible.sync="dialogTablePeripherys">
+
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="6">
+              <label class="products-label">民宿名称</label
+              ><el-input v-model="pName" placeholder="民宿名称"></el-input>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否开放预定</label>
+              <el-select v-model="pOpen" placeholder="请选择">
+                <el-option :key="'1'" :label="'是'" :value="'1'"></el-option>
+                <el-option :key="'0'" :label="'否'" :value="'0'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <label class="products-label">是否上架</label>
+              <el-select v-model="pDown" placeholder="请选择">
+                <el-option :key="'0'" :label="'上架'" :value="'0'"></el-option>
+                <el-option :key="'1'" :label="'下架'" :value="'1'"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="searchPs">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table :data="peripherys" ref="peripherysTable">
             <el-table-column type="selection"> </el-table-column>
             <el-table-column property="title" label="名称" width="150">
@@ -396,18 +547,25 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column label="是否下架">
+            <el-table-column label="是否上架">
               <template slot-scope="scope">
                 <el-tag
                   :type="scope.row.down == '1' ? 'success' : 'primary'"
                   disable-transitions
-                  >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                  >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
                 >
               </template>
             </el-table-column>
           </el-table>
           <!-- 分页 -->
-          <el-pagination small layout="prev, pager, next" :total="peripheryTotal">
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="pPage.totalCount"
+            :page-size="pPage.rows"
+            :current-page="pPage.page"
+            @current-change="changePagePs"
+          >
           </el-pagination>
           <div slot="footer" class="dialog-footer">
             <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
@@ -472,6 +630,76 @@ export default {
         provinces: [],
         cities: [],
         countys: [],
+      },
+      //景点对话框选项
+      attrName: "",
+      attrOpen: "",
+      attrDown: "",
+      //景点分页数据
+      attrPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
+      //农家乐对话框选项
+      ctName: "",
+      ctOpen: "",
+      ctDown: "",
+      //农家乐分页数据
+      ctPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
+      //酒店对话框选项
+      hName: "",
+      hOpen: "",
+      hDown: "",
+      //酒店分页数据
+      hPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
+      //民宿对话框选项
+      hmName: "",
+      hmOpen: "",
+      hmDown: "",
+      //民宿分页数据
+      hmPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
+      //线路对话框选项
+      pName: "",
+      pOpen: "",
+      pDown: "",
+      //线路分页数据
+      pPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
       },
       //关联用户
       traditem: [],
@@ -663,14 +891,84 @@ export default {
         this.info.classId += this.selectClasses[i].id + ",";
       }
     },
-    addAttractions: function () {
-      this.dialogTableAttractions = true;
+    //景点
+    searchAttrs: function () {
+      this.attrPage.page = 1;
+      if (this.attrName != null && this.attrName != "") {
+        this.attrPage["name"] = this.attrName;
+      } else {
+        this.$delete(this.attrPage, "name");
+      }
+      if (this.attrOpen != null && this.attrOpen != "") {
+        this.attrPage["isOpen"] = this.attrOpen;
+      } else {
+        this.$delete(this.attrPage, "isOpen");
+      }
+      if (this.attrDown != null && this.attrDown != "") {
+        this.attrPage["down"] = this.attrDown;
+      } else {
+        this.$delete(this.attrPage, "down");
+      }
       attractionApi
-        .getAllList(this.page)
+        .getAttractions(this.attrPage)
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.attractions = result.rows;
-          this.attractionTotal = result.total;
+          this.attrPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageAttrs(index) {
+      this.attrPage.page = index;
+      attractionApi
+        .getAttractions(this.attrPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.attractions = result.rows;
+          this.attrPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    addAttractions: function () {
+      this.dialogTableAttractions = true;
+      attractionApi
+        .getAttractions(this.attrPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.attractions = result.rows;
+          this.attrPage.totalCount = result.total;
           this.$nextTick(function () {
             this.attractions.forEach((attraction, i) => {
               this.selectAttractions.forEach((selectAttraction, j) => {
@@ -700,14 +998,89 @@ export default {
       this.selectAttractions = this.$refs.attractionsTable.selection;
     },
     //农家乐
-    addCountryTravels: function () {
-      this.dialogTableCountryTravels = true;
+    searchCts: function () {
+      this.ctPage.page = 1;
+      if (this.ctName != null && this.ctName != "") {
+        this.ctPage["name"] = this.ctName;
+      } else {
+        this.$delete(this.ctPage, "name");
+      }
+      if (this.ctOpen != null && this.ctOpen != "") {
+        this.ctPage["isOpen"] = this.ctOpen;
+      } else {
+        this.$delete(this.ctPage, "isOpen");
+      }
+      if (this.ctDown != null && this.ctDown != "") {
+        this.ctPage["down"] = this.ctDown;
+      } else {
+        this.$delete(this.ctPage, "down");
+      }
       countryTravelApi
-        .getAllList(this.page)
+        .getList(this.ctPage)
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.countryTravels = result.rows;
-          this.countryTravelTotal = result.total;
+          this.ctPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.countryTravels.forEach((countryTravel, i) => {
+              this.selectCountryTravels.forEach((selectCountryTravel, j) => {
+                if (
+                  this.countryTravels[i] != null &&
+                  this.selectCountryTravels[j] != null &&
+                  this.countryTravels[i].id == this.selectCountryTravels[j].id
+                ) {
+                  this.$refs.countryTravelsTable.toggleRowSelection(
+                    this.countryTravels[i],
+                    true
+                  );
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageCts(index) {
+      this.ctPage.page = index;
+      countryTravelApi
+        .getAttractions(this.ctPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.countryTravels = result.rows;
+          this.ctPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.countryTravels.forEach((countryTravel, i) => {
+              this.selectCountryTravels.forEach((selectCountryTravel, j) => {
+                if (
+                  this.countryTravels[i] != null &&
+                  this.selectCountryTravels[j] != null &&
+                  this.countryTravels[i].id == this.selectCountryTravels[j].id
+                ) {
+                  this.$refs.countryTravelsTable.toggleRowSelection(
+                    this.countryTravels[i],
+                    true
+                  );
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    addCountryTravels: function () {
+      this.dialogTableCountryTravels = true;
+      countryTravelApi
+        .getList(this.ctPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.countryTravels = result.rows;
+          this.ctPage.totalCount = result.total;
           this.$nextTick(function () {
             this.countryTravels.forEach((countryTravel, i) => {
               this.selectCountryTravels.forEach((selectCountryTravel, j) => {
@@ -737,14 +1110,83 @@ export default {
       this.selectCountryTravels = this.$refs.countryTravelsTable.selection;
     },
     //酒店
-    addHotels: function () {
-      this.dialogTableHotels = true;
+    searchHs: function () {
+      this.hPage.page = 1;
+      if (this.hName != null && this.hName != "") {
+        this.hPage["name"] = this.hName;
+      } else {
+        this.$delete(this.hPage, "name");
+      }
+      if (this.hOpen != null && this.hOpen != "") {
+        this.hPage["isOpen"] = this.hOpen;
+      } else {
+        this.$delete(this.hPage, "isOpen");
+      }
+      if (this.hDown != null && this.hDown != "") {
+        this.hPage["down"] = this.hDown;
+      } else {
+        this.$delete(this.hPage, "down");
+      }
       hotelApi
-        .getAllList(this.page)
+        .getList(this.hPage)
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.hotels = result.rows;
-          this.hotelTotal = result.total;
+          this.hPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.hotels.forEach((hotel, i) => {
+              this.selectHotels.forEach((selectHotel, j) => {
+                if (
+                  this.hotels[i] != null &&
+                  this.selectHotels[j] != null &&
+                  this.hotels[i].id == this.selectHotels[j].id
+                ) {
+                  this.$refs.hotelsTable.toggleRowSelection(this.hotels[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageHs(index) {
+      this.hPage.page = index;
+      hotelApi
+        .getList(this.hPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.hotels = result.rows;
+          this.hPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.hotels.forEach((hotel, i) => {
+              this.selectHotels.forEach((selectHotel, j) => {
+                if (
+                  this.hotels[i] != null &&
+                  this.selectHotels[j] != null &&
+                  this.hotels[i].id == this.selectHotels[j].id
+                ) {
+                  this.$refs.hotelsTable.toggleRowSelection(this.hotels[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    addHotels: function () {
+      this.dialogTableHotels = true;
+      hotelApi
+        .getList(this.hPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.hotels = result.rows;
+          this.hPage.totalCount = result.total;
           this.$nextTick(function () {
             this.hotels.forEach((hotel, i) => {
               this.selectHotels.forEach((selectHotel, j) => {
@@ -771,10 +1213,80 @@ export default {
       this.selectHotels = this.$refs.hotelsTable.selection;
     },
     //民宿
+    searchHms: function () {
+      this.hmPage.page = 1;
+      if (this.hmName != null && this.hmName != "") {
+        this.hmPage["name"] = this.hmName;
+      } else {
+        this.$delete(this.hmPage, "name");
+      }
+      if (this.hmOpen != null && this.hmOpen != "") {
+        this.hmPage["isOpen"] = this.hmOpen;
+      } else {
+        this.$delete(this.hmPage, "isOpen");
+      }
+      if (this.hmDown != null && this.hmDown != "") {
+        this.hmPage["down"] = this.hmDown;
+      } else {
+        this.$delete(this.hmPage, "down");
+      }
+      homestayApi
+        .getList(this.hmPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.homestays = result.rows;
+          this.hmPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.homestays.forEach((homestay, i) => {
+              this.selectHomestays.forEach((selectHomestay, j) => {
+                if (
+                  this.homestays[i] != null &&
+                  this.selectHomestays[j] != null &&
+                  this.homestays[i].id == this.selectHomestays[j].id
+                ) {
+                  this.$refs.homestaysTable.toggleRowSelection(this.homestays[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageHms(index) {
+      this.hmPage.page = index;
+      homestayApi
+        .getList(this.hmPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.homestays = result.rows;
+          this.hmPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.homestays.forEach((homestay, i) => {
+              this.selectHomestays.forEach((selectHomestay, j) => {
+                if (
+                  this.homestays[i] != null &&
+                  this.selectHomestays[j] != null &&
+                  this.homestays[i].id == this.selectHomestays[j].id
+                ) {
+                  this.$refs.homestaysTable.toggleRowSelection(this.homestays[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     addHomestays: function () {
       this.dialogTableHomestays = true;
+      alert(this.hmPage.page)
       homestayApi
-        .getAllList(this.page)
+        .getList(this.hmPage)
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.homestays = result.rows;
@@ -805,14 +1317,83 @@ export default {
       this.selectHomestays = this.$refs.homestaysTable.selection;
     },
     //线路
-    addPeripherys: function () {
-      this.dialogTablePeripherys = true;
+    searchPs: function () {
+      this.pPage.page = 1;
+      if (this.pName != null && this.pName != "") {
+        this.pPage["title"] = this.pName;
+      } else {
+        this.$delete(this.pPage, "title");
+      }
+      if (this.pOpen != null && this.pOpen != "") {
+        this.pPage["isOpen"] = this.pOpen;
+      } else {
+        this.$delete(this.pPage, "isOpen");
+      }
+      if (this.pDown != null && this.pDown != "") {
+        this.pPage["down"] = this.pDown;
+      } else {
+        this.$delete(this.pPage, "down");
+      }
       peripheryApi
-        .getAllList(this.page)
+        .getList(this.pPage)
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.peripherys = result.rows;
-          this.peripheryTotal = result.total;
+          this.pPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.peripherys.forEach((periphery, i) => {
+              this.selectPeripherys.forEach((selectPeriphery, j) => {
+                if (
+                  this.peripherys[i] != null &&
+                  this.selectPeripherys[j] != null &&
+                  this.peripherys[i].id == this.selectPeripherys[j].id
+                ) {
+                  this.$refs.peripherysTable.toggleRowSelection(this.peripherys[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePagePs(index) {
+      this.pPage.page = index;
+      peripheryApi
+        .getList(this.pPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.peripherys = result.rows;
+          this.pPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.peripherys.forEach((periphery, i) => {
+              this.selectPeripherys.forEach((selectPeriphery, j) => {
+                if (
+                  this.peripherys[i] != null &&
+                  this.selectPeripherys[j] != null &&
+                  this.peripherys[i].id == this.selectPeripherys[j].id
+                ) {
+                  this.$refs.peripherysTable.toggleRowSelection(this.peripherys[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    addPeripherys: function () {
+      this.dialogTablePeripherys = true;
+      peripheryApi
+        .getList(this.pPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.peripherys = result.rows;
+          this.pPage.totalCount = result.total;
           this.$nextTick(function () {
             this.peripherys.forEach((periphery, i) => {
               this.selectPeripherys.forEach((selectPeriphery, j) => {
@@ -860,46 +1441,44 @@ export default {
       this.info.businessAddress = this.baiduInfo.address;
       this.info.longitude = this.baiduInfo.longitude;
       this.info.latitude = this.baiduInfo.latitude;
-      api
-        .addOrEdit(this.info)
-        .then((result) => {
-          if (result.success) {
-            this.$message.success("提交成功！");
-            this.deleteTags(this.$route.fullPath); //关闭当前窗口
-            //跳转到列表页面，返回flow:true ，刷新界面，不返回则不刷新界面
-            this.$router.push({
-              name: "tradingUserList",
-              params: { flow: true },
-            });
+      api.addOrEdit(this.info).then((result) => {
+        if (result.success) {
+          this.$message.success("提交成功！");
+          this.deleteTags(this.$route.fullPath); //关闭当前窗口
+          //跳转到列表页面，返回flow:true ，刷新界面，不返回则不刷新界面
+          this.$router.push({
+            name: "tradingUserList",
+            params: { flow: true },
+          });
+        } else {
+          if (this.info.id) {
+            if (result.fielderrors) {
+              let errors = "";
+              for (let i = 0; i < result.fielderrors.length; i++) {
+                let error = result.fielderrors[i].error;
+                errors += error + "\n";
+              }
+              this.$message.error(errors);
+            }
           } else {
-            if (this.info.id) {
-              if (result.fielderrors) {
-                let errors = "";
-                for (let i = 0; i < result.fielderrors.length; i++) {
-                  let error = result.fielderrors[i].error;
-                  errors += error + "\n";
-                }
-                this.$message.error(errors);
+            if (result.fielderrors) {
+              let errors = "";
+              for (let i = 0; i < result.fielderrors.length; i++) {
+                let error = result.fielderrors[i].error;
+                errors += error + "\n";
               }
-            } else {
-              if (result.fielderrors) {
-                let errors = "";
-                for (let i = 0; i < result.fielderrors.length; i++) {
-                  let error = result.fielderrors[i].error;
-                  errors += error + "\n";
-                }
-                this.$message.error(errors);
-              }
+              this.$message.error(errors);
             }
           }
-        })
-        // .catch(() => {
-        //   if (this.info.id) {
-        //     this.$message.error("数据更新失败");
-        //   } else {
-        //     this.$message.error("数据添加失败");
-        //   }
-        // });
+        }
+      });
+      // .catch(() => {
+      //   if (this.info.id) {
+      //     this.$message.error("数据更新失败");
+      //   } else {
+      //     this.$message.error("数据添加失败");
+      //   }
+      // });
     },
     //取消按钮事件
     close: function () {
@@ -908,61 +1487,59 @@ export default {
     //获取详情信息
     getAdvert: function () {
       if (this.$route.params && this.$route.params.id) {
-        api
-          .detailed({ id: this.$route.params.id })
-          .then((result) => {
-            this.uploadGroupAvatar.fileList = [];
-            this.selectClasses = [];
-            this.selectAttractions = [];
-            this.selectCountryTravels = [];
-            this.selectHotels = [];
-            this.selectHomestays = [];
-            this.selectPeripherys = [];
-            this.selectUsers = [];
-            this.traditem = [];
-            this.info = result.tradingUser;
-            this.baiduInfo.address = this.info.businessAddress;
-            this.baiduInfo.longitude = this.info.longitude;
-            this.baiduInfo.latitude = this.info.latitude;
-            this.$refs.baiduMap.getClickInfo;
-            this.$refs.baiduMap.getLngAndLat();
-            if (this.info.headImg != null && this.info.headImg != "") {
-              this.uploadGroupAvatar.fileList.push({
-                url: baseURL.releaseUrl + this.info.headImg,
-              });
-            }
-            if (result.tlist != "" && result.tlist != null) {
-              this.selectClasses = result.tlist;
-            }
-            if (result.alist != "" && result.alist != null) {
-              this.selectAttractions = result.alist;
-            }
-            if (result.clist != "" && result.clist != null) {
-              this.selectCountryTravels = result.clist;
-            }
-            if (result.hlist != "" && result.hlist != null) {
-              this.selectHotels = result.hlist;
-            }
-            if (result.mlist != "" && result.mlist != null) {
-              this.selectHomestays = result.mlist;
-            }
-            if (result.plist != "" && result.plist != null) {
-              this.selectPeripherys = result.plist;
-            }
-            if (result.ulist != "" && result.ulist != null) {
-              this.selectUsers = result.ulist;
-            }
-            if (result.trlist != "" && result.trlist != null) {
-              this.traditem = result.trlist;
-            }
-            if (this.info.cooperationMode == 2) {
-              this.showMode = true;
-            }
-            this.isShow = false;
-          })
-          // .catch(() => {
-          //   this.$message.error("数据获取失败");
-          // });
+        api.detailed({ id: this.$route.params.id }).then((result) => {
+          this.uploadGroupAvatar.fileList = [];
+          this.selectClasses = [];
+          this.selectAttractions = [];
+          this.selectCountryTravels = [];
+          this.selectHotels = [];
+          this.selectHomestays = [];
+          this.selectPeripherys = [];
+          this.selectUsers = [];
+          this.traditem = [];
+          this.info = result.tradingUser;
+          this.baiduInfo.address = this.info.businessAddress;
+          this.baiduInfo.longitude = this.info.longitude;
+          this.baiduInfo.latitude = this.info.latitude;
+          this.$refs.baiduMap.getClickInfo;
+          this.$refs.baiduMap.getLngAndLat();
+          if (this.info.headImg != null && this.info.headImg != "") {
+            this.uploadGroupAvatar.fileList.push({
+              url: baseURL.releaseUrl + this.info.headImg,
+            });
+          }
+          if (result.tlist != "" && result.tlist != null) {
+            this.selectClasses = result.tlist;
+          }
+          if (result.alist != "" && result.alist != null) {
+            this.selectAttractions = result.alist;
+          }
+          if (result.clist != "" && result.clist != null) {
+            this.selectCountryTravels = result.clist;
+          }
+          if (result.hlist != "" && result.hlist != null) {
+            this.selectHotels = result.hlist;
+          }
+          if (result.mlist != "" && result.mlist != null) {
+            this.selectHomestays = result.mlist;
+          }
+          if (result.plist != "" && result.plist != null) {
+            this.selectPeripherys = result.plist;
+          }
+          if (result.ulist != "" && result.ulist != null) {
+            this.selectUsers = result.ulist;
+          }
+          if (result.trlist != "" && result.trlist != null) {
+            this.traditem = result.trlist;
+          }
+          if (this.info.cooperationMode == 2) {
+            this.showMode = true;
+          }
+          this.isShow = false;
+        });
+        // .catch(() => {
+        //   this.$message.error("数据获取失败");
+        // });
       }
     },
   },
