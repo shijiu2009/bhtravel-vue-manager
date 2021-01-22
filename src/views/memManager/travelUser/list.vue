@@ -16,9 +16,9 @@
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="username" label="用户名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="nickname" label="昵称" align="center" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="nickname" label="昵称" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mobile" label="电话" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="openid" label="openid" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="openid" label="openid" align="center" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="miniOpenid" label="miniOpenid" align="center" show-overflow-tooltip></el-table-column>
         <!-- <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
