@@ -266,8 +266,14 @@ export default {
         });
     },
   },
-  activated() {
+  created() {
     this.getList();
+  },
+  activated() {
+    if (this.$route.params && this.$route.params.flow) {
+      //重新获取页面数据，
+      this.getList();
+    }
   },
 };
 </script>

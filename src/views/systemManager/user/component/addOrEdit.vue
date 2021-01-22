@@ -18,13 +18,13 @@
           </el-form-item>
 
           <el-form-item
-            v-if='condition'
+            v-if="condition"
             label="登录密码"
             :required="true"
             v-finger-tips="{ content: '登录时使用的密码' }"
           >
             <el-input
-              v-if='condition'
+              v-if="condition"
               v-model="info.password"
               show-password
               ref="el_input_title"
@@ -59,10 +59,7 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item
-            label="所属组织"
-            v-finger-tips="{ content: '节点的上级' }"
-          >
+          <el-form-item label="所属组织" v-finger-tips="{ content: '节点的上级' }">
             <el-input
               type="readonly"
               v-model="byName"
@@ -111,7 +108,7 @@
             </el-select>
           </el-form-item>
         </div>
-        
+
         <!-- 操作按钮 -->
         <el-form-item>
           <el-button type="primary" @click="onSubmit">表单提交</el-button>
@@ -163,7 +160,7 @@ export default {
       rids: 0,
       ridses: [],
       byName: "",
-      condition:true,
+      condition: true,
     };
   },
   methods: {
@@ -233,7 +230,7 @@ export default {
           .getDetail({ uid: this.$route.params.id })
           .then((result) => {
             if (result.status && result.data) {
-              this.condition=false
+              this.condition = false;
               this.info = result.data;
               //合并两个数组
               console.log(result.data.roleIds);
@@ -279,10 +276,14 @@ export default {
       this.byName = data.pname;
     },
   },
-  created() {},
-  activated() {
-    //重新获取页面数据，
+  created() {
     this.getDetail();
+  },
+  activated() {
+    if (this.$route.params && this.$route.params.flow) {
+      //重新获取页面数据，
+      this.getDetail();
+    }
   },
 };
 </script>
