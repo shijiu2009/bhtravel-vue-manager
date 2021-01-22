@@ -1,7 +1,7 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="SmsInfo" label-width="98px">
+      <el-form ref="form" :model="SmsInfo" label-width="128px">
         <div class="form_item">
           <el-form-item label="accessKeyId" :required="true">
             <el-input
@@ -97,7 +97,7 @@
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="同一ip限制次数" :required="true">
+          <el-form-item label="ip限制次数" :required="true">
             <el-input
               v-model="SmsInfo.ipLimitNums"
               ref="el_input_title"
@@ -121,7 +121,7 @@
               show-icon
             ></el-alert>
           </el-form-item>
-          <el-form-item label="同一手机号限制次数" :required="true">
+          <el-form-item label="手机号限制次数" :required="true">
             <el-input
               v-model="SmsInfo.phoneRegLimitNums"
               ref="el_input_title"
