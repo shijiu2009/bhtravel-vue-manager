@@ -1,13 +1,13 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="90px">
+      <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <el-form-item label="农家乐名称">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="首页提示语">
-            <el-input v-model="info.indexTip"></el-input>
+            <el-input v-model="info.indexTip" style="width: 400px"></el-input>
           </el-form-item>
           <!-- <el-form-item label="最大游客承载量">
             <el-input v-model="info.maxCustom"></el-input>
@@ -15,11 +15,11 @@
           <el-form-item label="瞬时游客承载量">
             <el-input v-model="info.nowCustom"></el-input>
           </el-form-item> -->
-          <el-form-item label="推荐指数">
+          <el-form-item label="推荐指数" class="rank">
             <el-rate v-model="info.recommadStars" show-text> </el-rate>
           </el-form-item>
           <el-form-item label="排序">
-            <el-input v-model="info.sort"></el-input>
+            <el-input v-model="info.sort" style="width: 400px"></el-input>
           </el-form-item>
           <!-- <el-form-item label="主题" style="width: 50%">
             <el-select
@@ -55,38 +55,29 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-row>
-            <el-col :span="8">
-              <el-col :span="10">
-                <el-form-item label="封面图片"></el-form-item>
-              </el-col>
-              <el-col :span="14">
-                <UploadFile
-                  @uploadValue="titleValue"
-                  ref="uploadGroupTitle"
-                  :uploadGroup="uploadGroupTitle"
-                ></UploadFile>
-              </el-col>
-            </el-col>
-            <el-col :span="8">
-              <el-col :span="10">
-                <el-form-item label="缩略图图片"></el-form-item>
-              </el-col>
-              <el-col :span="14">
-                <UploadFile
-                  @uploadValue="thumbValue"
-                  ref="uploadGroupThumb"
-                  :uploadGroup="uploadGroupThumb"
-                ></UploadFile>
-              </el-col>
-            </el-col>
-          </el-row>
+
+          <el-form-item label="封面图片">
+            <UploadFile
+              @uploadValue="titleValue"
+              ref="uploadGroupTitle"
+              :uploadGroup="uploadGroupTitle"
+            ></UploadFile>
+          </el-form-item>
+
+          <el-form-item label="缩略图图片">
+            <UploadFile
+              @uploadValue="thumbValue"
+              ref="uploadGroupThumb"
+              :uploadGroup="uploadGroupThumb"
+            ></UploadFile>
+          </el-form-item>
+
           <el-form-item label="联系方式">
             <el-input v-model="info.phone"></el-input>
           </el-form-item>
           <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
           <el-form-item label="开放时间">
-            <el-input v-model="info.opening"></el-input>
+            <el-input v-model="info.opening" style="width: 400px"></el-input>
           </el-form-item>
           <!-- <el-form-item label="提前预定天数">
             <el-input v-model="info.advanceDay"></el-input>
@@ -106,7 +97,10 @@
             <el-input v-model="info.todayPrice"></el-input>
           </el-form-item> -->
           <el-form-item label="预定须知" :required="true">
-            <vue-ueditor-wrap v-model="info.notice" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.notice"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
@@ -115,7 +109,10 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="介绍（微信小程序、APP）" :required="true">
-            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.info"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="公告" :required="true">
             <quill-editor
@@ -134,10 +131,17 @@
             <el-button type="success" @click="addTicket">添加</el-button>
 
             <div style="margin-top: 10px">
-              <el-row :gutter="20" v-for="(eItem, index) in this.tickets" :key="index">
+              <el-row
+                :gutter="20"
+                v-for="(eItem, index) in this.tickets"
+                :key="index"
+              >
                 <el-row>
                   <el-form-item label="项目名称">
-                    <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
+                    <el-input
+                      v-model="eItem.name"
+                      placeholder="请输入内容"
+                    ></el-input>
                   </el-form-item>
                 </el-row>
                 <el-row>
@@ -163,10 +167,16 @@
                     ></el-input>
                   </el-form-item>
                   <el-form-item label="门店价">
-                    <el-input v-model="eItem.price" placeholder="请输入价格"></el-input>
+                    <el-input
+                      v-model="eItem.price"
+                      placeholder="请输入价格"
+                    ></el-input>
                   </el-form-item>
                   <el-form-item label="排序">
-                    <el-input v-model="eItem.sort" placeholder="请输入价格"></el-input>
+                    <el-input
+                      v-model="eItem.sort"
+                      placeholder="请输入价格"
+                    ></el-input>
                   </el-form-item>
                   <el-form-item label="是否下架">
                     <el-radio-group v-model="eItem.down">
@@ -222,16 +232,14 @@
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="图片集合"></el-form-item>
-            </el-col>
+
+          <el-form-item label="图片集合">
             <UploadFile
               @uploadValue="uploadValue"
               ref="UploadFile"
               :uploadGroup="uploadGroupOne"
             ></UploadFile>
-          </el-row>
+          </el-form-item>
         </div>
 
         <!-- 操作按钮 -->
@@ -271,7 +279,10 @@
           <el-table-column type="selection"> </el-table-column>
           <el-table-column property="name" label="名称" width="150">
             <template slot-scope="scope">
-              <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
+              <el-input
+                :placeholder="scope.row.name"
+                :disabled="true"
+              ></el-input>
             </template>
           </el-table-column>
           <el-table-column property="classId" label="所属分类" width="200">
@@ -544,14 +555,19 @@ export default {
     //提交表单
     onSubmit: function () {
       deleteKeys(this.info, "projects", this);
-      if (this.uploadGroupOne.fileList != null && this.uploadGroupOne.fileList != "") {
+      if (
+        this.uploadGroupOne.fileList != null &&
+        this.uploadGroupOne.fileList != ""
+      ) {
         for (let i = 0; i < this.uploadGroupOne.fileList.length; i++) {
           if ("response" in this.uploadGroupOne.fileList[i]) {
             this.info["items[" + i + "].path"] = this.uploadGroupOne.fileList[
               i
             ].response.filePath;
           } else {
-            var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(baseURL.imgUrl);
+            var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(
+              baseURL.imgUrl
+            );
             let url = this.uploadGroupOne.fileList[i].url.substr(pos);
             this.info["items[" + i + "].path"] = url;
           }
@@ -617,7 +633,9 @@ export default {
     //添加项目
     addTicket: function () {
       let ticket = JSON.parse(JSON.stringify(this.ticket));
-      ticket.uploadGroupTicket = JSON.parse(JSON.stringify(this.uploadGroupTicket));
+      ticket.uploadGroupTicket = JSON.parse(
+        JSON.stringify(this.uploadGroupTicket)
+      );
       this.tickets.push(JSON.parse(JSON.stringify(ticket)));
     },
     //添加路径
@@ -668,7 +686,10 @@ export default {
                   this.selectProducts[j] != null &&
                   this.products[i].id == this.selectProducts[j].id
                 ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                  this.$refs.productsTable.toggleRowSelection(
+                    this.products[i],
+                    true
+                  );
                 }
               });
             });
@@ -695,7 +716,10 @@ export default {
                   this.selectProducts[j] != null &&
                   this.products[i].id == this.selectProducts[j].id
                 ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                  this.$refs.productsTable.toggleRowSelection(
+                    this.products[i],
+                    true
+                  );
                 }
               });
             });
@@ -722,7 +746,10 @@ export default {
                   this.selectProducts[j] != null &&
                   this.products[i].id == this.selectProducts[j].id
                 ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
+                  this.$refs.productsTable.toggleRowSelection(
+                    this.products[i],
+                    true
+                  );
                 }
               });
             });
@@ -779,7 +806,10 @@ export default {
                 url: baseURL.releaseUrl + result.countryTravel.indexImg,
               });
             }
-            if (result.countryTravel.icon != null && result.countryTravel.icon != "") {
+            if (
+              result.countryTravel.icon != null &&
+              result.countryTravel.icon != ""
+            ) {
               this.uploadGroupThumb.fileList.push({
                 url: baseURL.releaseUrl + result.countryTravel.icon,
               });
@@ -888,3 +918,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.rank >>> .el-form-item__content {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+</style>

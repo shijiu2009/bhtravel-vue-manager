@@ -1,9 +1,9 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="attractionsPointInfo" label-width="90px">
-        <div class="form_item" >
-          <el-form-item label="标题" style="width:400px">
+      <el-form ref="form" :model="attractionsPointInfo" label-width="auto">
+        <div class="form_item">
+          <el-form-item label="标题" style="width: 400px">
             <el-input
               v-model="attractionsPointInfo.title"
               @change="infoChange"
@@ -34,37 +34,30 @@
               :min="0"
             ></el-input-number>
           </el-form-item>
-          <el-row>
-            <el-col :span="8">
-              <el-col :span="10">
-                <el-form-item label="标题图片"></el-form-item>
-              </el-col>
-              <el-col :span="14">
-                <uploadFile
-                  @uploadValue="uploadValue"
-                  ref="uploadGroup"
-                  :uploadGroup="uploadGroup"
-                ></uploadFile>
-              </el-col>
-            </el-col>
-          </el-row>
+          <el-form-item label="标题图片">
+            <uploadFile
+              @uploadValue="uploadValue"
+              ref="uploadGroup"
+              :uploadGroup="uploadGroup"
+            ></uploadFile>
+          </el-form-item>
           <el-form-item label="是否展示">
             <el-radio-group v-model="attractionsPointInfo.recommend">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="视频"></el-form-item>
-            </el-col>
+          <el-form-item label="视频">
             <UploadFileVideo
               @uploadValue="uploadVideo"
               :uploadGroup="uploadGroupVideo"
             ></UploadFileVideo>
-          </el-row>
+          </el-form-item>
           <el-form-item label="导游点介绍" :required="true">
-            <vue-ueditor-wrap v-model="attractionsPointInfo.info" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="attractionsPointInfo.info"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="是否上传音频文件">
             <el-radio-group
@@ -75,14 +68,6 @@
               <el-radio :label="1">是</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="生成音频文件" v-show="isShow">
-            <el-button type="success" @click="generate">生成</el-button>
-            <template>
-              <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto">
-                <li class="infinite-list-item">{{ attractionsPointInfo.audioUrl }}</li>
-              </ul>
-            </template>
-          </el-form-item>
           <el-form-item label="音频文本" :required="true" v-show="isShow">
             <el-input
               type="textarea"
@@ -92,15 +77,26 @@
             >
             </el-input>
           </el-form-item>
-          <el-row v-show="isAudioShow">
-            <el-col :span="3">
-              <el-form-item label="音频"></el-form-item>
-            </el-col>
+          <el-form-item label="生成音频文件" v-show="isShow">
+            <el-button type="success" @click="generate">生成</el-button>
+            <template>
+              <ul
+                class="infinite-list"
+                v-infinite-scroll="load"
+                style="overflow: auto"
+              >
+                <li class="infinite-list-item">
+                  {{ attractionsPointInfo.audioUrl }}
+                </li>
+              </ul>
+            </template>
+          </el-form-item>
+          <el-form-item label="音频" v-show="isAudioShow">
             <UploadFileVideo
               @uploadValue="uploadAudio"
               :uploadGroup="uploadGroupAudio"
             ></UploadFileVideo>
-          </el-row>
+          </el-form-item>
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -118,8 +114,10 @@
           @current-change="handleCurrentChange"
           style="width: 100%"
         >
-          <el-table-column property="id" label="id" width="100"> </el-table-column>
-          <el-table-column property="name" label="名称" width="100"> </el-table-column>
+          <el-table-column property="id" label="id" width="100">
+          </el-table-column>
+          <el-table-column property="name" label="名称" width="100">
+          </el-table-column>
         </el-table>
         <div style="margin-top: 20px">
           <el-button type="primary" @click="confirmAttractions">确定</el-button>
@@ -267,7 +265,10 @@ export default {
             this.$message.success("提交成功！");
             this.deleteTags(this.$route.fullPath); //关闭当前窗口
             //跳转到列表页面，返回flow:true ，刷新界面，不返回则不刷新界面
-            this.$router.push({ name: "attractionsPointList", params: { flow: true } });
+            this.$router.push({
+              name: "attractionsPointList",
+              params: { flow: true },
+            });
           } else {
             if (this.attractionsPointInfo.id) {
               if (result.fielderrors) {
@@ -326,46 +327,52 @@ export default {
     //获取详情信息
     getAttractionsPoint: function () {
       if (this.$route.params && this.$route.params.id) {
-        attractionsPointApi.detailed({ id: this.$route.params.id }).then((result) => {
-          this.currentRowId = result.attractionsPoint.attractionsId;
-          this.currentRowName = result.attractionsPoint.attractionsName;
-          this.attractionsPointInfo = result.attractionsPoint;
-          if (this.attractionsPointInfo.isUpfile == 0) {
-            this.isShow = true;
-            this.isAudioShow = false;
-          }
-          this.uploadGroupVideo.fileList = [];
-          let fileVideo = result.attractionsPoint.videoUrl;
-          let fileNameVideo = fileVideo.substring(fileVideo.lastIndexOf("/") + 1);
-          this.attractionsPointInfo = result.attractionsPoint;
-          this.uploadGroupVideo.fileList = [
-            {
-              name: fileNameVideo,
-              url: result.attractionsPoint.videoUrl,
-            },
-          ];
-          this.uploadGroupAudio.fileList = [];
-          let fileAudio = result.attractionsPoint.audioUrl;
-          let fileNameAudio = fileAudio.substring(fileAudio.lastIndexOf("/") + 1);
-          this.uploadGroupAudio.fileList = [
-            {
-              name: fileNameAudio,
-              url: result.attractionsPoint.audioUrl,
-            },
-          ];
-          this.uploadGroup.fileList = [];
-          if (
-            result.attractionsPoint.titleImgurl != null &&
-            result.attractionsPoint.titleImgurl != ""
-          ) {
-            this.uploadGroup.fileList.push({
-              url: baseURL.releaseUrl + result.attractionsPoint.titleImgurl,
-            });
-          }
-        })
-        .catch(() => {
-          this.$message.error("数据获取失败");
-        });
+        attractionsPointApi
+          .detailed({ id: this.$route.params.id })
+          .then((result) => {
+            this.currentRowId = result.attractionsPoint.attractionsId;
+            this.currentRowName = result.attractionsPoint.attractionsName;
+            this.attractionsPointInfo = result.attractionsPoint;
+            if (this.attractionsPointInfo.isUpfile == 0) {
+              this.isShow = true;
+              this.isAudioShow = false;
+            }
+            this.uploadGroupVideo.fileList = [];
+            let fileVideo = result.attractionsPoint.videoUrl;
+            let fileNameVideo = fileVideo.substring(
+              fileVideo.lastIndexOf("/") + 1
+            );
+            this.attractionsPointInfo = result.attractionsPoint;
+            this.uploadGroupVideo.fileList = [
+              {
+                name: fileNameVideo,
+                url: result.attractionsPoint.videoUrl,
+              },
+            ];
+            this.uploadGroupAudio.fileList = [];
+            let fileAudio = result.attractionsPoint.audioUrl;
+            let fileNameAudio = fileAudio.substring(
+              fileAudio.lastIndexOf("/") + 1
+            );
+            this.uploadGroupAudio.fileList = [
+              {
+                name: fileNameAudio,
+                url: result.attractionsPoint.audioUrl,
+              },
+            ];
+            this.uploadGroup.fileList = [];
+            if (
+              result.attractionsPoint.titleImgurl != null &&
+              result.attractionsPoint.titleImgurl != ""
+            ) {
+              this.uploadGroup.fileList.push({
+                url: baseURL.releaseUrl + result.attractionsPoint.titleImgurl,
+              });
+            }
+          })
+          .catch(() => {
+            this.$message.error("数据获取失败");
+          });
       } else if (this.$route.params && this.$route.params.flow) {
         //重置参数
         this.attractionsPointInfo = {

@@ -4,13 +4,13 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="分类名称">
-            <el-input v-model="info.name" @change="infoChange"></el-input>
+            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="分类别名">
-            <el-input v-model="info.nickname" @change="infoChange"></el-input>
+            <el-input v-model="info.nickname" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="排序">
-            <el-input v-model="info.sort" @change="infoChange"></el-input>
+            <el-input v-model="info.sort" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
         </div>
         <!-- 操作按钮 -->

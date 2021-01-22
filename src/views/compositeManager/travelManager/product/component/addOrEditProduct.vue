@@ -24,14 +24,14 @@
             </el-select>
           </el-form-item> -->
           <el-form-item label="美食名称">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model="info.name" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="副标题">
-            <el-input v-model="info.subTitle"></el-input>
+            <el-input v-model="info.subTitle" style="width:400px"></el-input>
           </el-form-item>
-          <el-form-item label="今日显示价">
-            <el-input v-model="info.todayPrice"></el-input>
-          </el-form-item>
+          <!-- <el-form-item label="今日显示价">
+            <el-input v-model="info.todayPrice" style="width:400px"></el-input>
+          </el-form-item> -->
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
           </el-form-item>
@@ -56,12 +56,12 @@
               :uploadGroup="uploadGroupThumb"
             ></UploadFile>
           </el-row>
-          <el-form-item label="推荐理由" :required="true">
+          <!-- <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
               v-model="info.recommandReason"
               :config="myConfig"
             ></vue-ueditor-wrap>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="关联商家">
             <el-button type="success" @click="addTradingUsers">添加</el-button>
@@ -403,3 +403,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.info_box >>> .el-form-item__content{
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+</style>

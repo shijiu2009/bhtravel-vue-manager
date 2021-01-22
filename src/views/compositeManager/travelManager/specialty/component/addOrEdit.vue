@@ -3,8 +3,8 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
-          <el-form-item label="所属分类" style="width: 50%">
-            <el-select v-model="info.typeId" placeholder="请选择">
+          <el-form-item label="所属分类">
+            <el-select v-model="info.typeId" placeholder="请选择" style="width: 400px">
               <el-option
                 v-for="item in classes"
                 :key="item.value"
@@ -23,15 +23,15 @@
               ></el-option>
             </el-select>
           </el-form-item> -->
-          <el-form-item label="特产名称">
-            <el-input v-model="info.name"></el-input>
+          <el-form-item label="特产名称" >
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="副标题">
-            <el-input v-model="info.subTitle"></el-input>
+            <el-input v-model="info.subTitle" style="width: 400px"></el-input>
           </el-form-item>
-          <el-form-item label="今日显示价">
+          <!-- <el-form-item label="今日显示价">
             <el-input v-model="info.todayPrice"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
           </el-form-item>
@@ -407,3 +407,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.info_box >>> .el-form-item__content{
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+</style>
