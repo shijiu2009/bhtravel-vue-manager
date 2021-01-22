@@ -262,9 +262,7 @@
 }
 /* ---------------------------------------------------------------pzk */
 /* 富文本编辑框 */
-.el-form-item__content{
-    line-height: 0 !important;
-}
+
 .edui-toolbar div:nth-child(-n+98):nth-child(n+78){
     display: none !important;
     background-color: #f56c6c;
