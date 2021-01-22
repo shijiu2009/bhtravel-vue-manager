@@ -3,13 +3,13 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
-          <el-form-item label="景点名称">
+          <el-form-item label="景点名称" style="width:490px">
             <el-input v-model="info.name"></el-input>
           </el-form-item>
-          <el-form-item label="首页提示语">
+          <el-form-item label="首页提示语" style="width:490px">
             <el-input v-model="info.indexTip"></el-input>
           </el-form-item>
-          <el-form-item label="poicode">
+          <el-form-item label="poicode" style="width:490px">
             <el-input v-model="info.poiCode"></el-input>
           </el-form-item>
           <!-- <el-form-item label="最大游客承载量">
@@ -18,8 +18,8 @@
           <el-form-item label="瞬时游客承载量">
             <el-input v-model="info.nowCustom"></el-input>
           </el-form-item> -->
-          <el-form-item label="推荐指数">
-            <el-rate v-model="info.recommadStars" show-text> </el-rate>
+          <el-form-item label="推荐指数" class="buttom-con">
+            <el-rate v-model="info.recommadStars" show-text  class="buttom-con-son"> </el-rate>
           </el-form-item>
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
@@ -38,8 +38,8 @@
               ></el-option>
             </el-select>
           </el-form-item> -->
-          <el-form-item label="景点质量等级" v-show="isThemesShow" style="width: 50%">
-            <el-select
+          <el-form-item label="景点质量等级" v-show="isThemesShow"  class="xiaochengxushoujia" >
+            <el-select style="width: 180px"
               v-model="info.qualityGrade"
               placeholder="请选择"
               ref="qualityGrade"
@@ -98,18 +98,19 @@
               </el-col>
             </el-col>
           </el-row>
-          <el-form-item label="景点联系方式">
-            <el-input v-model="info.phone"></el-input>
+          <el-form-item label="景点联系方式" class="xiaochengxushoujia">
+            <el-input v-model="info.phone" style="width: 180px"></el-input>
           </el-form-item>
           <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
-          <el-form-item label="开放时间">
+          <el-form-item label="开放时间" style="width: 490px">
             <el-input v-model="info.opening"></el-input>
           </el-form-item>
           <!-- <el-form-item label="提前预定天数">
             <el-input v-model="info.advanceDay"></el-input>
           </el-form-item> -->
-          <el-form-item label="最晚预定时间">
-            <el-time-picker
+          <div class="xiaochengxushoujia">
+              <el-form-item label="最晚预定时间">
+            <el-time-picker style="width: 180px"
               v-model="info.lastReserveTime"
               value-format="HH:mm:ss"
               :picker-options="{
@@ -119,6 +120,7 @@
             >
             </el-time-picker>
           </el-form-item>
+          </div>
           <!-- <el-form-item label="今日价格">
             <el-input v-model="info.todayPrice"></el-input>
           </el-form-item> -->
@@ -131,7 +133,7 @@
               :config="myConfig"
             ></vue-ueditor-wrap>
           </el-form-item>
-          <el-form-item label="景点介绍（微信小程序、APP）" :required="true">
+          <el-form-item label="景点介绍（微信小程序、APP）" :required="true" >
             <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="公告" :required="true">
@@ -149,12 +151,19 @@
           </el-form-item>
           <el-form-item label="添加门票">
             <el-button type="success" @click="addTicket">添加</el-button>
+            <el-button v-if="tickets.length>0" type="danger" @click="deleteTitket">删除</el-button>
+                            <!-- <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                  @click="deleteTitket(index)"
+                ></el-button> -->
 
             <div style="margin-top: 10px">
               <el-row :gutter="20" v-for="(eItem, index) in this.tickets" :key="index">
                 <el-row>
-                  <el-form-item label="景点名称">
-                    <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
+                  <el-form-item label="门票名称">
+                    <el-input v-model="eItem.name" placeholder="请输入内容"  style="width:400px"></el-input>
                   </el-form-item>
                 </el-row>
                 <el-row>
@@ -173,32 +182,39 @@
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价">
-                    <el-input
-                      v-model="eItem.salePrice"
-                      placeholder="请输入价格"
-                    ></el-input>
-                  </el-form-item>
-                  <el-form-item label="门店价">
+                  <div class="xiaochengxushoujia">
+                    <el-form-item label="小程序销售价">
+                      <el-input 
+                        v-model="eItem.salePrice"
+                        placeholder="请输入价格"
+                      ></el-input>
+                    </el-form-item>
+                  </div>
+                  <div class="menmiandian">
+                    <el-form-item label="门店价">
                     <el-input v-model="eItem.price" placeholder="请输入价格"></el-input>
                   </el-form-item>
+                  </div>
                   <el-form-item label="购票须知" :required="true">
                     <vue-ueditor-wrap
                       v-model="eItem.information"
                       :config="myConfig"
                     ></vue-ueditor-wrap>
                   </el-form-item>
-                  <el-form-item label="排序">
+                  <div class="menmiandian">
+                    <el-form-item label="排序">
                     <el-input-number v-model="eItem.sort" :min="0"></el-input-number>
                   </el-form-item>
-                  <el-form-item label="是否下架">
-                    <el-radio-group v-model="eItem.down">
+                  </div>
+                  <el-form-item label="是否下架" class="buttom-con">
+                    <el-radio-group v-model="eItem.down" class="buttom-con-son">
                       <el-radio :label="1">是</el-radio>
                       <el-radio :label="0">否</el-radio>
                     </el-radio-group>
                   </el-form-item>
-                  <el-form-item label="默认门票">
+                  <el-form-item label="默认门票" class="buttom-con">
                     <el-radio-group
+                      class="buttom-con-son"
                       v-model="eItem.isDefault"
                       @change="defaultChange(index)"
                     >
@@ -207,12 +223,7 @@
                     </el-radio-group>
                   </el-form-item>
                 </el-form-item>
-                <el-button
-                  type="danger"
-                  icon="el-icon-delete"
-                  circle
-                  @click="deleteTitket(index)"
-                ></el-button>
+
               </el-row>
             </div>
           </el-form-item>
@@ -221,26 +232,26 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
           </el-card>
-
-          <el-form-item label="必游景点">
-            <el-radio-group v-model="info.indexRecommend">
+          
+          <el-form-item label="必游景点" class="buttom-con">
+            <el-radio-group v-model="info.indexRecommend" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="开放预定">
-            <el-radio-group v-model="info.isOpen">
+          <el-form-item label="开放预定" class="buttom-con">
+            <el-radio-group v-model="info.isOpen" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="是否下架">
-            <el-radio-group v-model="info.down">
+          <el-form-item label="是否下架" class="buttom-con">
+            <el-radio-group v-model="info.down" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
@@ -640,7 +651,7 @@ export default {
     addTicket: function () {
       let ticket = JSON.parse(JSON.stringify(this.ticket));
       ticket.uploadGroupTicket = JSON.parse(JSON.stringify(this.uploadGroupTicket));
-      this.tickets.push(JSON.parse(JSON.stringify(ticket)));
+      this.tickets.unshift(JSON.parse(JSON.stringify(ticket)));
     },
     //添加路径
     titleValue: function (data) {
@@ -658,8 +669,8 @@ export default {
       ].uploadGroup.fileList[0].response.filePath;
     },
     //删除行程详情
-    deleteTitket: function (index) {
-      this.tickets.splice(index, 1)[0];
+    deleteTitket: function () {
+      this.tickets.splice(0, 1)[0];
     },
     //取消按钮事件
     close: function () {
