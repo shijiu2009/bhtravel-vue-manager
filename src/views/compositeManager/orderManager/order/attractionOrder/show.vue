@@ -16,6 +16,7 @@
               </div>
             </div>
             <div class="text item">下单时间： {{ info.createTime }}</div>
+            <div class="text item" v-show="info.status == 2 || info.status == 3 || info.status == 4">出行时间： {{info.schedule.split(' ')[0]}}</div>
             <div class="text item">总金额： {{ info.totalPrice }}</div>
             <div class="text item" v-if="info.status == 1">
               订单状态： 未付款
@@ -97,3 +98,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.box-card .item{
+  line-height: 30px;
+}
+</style>

@@ -278,6 +278,9 @@ export default {
 };
 </script>
 <style scoped>
+.form-box .el-form-item {
+  max-width: 600px;
+}
 .drawer_btn {
   padding: 0 20px;
 }

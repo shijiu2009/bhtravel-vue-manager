@@ -2,11 +2,13 @@
 .form_item {
     width: 70%;
 }
-.edui-default .edui-editor{
-    width: 100%!important;
-    z-index: 2!important;
-    position: relative!important;
+
+.edui-default .edui-editor {
+    width: 100% !important;
+    z-index: 2 !important;
+    position: relative !important;
 }
+
 .el-form-item .el-cascader,
 .el-form-item .el-select {
     width: 100%;
@@ -20,7 +22,7 @@
     width: 100%;
 }
 
-.info_box { 
+.info_box {
     width: 100%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     padding: 40px;
@@ -86,7 +88,7 @@
 }
 
 /* 富文本框 */
-.ql-toolbar.ql-snow + .ql-container.ql-snow {
+.ql-toolbar.ql-snow+.ql-container.ql-snow {
     height: 100%;
     min-height: 400px;
 }
@@ -165,6 +167,7 @@
     margin-left: 10px;
     top: 12px;
 }
+
 .fingerTips {
     position: fixed;
     display: none;
@@ -176,9 +179,11 @@
 .fingerTips.show {
     display: block;
 }
+
 .fingerTips.show_01 {
     opacity: 1;
 }
+
 .fingerTips .fingerTips_item {
     color: #666;
     font-size: 14px;
@@ -220,6 +225,7 @@
     position: relative;
     opacity: 0;
 }
+
 .report_error_item {
     padding: 8px 16px;
     background-color: #fef0f0;
@@ -234,9 +240,11 @@
     box-sizing: border-box;
     display: flex;
 }
+
 .report_error.show_01 .report_error_item {
     opacity: 1;
 }
+
 .report_error .icon {
     font-size: 16px;
     width: 16px;
@@ -246,9 +254,11 @@
     display: table-cell;
     padding: 0 8px;
 }
+
 .report_error.show {
     display: block;
 }
+
 .report_error.show_01 {
     opacity: 1;
 }
@@ -260,42 +270,71 @@
     left: 8px;
     transform: translateY(50%);
 }
+
 /* ---------------------------------------------------------------pzk */
 /* 富文本编辑框 */
 
-.el-form-item__content .edui-editor-toolbarboxouter{
-   line-height: 0!important;
+.el-form-item__content .edui-editor-toolbarboxouter {
+    line-height: 0 !important;
 }
 
-.edui-toolbar div:nth-child(-n+98):nth-child(n+78){
+.edui-toolbar div:nth-child(-n+98):nth-child(n+78) {
     display: none !important;
     background-color: #f56c6c;
 }
-.edui-toolbar div:nth-child(-n+71):nth-child(n+63){
+
+.edui-toolbar div:nth-child(-n+71):nth-child(n+63) {
     display: none !important;
     background-color: #f56c6c;
 }
-.buttom-con{
+
+.buttom-con {
     display: flex;
     align-items: center;
 }
-.buttom-con-son{
+
+.buttom-con-son {
     margin-left: -90px;
 }
-.xiaochengxushoujia{
+
+.xiaochengxushoujia {
     /* 小程序售价、最晚预定时间等对齐样式 */
     margin: 20px 0;
 }
-.xiaochengxushoujia .el-form-item__label{
+
+.xiaochengxushoujia .el-form-item__label {
     padding: 0;
     width: 0;
-    margin-left:-12px;
+    margin-left: -12px;
 }
-.menmiandian{
+
+.menmiandian {
     margin: 20px 0;
 }
 .input-margin-width{
     width:490px;
     margin: 20px 0;
 }
+
 /* ---------------------------------------------------------------pzk */
+
+
+/* 表格颜色 */
+.el-table--border {
+    border: 1px solid #ccc !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.el-table--border th,
+.el-table--border td {
+    border-right: 1px solid #ccc !important;
+}
+
+.el-table--border th,
+.el-table td {
+    border-bottom: 1px solid #ccc !important;
+}
+.el-table:before,.el-table__fixed-right::before{
+    background-color: #ccc !important;
+}

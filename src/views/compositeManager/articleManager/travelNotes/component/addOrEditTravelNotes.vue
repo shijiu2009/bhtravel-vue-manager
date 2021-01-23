@@ -1,7 +1,7 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="90px">
+      <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <el-form-item label="游记攻略分类">
             <el-radio-group v-model="info.oid">
@@ -52,42 +52,32 @@
           <el-form-item label="作者">
             <el-input v-model="info.author" @change="infoChange"></el-input>
           </el-form-item>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="游记攻略标题图片(1600*900)"></el-form-item>
-            </el-col>
+          <el-form-item label="游记攻略标题图片(1600*900)">
             <UploadFile
               @uploadValue="titleValue"
               :uploadGroup="uploadGroupTitle"
             ></UploadFile>
-          </el-row>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="游记攻略缩略图片(900*506)"></el-form-item>
-            </el-col>
+          </el-form-item>
+
+          <el-form-item label="游记攻略缩略图片(900*506)">
             <UploadFile
               @uploadValue="thumbValue"
               :uploadGroup="uploadGroupThumb"
             ></UploadFile>
-          </el-row>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="游记攻略首页图片(250*167)"></el-form-item>
-            </el-col>
+          </el-form-item>
+
+          <el-form-item label="游记攻略首页图片(250*167)">
             <UploadFile
               @uploadValue="indexValue"
               :uploadGroup="uploadGroupIndex"
             ></UploadFile>
-          </el-row>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="用户头像"></el-form-item>
-            </el-col>
+          </el-form-item>
+          <el-form-item label="用户头像">
             <UploadFile
               @uploadValue="headImgValue"
               :uploadGroup="uploadGroupHeadImg"
             ></UploadFile>
-          </el-row>
+          </el-form-item>
           <el-form-item label="是否展示">
             <el-radio-group v-model="info.isShow">
               <el-radio :label="1">是</el-radio>

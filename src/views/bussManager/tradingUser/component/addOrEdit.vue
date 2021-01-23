@@ -144,14 +144,34 @@
 
         <!-- 对话框 -->
         <el-dialog title="关联用户" :visible.sync="dialogTableUsers">
+          
+          <el-row :gutter="20" class="products-div">
+            <el-col :span="12">
+              <label class="products-label">手机号码</label
+              ><el-input v-model="uName" placeholder="手机号码"></el-input>
+            </el-col>
+            <el-col :span="12">
+              <el-button type="primary" @click="searchUs">搜 索</el-button>
+            </el-col>
+          </el-row>
+
           <el-table ref="usersTable" :data="users">
             <el-table-column type="selection"> </el-table-column>
-            <el-table-column property="username" label="id"> </el-table-column>
-            <el-table-column property="email" label="邮箱"> </el-table-column>
-            <el-table-column property="mobile" label="号码"> </el-table-column>
+            <el-table-column property="username" label="手机号码"> </el-table-column>
             <el-table-column property="miniOpenid" label="小程序的openid">
             </el-table-column>
           </el-table>
+
+          <!-- 分页 -->
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="uPage.totalCount"
+            :page-size="uPage.rows"
+            :current-page="uPage.page"
+            @current-change="changePageUs"
+          >
+          </el-pagination>
           <div style="margin-top: 20px">
             <el-button type="primary" @click="confirmUsers">确定</el-button>
           </div>
@@ -632,6 +652,18 @@ export default {
         cities: [],
         countys: [],
       },
+      //用户对话框选项
+      uName: "",
+      //用户分页数据
+      uPage: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
       //景点对话框选项
       attrName: "",
       attrOpen: "",
@@ -758,12 +790,73 @@ export default {
     avatarValue: function (data) {
       this.info.headImg = data.filePath;
     },
+    //用户
+    searchUs: function () {
+      this.uPage.page = 1;
+      if (this.uName != null && this.uName != "") {
+        this.uPage["username"] = this.uName;
+      } else {
+        this.$delete(this.uPage, "username");
+      }
+      usersApi
+        .getList(this.uPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.users = result.rows;
+          this.uPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.users.forEach((user, i) => {
+              this.selectUsers.forEach((selectUser, j) => {
+                if (
+                  this.users[i] != null &&
+                  this.selectUsers[j] != null &&
+                  this.users[i].id == this.selectUsers[j].id
+                ) {
+                  this.$refs.usersTable.toggleRowSelection(this.users[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageUs(index) {
+      this.uPage.page = index;
+      usersApi
+        .getList(this.uPage)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.users = result.rows;
+          this.uPage.totalCount = result.total;
+          this.$nextTick(function () {
+            this.users.forEach((user, i) => {
+              this.selectUsers.forEach((selectUser, j) => {
+                if (
+                  this.users[i] != null &&
+                  this.selectUsers[j] != null &&
+                  this.users[i].id == this.selectUsers[j].id
+                ) {
+                  this.$refs.usersTable.toggleRowSelection(this.users[i], true);
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     addUsers: function () {
       this.dialogTableUsers = true;
       usersApi
-        .getAllList(this.page)
+        .getList(this.uPage)
         .then((result) => {
           this.users = result.rows;
+          this.uPage.totalCount = result.total;
           this.$nextTick(function () {
             this.users.forEach((user, i) => {
               this.selectUsers.forEach((selectUser, j) => {

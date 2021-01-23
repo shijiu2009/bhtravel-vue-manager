@@ -40,7 +40,7 @@
         </div>
 
         <div>
-          <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
+          <el-input placeholder="输入关键字进行过滤" v-model="filterText" style="max-width:400px"></el-input>
           <div class="custom-tree-container">
             <div class="block">
               <el-tree
@@ -271,6 +271,9 @@ export default {
 };
 </script>
 <style scoped>
+.form-box .el-form-item {
+  max-width: 600px;
+}
 .drawer_btn {
   padding: 0 20px;
 }

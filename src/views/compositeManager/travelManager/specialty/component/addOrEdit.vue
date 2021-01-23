@@ -35,7 +35,7 @@
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
           </el-form-item>
-          <el-form-item label="推荐指数">
+          <el-form-item label="推荐指数" class="rank">
             <el-rate v-model="info.recommendationIndex" show-text> </el-rate>
           </el-form-item>
           <el-row>
@@ -56,12 +56,6 @@
               :uploadGroup="uploadGroupThumb"
             ></UploadFile>
           </el-row>
-          <el-form-item label="推荐理由" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.recommandReason"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
-          </el-form-item>
 
           <el-form-item label="关联商家">
             <el-button type="success" @click="addTradingUsers">添加</el-button>
@@ -409,7 +403,7 @@ export default {
 </script>
 
 <style scoped>
-.info_box >>> .el-form-item__content{
+.rank >>> .el-form-item__content{
   display: flex;
   align-items: center;
   height: 40px;

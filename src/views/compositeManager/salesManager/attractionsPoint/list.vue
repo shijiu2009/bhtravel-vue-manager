@@ -32,7 +32,7 @@
       >
         <el-table-column type="selection" width="52" align="center"></el-table-column>
 
-        <el-table-column prop="id" width="100" align="center" label="序号" sortable></el-table-column>
+        <el-table-column prop="index" width="50" align="center" label="序号"></el-table-column>
         <el-table-column prop="title" label="标题" width="150" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="attractionsName" label="所属景点" width="200" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="sort" label="排序" width="200" align="center" show-overflow-tooltip></el-table-column>
