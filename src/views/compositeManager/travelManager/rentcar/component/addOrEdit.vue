@@ -4,11 +4,11 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="名称">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model="info.name" style="width:400px"></el-input>
           </el-form-item>
 
           <el-form-item label="车型">
-            <el-input v-model="info.type"></el-input>
+            <el-input v-model="info.type" style="width:400px"></el-input>
           </el-form-item>
 
           <el-form-item label="天数">
@@ -16,19 +16,19 @@
           </el-form-item>
 
           <el-form-item label="价格">
-            <el-input v-model="info.price"></el-input>
+            <el-input v-model="info.price" style="width:400px"></el-input>
           </el-form-item>
 
           <el-form-item label="级别">
-            <el-input v-model="info.level"></el-input>
+            <el-input v-model="info.level" style="width:400px"></el-input>
           </el-form-item>
 
           <!-- <el-form-item label="座位">
             <el-input v-model="info.seat"></el-input>
           </el-form-item> -->
 
-          <el-form-item label="电话">
-            <el-input v-model="info.phone"></el-input>
+          <el-form-item label="电话" >
+            <el-input v-model="info.phone" style="width:400px"></el-input>
           </el-form-item>
 
           <el-form-item label="排序">

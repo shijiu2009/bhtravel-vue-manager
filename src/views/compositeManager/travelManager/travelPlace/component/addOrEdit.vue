@@ -3,8 +3,8 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="文旅场所名称">
-            <el-input v-model="info.name" @change="infoChange"></el-input>
+          <el-form-item label="文旅场所名称" >
+            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -40,7 +40,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="开馆日期">
-            <el-input v-model="info.openDay"></el-input>
+            <el-input v-model="info.openDay" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="开馆时间">
             <el-time-picker
@@ -87,7 +87,7 @@
             ></quill-editor>
           </el-form-item> -->
 
-          <el-row>
+          <!-- <el-row>
             <el-col :span="3">
               <el-form-item label="图片集合"></el-form-item>
             </el-col>
@@ -96,7 +96,7 @@
               ref="UploadFile"
               :uploadGroup="uploadGroupPhotos"
             ></UploadFile>
-          </el-row>
+          </el-row> -->
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -379,3 +379,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.info_box  >>> .el-form-item__content{
+  width: 400px;
+}
+</style>
