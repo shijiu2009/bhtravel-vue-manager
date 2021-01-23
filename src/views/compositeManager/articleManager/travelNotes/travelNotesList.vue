@@ -135,6 +135,20 @@ export default {
               },
             ],
           },
+          {
+            name: "oid",
+            title: "分类",
+            list: [
+              {
+                value: "1",
+                label: "游记",
+              },
+              {
+                value: "2",
+                label: "攻略",
+              },
+            ],
+          },
         ],
         date: false,
       },
