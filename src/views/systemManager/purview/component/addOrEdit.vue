@@ -8,9 +8,7 @@
             :required="true"
             v-finger-tips="{ content: '权限名称，与页面的name一致' }"
           >
-            <el-input
-              v-model="purviewInfo.aliasname"
-            >
+            <el-input v-model="purviewInfo.aliasname" >
             </el-input>
           </el-form-item>
 
@@ -259,6 +257,9 @@ export default {
 };
 </script>
 <style scoped>
+.form-box >>> .el-form-item{
+  max-width: 600px;
+}
 .drawer_btn {
   padding: 0 20px;
 }

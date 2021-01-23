@@ -79,7 +79,7 @@
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="name" label="名称" width="150" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column prop="url" label="视频路径" align="center"></el-table-column>
-        <el-table-column label="是否显示" width="60" align="center">
+        <el-table-column label="是否显示" width="150" align="center">
           <template slot-scope="scope" >
             <el-tag
               :type="scope.row.isShow=='1' ? 'success' : 'primary'"

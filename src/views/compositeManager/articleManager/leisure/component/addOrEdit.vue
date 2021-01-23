@@ -1,17 +1,17 @@
 <template>
   <div class="info_box">
     <div class="form-box">
-      <el-form ref="form" :model="info" label-width="108px">
+      <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <!-- <el-form-item label="所属分类" style="width: 50%">
             <el-radio :label="1">休闲</el-radio>
             <el-radio :label="2">娱乐</el-radio>
           </el-form-item> -->
           <el-form-item label="休闲娱乐名称">
-            <el-input v-model="info.name"></el-input>
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="副标题">
-            <el-input v-model="info.subTitle"></el-input>
+            <el-input v-model="info.subTitle" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
@@ -19,30 +19,24 @@
           <el-form-item label="推荐指数">
             <el-rate v-model="info.recommendationIndex" show-text> </el-rate>
           </el-form-item>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="内容封面图片(640*428)"></el-form-item>
-            </el-col>
+          <el-form-item label="内容封面图片(640*428)">
             <UploadFile
               @uploadValue="titleValue"
               :uploadGroup="uploadGroupTitle"
             ></UploadFile>
-          </el-row>
-          <el-row>
-            <el-col :span="3">
-              <el-form-item label="列表缩略图片(280*187)"></el-form-item>
-            </el-col>
+          </el-form-item>
+          <el-form-item label="列表缩略图片(280*187)">
             <UploadFile
               @uploadValue="thumbValue"
               :uploadGroup="uploadGroupThumb"
             ></UploadFile>
-          </el-row>
-          <el-form-item label="推荐理由" :required="true">
+          </el-form-item>
+          <!-- <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
               v-model="info.recommandReason"
               :config="myConfig"
             ></vue-ueditor-wrap>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="关联商家">
             <el-button type="success" @click="addTradingUsers">添加</el-button>
@@ -56,7 +50,10 @@
           <br />
 
           <el-form-item label="特产详情(微信,App)" :required="true">
-            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.info"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="特产详情(web)" :required="true">
             <quill-editor
@@ -107,7 +104,10 @@
         <el-table-column type="selection"> </el-table-column>
         <el-table-column property="username" label="登录名称" width="150">
           <template slot-scope="scope">
-            <el-input :placeholder="scope.row.username" :disabled="true"></el-input>
+            <el-input
+              :placeholder="scope.row.username"
+              :disabled="true"
+            ></el-input>
           </template>
         </el-table-column>
         <el-table-column property="name" label="登录中文名" width="150">
@@ -117,17 +117,24 @@
         </el-table-column>
         <el-table-column property="mobile" label="联系电话" width="150">
           <template slot-scope="scope">
-            <el-input :placeholder="scope.row.mobile" :disabled="true"></el-input>
+            <el-input
+              :placeholder="scope.row.mobile"
+              :disabled="true"
+            ></el-input>
           </template>
         </el-table-column>
         <el-table-column property="email" label="电子邮箱" width="150">
           <template slot-scope="scope">
-            <el-input :placeholder="scope.row.email" :disabled="true"></el-input>
+            <el-input
+              :placeholder="scope.row.email"
+              :disabled="true"
+            ></el-input>
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页 -->
-      <el-pagination small layout="prev, pager, next" :total="total"> </el-pagination>
+      <el-pagination small layout="prev, pager, next" :total="total">
+      </el-pagination>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="confirmTradingUsers">确 定</el-button>
@@ -463,6 +470,6 @@ export default {
 
 <style scoped>
 .el-rate {
-    display: inline-flex;
+  display: inline-flex;
 }
 </style>
