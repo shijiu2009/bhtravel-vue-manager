@@ -3,7 +3,7 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="民宿名称">
+          <el-form-item label="民宿名称" style="width:490px">
             <el-input v-model="info.name" @change="infoChange"></el-input>
             <el-tooltip
               :content="tigs.title.content"
@@ -22,7 +22,7 @@
             ></el-alert>
           </el-form-item>
 
-          <el-form-item label="副标题">
+          <el-form-item label="副标题" style="width:490px">
             <el-input v-model="info.indexTip"></el-input>
           </el-form-item>
           <!-- <el-form-item label="主题" style="width: 50%">
@@ -45,7 +45,7 @@
               ></el-option>
             </el-select>
           </el-form-item> -->
-          <el-form-item label="开业时间">
+          <el-form-item label="开业时间" style="width:490px">
             <el-input v-model="info.openTime"></el-input>
           </el-form-item>
           <!-- <el-form-item label="酒店类型">
@@ -54,8 +54,8 @@
               <el-radio :label="2">民宿</el-radio>
             </el-radio-group>
           </el-form-item> -->
-          <el-form-item label="民宿星级" style="width: 50%">
-            <el-select v-model="info.stars" placeholder="请选择">
+          <el-form-item label="民宿星级" >
+            <el-select v-model="info.stars" placeholder="请选择" style="width: 100px">
               <el-option
                 v-for="item in starses"
                 :key="item.value"
@@ -187,10 +187,29 @@
           </el-form-item>
           <el-form-item label="房型">
             <el-button type="success" @click="addSub">添加</el-button>
-            <div style="margin-top: 10px">
-              <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index">
+                            <!-- <el-button
+                  type="primary"
+                  round
+                  icon="el-icon-edit"
+                  circle
+                  title="编辑"
+                  @click="openTable(index)"
+                ></el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                  @click="deleteSub(index)"
+                ></el-button> -->
+            <div style="margin-top: -50px">
+              <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index"  style="padding-top:30px;margin-left: -4px;margin-bottom:50px; box-shadow:0px 0px 8px #888;">
+                  <div style="position: relative;top:-20px;left:80px">
+                    <el-button type="primary" @click="openTable(index)" style="">编辑</el-button>
+                    <el-button type="danger" @click="deleteSub(index)">删除</el-button>
+                    <span style="margin-left:40px">第{{roomlist.length-index}}个房型，共{{roomlist.length}}个房型</span>
+                  </div>
                 <el-row>
-                  <el-form-item label="房型名称">
+                  <el-form-item label="房型名称" class="input-margin-width">
                     <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
                   </el-form-item>
                 </el-row>
@@ -204,7 +223,7 @@
                   </el-form-item>
                 </el-row>
                 <el-row>
-                  <el-form-item label="床型">
+                  <el-form-item label="床型" class="input-margin-width" style="margin:0">
                     <el-select v-model="eItem.bedType" placeholder="请选择">
                       <el-option
                         v-for="item in roomTypes"
@@ -215,10 +234,10 @@
                     </el-select>
                   </el-form-item>
                 </el-row>
-                <el-form-item label="面积">
+                <el-form-item label="面积" class="input-margin-width">
                   <el-input v-model="eItem.area" placeholder="请输入内容"></el-input>
                 </el-form-item>
-                <el-form-item label="早餐">
+                <el-form-item label="早餐" class="input-margin-width">
                   <el-select v-model="eItem.breakfast" placeholder="请选择">
                     <el-option
                       v-for="item in breakfasts"
@@ -235,7 +254,7 @@
                     <el-radio :label="2">有（收费）</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="排序">
+                <el-form-item label="排序" class="input-margin-width">
                   <el-input v-model="eItem.sort" placeholder="请输入排序"></el-input>
                 </el-form-item>
                 <el-form-item label="下架">
@@ -253,40 +272,40 @@
                     <el-radio :label="1">是</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="平日价格">
-                  <el-form-item label="门店价">
+                <el-form-item label="平日价格" class="input-margin-width">
+                  <el-form-item label="门店价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.retailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价">
+                  <el-form-item label="小程序销售价"  style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.salePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价">
+                  <el-form-item label="结算底价"  style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.floorPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
                 </el-form-item>
-                <el-form-item label="周末价格">
-                  <el-form-item label="门店价">
+                <el-form-item label="周末价格" class="input-margin-width">
+                  <el-form-item label="门店价"  style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklyRetailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价">
+                  <el-form-item label="小程序销售价"  style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklySalePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价">
+                  <el-form-item label="结算底价"  style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklyfloorPrice"
                       placeholder="请输入价格"
@@ -304,7 +323,7 @@
                     <el-checkbox label="1">周日</el-checkbox>
                   </el-checkbox-group>
                 </el-form-item>
-                <el-button
+                <!-- <el-button
                   type="primary"
                   round
                   icon="el-icon-edit"
@@ -317,7 +336,7 @@
                   icon="el-icon-delete"
                   circle
                   @click="deleteSub(index)"
-                ></el-button>
+                ></el-button> -->
               </div>
             </div>
           </el-form-item>
@@ -326,7 +345,7 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
@@ -528,6 +547,12 @@
                 >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
               >
             </template>
+          </el-table-column>
+           <!-- 单独添加 -->
+          <el-table-column label="" >
+           <template slot-scope="scope">
+          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
+           </template>
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -857,6 +882,12 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
+     //单个关联产品点击添加
+    handleDelete(index,item){
+      // console.log(index,item);
+      this.dialogTableProducts = false;
+      this.selectProducts.push(item)
+    },
     //信息校验
     infoChange: function () {
       let isCheck = true;

@@ -129,19 +129,20 @@
           </el-form-item>
           <el-form-item label="添加项目">
             <el-button type="success" @click="addTicket">添加</el-button>
-
             <div style="margin-top: 10px">
               <el-row
                 :gutter="20"
                 v-for="(eItem, index) in this.tickets"
-                :key="index"
+                :key="index" style="box-shadow:0px 0px 8px #888; padding:10px"
               >
-                <el-row>
+                <el-button type="danger" @click="deleteTitket(index)">删除</el-button>
+                <span style="margin-left:40px">第{{tickets.length-index}}个项目，共{{tickets.length}}个项目</span>
+                <el-row >
                   <el-form-item label="项目名称">
                     <el-input
                       v-model="eItem.name"
                       placeholder="请输入内容"
-                    ></el-input>
+                      style="width:300px"></el-input>
                   </el-form-item>
                 </el-row>
                 <el-row>
@@ -154,7 +155,7 @@
                   </el-form-item>
                 </el-row>
                 <el-form-item label="项目价格">
-                  <el-form-item label="结算底价">
+                  <el-form-item label="结算底价" >
                     <el-input
                       v-model="eItem.floorPrice"
                       placeholder="请输入价格"
@@ -194,12 +195,12 @@
                     </el-radio-group>
                   </el-form-item>
                 </el-form-item>
-                <el-button
+                <!-- <el-button
                   type="danger"
                   icon="el-icon-delete"
                   circle
                   @click="deleteTitket(index)"
-                ></el-button>
+                ></el-button> -->
               </el-row>
             </div>
           </el-form-item>
@@ -208,7 +209,7 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <el-card class="box-card"  v-if="selectProducts.length>0" style="margin-bottom:20px">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
@@ -232,6 +233,8 @@
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
+
+
 
           <el-form-item label="图片集合">
             <UploadFile
@@ -321,6 +324,14 @@
               >
             </template>
           </el-table-column>
+
+                  <!-- 单独添加 -->
+          <el-table-column label="" >
+           <template slot-scope="scope">
+          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
+           </template>
+          </el-table-column>
+
         </el-table>
         <!-- 分页 -->
         <el-pagination
@@ -552,6 +563,13 @@ export default {
         }
       }
     },
+    //单个关联产品点击添加
+       handleDelete(index,item){
+      // console.log(index,item);
+      this.dialogTableProducts = false;
+      this.selectProducts.push(item)
+
+    },
     //提交表单
     onSubmit: function () {
       deleteKeys(this.info, "projects", this);
@@ -636,7 +654,7 @@ export default {
       ticket.uploadGroupTicket = JSON.parse(
         JSON.stringify(this.uploadGroupTicket)
       );
-      this.tickets.push(JSON.parse(JSON.stringify(ticket)));
+      this.tickets.unshift(JSON.parse(JSON.stringify(ticket)));
     },
     //添加路径
     titleValue: function (data) {

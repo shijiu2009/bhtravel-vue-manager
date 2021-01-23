@@ -39,7 +39,7 @@
             </el-select>
           </el-form-item> -->
           <el-form-item label="景点质量等级" v-show="isThemesShow"  class="xiaochengxushoujia" >
-            <el-select style="width: 180px"
+            <el-select style="width: 100px"
               v-model="info.qualityGrade"
               placeholder="请选择"
               ref="qualityGrade"
@@ -151,7 +151,6 @@
           </el-form-item>
           <el-form-item label="添加门票">
             <el-button type="success" @click="addTicket">添加</el-button>
-            <el-button v-if="tickets.length>0" type="danger" @click="deleteTitket">删除</el-button>
                             <!-- <el-button
                   type="danger"
                   icon="el-icon-delete"
@@ -160,7 +159,9 @@
                 ></el-button> -->
 
             <div style="margin-top: 10px">
-              <el-row :gutter="20" v-for="(eItem, index) in this.tickets" :key="index">
+              <el-row :gutter="20" v-for="(eItem, index) in this.tickets" :key="index" style="box-shadow:0px 0px 8px #888; padding:10px">
+                <el-button v-if="tickets.length>0" type="danger" @click="deleteTitket(index)">删除</el-button>
+                <span style="margin-left:40px">门票:{{tickets.length-index}}/{{tickets.length}}</span>
                 <el-row>
                   <el-form-item label="门票名称">
                     <el-input v-model="eItem.name" placeholder="请输入内容"  style="width:400px"></el-input>
@@ -348,7 +349,6 @@
            <template slot-scope="scope">
           <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
            </template>
-
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -785,7 +785,6 @@ export default {
       // console.log(index,item);
       this.dialogTableProducts = false;
       this.selectProducts.push(item)
-
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {

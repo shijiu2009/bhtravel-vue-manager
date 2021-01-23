@@ -55,7 +55,7 @@
             </el-radio-group>
           </el-form-item> -->
           <el-form-item label="酒店星级">
-            <el-select v-model="info.stars" placeholder="请选择"  style="width: 180px">
+            <el-select v-model="info.stars" placeholder="请选择"  style="width: 100px">
               <el-option
                 v-for="item in starses"
                 :key="item.value"
@@ -202,14 +202,15 @@
                   @click="deleteSub(index)"
                 ></el-button> -->
                 <!-------------------------------------------------------------- todo -->
-            <div style="margin-top: 0px;padding-bottom:50px">
-              <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index">
-                  <div style="position: relative;top:-40px;left:80px">
+            <div style="margin-top: -50px;">
+              <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index" style="padding-top:30px;margin-left: -4px;margin-bottom:50px; box-shadow:0px 0px 8px #888;">
+                  <div style="position: relative;top:-20px;left:80px">
                     <el-button type="primary" @click="openTable(index)" style="">编辑</el-button>
                     <el-button type="danger" @click="deleteSub(index)">删除</el-button>
+                    <span style="margin-left:40px">第{{roomlist.length-index}}个房型，共{{roomlist.length}}个房型</span>
                   </div>
                 <el-row>
-                  <el-form-item label="房型名称">
+                  <el-form-item label="房型名称" style="width:490px">
                     <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
                   </el-form-item>
                 </el-row>
@@ -223,7 +224,7 @@
                   </el-form-item>
                 </el-row>
                 <el-row>
-                  <el-form-item label="床型">
+                  <el-form-item label="床型" style="width:490px">
                     <el-select v-model="eItem.bedType" placeholder="请选择">
                       <el-option
                         v-for="item in roomTypes"
@@ -234,10 +235,10 @@
                     </el-select>
                   </el-form-item>
                 </el-row>
-                <el-form-item label="面积">
+                <el-form-item label="面积" style="width:490px">
                   <el-input v-model="eItem.area" placeholder="请输入内容"></el-input>
                 </el-form-item>
-                <el-form-item label="早餐">
+                <el-form-item label="早餐" style="width:490px;margin-top:20px">
                   <el-select v-model="eItem.breakfast" placeholder="请选择">
                     <el-option
                       v-for="item in breakfasts"
@@ -279,56 +280,66 @@
                     <el-radio :label="1">是</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="平日价格">
-                  <el-form-item label="门店价">
+                <el-form-item label="平日价格" class="input-margin-width">
+                  <el-form-item label="门店价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.retailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价">
+                  <el-form-item label="小程序销售价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.salePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价">
+                  <el-form-item label="结算底价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.floorPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
                 </el-form-item>
-                <el-form-item label="周末价格">
-                  <el-form-item label="门店价">
+                <el-form-item label="周末价格" class="input-margin-width">
+                  <el-form-item label="门店价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklyRetailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价">
+                  <el-form-item label="小程序销售价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklySalePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价">
+                  <el-form-item label="结算底价" style="margin-bottom:10px">
                     <el-input
                       v-model="eItem.weeklyfloorPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
                 </el-form-item>
-                <el-form-item label="周末日期">
-                  <el-checkbox-group v-model="eItem.weekly">
-                    <el-checkbox label="2">周一</el-checkbox>
-                    <el-checkbox label="3">周二</el-checkbox>
-                    <el-checkbox label="4">周三</el-checkbox>
-                    <el-checkbox label="5">周四</el-checkbox>
-                    <el-checkbox label="6">周五</el-checkbox>
-                    <el-checkbox label="7">周六</el-checkbox>
-                    <el-checkbox label="1">周日</el-checkbox>
+                <el-form-item label="周末日期" style="margin-top:10px">
+                  <el-checkbox-group v-model="eItem.weekly" style="margin-left:30px" >
+                    <el-checkbox label="2" >周一</el-checkbox>
+                    <el-checkbox label="3" >周二</el-checkbox>
+                    <el-checkbox label="4" >周三</el-checkbox>
+                    <el-checkbox label="5" >周四</el-checkbox>
+                    <el-checkbox label="6" >周五</el-checkbox>
+                    <el-checkbox label="7" >周六</el-checkbox>
+                    <el-checkbox label="1" >周日</el-checkbox>
                   </el-checkbox-group>
+
+                  <!-- <div  @click="text1(index)">
+                    <el-checkbox label="0" >全选</el-checkbox>
+                  </div> -->
+                   <!-- <div @click="text1(index)">
+                      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                      <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+                        <el-checkbox v-for="city in cities" :label="city" :key="city" >{{city}}</el-checkbox>
+                      </el-checkbox-group>
+                   </div> -->
                 </el-form-item>
                 <!-- <el-button
                   type="primary"
@@ -555,6 +566,14 @@
               >
             </template>
           </el-table-column>
+
+                    <!-- 单独添加 -->
+          <el-table-column label="" >
+           <template slot-scope="scope">
+          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
+           </template>
+          </el-table-column>
+
         </el-table>
         <!-- 分页 -->
         <el-pagination
@@ -690,6 +709,10 @@ export default {
         departureDate: "",
         editTime: "",
       },
+      checkAll: false,
+      checkedCities: [],
+      cities: ['周一','周二','周三','周四','周五','周六','周日'],
+      isIndeterminate: false,
       priceTime: "",
       storePrice: "",
       flooerprice: "",
@@ -879,12 +902,53 @@ export default {
         cities: [],
         countys: [],
       },
+      ckboxindex:'',
+      ckboxitem:false
     };
   },
   methods: {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
+        //单个关联产品点击添加
+       handleDelete(index,item){
+      // console.log(index,item);
+      this.dialogTableProducts = false;
+      this.selectProducts.push(item)
+
+    },
+      handleCheckAllChange(value) {
+        this.checkedCities = value ? this.cities : [];
+        this.isIndeterminate = false;
+        if (value) {
+          this.roomlist[0].weekly = [2,3,4,5,6,7,1]
+        }else{
+          this.roomlist[0].weekly = []
+        }
+        console.log( this.roomlist[0].weekly);
+      },
+      text1(index){
+        // this.ckboxitem = !this.ckboxitem
+        // console.log(index);
+        this.ckboxindex = index
+        this.ckboxitem =!this.ckboxitem        
+        // console.log(this.roomlist);
+        console.log(this.ckboxindex);
+},
+      handleCheckedCitiesChange(value) {
+        console.log(value);
+        this.roomlist[this.ckboxindex].weekly = []
+        const labelList = {'周一':2,'周二':3,'周三':4,'周四':5,'周五':6,'周六':7,'周日':1,}
+        let that = this
+        value.forEach(function(item){
+          // console.log(labelList[item]);
+          that.roomlist[that.ckboxindex].weekly.push(labelList[item])
+        })
+        console.log(this.roomlist);
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      },
     //信息校验
     infoChange: function () {
       let isCheck = true;
