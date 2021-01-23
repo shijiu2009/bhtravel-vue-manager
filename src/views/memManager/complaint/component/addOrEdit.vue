@@ -61,6 +61,7 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
+import ueditor from "@/assets/js/ueditorConfig.js";
 export default {
   components: {
     VueUeditorWrap,
@@ -85,6 +86,7 @@ export default {
         replyname: "",
         isShow: 0,
       },
+      myConfig: ueditor.myConfig,
     };
   },
   methods: {
