@@ -1,51 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      <div>
-        <!-- 可选择下拉搜索 -->
-        <div class="searChfactor">
-          <el-select size="mini" v-model="queryInfo.job" clearable filterable placeholder="所处位置">
-            <el-option
-              size="mini"
-              v-for="item in loctions.options"
-              :key="item.id"
-              :label="item.codeName"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <!-- 输入搜索条件input框 -->
-        <div class="searChfactor input-box">
-          <el-input
-            v-model="queryInfo.name"
-            placeholder="名称"
-            class="handle-input mr10"
-            size="mini"
-            clearable
-          ></el-input>
-        </div>
-        <!-- 时间选择器 -->
-        <div class="block searChfactor">
-          <el-date-picker
-            v-model="queryInfo.date"
-            size="mini"
-            type="datetimerange"
-            :picker-options="timePicker.pickerOptions"
-            range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          ></el-date-picker>
-        </div>
-        <!-- 搜索确定按钮 -->
-        <el-button
-          class="searChfactor"
-          type="primary"
-          size="mini"
-          icon="el-icon-search"
-          @click="handleSearch"
-        >搜索</el-button>
-      </div>
+      <Screen :screenCondition="screenCondition"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -55,7 +11,8 @@
           class="handle-del mr10"
           size="mini"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -63,7 +20,8 @@
           class="handle-del mr10"
           size="mini"
           @click="editLinkBtn('')"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -76,15 +34,28 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="name" label="名称" width="150" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="name"
+          label="名称"
+          width="150"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column prop="url" label="视频路径" align="center"></el-table-column>
         <el-table-column label="是否显示" width="150" align="center">
           <template slot-scope="scope" >
             <el-tag
-              :type="scope.row.isShow=='1' ? 'success' : 'primary'"
+              :type="scope.row.isShow == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.isShow=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.isShow == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -105,7 +76,7 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"
+              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -127,24 +98,27 @@
 <script>
 import api from "@/api/video.js";
 import { mapMutations } from "vuex";
-
+import Screen from "@/components/screen/screen.vue";
 export default {
   name: "videoList",
+  components: {
+    Screen,
+  },
   data() {
     return {
       //加载
       loading: true,
       list: [],
 
-      //搜索信息
-      queryInfo: {
-        job: "",
-        name: "",
-        date: "",
-      },
-      //广告位置列表，用做筛选条件
-      loctions: {
-        options: [],
+      //搜索栏数据
+      screenCondition: {
+        input: [
+          {
+            name: "name",
+            title: "名称",
+          },
+        ],
+        date: false,
       },
       //时间选择器
       timePicker: {
@@ -191,6 +165,7 @@ export default {
         // 默认每页显示的条数（可修改）
         rows: 10,
       },
+      searchDate: [],
       multipleSelection: [],
       url: this.$baseUrl.releaseUrl,
       imgList: [],
@@ -201,8 +176,31 @@ export default {
       setTagsList: "SET_TAGSLIST",
     }),
     //触发搜索按钮
-    handleSearch: function () {
-      console.log(this.queryInfo);
+    handleSearch: function (data) {
+      if (data != null) {
+        data["page"] = this.page.page;
+        data["totalCount"] = this.page.totalCount;
+        data["rows"] = this.page.rows;
+        this.searchDate = data;
+      } else {
+        data = this.page;
+      }
+      api
+        .getList(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.list = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
     },
     //删除所有选中项(批量删除)
     delAllSelection: function () {
@@ -279,7 +277,7 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getList();
+      this.handleSearch(this.searchDate);
     },
   },
   created() {
