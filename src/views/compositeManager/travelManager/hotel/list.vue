@@ -35,7 +35,7 @@
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
         <el-table-column prop="name" label="酒店名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column label="星级" width="60" align="center">
+        <el-table-column label="星级" width="120" align="center">
           <template slot-scope="scope" >
             <el-tag v-if="scope.row.stars=='0'">无星级</el-tag>
             <el-tag v-if="scope.row.stars=='1'">一星级</el-tag>

@@ -4,7 +4,7 @@
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
           <el-form-item label="旅行社名称">
-            <el-input v-model="info.name" @change="infoChange"></el-input>
+            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -22,10 +22,10 @@
             ></el-alert>
           </el-form-item>
           <el-form-item label="诚信分">
-            <el-input v-model="info.score" @change="infoChange"></el-input>
+            <el-input v-model="info.score" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
           <el-form-item label="联系方式">
-            <el-input v-model="info.contact" @change="infoChange"></el-input>
+            <el-input v-model="info.contact" @change="infoChange" style="width:400px"></el-input>
           </el-form-item>
           <el-row>
             <el-col :span="8">
@@ -42,12 +42,12 @@
             </el-col>
           </el-row>
           <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
-          <el-form-item label="资质经营" :required="true">
+          <!-- <el-form-item label="资质经营" :required="true">
             <vue-ueditor-wrap
               v-model="info.qualification"
               :config="myConfig"
             ></vue-ueditor-wrap>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="介绍（微信小程序、app）" :required="true">
             <vue-ueditor-wrap
               v-model="info.contentMini"
@@ -291,3 +291,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.info_box >>> .el-form-item__content{
+  width: 400px;
+}
+</style>

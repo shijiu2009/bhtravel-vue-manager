@@ -97,3 +97,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.box-card .item{
+  line-height: 30px;
+}
+</style>
