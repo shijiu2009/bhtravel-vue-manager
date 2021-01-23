@@ -2,6 +2,8 @@ import login from '@/api/login.js';
 import md5 from "js-md5";
 const user = {
     state: {
+        /*用户信息 */
+        userName: localStorage.getItem('userName'),
         //令牌的存储和获取
         getUserToken() {
             return sessionStorage.getItem('token')
@@ -12,6 +14,9 @@ const user = {
         userInfo: {},
     },
     mutations: {
+        SET_USERNAME: (state, username) => {
+            state.userName = username
+        },
         SET_USER: (state, userInfo) => {
             state.userInfo = userInfo
         },
@@ -43,13 +48,22 @@ const user = {
                 login.login(data).then((result) => {
                     if (result.status) {
                         commit('SET_TOKEN', result.data.token);
-                        resolve({ status: true });
+                        resolve({
+                            status: true
+                        });
+                        commit('SET_USERNAME', result.data.username)
+                        localStorage.setItem("userName", result.data.username)
                         localStorage.setItem("token", result.data.token)
                     } else if (result.msg == "用户名或密码错误！！") {
-                        login.openLogin({ name: data.username, passwd: passwd }).then((result) => {
+                        login.openLogin({
+                            name: data.username,
+                            passwd: passwd
+                        }).then((result) => {
                             if (result.success) {
                                 commit('SET_TOKEN', result.token);
-                                resolve({ status: true });
+                                resolve({
+                                    status: true
+                                });
                                 localStorage.setItem("token", result.token)
                             } else {
                                 reject(result)
@@ -79,7 +93,9 @@ const user = {
                 commit('CLOSE_TOKEN');
                 commit('CLOSE_USERINFO');
                 commit('DELETE_MENU');
-                resolve({ success: true });
+                resolve({
+                    success: true
+                });
             })
         }
     },

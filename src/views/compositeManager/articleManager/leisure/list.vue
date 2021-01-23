@@ -140,7 +140,23 @@ export default {
             title: "休闲娱乐名称",
           },
         ],
-        date: true,
+        date: false,
+        select: [
+          {
+            name: "down",
+            title: "是否显示",
+            list: [
+              {
+                value: "1",
+                label: "是",
+              },
+              {
+                value: "0",
+                label: "否",
+              },
+            ],
+          },
+        ],
       },
       //广告位置列表，用做筛选条件
       loctions: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      
+      <Screen :screenCondition="screenCondition"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -45,15 +45,25 @@ import api from "@/api/activity.js";
 import { mapState, mapMutations } from "vuex";
 //调用详细内容页面
 import Detailed from "./component/detailed";
-
+import Screen from "@/components/screen/screen.vue";
 export default {
   name: "activityList",
   components: {
     Detailed,
+    Screen
   },
   data() {
     return {
-      queryInfo: {},
+      //搜索栏数据
+      screenCondition: {
+        input: [
+          {
+            name: "title",
+            title: "主题名称",
+          },
+        ],
+        date: false,
+      },
       //是否显示加载动画效果
       loading: true,
       activityList: [],
@@ -73,7 +83,33 @@ export default {
       setTagsList: "SET_TAGSLIST",
       deleteInclude: "DELETE_INCLUDE",
     }),
-    handleSearch() {},
+    //触发搜索按钮
+    handleSearch: function (data) {
+      if (data != null) {
+        data["page"] = this.page.page;
+        data["totalCount"] = this.page.totalCount;
+        data["rows"] = this.page.rows;
+        this.searchDate = data;
+      } else {
+        data = this.page;
+      }
+      api
+        .getActivitys(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.activityList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     //删除所有选中项(批量删除)
     delAllSelection: function () {
       //判断是否有选中项
@@ -162,7 +198,7 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getActivitys();
+       this.handleSearch(this.searchDate);
     },
   },
   created() {
