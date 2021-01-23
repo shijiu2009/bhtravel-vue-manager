@@ -303,12 +303,12 @@
 
         <el-table :data="products" ref="productsTable">
           <el-table-column type="selection"> </el-table-column>
-          <el-table-column property="name" label="名称" width="150">
+          <el-table-column property="name" label="名称" width="200">
             <template slot-scope="scope">
               <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
             </template>
           </el-table-column>
-          <el-table-column property="classId" label="所属分类" width="200">
+          <el-table-column property="classId" label="所属分类" width="100">
             <template slot-scope="scope">
               <el-tag
                 :type="scope.row.classId == '1' ? 'success' : 'primary'"
@@ -343,6 +343,12 @@
                 >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
               >
             </template>
+          </el-table-column>
+          <el-table-column label="" >
+           <template slot-scope="scope">
+          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
+           </template>
+
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -575,6 +581,7 @@ export default {
         }
       }
     },
+
     //提交表单
     onSubmit: function () {
       deleteKeys(this.info, "tickets", this);
@@ -741,6 +748,7 @@ export default {
     },
     addProducts: function () {
       console.log(this.page)
+      //弹框的显示隐藏
       this.dialogTableProducts = true;
       productApi
         .getAllList(this.page)
@@ -768,8 +776,16 @@ export default {
         });
     },
     confirmProducts: function () {
+      //弹框的显示隐藏
       this.dialogTableProducts = false;
       this.selectProducts = this.$refs.productsTable.selection;
+      console.log(this.$refs.productsTable);
+    },
+    handleDelete(index,item){
+      // console.log(index,item);
+      this.dialogTableProducts = false;
+      this.selectProducts.push(item)
+
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {
