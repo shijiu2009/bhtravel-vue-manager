@@ -3,7 +3,7 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="酒店名称">
+          <el-form-item label="酒店名称" style="width:490px">
             <el-input v-model="info.name" @change="infoChange"></el-input>
             <el-tooltip
               :content="tigs.title.content"
@@ -22,7 +22,7 @@
             ></el-alert>
           </el-form-item>
 
-          <el-form-item label="副标题">
+          <el-form-item label="副标题" style="width:490px">
             <el-input v-model="info.indexTip"></el-input>
           </el-form-item>
           <!-- <el-form-item label="主题" style="width: 50%">
@@ -45,7 +45,7 @@
               ></el-option>
             </el-select>
           </el-form-item> -->
-          <el-form-item label="开业时间">
+          <el-form-item label="开业时间" style="width:490px">
             <el-input v-model="info.openTime"></el-input>
           </el-form-item>
           <!-- <el-form-item label="酒店类型">
@@ -54,8 +54,8 @@
               <el-radio :label="2">民宿</el-radio>
             </el-radio-group>
           </el-form-item> -->
-          <el-form-item label="酒店星级" style="width: 50%">
-            <el-select v-model="info.stars" placeholder="请选择">
+          <el-form-item label="酒店星级">
+            <el-select v-model="info.stars" placeholder="请选择"  style="width: 180px">
               <el-option
                 v-for="item in starses"
                 :key="item.value"
@@ -187,8 +187,27 @@
           </el-form-item>
           <el-form-item label="酒店房型">
             <el-button type="success" @click="addSub">添加</el-button>
-            <div style="margin-top: 10px">
+                            <!-- <el-button
+                  type="primary"
+                  round
+                  icon="el-icon-edit"
+                  circle
+                  title="编辑"
+                  @click="openTable(index)"
+                ></el-button>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                  @click="deleteSub(index)"
+                ></el-button> -->
+                <!-------------------------------------------------------------- todo -->
+            <div style="margin-top: 0px;padding-bottom:50px">
               <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index">
+                  <div style="position: relative;top:-40px;left:80px">
+                    <el-button type="primary" @click="openTable(index)" style="">编辑</el-button>
+                    <el-button type="danger" @click="deleteSub(index)">删除</el-button>
+                  </div>
                 <el-row>
                   <el-form-item label="房型名称">
                     <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
@@ -311,7 +330,7 @@
                     <el-checkbox label="1">周日</el-checkbox>
                   </el-checkbox-group>
                 </el-form-item>
-                <el-button
+                <!-- <el-button
                   type="primary"
                   round
                   icon="el-icon-edit"
@@ -324,7 +343,7 @@
                   icon="el-icon-delete"
                   circle
                   @click="deleteSub(index)"
-                ></el-button>
+                ></el-button> -->
               </div>
             </div>
           </el-form-item>
@@ -333,7 +352,7 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
             <span v-for="o in selectProducts" :key="o.id" class="text item">
               {{ o.name }}
             </span>
@@ -901,7 +920,8 @@ export default {
     addSub: function () {
       let psub = JSON.parse(JSON.stringify(this.psub));
       psub.uploadGroupRoom = JSON.parse(JSON.stringify(this.uploadGroupRoom));
-      this.roomlist.push(psub);
+      // this.roomlist.push(psub);
+      this.roomlist.unshift(psub);
     },
     //删除行程详情
     deleteTrip: function (index) {

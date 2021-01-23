@@ -263,6 +263,10 @@
 /* ---------------------------------------------------------------pzk */
 /* 富文本编辑框 */
 
+.el-form-item__content .edui-editor-toolbarboxouter{
+   line-height: 0!important;
+}
+
 .edui-toolbar div:nth-child(-n+98):nth-child(n+78){
     display: none !important;
     background-color: #f56c6c;
@@ -283,9 +287,9 @@
     margin: 20px 0;
 }
 .xiaochengxushoujia .el-form-item__label{
-padding: 0;
-width: 0;
-margin-left:-12px;
+    padding: 0;
+    width: 0;
+    margin-left:-12px;
 }
 .menmiandian{
     margin: 20px 0;
