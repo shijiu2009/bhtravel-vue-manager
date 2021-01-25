@@ -86,7 +86,7 @@
           @ready="handler"
           style="width: 500px; height: 300px"
           @click="getClickInfo"
-          :scroll-wheel-zoom="true"
+          :scroll-wheel-zoom="false"
         ></baidu-map>
       </el-col>
     </el-row>
