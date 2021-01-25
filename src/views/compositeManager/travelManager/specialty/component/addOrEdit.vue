@@ -61,9 +61,14 @@
             <el-button type="success" @click="addTradingUsers">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card">
+          <!-- <el-card class="box-card">
             <span v-for="o in selectTradingUsers" :key="o.id" class="text item">
               {{ o.name }}
+            </span>
+          </el-card> -->
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectTradingUsers.length>0">
+            <span v-for="(item,index) in selectTradingUsers" :key="item.id" class="text item">
+              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
           <br />
@@ -227,6 +232,9 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
+    deleteProduct: function (index) {
+      this.selectTradingUsers.splice(index,1);
+    },
     addTradingUsers: function () {
       this.dialogTableTradingUsers = true;
       tApi

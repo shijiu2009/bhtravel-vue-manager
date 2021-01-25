@@ -2,8 +2,8 @@
   <div>
     <el-row v-show="baiduInfo.isArea">
       <el-col :span="8">
-        <el-form-item label="省份">
-          <el-select
+        <el-form-item label="省份" >
+          <el-select style="width:200px"
             v-model="baiduInfo.proxcode"
             placeholder="请选择"
             @change="provinceChange"
@@ -19,7 +19,7 @@
       </el-col>
       <el-col :span="8">
         <el-form-item label="城市">
-          <el-select
+          <el-select style="width:200px"
             v-model="baiduInfo.cityxcode"
             placeholder="请选择"
             @change="cityChange"
@@ -35,7 +35,7 @@
       </el-col>
       <el-col :span="8">
         <el-form-item label="区县">
-          <el-select v-model="baiduInfo.countyxcode" placeholder="请选择">
+          <el-select v-model="baiduInfo.countyxcode" placeholder="请选择" style="width:200px">
             <el-option
               v-for="item in baiduInfo.countys"
               :key="item.value"

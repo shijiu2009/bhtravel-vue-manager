@@ -74,7 +74,7 @@
           </el-row>
           <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
           <el-form-item label="介绍（微信小程序、app）" :required="true">
-            <vue-ueditor-wrap
+            <vue-ueditor-wrap style="width:731px"
               v-model="info.contentMini"
               :config="myConfig"
             ></vue-ueditor-wrap>

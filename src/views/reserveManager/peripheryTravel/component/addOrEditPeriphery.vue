@@ -446,7 +446,7 @@
       <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
         <el-table :data="products" ref="productsTable">
           <el-table-column type="selection"> </el-table-column>
-          <el-table-column property="name" label="名称" width="150">
+          <el-table-column property="name" label="名称">
             <template slot-scope="scope">
               <el-input
                 :placeholder="scope.row.name"
@@ -454,7 +454,7 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column property="classId" label="所属分类" width="200">
+          <el-table-column property="classId" label="所属分类">
             <template slot-scope="scope">
               <el-input
                 :placeholder="scope.row.classId"

@@ -298,7 +298,9 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            <div style="height:59px;display: flex; align-items: flex-end;">
+              <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            </div>
           </el-col>
         </el-row>
 

@@ -518,7 +518,7 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column property="classId" label="所属分类" width="200">
+          <el-table-column property="classId" label="所属分类" >
             <template slot-scope="scope">
               <el-input
                 :placeholder="scope.row.classId"

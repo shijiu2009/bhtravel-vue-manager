@@ -420,7 +420,9 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            <div style="height:59px;display: flex; align-items: flex-end;">
+              <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            </div>
           </el-col>
         </el-row>
 
@@ -431,7 +433,7 @@
               <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
             </template>
           </el-table-column>
-          <el-table-column property="classId" label="所属分类" width="200">
+          <el-table-column property="classId" label="所属分类">
             <template slot-scope="scope">
               <el-tag
                 :type="scope.row.classId == '1' ? 'success' : 'primary'"
