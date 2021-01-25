@@ -178,6 +178,28 @@ export default {
               },
             ],
           },
+          {
+            name: "typeId",
+            title: "分类",
+            list: [
+              {
+                value: "3824",
+                label: "地标特产",
+              },
+              {
+                value: "3825",
+                label: "礼品",
+              },
+              {
+                value: "3826",
+                label: "伴手礼",
+              },
+              {
+                value: "3827",
+                label: "纪念品",
+              },
+            ],
+          },
         ],
         date: false,
       },
