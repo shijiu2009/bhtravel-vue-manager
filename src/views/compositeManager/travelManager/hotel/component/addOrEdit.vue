@@ -1012,12 +1012,18 @@ export default {
       this.page.page = 1;
       if (this.productName != null && this.productName != "") {
         this.page["name"] = this.productName;
+      } else {
+        this.$delete(this.page, "name");
       }
       if (this.productClass != null && this.productClass != "") {
         this.page["classId"] = this.productClass;
+      } else {
+        this.$delete(this.page, "classId");
       }
       if (this.productDown != null && this.productDown != "") {
         this.page["down"] = this.productDown;
+      } else {
+        this.$delete(this.page, "down");
       }
       productApi
         .getAllList(this.page)
