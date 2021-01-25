@@ -47,18 +47,24 @@
               {{ o.name }}
             </span>
           </el-card> -->
-          <el-card class="box-card" style="margin-bottom:20px" v-if="selectTradingUsers.length>0">
-            <span v-for="(item,index) in selectTradingUsers" :key="item.id" class="text item">
-              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
+          <el-card
+            class="box-card"
+            style="margin-bottom: 20px"
+            v-if="selectTradingUsers.length > 0"
+          >
+            <span
+              v-for="(item, index) in selectTradingUsers"
+              :key="item.id"
+              class="text item"
+            >
+              {{ item.name
+              }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
           <br />
 
           <el-form-item label="特产详情(微信,App)" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.info"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
+            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="特产详情(web)" :required="true">
             <quill-editor
@@ -101,9 +107,9 @@
           ><el-input v-model="productName" placeholder="商家名称"></el-input>
         </el-col>
         <el-col :span="6">
-            <div style="height:59px;display: flex; align-items: flex-end;">
-              <el-button type="primary" @click="searchProducts">搜 索</el-button>
-            </div>
+          <div style="height: 59px; display: flex; align-items: flex-end">
+            <el-button type="primary" @click="searchProducts">搜 索</el-button>
+          </div>
         </el-col>
       </el-row>
 
@@ -111,10 +117,7 @@
         <el-table-column type="selection"> </el-table-column>
         <el-table-column property="username" label="登录名称" width="150">
           <template slot-scope="scope">
-            <el-input
-              :placeholder="scope.row.username"
-              :disabled="true"
-            ></el-input>
+            <el-input :placeholder="scope.row.username" :disabled="true"></el-input>
           </template>
         </el-table-column>
         <el-table-column property="name" label="登录中文名" width="150">
@@ -124,31 +127,25 @@
         </el-table-column>
         <el-table-column property="mobile" label="联系电话" width="150">
           <template slot-scope="scope">
-            <el-input
-              :placeholder="scope.row.mobile"
-              :disabled="true"
-            ></el-input>
+            <el-input :placeholder="scope.row.mobile" :disabled="true"></el-input>
           </template>
         </el-table-column>
         <el-table-column property="email" label="电子邮箱" width="150">
           <template slot-scope="scope">
-            <el-input
-              :placeholder="scope.row.email"
-              :disabled="true"
-            ></el-input>
+            <el-input :placeholder="scope.row.email" :disabled="true"></el-input>
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页 -->
       <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="page.totalCount"
-          :page-size="page.rows"
-          :current-page="page.page"
-          @current-change="changePageProducts"
-        >
-        </el-pagination>
+        small
+        layout="prev, pager, next"
+        :total="page.totalCount"
+        :page-size="page.rows"
+        :current-page="page.page"
+        @current-change="changePageProducts"
+      >
+      </el-pagination>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="confirmTradingUsers">确 定</el-button>
@@ -258,12 +255,14 @@ export default {
       deleteTags: "DELETE_TAGSLIST",
     }),
     deleteProduct: function (index) {
-      this.selectTradingUsers.splice(index,1);
+      this.selectTradingUsers.splice(index, 1);
     },
     searchProducts: function () {
       this.page.page = 1;
       if (this.productName != null && this.productName != "") {
         this.page["businessName"] = this.productName;
+      } else {
+        this.$delete(this.page, "businessName");
       }
       tApi
         .getAllList(this.page)

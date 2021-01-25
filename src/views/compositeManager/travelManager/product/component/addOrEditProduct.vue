@@ -272,6 +272,8 @@ export default {
       this.page.page = 1;
       if (this.productName != null && this.productName != "") {
         this.page["businessName"] = this.productName;
+      } else {
+        this.$delete(this.page, "businessName");
       }
       tApi
         .getAllList(this.page)
