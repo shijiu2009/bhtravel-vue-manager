@@ -352,10 +352,10 @@
           </el-form-item>
 
           <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
-            <span v-for="o in selectProducts" :key="o.id" class="text item">
-              {{ o.name }}
+            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
+              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
-          </el-card>
+          </el-card>  
 
           <el-form-item label="首页推荐">
             <el-radio-group v-model="info.indexRecommend">
@@ -980,6 +980,9 @@ export default {
           done();
         })
         .catch((_) => {});
+    },
+    deleteProduct: function (index) {
+      this.selectProducts.splice(index,1);
     },
     searchProducts: function () {
       this.page.page = 1;

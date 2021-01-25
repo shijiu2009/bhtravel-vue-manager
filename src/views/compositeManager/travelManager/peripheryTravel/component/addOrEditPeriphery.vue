@@ -261,8 +261,8 @@
           </el-form-item>
 
           <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
-            <span v-for="o in selectProducts" :key="o.id" class="text item">
-              {{ o.name }}
+            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
+              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
           <el-form-item label="热门推荐" class="buttom-con">
@@ -768,6 +768,9 @@ export default {
       this.subPrices = [];
       this.subPrices =
         this.cachePrices[index] == undefined ? [] : this.cachePrices[index];
+    },
+    deleteProduct: function (index) {
+      this.selectProducts.splice(index,1);
     },
     searchProducts: function () {
       this.page.page = 1;

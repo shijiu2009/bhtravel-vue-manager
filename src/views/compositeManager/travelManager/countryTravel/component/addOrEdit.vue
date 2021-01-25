@@ -209,9 +209,9 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card"  v-if="selectProducts.length>0" style="margin-bottom:20px">
-            <span v-for="o in selectProducts" :key="o.id" class="text item">
-              {{ o.name }}
+          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
+            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
+              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
 
@@ -678,6 +678,9 @@ export default {
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+    },
+    deleteProduct: function (index) {
+      this.selectProducts.splice(index,1);
     },
     searchProducts: function () {
       this.page.page = 1;

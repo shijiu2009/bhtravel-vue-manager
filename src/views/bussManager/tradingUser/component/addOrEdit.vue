@@ -4,22 +4,22 @@
       <el-form ref="form" :model="info" label-width="auto">
         <div class="form_item">
           <el-form-item label="登录名称">
-            <el-input v-model="info.username" style="width:400px"></el-input>
+            <el-input v-model="info.username" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="登录密码" v-show="isShow">
-            <el-input v-model="info.password"  style="width:400px"></el-input>
+            <el-input v-model="info.password" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="登录中文名">
-            <el-input v-model="info.name" style="width:400px"></el-input>
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="联系电话">
-            <el-input v-model="info.mobile" style="width:400px"></el-input>
+            <el-input v-model="info.mobile" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="电子邮箱">
-            <el-input v-model="info.email" style="width:400px"></el-input>
+            <el-input v-model="info.email" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="商家名称">
-            <el-input v-model="info.businessName" style="width:400px"></el-input>
+            <el-input v-model="info.businessName" style="width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="头像">
@@ -31,15 +31,14 @@
           </el-form-item>
 
           <el-row>
-            <el-col :span="8" >
-              <el-form-item label="合作模式" class="select-option" >
+            <el-col :span="8">
+              <el-form-item label="合作模式" class="select-option">
                 <el-radio-group
                   v-model="info.cooperationMode"
                   @change="cooperationChange"
-                  
                 >
-                  <el-radio :label="1" >结算底价</el-radio>
-                  <el-radio :label="2" >佣金比例</el-radio>
+                  <el-radio :label="1">结算底价</el-radio>
+                  <el-radio :label="2">佣金比例</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
@@ -69,9 +68,10 @@
           <el-form-item label="关联用户">
             <el-button type="success" @click="addUsers">添加</el-button>
           </el-form-item>
-          <el-card class="box-card" v-show="selectUsers.length>0" style="width:500px">
-            <span v-for="o in selectUsers" :key="o.id" class="text item">
-              {{ o.username }}
+          <el-card class="box-card">
+            <span v-for="(item, index) in selectUsers" :key="item.id" class="text item">
+              {{ item.username
+              }}<el-button type="text" @click="deleteUsers(index)">删除</el-button>
             </span>
           </el-card>
           <br />
@@ -97,8 +97,13 @@
         </el-form-item>
 
         <el-card class="box-card">
-          <span v-for="o in selectAttractions" :key="o.id" class="text item">
-            {{ o.name }}
+          <span
+            v-for="(item, index) in selectAttractions"
+            :key="item.id"
+            class="text item"
+          >
+            {{ item.name
+            }}<el-button type="text" @click="deleteAttractions(index)">删除</el-button>
           </span>
         </el-card>
 
@@ -107,8 +112,13 @@
         </el-form-item>
 
         <el-card class="box-card">
-          <span v-for="o in selectCountryTravels" :key="o.id" class="text item">
-            {{ o.name }}
+          <span
+            v-for="(item, index) in selectCountryTravels"
+            :key="item.id"
+            class="text item"
+          >
+            {{ item.name
+            }}<el-button type="text" @click="deleteCountryTravels(index)">删除</el-button>
           </span>
         </el-card>
 
@@ -117,8 +127,9 @@
         </el-form-item>
 
         <el-card class="box-card">
-          <span v-for="o in selectHotels" :key="o.id" class="text item">
-            {{ o.name }}
+          <span v-for="(item, index) in selectHotels" :key="item.id" class="text item">
+            {{ item.name
+            }}<el-button type="text" @click="deleteHotels(index)">删除</el-button>
           </span>
         </el-card>
 
@@ -127,8 +138,9 @@
         </el-form-item>
 
         <el-card class="box-card">
-          <span v-for="o in selectHomestays" :key="o.id" class="text item">
-            {{ o.name }}
+          <span v-for="(item, index) in selectHomestays" :key="item.id" class="text item">
+            {{ item.name
+            }}<el-button type="text" @click="deleteHomestays(index)">删除</el-button>
           </span>
         </el-card>
 
@@ -137,14 +149,18 @@
         </el-form-item>
 
         <el-card class="box-card">
-          <span v-for="o in selectPeripherys" :key="o.id" class="text item">
-            {{ o.title }}
+          <span
+            v-for="(item, index) in selectPeripherys"
+            :key="item.id"
+            class="text item"
+          >
+            {{ item.title
+            }}<el-button type="text" @click="deletePeripherys(index)">删除</el-button>
           </span>
         </el-card>
 
         <!-- 对话框 -->
         <el-dialog title="关联用户" :visible.sync="dialogTableUsers">
-          
           <el-row :gutter="20" class="products-div">
             <el-col :span="12">
               <label class="products-label">手机号码</label
@@ -362,7 +378,6 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看酒店" :visible.sync="dialogTableHotels">
-
           <el-row :gutter="20" class="products-div">
             <el-col :span="6">
               <label class="products-label">酒店名称</label
@@ -440,7 +455,6 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看民宿" :visible.sync="dialogTableHomestays">
-
           <el-row :gutter="20" class="products-div">
             <el-col :span="6">
               <label class="products-label">民宿名称</label
@@ -518,7 +532,6 @@
 
         <!-- 对话框 -->
         <el-dialog title="可查看线路" :visible.sync="dialogTablePeripherys">
-
           <el-row :gutter="20" class="products-div">
             <el-col :span="6">
               <label class="products-label">民宿名称</label
@@ -791,6 +804,9 @@ export default {
       this.info.headImg = data.filePath;
     },
     //用户
+    deleteUsers: function (index) {
+      this.selectUsers.splice(index, 1);
+    },
     searchUs: function () {
       this.uPage.page = 1;
       if (this.uName != null && this.uName != "") {
@@ -986,6 +1002,9 @@ export default {
       }
     },
     //景点
+    deleteAttractions: function (index) {
+      this.selectAttractions.splice(index, 1);
+    },
     searchAttrs: function () {
       this.attrPage.page = 1;
       if (this.attrName != null && this.attrName != "") {
@@ -1092,6 +1111,9 @@ export default {
       this.selectAttractions = this.$refs.attractionsTable.selection;
     },
     //农家乐
+    deleteCountryTravels: function (index) {
+      this.selectCountryTravels.splice(index, 1);
+    },
     searchCts: function () {
       this.ctPage.page = 1;
       if (this.ctName != null && this.ctName != "") {
@@ -1204,6 +1226,9 @@ export default {
       this.selectCountryTravels = this.$refs.countryTravelsTable.selection;
     },
     //酒店
+    deleteHotels: function (index) {
+      this.selectHotels.splice(index, 1);
+    },
     searchHs: function () {
       this.hPage.page = 1;
       if (this.hName != null && this.hName != "") {
@@ -1307,6 +1332,9 @@ export default {
       this.selectHotels = this.$refs.hotelsTable.selection;
     },
     //民宿
+    deleteHomestays: function (index) {
+      this.selectHomestays.splice(index, 1);
+    },
     searchHms: function () {
       this.hmPage.page = 1;
       if (this.hmName != null && this.hmName != "") {
@@ -1378,7 +1406,7 @@ export default {
     },
     addHomestays: function () {
       this.dialogTableHomestays = true;
-      alert(this.hmPage.page)
+      alert(this.hmPage.page);
       homestayApi
         .getList(this.hmPage)
         .then((result) => {
@@ -1411,6 +1439,9 @@ export default {
       this.selectHomestays = this.$refs.homestaysTable.selection;
     },
     //线路
+    deletePeripherys: function (index) {
+      this.selectPeripherys.splice(index, 1);
+    },
     searchPs: function () {
       this.pPage.page = 1;
       if (this.pName != null && this.pName != "") {
@@ -1652,12 +1683,11 @@ export default {
 </script>
 
 <style scoped>
-
-.info_box >>> .el-form-item__content{
+.info_box >>> .el-form-item__content {
   line-height: 40px !important;
 }
-.box-card{
+.box-card {
   margin-bottom: 20px;
 }
-</style>>
-
+</style>
+>
