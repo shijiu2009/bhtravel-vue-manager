@@ -507,15 +507,15 @@
           <el-col :span="6">
             <label class="products-label">分类</label>
             <el-select v-model="productClass" placeholder="请选择">
-              <el-option :key="1" :label="'美食'" :value="1"></el-option>
-              <el-option :key="2" :label="'特产'" :value="2"></el-option>
+              <el-option :key="'1'" :label="'美食'" :value="'1'"></el-option>
+              <el-option :key="'2'" :label="'特产'" :value="'2'"></el-option>
             </el-select>
           </el-col>
           <el-col :span="6">
             <label class="products-label">是否上架</label>
             <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="'上架'" :value="1"></el-option>
-              <el-option :key="0" :label="'下架'" :value="0"></el-option>
+              <el-option :key="'0'" :label="'上架'" :value="'0'"></el-option>
+              <el-option :key="'1'" :label="'下架'" :value="'1'"></el-option>
             </el-select>
           </el-col>
           <el-col :span="6">
@@ -557,12 +557,12 @@
               >
             </template>
           </el-table-column>
-          <el-table-column label="是否下架">
+          <el-table-column label="是否上架">
             <template slot-scope="scope">
               <el-tag
-                :type="scope.row.down == '1' ? 'success' : 'primary'"
+                :type="scope.row.down == '0' ? 'success' : 'primary'"
                 disable-transitions
-                >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
+                >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
               >
             </template>
           </el-table-column>
