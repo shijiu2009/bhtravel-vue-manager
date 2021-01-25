@@ -308,7 +308,7 @@
       </el-form>
 
       <!-- 对话框 -->
-      <el-dialog title="套餐价格" :visible.sync="dialogTableVisible">
+      <el-dialog title="套餐价格" :visible.sync="dialogTableVisible"  class="dialog">
         <el-form>
           <el-row>
             <el-col :span="12">
@@ -320,6 +320,7 @@
                     range-separator="至"
                     start-placeholder="开始日期"
                     end-placeholder="结束日期"
+                    :picker-options="pickerOptions"
                   ></el-date-picker>
                 </div>
               </el-form-item>
@@ -353,7 +354,6 @@
                 :placeholder="scope.row.departureDate"
                 align="right"
                 type="date"
-                :picker-options="pickerOptions"
               ></el-date-picker>
             </template>
           </el-table-column>
@@ -626,32 +626,32 @@ export default {
       total: 0,
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() > Date.now();
+          return time.getTime() < new Date(new Date(new Date().toLocaleDateString()).getTime());
         },
-        shortcuts: [
-          {
-            text: "今天",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            },
-          },
-          {
-            text: "昨天",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit("pick", date);
-            },
-          },
-          {
-            text: "一周前",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            },
-          },
-        ],
+        // shortcuts: [
+        //   {
+        //     text: "今天",
+        //     onClick(picker) {
+        //       picker.$emit("pick", new Date());
+        //     },
+        //   },
+        //   {
+        //     text: "昨天",
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
+        //       picker.$emit("pick", date);
+        //     },
+        //   },
+        //   {
+        //     text: "一周前",
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+        //       picker.$emit("pick", date);
+        //     },
+        //   },
+        // ],
       },
       //對話框
       dialogTableVisible: false,
@@ -1150,3 +1150,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.dialog >>> .el-table{
+  max-height: 40vh;
+  overflow: scroll;
+}
+</style>
