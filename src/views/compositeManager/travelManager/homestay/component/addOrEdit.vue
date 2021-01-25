@@ -313,7 +313,7 @@
                   </el-form-item>
                 </el-form-item>
                 <el-form-item label="周末日期">
-                  <el-checkbox-group v-model="eItem.weekly">
+                  <!-- <el-checkbox-group v-model="eItem.weekly">
                     <el-checkbox label="2">周一</el-checkbox>
                     <el-checkbox label="3">周二</el-checkbox>
                     <el-checkbox label="4">周三</el-checkbox>
@@ -321,7 +321,13 @@
                     <el-checkbox label="6">周五</el-checkbox>
                     <el-checkbox label="7">周六</el-checkbox>
                     <el-checkbox label="1">周日</el-checkbox>
-                  </el-checkbox-group>
+                  </el-checkbox-group> -->
+                  <div @click="get_ckbox_index(index)">
+                    <el-checkbox :indeterminate="eItem.isIndeterminate" v-model="eItem.checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                    <el-checkbox-group v-model="eItem.checkedCities" @change="handleCheckedCitiesChange">
+                      <el-checkbox v-for="city in eItem.cities" :label="city" :key="city" >{{city}}</el-checkbox>
+                    </el-checkbox-group>
+                  </div>
                 </el-form-item>
                 <!-- <el-button
                   type="primary"
@@ -673,7 +679,12 @@ export default {
         weeklyRetailPrice: "",
         weeklySalePrice: "",
         weeklyfloorPrice: "",
+        //ckbox
         weekly: [],
+        isIndeterminate: false,
+        checkAll: false,
+        checkedCities: [],
+        cities: ['周一','周二','周三','周四','周五','周六','周日'],
       },
       subPrices: [],
       indexPrices: 0,
@@ -882,12 +893,40 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
-     //单个关联产品点击添加
+
+    //单个关联产品点击添加
     handleDelete(index,item){
-      // console.log(index,item);
       this.dialogTableProducts = false;
       this.selectProducts.push(item)
     },
+    handleCheckAllChange(value) {
+      this.roomlist[this.ckboxindex].checkedCities = value ? this.roomlist[this.ckboxindex].cities : [];
+      this.roomlist[this.ckboxindex].isIndeterminate = false;
+      if (value) {
+        this.roomlist[this.ckboxindex].weekly = [2,3,4,5,6,7,1]
+      }else{
+        this.roomlist[this.ckboxindex].weekly = []
+      }
+      // console.log( this.roomlist[this.ckboxindex].weekly);
+    },
+    get_ckbox_index(index){
+      this.ckboxindex = index
+      this.ckboxitem =!this.ckboxitem        
+      // console.log(this.ckboxindex);
+},
+    handleCheckedCitiesChange(value) {
+      // console.log(value);
+      this.roomlist[this.ckboxindex].weekly = []
+      const labelList = {'周一':2,'周二':3,'周三':4,'周四':5,'周五':6,'周六':7,'周日':1,}
+      let that = this
+      value.forEach(function(item){
+        that.roomlist[that.ckboxindex].weekly.push(labelList[item])
+      })
+      // console.log(this.roomlist);
+      let checkedCount = value.length;
+      this.roomlist[this.ckboxindex].checkAll = checkedCount === this.roomlist[this.ckboxindex].cities.length;
+      this.roomlist[this.ckboxindex].isIndeterminate = checkedCount > 0 && checkedCount < this.roomlist[this.ckboxindex].cities.length;
+      },
     //信息校验
     infoChange: function () {
       let isCheck = true;
@@ -923,7 +962,8 @@ export default {
     addSub: function () {
       let psub = JSON.parse(JSON.stringify(this.psub));
       psub.uploadGroupRoom = JSON.parse(JSON.stringify(this.uploadGroupRoom));
-      this.roomlist.push(psub);
+      // this.roomlist.push(psub);
+      this.roomlist.unshift(psub);
     },
     //删除行程详情
     deleteTrip: function (index) {
