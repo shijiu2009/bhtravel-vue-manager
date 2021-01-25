@@ -59,7 +59,7 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column label="开放预定">
+        <el-table-column label="开放预定" align="center">
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
@@ -68,7 +68,7 @@
             >
           </template>
         </el-table-column>
-        <el-table-column label="是否上架">
+        <el-table-column label="是否上架" align="center">
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.down == '0' ? 'success' : 'primary'"
@@ -84,7 +84,7 @@
           show-overflow-tooltip
           sortable
         ></el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
+        <el-table-column fixed="right" label="操作" width="150" align="center">
           <div slot-scope="scope">
             <el-button
               type="primary"

@@ -24,6 +24,7 @@
           size="mini"
           v-model="screenInfo[item.name]"
           clearable
+          @clear="clear"
           filterable
           :placeholder="item.title"
         >
@@ -82,7 +83,12 @@ export default {
   methods: {
     //触发搜索按钮
     handleSearch: function () {
+
       this.$parent.handleSearch(this.screenInfo);
+    },
+    // 触发默认值
+    clear: function (){
+      this.handleSearch()
     },
   },
   //组件创建前

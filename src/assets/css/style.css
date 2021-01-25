@@ -119,8 +119,11 @@
 }
 
 .pagination {
-    position: fixed;
-    bottom: 10px;
+    position: sticky;
+    bottom: 0px;
+    background-color: #fff;
+    z-index: 99;
+    padding: 10px 0px;
     transition: all 0.5;
     animation: paginationShow 0.5s infinite;
     -webkit-animation: paginationShow 0.5s infinite;
