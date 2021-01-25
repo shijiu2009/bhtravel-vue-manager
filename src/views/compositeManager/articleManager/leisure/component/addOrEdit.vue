@@ -145,8 +145,15 @@
           </el-table-column>
       </el-table>
       <!-- 分页 -->
-      <el-pagination small layout="prev, pager, next" :total="total">
-      </el-pagination>
+      <el-pagination
+          small
+          layout="prev, pager, next"
+          :total="page.totalCount"
+          :page-size="page.rows"
+          :current-page="page.page"
+          @current-change="changePageProducts"
+        >
+        </el-pagination>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="confirmTradingUsers">确 定</el-button>
@@ -333,7 +340,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.tradingUsers = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.tradingUsers.forEach((tradingUser, i) => {
               this.selectTradingUsers.forEach((selectTradingUser, j) => {

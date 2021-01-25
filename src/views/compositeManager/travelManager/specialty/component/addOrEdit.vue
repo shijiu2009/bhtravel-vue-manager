@@ -61,11 +61,11 @@
             <el-button type="success" @click="addTradingUsers">添加</el-button>
           </el-form-item>
 
-          <!-- <el-card class="box-card">
+          <el-card class="box-card">
             <span v-for="o in selectTradingUsers" :key="o.id" class="text item">
               {{ o.name }}
             </span>
-          </el-card> -->
+          </el-card>
           <el-card class="box-card" style="margin-bottom:20px" v-if="selectTradingUsers.length>0">
             <span v-for="(item,index) in selectTradingUsers" :key="item.id" class="text item">
               {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
@@ -140,7 +140,15 @@
           </el-table-column>
       </el-table>
       <!-- 分页 -->
-      <el-pagination small layout="prev, pager, next" :total="total"> </el-pagination>
+      <el-pagination
+          small
+          layout="prev, pager, next"
+          :total="page.totalCount"
+          :page-size="page.rows"
+          :current-page="page.page"
+          @current-change="changePageProducts"
+        >
+        </el-pagination>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="confirmTradingUsers">确 定</el-button>
@@ -189,6 +197,16 @@ export default {
       selectTradingUsers: [],
       dialogTableTradingUsers: false,
       total: 0,
+      //分页数据
+      page: {
+        // 默认显示第几页
+        page: 1,
+        // 总条数，根据接口获取数据长度(注意：这里不能为空)
+        totalCount: 0,
+        // 个数选择器（可修改）
+        // 默认每页显示的条数（可修改）
+        rows: 10,
+      },
       statuses: [
         {
           value: 0,
@@ -245,6 +263,69 @@ export default {
     deleteProduct: function (index) {
       this.selectTradingUsers.splice(index,1);
     },
+    searchProducts: function () {
+      this.page.page = 1;
+      if (this.productName != null && this.productName != "") {
+        this.page["businessName"] = this.productName;
+      }
+      tApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.tradingUsers = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.tradingUsers.forEach((tradingUser, i) => {
+              this.selectTradingUsers.forEach((selectTradingUser, j) => {
+                if (
+                  this.tradingUsers[i] != null &&
+                  this.selectTradingUsers[j] != null &&
+                  this.tradingUsers[i].id == this.selectTradingUsers[j].id
+                ) {
+                  this.$refs.tradingUsersTable.toggleRowSelection(
+                    this.tradingUsers[i],
+                    true
+                  );
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
+    changePageProducts(index) {
+      this.page.page = index;
+      tApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.tradingUsers = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.tradingUsers.forEach((tradingUser, i) => {
+              this.selectTradingUsers.forEach((selectTradingUser, j) => {
+                if (
+                  this.tradingUsers[i] != null &&
+                  this.selectTradingUsers[j] != null &&
+                  this.tradingUsers[i].id == this.selectTradingUsers[j].id
+                ) {
+                  this.$refs.tradingUsersTable.toggleRowSelection(
+                    this.tradingUsers[i],
+                    true
+                  );
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     addTradingUsers: function () {
       this.dialogTableTradingUsers = true;
       tApi
@@ -252,7 +333,7 @@ export default {
         .then((result) => {
           this.loading = false; //关掉加载动画
           this.tradingUsers = result.rows;
-          this.total = result.total;
+          this.page.totalCount = result.total;
           this.$nextTick(function () {
             this.tradingUsers.forEach((tradingUser, i) => {
               this.selectTradingUsers.forEach((selectTradingUser, j) => {
