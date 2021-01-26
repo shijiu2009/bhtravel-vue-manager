@@ -1,11 +1,18 @@
 <template>
-  <div class="header">
-    <div class="openMenu">
+  <div class="header" >
+    <div class="openMenu" >
+      <div class="left-img"> 
+        <div class="img-box">
+          <img src="../../assets/images/home.png" alt="">
+        </div>
+        北海智慧旅游
+      </div>
       <div class="header-left">
+
         <!-- 展开或缩放菜单 -->
-        <i class="iconfont icon-caidan" :class="{action:isCollapse}" @click="openMenu"></i>
+        <i class="iconfont icon-caidan" :class="{action:isCollapse}" @click="openMenu" style="color:#fff"></i>
         <!-- 面包屑 -->
-        <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right">
+        <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right" >
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item v-for="item in breadcrumb" :key="item">{{item}}</el-breadcrumb-item>
         </el-breadcrumb>
@@ -16,7 +23,7 @@
           <div class="btn-fullscreen header-btn" @click="handleFullScreen">
             <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
               <p>
-                <i class="el-icon-rank"></i>
+                <i class="el-icon-rank" style="color:#fff"></i>
               </p>
             </el-tooltip>
           </div>
@@ -28,7 +35,8 @@
               placement="bottom"
             >
               <router-link to="/">
-                <i class="el-icon-bell"></i>
+                <i class="el-icon-bell" style="color:#fff"></i>
+                <span style="font-size:14px;color:#fff;margin-left:-6px">消息</span>
               </router-link>
             </el-tooltip>
             <span class="btn-bell-badge" v-if="message"></span>
@@ -133,12 +141,38 @@ export default {
   width: 100%;
   /* border-bottom: 1px solid #e5e5e5;
   background: #fff; */
-  background: linear-gradient(162deg, #43C9FB, #18A2DB);
+  background: linear-gradient(162deg,  #18A2DB,#43C9FB);
   box-shadow: 0px 8px 40px 0px rgba(25, 163, 220, 0.22);
   z-index: 999;
   height: 70px;
   line-height: 70px;
-  min-width: 500px;
+  min-width: 700px;
+  
+}
+.left-img {
+  float: left;
+  width: 280px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-family: SourceHanSansCN;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 33px;
+}
+.img-box{
+  width: 37px;
+  height: 37px;
+  margin: 0 10px 0 30px;
+  background: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 5px;
+}
+.img-box img{
+  width: 100%;
+  height: 100%;
 }
 .header-left {
   float: left;
@@ -221,4 +255,5 @@ export default {
   padding: 0;
   transform: translate(-2px, -2 px);
 }
+
 </style>

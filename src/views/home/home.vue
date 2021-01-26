@@ -83,7 +83,7 @@ export default {
 <style scoped>
 .navtop{
   height: 70px;  
-  background: linear-gradient(162deg, #43C9FB, #18A2DB);
+  background: linear-gradient(162deg, #18A2DB, #42C7F9);
   box-shadow: 0px 8px 40px 0px rgba(25, 163, 220, 0.12);
 }
 .content_box {
