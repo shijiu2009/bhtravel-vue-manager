@@ -147,6 +147,11 @@
               <el-input :placeholder="scope.row.email" :disabled="true"></el-input>
             </template>
           </el-table-column>
+           <el-table-column label="" >
+           <template slot-scope="scope">
+          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
+           </template>
+          </el-table-column>
         </el-table>
         <!-- 分页 -->
         <el-pagination
@@ -265,6 +270,11 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
+    handleDelete(index,item){
+      // console.log(index,item);
+      this.dialogTableTradingUsers = false;
+      this.selectTradingUsers.push(item)
+    },
     deleteProduct: function (index) {
       this.selectTradingUsers.splice(index,1);
     },
