@@ -137,7 +137,7 @@ export default {
   /* background: #fff; */
   padding: 5px 10px 5px 10px;
   background: #EAF4F8;
-  /* border-bottom: 1px solid #e5e5e5; */
+  border-bottom: 1px solid #e5e5e5;
   /* box-shadow: 0 5px 10px #ddd; */
 }
 
@@ -159,7 +159,7 @@ export default {
   border: 1px solid #e9eaec;
   margin-bottom: -1px;
   background: #fff;
-  padding: 0 5px 0 12px;
+  padding: 1px 5px 0 12px;
   vertical-align: middle;
   color: #666;
   -webkit-transition: all 0.3s ease-in;

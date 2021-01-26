@@ -134,15 +134,14 @@ export default {
   color: #409eff !important;
 } */
 
-.el-menu-item-box{
+.el-menu-item-box {
   margin-bottom: 4px;
 }
 .el-submenu .el-menu-item {
-  height: 40px;
-  line-height: 40px;
+  line-height: 36px;
   font-size: 12px;
   background: #234759 !important;
-  padding-left: 40px !important;
+  padding: 6px 40px !important;
 }
 .el-submenu .el-menu-item span {
   border-radius: 4px;
@@ -154,7 +153,7 @@ export default {
 }
 </style>
 <style >
-.el-submenu .el-menu{
-   background: #234759 !important;
+.el-submenu .el-menu {
+  background: #234759 !important;
 }
 </style>
