@@ -85,6 +85,7 @@ export default {
 }
 .menu {
   /* position: fixed; */
+  background: #10374B;
   position: absolute;
   left: 0;
   top: 70px;
