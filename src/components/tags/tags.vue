@@ -149,7 +149,7 @@ export default {
 .tags-li {
   float: left;
   margin: 3px 5px 0px 3px;
-  border-radius: 3px;
+  border-radius: 28px;
   font-size: 12px;
   overflow: hidden;
   cursor: pointer;
@@ -170,9 +170,6 @@ export default {
   background: #f8f8f8;
 }
 
-.tags-li.active {
-  color: #fff;
-}
 
 .tags-li-title {
   float: left;
@@ -201,7 +198,12 @@ export default {
   color: #606266;
 }
 .active {
-  background: #d4d4d4;
-  color: #eeeeeebd;
+  background: #36BDF1;
+}
+.active .tags-li-title{
+  color: #fff;
+}
+.active .el-icon-close {
+  color: #fff;
 }
 </style>
