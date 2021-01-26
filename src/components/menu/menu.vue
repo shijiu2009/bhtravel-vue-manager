@@ -1,13 +1,7 @@
 <template>
   <div class="menu">
-    <el-menu
-      class="el-menu-vertical-demo sidebar"
-      :default-active="onRoutes"
-      background-color="#fff"
-      active-text-color="#409eff"
-      :collapse="isCollapse"
-      router
-    >
+    <el-menu class="el-menu-vertical-demo sidebar" :default-active="onRoutes" background-color="#10384d"
+      text-color="#FFFFFF" :collapse="isCollapse" router>
       <!-- 一级路由遍历 -->
       <template v-for="item in menuList">
         <!-- 判断是否有子路由 -->
@@ -20,32 +14,21 @@
             <!-- 二级路由遍历 -->
             <template v-for="subItem in item.children">
               <!-- 判断是否有子路由 -->
-              <el-submenu
-                v-if="subItem.children&&subItem.meta.isMenu"
-                :index="subItem.path"
-                :key="subItem.id"
-              >
+              <el-submenu v-if="subItem.children&&subItem.meta.isMenu" :index="subItem.path" :key="subItem.id">
                 <template slot="title">
                   <span>{{subItem.meta.title }}</span>
                 </template>
                 <!-- 三级路由遍历 -->
-                <div v-for="(threeItem) in subItem.children" :key="threeItem.id">
-                  <el-menu-item
-                    :index="threeItem.path"
-                    :class="{'is-active':currentRouter===threeItem.path}"
-                    v-if="threeItem.meta.isMenu"
-                  >
+                <div v-for="(threeItem) in subItem.children" :key="threeItem.id" class="el-menu-item-box">
+                  <el-menu-item :index="threeItem.path" :class="{'is-active':currentRouter===threeItem.path}"
+                    v-if="threeItem.meta.isMenu">
                     <span>{{threeItem.meta.title }}</span>
                   </el-menu-item>
                 </div>
               </el-submenu>
               <!-- 没有子路由 -->
-              <el-menu-item
-                v-if="!subItem.children&&subItem.meta.isMenu"
-                :index="subItem.path"
-                :key="subItem.id"
-                :class="{'is-active':currentRouter===subItem.path}"
-              >
+              <el-menu-item v-if="!subItem.children&&subItem.meta.isMenu" :index="subItem.path" :key="subItem.id"
+                :class="{'is-active':currentRouter===subItem.path}">
                 <span>{{subItem.meta.title}}</span>
               </el-menu-item>
             </template>
@@ -53,11 +36,7 @@
         </template>
         <!-- 没有子路由 -->
         <template v-if="!item.children&&item.meta.isMenu">
-          <el-menu-item
-            :index="item.path"
-            :class="{'is-active':currentRouter===item.path}"
-            :key="item.id"
-          >
+          <el-menu-item :index="item.path" :class="{'is-active':currentRouter===item.path}" :key="item.id">
             <i :class="item.icon"></i>
             <span slot="title">{{ item.meta.title }}</span>
           </el-menu-item>
@@ -97,19 +76,21 @@ export default {
 };
 </script>
 <style scoped>
-.el-submenu .el-menu-item.is-active {
-  color: #409eff !important;
+.menu {
+  background: #10374b;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 240px;
   min-height: 400px;
 }
 .menu {
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   left: 0;
-  top: 0;
+  top: 70px;
   height: 100%;
-  z-index: 999;
+  /* width: 245px; */
+  /* z-index: 999; */
   overflow: hidden;
   border-right: solid 1px #e6e6e6;
 }
@@ -128,11 +109,13 @@ export default {
   display: inline-block;
   width: 100%;
 }
-.menu .sidebar {
-  /* height: 100%; */
-}
 
-.el-menu-vertical-demo > li.el-submenu,
+/*  */
+/* .menu .sidebar { */
+/* height: 100%; */
+/* } */
+
+/* .el-menu-vertical-demo > li.el-submenu,
 .el-menu-vertical-demo > li.el-menu-item {
   border-top: 1px solid hsla(0, 0%, 93.3%, 0.3);
 }
@@ -148,11 +131,29 @@ export default {
 }
 .el-menu-item:hover.el-menu-item i {
   color: #409eff !important;
+} */
+
+.el-menu-item-box{
+  margin-bottom: 4px;
 }
 .el-submenu .el-menu-item {
   height: 40px;
   line-height: 40px;
-  background: #a5a0a0;
   font-size: 12px;
+  background: #234759 !important;
+  padding-left: 40px !important;
+}
+.el-submenu .el-menu-item span {
+  border-radius: 4px;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+.el-submenu .el-menu-item.is-active span {
+  background: #37bef2;
+}
+</style>
+<style >
+.el-submenu .el-menu{
+   background: #234759 !important;
 }
 </style>

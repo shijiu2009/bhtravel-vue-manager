@@ -131,11 +131,13 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
-  background: #fff;
-  z-index: 99;
-  height: 50px;
-  line-height: 50px;
+  /* border-bottom: 1px solid #e5e5e5;
+  background: #fff; */
+  background: linear-gradient(162deg, #43C9FB, #18A2DB);
+  box-shadow: 0px 8px 40px 0px rgba(25, 163, 220, 0.22);
+  z-index: 999;
+  height: 70px;
+  line-height: 70px;
   min-width: 500px;
 }
 .header-left {
@@ -198,7 +200,7 @@ export default {
 .user-avator {
   width: 40px;
   height: 40px;
-  margin: 0 10px;
+  margin: 10px 10px;
   display: inline-block;
   transform: translateY(14%);
 }
