@@ -895,7 +895,7 @@ export default {
     },
     confirmUsers: function () {
       this.dialogTableUsers = false;
-      this.selectUsers = this.$refs.usersTable.selection;
+      this.selectUsers.concat(this.$refs.usersTable.selection);
       this.traditem = [];
       for (let i = 0; i < this.selectUsers.length; i++) {
         let user = this.selectUsers[i];
@@ -1108,7 +1108,7 @@ export default {
       this.selectAttractions = [];
       this.objs = [];
       this.dialogTableAttractions = false;
-      this.selectAttractions = this.$refs.attractionsTable.selection;
+      this.selectAttractions.concat(this.$refs.attractionsTable.selection);
     },
     //农家乐
     deleteCountryTravels: function (index) {
@@ -1223,7 +1223,7 @@ export default {
       this.selectCountryTravels = [];
       this.objs = [];
       this.dialogTableCountryTravels = false;
-      this.selectCountryTravels = this.$refs.countryTravelsTable.selection;
+      this.selectCountryTravels.concat(this.$refs.countryTravelsTable.selection);
     },
     //酒店
     deleteHotels: function (index) {
@@ -1329,7 +1329,7 @@ export default {
       this.selectHotels = [];
       this.objs = [];
       this.dialogTableHotels = false;
-      this.selectHotels = this.$refs.hotelsTable.selection;
+      this.selectHotels.concat(this.$refs.hotelsTable.selection);
     },
     //民宿
     deleteHomestays: function (index) {
@@ -1436,7 +1436,7 @@ export default {
       this.selectHomestays = [];
       this.objs = [];
       this.dialogTableHomestays = false;
-      this.selectHomestays = this.$refs.homestaysTable.selection;
+      this.selectHomestays.concat(this.$refs.homestaysTable.selection);
     },
     //线路
     deletePeripherys: function (index) {
@@ -1542,7 +1542,7 @@ export default {
       this.selectPeripherys = [];
       this.objs = [];
       this.dialogTablePeripherys = false;
-      this.selectPeripherys = this.$refs.peripherysTable.selection;
+      this.selectPeripherys.concat(this.$refs.peripherysTable.selection);
     },
     //提交表单
     onSubmit: function () {
