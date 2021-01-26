@@ -4,7 +4,7 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="文章标题">
-            <el-input v-model="info.title"></el-input>
+            <el-input v-model="info.title" style="max-width:400px"></el-input>
           </el-form-item>
           <!-- <el-form-item label="简介">
             <el-input v-model="info.summary"></el-input>
@@ -23,7 +23,7 @@
             </el-select>
           </el-form-item> -->
           <el-form-item label="作者">
-            <el-input v-model="info.author"></el-input>
+            <el-input v-model="info.author" style="max-width:400px"></el-input>
           </el-form-item>
           <el-form-item label="发布时间">
             <el-date-picker
@@ -77,6 +77,7 @@
             <el-input
               v-model="info.recommendSort"
               placeholder="不是推荐文章不要输入！"
+              style="max-width:400px"
             ></el-input>
           </el-form-item>
 

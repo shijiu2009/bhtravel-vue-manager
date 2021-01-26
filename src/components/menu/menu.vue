@@ -84,11 +84,13 @@ export default {
   min-height: 400px;
 }
 .menu {
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   left: 0;
-  top: 0;
+  top: 70px;
   height: 100%;
-  z-index: 999;
+  /* width: 245px; */
+  /* z-index: 999; */
   overflow: hidden;
   border-right: solid 1px #e6e6e6;
 }
