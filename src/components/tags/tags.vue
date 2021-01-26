@@ -136,7 +136,8 @@ export default {
   overflow: hidden;
   /* background: #fff; */
   padding: 5px 10px 5px 10px;
-  border-bottom: 1px solid #e5e5e5;
+  background: #EAF4F8;
+  /* border-bottom: 1px solid #e5e5e5; */
   /* box-shadow: 0 5px 10px #ddd; */
 }
 

@@ -276,7 +276,7 @@
         </el-form-item>
       </el-form>
 
-      <!-- 对话框 -->
+      <!-- 对话框
       <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
         <el-row :gutter="20" class="products-div">
           <el-col :span="6">
@@ -353,8 +353,8 @@
            </template>
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
-        <el-pagination
+         分页 -->
+        <!-- <el-pagination
           small
           layout="prev, pager, next"
           :total="page.totalCount"
@@ -364,10 +364,10 @@
         >
         </el-pagination>
         <div slot="footer" class="dialog-footer">
-          <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmProducts">确 定</el-button>
+          <el-button @click="dialogTableVisible = false">取 消</el-button> -->
+          <!-- <el-button type="primary" @click="confirmProducts">确 定</el-button>
         </div>
-      </el-dialog>
+      </el-dialog> -->
     </div>
   </div>
 </template>
@@ -439,25 +439,6 @@ export default {
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
         rows: 10,
-      },
-      //对话框选项
-      productName: "",
-      productClass: "",
-      productDown: "",
-      items: [],
-      tickets: [],
-      products: [],
-      total: 0,
-      ticket: {
-        id: "",
-        name: "",
-        img: "",
-        floorPrice: "",
-        salePrice: "",
-        price: "",
-        sort: 0,
-        down: 0,
-        isDefault: 0,
       },
       selectProducts: [],
       //图片上传组件信息
@@ -557,8 +538,6 @@ export default {
           label: "广西三星级农家乐",
         },
       ],
-      //对话框
-      dialogTableProducts: false,
       baiduInfo: {
         address: "",
         longitude: "",
@@ -656,6 +635,38 @@ export default {
           }
         });
     },
+    // 添加产品
+    addProducts: function () {
+      //弹框的显示隐藏
+      this.dialogTableProducts = true;
+      productApi
+        .getAllList(this.page)
+        .then((result) => {
+          this.loading = false; //关掉加载动画
+          this.products = result.rows;
+          this.page.totalCount = result.total;
+          this.$nextTick(function () {
+            this.products.forEach((product, i) => {
+              this.selectProducts.forEach((selectProduct, j) => {
+                if (
+                  this.products[i] != null &&
+                  this.selectProducts[j] != null &&
+                  this.products[i].id == this.selectProducts[j].id
+                ) {
+                  this.$refs.productsTable.toggleRowSelection(
+                    this.products[i],
+                    true
+                  );
+                }
+              });
+            });
+          });
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
+    },
     //添加门票
     addTicket: function () {
       let ticket = JSON.parse(JSON.stringify(this.ticket));
@@ -687,114 +698,6 @@ export default {
     },
     deleteProduct: function (index) {
       this.selectProducts.splice(index,1);
-    },
-    searchProducts: function () {
-      this.page.page = 1;
-      if (this.productName != null && this.productName != "") {
-        this.page["name"] = this.productName;
-      } else {
-        this.$delete(this.page, "name");
-      }
-      if (this.productClass != null && this.productClass != "") {
-        this.page["classId"] = this.productClass;
-      } else {
-        this.$delete(this.page, "classId");
-      }
-      if (this.productDown != null && this.productDown != "") {
-        this.page["down"] = this.productDown;
-      } else {
-        this.$delete(this.page, "down");
-      }
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    changePageProducts(index) {
-      this.page.page = index;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    addProducts: function () {
-      console.log(this.page)
-      //弹框的显示隐藏
-      this.dialogTableProducts = true;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    confirmProducts: function () {
-      //弹框的显示隐藏
-      this.dialogTableProducts = false;
-      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
-    },
-    handleDelete(index,item){
-      // console.log(index,item);
-      this.dialogTableProducts = false;
-      this.selectProducts.push(item)
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {
