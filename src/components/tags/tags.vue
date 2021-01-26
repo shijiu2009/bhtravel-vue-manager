@@ -35,7 +35,7 @@ export default {
       deleteTags: "DELETE_TAGSLIST",
     }),
     isActive(item) {
-      return item.index === this.$route.fullPath;
+      return item.path === this.$route.fullPath;
     },
     // 关闭单个标签
     closeTags(index) {
