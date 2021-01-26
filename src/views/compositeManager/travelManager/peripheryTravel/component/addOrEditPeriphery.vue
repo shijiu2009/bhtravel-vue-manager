@@ -3,8 +3,12 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="线路标题" style="width:500px">
-            <el-input v-model="info.title" @change="infoChange" style="width:400px"></el-input>
+          <el-form-item label="线路标题" style="width: 500px">
+            <el-input
+              v-model="info.title"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -23,7 +27,11 @@
           </el-form-item>
 
           <el-form-item label="线路副标题">
-            <el-input v-model="info.subtitle" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.subtitle"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <!-- <el-form-item label="基本房间数">
             <el-input-number v-model="info.countRooms" :min="0"></el-input-number>
@@ -75,7 +83,10 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="提前预定天数">
-                <el-input-number v-model="info.advanceDay" :min="0"></el-input-number>
+                <el-input-number
+                  v-model="info.advanceDay"
+                  :min="0"
+                ></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -87,7 +98,10 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="游玩人数">
-                <el-input-number v-model="info.players" :min="0"></el-input-number>
+                <el-input-number
+                  v-model="info.players"
+                  :min="0"
+                ></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -101,7 +115,10 @@
             <el-input-number v-model="info.days" :min="0"></el-input-number>
           </el-form-item> -->
           <el-form-item label="预定须知" :required="true">
-            <vue-ueditor-wrap v-model="info.notice" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.notice"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
@@ -110,7 +127,10 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="产品特色" :required="true">
-            <vue-ueditor-wrap v-model="info.edge" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.edge"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="费用说明" :required="true">
             <vue-ueditor-wrap
@@ -235,7 +255,7 @@
                   <div style="margin-top: 10px">
                     {{ eItem.title }}
                   </div>
-                  <el-col :offset="2" :span="4" style="margin-top:-18px">
+                  <el-col :offset="2" :span="4" style="margin-top: -18px">
                     <el-button
                       type="primary"
                       round
@@ -256,35 +276,49 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="关联产品" >
+          <el-form-item label="关联产品">
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
-            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
-              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
+          <el-card
+            class="box-card"
+            style="margin-bottom: 20px"
+            v-if="selectProducts.length > 0"
+          >
+            <span
+              v-for="(item, index) in selectProducts"
+              :key="item.id"
+              class="text item"
+            >
+              {{ item.name
+              }}<el-button type="text" @click="deleteProduct(index)"
+                >删除</el-button
+              >
             </span>
           </el-card>
           <el-form-item label="热门推荐" class="buttom-con">
-            <el-radio-group v-model="info.indexRecommend" class="buttom-con-son">
+            <el-radio-group
+              v-model="info.indexRecommend"
+              class="buttom-con-son"
+            >
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="热门搜索" class="buttom-con">
-            <el-radio-group v-model="info.hotSearch"  class="buttom-con-son">
+            <el-radio-group v-model="info.hotSearch" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="开放预定" class="buttom-con">
-            <el-radio-group v-model="info.isOpen"  class="buttom-con-son">
+            <el-radio-group v-model="info.isOpen" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="是否下架" class="buttom-con">
-            <el-radio-group v-model="info.down"  class="buttom-con-son">
+            <el-radio-group v-model="info.down" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
@@ -308,7 +342,11 @@
       </el-form>
 
       <!-- 对话框 -->
-      <el-dialog title="套餐价格" :visible.sync="dialogTableVisible"  class="dialog">
+      <el-dialog
+        title="套餐价格"
+        :visible.sync="dialogTableVisible"
+        class="dialog"
+      >
         <el-form>
           <el-row>
             <el-col :span="12">
@@ -327,23 +365,34 @@
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="门市价">
-                <el-input v-model="storePrice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="storePrice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="结算底价">
-                <el-input v-model="flooerprice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="flooerprice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="App售价">
-                <el-input v-model="appPrice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="appPrice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-button type="success" @click="addTablePrice()">添加</el-button>
-            <el-button type="danger" @click="deleteTablePrice()">全部删除</el-button>
+            <el-button type="danger" @click="deleteTablePrice()"
+              >全部删除</el-button
+            >
           </el-row>
         </el-form>
         <el-table :data="subPrices">
@@ -397,112 +446,23 @@
           <el-button type="primary" @click="confirmPrice">确 定</el-button>
         </div>
       </el-dialog>
-
-      <!-- 对话框 -->
-      <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
-        <el-row :gutter="20" class="products-div">
-          <el-col :span="6">
-            <label class="products-label">产品名称</label
-            ><el-input v-model="productName" placeholder="产品名称"></el-input>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">分类</label>
-            <el-select v-model="productClass" placeholder="请选择">
-              <el-option :key="1" :label="'美食'" :value="1"></el-option>
-              <el-option :key="2" :label="'特产'" :value="2"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">是否上架</label>
-            <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="'上架'" :value="1"></el-option>
-              <el-option :key="0" :label="'下架'" :value="0"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <div style="height:59px;display: flex; align-items: flex-end;">
-              <el-button type="primary" @click="searchProducts">搜 索</el-button>
-            </div>
-          </el-col>
-        </el-row>
-
-        <el-table :data="products" ref="productsTable">
-          <el-table-column type="selection"> </el-table-column>
-          <el-table-column property="name" label="名称" width="150">
-            <template slot-scope="scope">
-              <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column property="classId" label="所属分类">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.classId == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.classId == "1" ? "美食" : "特产" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="isOpen" label="开放预定">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.isOpen == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="hotSearch" label="热门搜索">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.hotSearch == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.hotSearch == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column label="是否下架">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.down == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column label="" >
-           <template slot-scope="scope">
-          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
-           </template>
-          </el-table-column>
-        </el-table>
-        <!-- 分页 -->
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="page.totalCount"
-          :page-size="page.rows"
-          :current-page="page.page"
-          @current-change="changePageProducts"
-        >
-        </el-pagination>
-        <div slot="footer" class="dialog-footer">
-          <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmProducts">确 定</el-button>
-        </div>
-      </el-dialog>
+      <productDialog
+        :dialogTableProduct.sync="dialogTableProducts"
+        @SelectionComplete="SelectionComplete"
+      ></productDialog>
     </div>
   </div>
 </template>
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/reserveManager/periphery.js";
-import productApi from "@/api/reserveManager/product.js";
 import { mapMutations } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import { deleteKeys } from "@/api/deleteKeys.js";
 import baseURL from "@/config/baseUrl.js";
 //百度地图
 import baiduMap from "@/components/baiduMap/baiduMap.vue";
+import productDialog from "@/components/productsDialog";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";
@@ -513,6 +473,7 @@ export default {
     UploadFile,
     VueUeditorWrap,
     baiduMap,
+    productDialog
   },
   data() {
     return {
@@ -548,20 +509,7 @@ export default {
         // reviewStat: 0,
       },
       myConfig: ueditor.myConfig,
-      //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 10,
-      },
-      //对话框选项
-      productName: "",
-      productClass: "",
-      productDown: "",
+
       baiduInfo: {
         address: "",
         longitude: "",
@@ -628,7 +576,10 @@ export default {
       total: 0,
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() < new Date(new Date(new Date().toLocaleDateString()).getTime());
+          return (
+            time.getTime() <
+            new Date(new Date(new Date().toLocaleDateString()).getTime())
+          );
         },
         // shortcuts: [
         //   {
@@ -714,11 +665,6 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
-    handleDelete(index,item){
-      // console.log(index,item);
-      this.dialogTableProducts = false;
-      this.selectProducts.push(item)
-    },
     //信息校验
     infoChange: function () {
       let isCheck = true;
@@ -772,107 +718,13 @@ export default {
         this.cachePrices[index] == undefined ? [] : this.cachePrices[index];
     },
     deleteProduct: function (index) {
-      this.selectProducts.splice(index,1);
-    },
-    searchProducts: function () {
-      this.page.page = 1;
-      if (this.productName != null && this.productName != "") {
-        this.page["name"] = this.productName;
-      } else {
-        this.$delete(this.page, "name");
-      }
-      if (this.productClass != null && this.productClass != "") {
-        this.page["classId"] = this.productClass;
-      } else {
-        this.$delete(this.page, "classId");
-      }
-      if (this.productDown != null && this.productDown != "") {
-        this.page["down"] = this.productDown;
-      } else {
-        this.$delete(this.page, "down");
-      }
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    changePageProducts(index) {
-      this.page.page = index;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
+      this.selectProducts.splice(index, 1);
     },
     addProducts: function () {
       this.dialogTableProducts = true;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
     },
-    confirmProducts: function () {
-      this.dialogTableProducts = false;
-      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
+    SelectionComplete: function (val) {
+      this.selectProducts = val;
     },
     addTablePrice: function () {
       let oneDay = 1000 * 60 * 60 * 24;
@@ -933,7 +785,9 @@ export default {
         this.info["psubList[" + i + "].id"] = this.psubList[i].id;
         this.info["psubList[" + i + "].info"] = this.psubList[i].info;
         this.info["psubList[" + i + "].title"] = this.psubList[i].title;
-        this.info["psubList[" + i + "].theDefault"] = this.psubList[i].theDefault;
+        this.info["psubList[" + i + "].theDefault"] = this.psubList[
+          i
+        ].theDefault;
         this.info["psubList[" + i + "].peoNum"] = this.psubList[i].peoNum;
         this.info["psubList[" + i + "].price"] = this.psubList[i].price;
         this.info["psubList[" + i + "].sort"] = this.psubList[i].sort;
@@ -944,9 +798,9 @@ export default {
             this.info[
               "psubList[" + i + "].prices[" + j + "].storePrice"
             ] = this.cachePrices[i][j].storePrice;
-            this.info["psubList[" + i + "].prices[" + j + "].price"] = this.cachePrices[
-              i
-            ][j].price;
+            this.info[
+              "psubList[" + i + "].prices[" + j + "].price"
+            ] = this.cachePrices[i][j].price;
             this.info[
               "psubList[" + i + "].prices[" + j + "].flooerprice"
             ] = this.cachePrices[i][j].flooerprice;
@@ -971,7 +825,9 @@ export default {
             i
           ].response.filePath;
         } else {
-          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(baseURL.imgUrl);
+          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(
+            baseURL.imgUrl
+          );
           let url = this.uploadGroupOne.fileList[i].url.substr(pos);
           this.info["ptImgs[" + i + "].path"] = url;
         }
@@ -1054,7 +910,10 @@ export default {
               this.psubList = result.publist;
             }
             for (let i = 0; i < result.publist.length; i++) {
-              if (result.publist[i].prices != null && result.publist[i].prices != "") {
+              if (
+                result.publist[i].prices != null &&
+                result.publist[i].prices != ""
+              ) {
                 this.cachePrices[i] = result.publist[i].prices;
               }
             }
@@ -1133,7 +992,7 @@ export default {
           provinces: [],
           cities: [],
           countys: [],
-          isArea: true
+          isArea: true,
         };
         this.uploadGroupOne.fileList = [];
         this.uploadGroupTitle.fileList = [];
@@ -1159,7 +1018,7 @@ export default {
 };
 </script>
 <style scoped>
-.dialog >>> .el-table{
+.dialog >>> .el-table {
   max-height: 40vh;
   overflow: scroll;
 }

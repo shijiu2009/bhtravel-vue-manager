@@ -133,16 +133,24 @@
               <el-row
                 :gutter="20"
                 v-for="(eItem, index) in this.tickets"
-                :key="index" style="box-shadow:0px 0px 8px #888; padding:10px"
+                :key="index"
+                style="box-shadow: 0px 0px 8px #888; padding: 10px"
               >
-                <el-button type="danger" @click="deleteTitket(index)">删除</el-button>
-                <span style="margin-left:40px">第{{tickets.length-index}}个项目，共{{tickets.length}}个项目</span>
-                <el-row >
+                <el-button type="danger" @click="deleteTitket(index)"
+                  >删除</el-button
+                >
+                <span style="margin-left: 40px"
+                  >第{{ tickets.length - index }}个项目，共{{
+                    tickets.length
+                  }}个项目</span
+                >
+                <el-row>
                   <el-form-item label="项目名称">
                     <el-input
                       v-model="eItem.name"
                       placeholder="请输入内容"
-                      style="width:300px"></el-input>
+                      style="width: 300px"
+                    ></el-input>
                   </el-form-item>
                 </el-row>
                 <el-row>
@@ -155,7 +163,7 @@
                   </el-form-item>
                 </el-row>
                 <el-form-item label="项目价格">
-                  <el-form-item label="结算底价" >
+                  <el-form-item label="结算底价">
                     <el-input
                       v-model="eItem.floorPrice"
                       placeholder="请输入价格"
@@ -209,9 +217,20 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
-            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
-              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
+          <el-card
+            class="box-card"
+            style="margin-bottom: 20px"
+            v-if="selectProducts.length > 0"
+          >
+            <span
+              v-for="(item, index) in selectProducts"
+              :key="item.id"
+              class="text item"
+            >
+              {{ item.name
+              }}<el-button type="text" @click="deleteProduct(index)"
+                >删除</el-button
+              >
             </span>
           </el-card>
 
@@ -234,8 +253,6 @@
             </el-radio-group>
           </el-form-item>
 
-
-
           <el-form-item label="图片集合">
             <UploadFile
               @uploadValue="uploadValue"
@@ -252,116 +269,22 @@
         </el-form-item>
       </el-form>
 
-      <!-- 对话框 -->
-      <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
-        <el-row :gutter="20" class="products-div">
-          <el-col :span="6">
-            <label class="products-label">产品名称</label
-            ><el-input v-model="productName" placeholder="产品名称"></el-input>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">分类</label>
-            <el-select v-model="productClass" placeholder="请选择">
-              <el-option :key="1" :label="'美食'" :value="1"></el-option>
-              <el-option :key="2" :label="'特产'" :value="2"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">是否上架</label>
-            <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="'上架'" :value="1"></el-option>
-              <el-option :key="0" :label="'下架'" :value="0"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <div style="height:59px;display: flex; align-items: flex-end;">
-              <el-button type="primary" @click="searchProducts">搜 索</el-button>
-            </div>
-          </el-col>
-        </el-row>
-
-        <el-table :data="products" ref="productsTable">
-          <el-table-column type="selection"> </el-table-column>
-          <el-table-column property="name" label="名称" width="150">
-            <template slot-scope="scope">
-              <el-input
-                :placeholder="scope.row.name"
-                :disabled="true"
-              ></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column property="classId" label="所属分类">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.classId == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.classId == "1" ? "美食" : "特产" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="isOpen" label="开放预定">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.isOpen == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="hotSearch" label="热门搜索">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.hotSearch == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.hotSearch == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column label="是否下架">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.down == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-
-                  <!-- 单独添加 -->
-          <el-table-column label="" >
-           <template slot-scope="scope">
-          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
-           </template>
-          </el-table-column>
-
-        </el-table>
-        <!-- 分页 -->
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="page.totalCount"
-          :page-size="page.rows"
-          :current-page="page.page"
-          @current-change="changePageProducts"
-        >
-        </el-pagination>
-        <div slot="footer" class="dialog-footer">
-          <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmProducts">确 定</el-button>
-        </div>
-      </el-dialog>
+      <productDialog
+        :dialogTableProduct.sync="dialogTableProducts"
+        @SelectionComplete="SelectionComplete"
+      ></productDialog>
     </div>
   </div>
 </template>
 <script>
 import api from "@/api/reserveManager/countryTravel.js";
-import productApi from "@/api/reserveManager/product.js";
 import { analysisResolution } from "@/api/analysis.js";
 import { mapMutations } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
 //百度地图
 import baiduMap from "@/components/baiduMap/baiduMap.vue";
+import productDialog from "@/components/productsDialog";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";
@@ -372,6 +295,7 @@ export default {
     baiduMap,
     UploadFile,
     VueUeditorWrap,
+    productDialog,
   },
   data() {
     return {
@@ -413,19 +337,6 @@ export default {
       },
       myConfig: ueditor.myConfig,
       //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 10,
-      },
-      //对话框选项
-      productName: "",
-      productClass: "",
-      productDown: "",
       items: [],
       tickets: [],
       products: [],
@@ -565,13 +476,7 @@ export default {
         }
       }
     },
-    //单个关联产品点击添加
-       handleDelete(index,item){
-      // console.log(index,item);
-      this.dialogTableProducts = false;
-      this.selectProducts.push(item)
 
-    },
     //提交表单
     onSubmit: function () {
       deleteKeys(this.info, "projects", this);
@@ -682,116 +587,14 @@ export default {
       this.$router.go(-1);
     },
     deleteProduct: function (index) {
-      this.selectProducts.splice(index,1);
+      this.selectProducts.splice(index, 1);
     },
-    searchProducts: function () {
-      this.page.page = 1;
-      if (this.productName != null && this.productName != "") {
-        this.page["name"] = this.productName;
-      } else {
-        this.$delete(this.page, "name");
-      }
-      if (this.productClass != null && this.productClass != "") {
-        this.page["classId"] = this.productClass;
-      } else {
-        this.$delete(this.page, "classId");
-      }
-      if (this.productDown != null && this.productDown != "") {
-        this.page["down"] = this.productDown;
-      } else {
-        this.$delete(this.page, "down");
-      }
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(
-                    this.products[i],
-                    true
-                  );
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    changePageProducts(index) {
-      this.page.page = index;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(
-                    this.products[i],
-                    true
-                  );
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
+
     addProducts: function () {
       this.dialogTableProducts = true;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(
-                    this.products[i],
-                    true
-                  );
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
     },
-    confirmProducts: function () {
-      this.dialogTableProducts = false;
-      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
+    SelectionComplete: function (val) {
+      this.selectProducts = val;
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {
