@@ -1106,7 +1106,7 @@ export default {
     },
     confirmProducts: function () {
       this.dialogTableProducts = false;
-      this.selectProducts.concat(this.$refs.productsTable.selection);
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     openTable(index) {
       this.dialogTableVisible = true;

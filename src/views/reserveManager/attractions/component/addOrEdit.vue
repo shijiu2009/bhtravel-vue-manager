@@ -640,7 +640,7 @@ export default {
     },
     confirmProducts: function () {
       this.dialogTableProducts = false;
-      this.selectProducts.concat(this.$refs.productsTable.selection);
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {

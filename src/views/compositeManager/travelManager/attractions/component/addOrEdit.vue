@@ -789,7 +789,7 @@ export default {
     confirmProducts: function () {
       //弹框的显示隐藏
       this.dialogTableProducts = false;
-      this.selectProducts.concat(this.$refs.productsTable.selection);
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     handleDelete(index,item){
       // console.log(index,item);

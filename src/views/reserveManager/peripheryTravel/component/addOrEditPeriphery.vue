@@ -762,7 +762,7 @@ export default {
     },
     confirmProducts: function () {
       this.dialogTableProducts = false;
-      this.selectProducts.concat(this.$refs.productsTable.selection);
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     addTablePrice: function () {
       let oneDay = 1000 * 60 * 60 * 24;
