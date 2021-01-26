@@ -251,7 +251,7 @@
               ></el-input>
             </template>
           </el-table-column>
-          <el-table-column property="classId" label="所属分类" width="200">
+          <el-table-column property="classId" label="所属分类" >
             <template slot-scope="scope">
               <el-input
                 :placeholder="scope.row.classId"
@@ -617,7 +617,7 @@ export default {
     },
     confirmProducts: function () {
       this.dialogTableProducts = false;
-      this.selectProducts = this.$refs.productsTable.selection;
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     themesChange: function (id) {
       let label = this.themes.find((item) => {

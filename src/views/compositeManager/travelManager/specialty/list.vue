@@ -166,7 +166,7 @@ export default {
         select: [
           {
             name: "down",
-            title: "分类搜索",
+            title: "状态",
             list: [
               {
                 value: "0",

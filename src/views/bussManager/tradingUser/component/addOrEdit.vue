@@ -895,7 +895,7 @@ export default {
     },
     confirmUsers: function () {
       this.dialogTableUsers = false;
-      this.selectUsers = this.$refs.usersTable.selection;
+      this.selectUsers.push.apply(this.selectUsers,this.$refs.usersTable.selection);
       this.traditem = [];
       for (let i = 0; i < this.selectUsers.length; i++) {
         let user = this.selectUsers[i];
@@ -1105,10 +1105,9 @@ export default {
         });
     },
     confirmAttractions: function () {
-      this.selectAttractions = [];
       this.objs = [];
       this.dialogTableAttractions = false;
-      this.selectAttractions = this.$refs.attractionsTable.selection;
+      this.selectAttractions.push.apply(this.selectAttractions,this.$refs.attractionsTable.selection);
     },
     //农家乐
     deleteCountryTravels: function (index) {
@@ -1220,10 +1219,9 @@ export default {
         });
     },
     confirmCountryTravels: function () {
-      this.selectCountryTravels = [];
       this.objs = [];
       this.dialogTableCountryTravels = false;
-      this.selectCountryTravels = this.$refs.countryTravelsTable.selection;
+      this.selectCountryTravels.push.apply(this.selectCountryTravels,this.$refs.countryTravelsTable.selection);
     },
     //酒店
     deleteHotels: function (index) {
@@ -1326,10 +1324,9 @@ export default {
         });
     },
     confirmHotels: function () {
-      this.selectHotels = [];
       this.objs = [];
       this.dialogTableHotels = false;
-      this.selectHotels = this.$refs.hotelsTable.selection;
+      this.selectHotels.push.apply(this.selectHotels,this.$refs.hotelsTable.selection);
     },
     //民宿
     deleteHomestays: function (index) {
@@ -1433,10 +1430,9 @@ export default {
         });
     },
     confirmHomestays: function () {
-      this.selectHomestays = [];
       this.objs = [];
       this.dialogTableHomestays = false;
-      this.selectHomestays = this.$refs.homestaysTable.selection;
+      this.selectHomestays.push.apply(this.selectHomestays,this.$refs.homestaysTable.selection);
     },
     //线路
     deletePeripherys: function (index) {
@@ -1539,10 +1535,9 @@ export default {
         });
     },
     confirmPeripherys: function () {
-      this.selectPeripherys = [];
       this.objs = [];
       this.dialogTablePeripherys = false;
-      this.selectPeripherys = this.$refs.peripherysTable.selection;
+      this.selectPeripherys.push.apply(this.selectPeripherys,this.$refs.peripherysTable.selection);
     },
     //提交表单
     onSubmit: function () {

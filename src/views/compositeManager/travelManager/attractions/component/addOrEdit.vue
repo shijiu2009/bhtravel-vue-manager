@@ -298,7 +298,9 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            <div style="height:59px;display: flex; align-items: flex-end;">
+              <el-button type="primary" @click="searchProducts">搜 索</el-button>
+            </div>
           </el-col>
         </el-row>
 
@@ -690,12 +692,18 @@ export default {
       this.page.page = 1;
       if (this.productName != null && this.productName != "") {
         this.page["name"] = this.productName;
+      } else {
+        this.$delete(this.page, "name");
       }
       if (this.productClass != null && this.productClass != "") {
         this.page["classId"] = this.productClass;
+      } else {
+        this.$delete(this.page, "classId");
       }
       if (this.productDown != null && this.productDown != "") {
         this.page["down"] = this.productDown;
+      } else {
+        this.$delete(this.page, "down");
       }
       productApi
         .getAllList(this.page)
@@ -781,8 +789,7 @@ export default {
     confirmProducts: function () {
       //弹框的显示隐藏
       this.dialogTableProducts = false;
-      this.selectProducts = this.$refs.productsTable.selection;
-      console.log(this.$refs.productsTable);
+      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
     },
     handleDelete(index,item){
       // console.log(index,item);
