@@ -1,10 +1,11 @@
 <template>
   <div>
+    <!-- <div class="navtop"></div> -->
+    <Header></Header>
     <Menu></Menu>
     <div class="content_box" :class="{isCollapse:isCollapse}">
       <!-- 头部 -->
       <Tags></Tags>
-      <Header></Header>
       <div class="content">
         <!-- transition页面过度动画 -->
         <transition name="slide-top">
@@ -80,6 +81,11 @@ export default {
 };
 </script>
 <style scoped>
+.navtop{
+  height: 70px;  
+  background: linear-gradient(162deg, #43C9FB, #18A2DB);
+  box-shadow: 0px 8px 40px 0px rgba(25, 163, 220, 0.12);
+}
 .content_box {
   display: flex;
   flex-direction: column;
@@ -90,7 +96,7 @@ export default {
   bottom: 0px;
   transition: left 0.3s ease-in-out;
   overflow: hidden;
-  padding-top: 50px;
+  padding-top: 70px;
 }
 .content {
   flex: 1;
@@ -102,6 +108,7 @@ export default {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 500px;
+  background: #EAF4F8;
   /* height: calc(100% - 30px); */
 }
 
