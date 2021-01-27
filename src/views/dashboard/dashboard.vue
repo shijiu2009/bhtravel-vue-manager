@@ -63,6 +63,7 @@
           <el-progress :percentage="0.9" color="#f56c6c"></el-progress>
         </el-card> -->
       </el-col>
+      <!-- 右侧 -->
       <el-col :span="18" style="height:100%;">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
