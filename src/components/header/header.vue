@@ -1,12 +1,14 @@
 <template>
   <div class="header">
     <div class="openMenu">
-      <div class="left-img">
-        <div class="img-box">
-          <img src="../../assets/images/home.png" alt="" />
+      <router-link :to="{ path: '/' }">
+        <div class="left-img">
+          <div class="img-box">
+            <img src="../../assets/images/home.png" alt="" />
+          </div>
+          北海智慧旅游
         </div>
-        北海智慧旅游
-      </div>
+      </router-link>
       <div class="header-left">
         <!-- 展开或缩放菜单 -->
         <i
@@ -59,45 +61,61 @@
             trigger="click"
             @command="handleCommand"
           >
-            <img src="../../assets/images/img.jpg" />
+            <img :src="userimage" alt="" />
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="changePassword">修改密码</el-dropdown-item>
+              <el-dropdown-item @click.native="changePassword"
+                >修改密码</el-dropdown-item
+              >
               <el-dropdown-item command="loginout" @click.native="logoutFun"
                 >退出登录</el-dropdown-item
               >
             </el-dropdown-menu>
           </el-dropdown>
+          <!-- 对话框 -->
+          <el-dialog title="修改密码" :visible.sync="dialogPassword" :modal-append-to-body='false'>
+            <div class="demo-input-suffix">
+              新密码：
+              <el-input
+                v-model="passwordParams.newpass1"
+                show-password
+              ></el-input>
+            </div>
+            <div class="demo-input-suffix">
+              再次输入新密码：
+              <el-input
+                v-model="passwordParams.newpass2"
+                show-password
+              ></el-input>
+            </div>
+            <div slot="footer" class="dialog-footer">
+              <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
+              <el-button type="primary" @click="confirmPassword"
+                >确 定</el-button
+              >
+            </div>
+          </el-dialog>
         </div>
       </div>
     </div>
-    <!-- 对话框 -->
-    <el-dialog title="修改密码" :visible.sync="dialogPassword">
-      <div class="demo-input-suffix">
-        新密码：
-        <el-input v-model="passwordParams.newpass1" show-password></el-input>
-      </div>
-      <div class="demo-input-suffix">
-        再次输入新密码：
-        <el-input v-model="passwordParams.newpass2" show-password></el-input>
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-        <el-button type="primary" @click="confirmPassword">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import api from "@/api/systemManager/user.js";
+import store from "@/store/modules/user.js";
+
 export default {
   data() {
     return {
-      dialogPassword:false,
-      passwordParams:{
-        newpass1:'',
-        newpass2:''
+      dialogPassword: false,
+      passwordParams: {
+        newpass1: "",
+        newpass2: "",
       },
+      store,
+      userimage:
+        "https://travel.gxucreate.com/travelbh" + store.state.userInfo.avatar,
       fullscreen: false, //是否全屏属性
       message: 2, //消息数量
       username: "我的光啊", //用户名称
@@ -115,8 +133,12 @@ export default {
     },
     ...mapState({
       isCollapse: "isCollapse",
+      userInfo: "userInfo"
     }),
   },
+  // created(){
+  //   console.log(this.userInfo)
+  // },
   methods: {
     ...mapMutations({
       updataCollapse: "UPDATA_COLLAPSE",
@@ -125,11 +147,16 @@ export default {
       logout: "logout",
     }),
     // 修改密码
-    changePassword(){
-      console.log(1)
-      this.dialogPassword = !this.dialogPassword
+    changePassword() {
+      console.log(1);
+      this.dialogPassword= !this.dialogPassword;
     },
-    confirmPassword(){},
+        confirmPassword: function () {
+      api.changePassword(this.passwordParams).then((result) => {
+        alert(result.msg);
+      });
+      this.dialogPassword = false;
+    },
     //展开或缩放菜单
     openMenu: function () {
       this.updataCollapse();

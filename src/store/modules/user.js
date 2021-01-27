@@ -11,7 +11,8 @@ const user = {
         setUserToken(value) {
             sessionStorage.setItem('token', value)
         },
-        userInfo: {},
+        //解析串化的localStorage数据
+        userInfo: JSON.parse(localStorage.getItem('userInfo')),
     },
     mutations: {
         SET_USERNAME: (state, username) => {
@@ -28,6 +29,10 @@ const user = {
         },
         SET_TOKEN: (state, token) => {
             state.setUserToken(token);
+        },
+        SAVE_USER:(state,userinfo)=>{
+            state.userInfo = userinfo;
+            console.log(state.userInfo)
         }
     },
     actions: {
@@ -47,18 +52,26 @@ const user = {
                 //登录
                 login.login(data).then((result) => {
                     if (result.status) {
+                        console.log(result);
                         commit('SET_TOKEN', result.data.token);
+                        //对象串化
+                        localStorage.setItem("userInfo", JSON.stringify(result.data))
+                        //对象解析
+                        // console.log(JSON.parse(localStorage.getItem('userInfo')))
+                        commit('SAVE_USER',result.data)
                         resolve({
                             status: true
                         });
                         commit('SET_USERNAME', result.data.username)
                         localStorage.setItem("userName", result.data.username)
+                        console.log(localStorage.getItem('userName'));
                         localStorage.setItem("token", result.data.token)
                     } else if (result.msg == "用户名或密码错误！！") {
                         login.openLogin({
                             name: data.username,
                             passwd: passwd
                         }).then((result) => {
+                            console.log(result);
                             if (result.success) {
                                 commit('SET_TOKEN', result.token);
                                 resolve({

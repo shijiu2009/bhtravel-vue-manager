@@ -3,12 +3,13 @@
     <el-menu class="el-menu-vertical-demo sidebar" :default-active="onRoutes" background-color="#10384d"
       text-color="#FFFFFF" :collapse="isCollapse" router>
       <!-- 一级路由遍历 -->
-      <template v-for="item in menuList">
+      <template v-for="(item,i) in menuList">
         <!-- 判断是否有子路由 -->
         <template v-if="item.children&&item.meta.isMenu">
           <el-submenu :index="item.path" :key="item.id">
             <template slot="title" v-if="item.meta.isMenu">
-              <i :class="item.icon"></i>
+              <!-- <i :class="item.icon"></i> -->
+              <i :class="iconList[i-1]" style="color:#fff;"></i>
               <span slot="title">{{ item.meta.title }}</span>
             </template>
             <!-- 二级路由遍历 -->
@@ -51,6 +52,14 @@ export default {
   data() {
     return {
       actionPath: "/", //当前路由
+      iconList: [
+        'el-icon-s-tools',
+        'el-icon-s-data',
+        'el-icon-menu',
+        'el-icon-s-custom',
+        'el-icon-s-shop',
+        'el-icon-s-operation',
+        ], //路由列表
     };
   },
   computed: {

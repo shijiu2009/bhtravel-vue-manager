@@ -1,123 +1,160 @@
 <template>
   <div>
-    <div class="handle-box">
-      <Screen :screenCondition="screenCondition"></Screen>
-      <!-- 操作按钮 -->
-      <div class="operation">
-        <!-- 批量删除按钮 -->
-        <el-button
-          type="primary"
-          class="handle-del mr10"
-          size="mini"
-          @click="delAllSelection"
-          >批量结算</el-button
-        >
+    <div>
+      <div class="handle-box">
+        <Screen :screenCondition="screenCondition"></Screen>
+        <!-- 操作按钮 -->
+        <div class="operation">
+          <!-- 批量删除按钮 -->
+          <el-button
+            type="primary"
+            class="handle-del mr10"
+            size="mini"
+            @click="delAllSelection"
+            >批量结算</el-button
+          >
+        </div>
       </div>
-    </div>
-    <div class="data_list">
-      <el-table
-        :data="themeList"
-        border
-        ref="multipleTable"
-        style="width: 100%"
-        v-loading="loading"
-        :max-height="this.$tableHeight"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column
-          type="index"
-          width="50"
-          align="center"
-          label="序号"
-          sortable
-        ></el-table-column>
-        <el-table-column
-          prop="orderNo"
-          label="订单号"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="orderName"
-          label="订单名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column label="类型" width="60" align="center">
-          <template slot-scope="scope">
-            <el-tag v-if="scope.row.type == 0" disable-transitions>酒店</el-tag>
-            <el-tag v-if="scope.row.type == 1" disable-transitions>景点</el-tag>
-            <el-tag v-if="scope.row.type == 2" disable-transitions>线路</el-tag>
-            <el-tag v-if="scope.row.type == 3" disable-transitions>产品</el-tag>
-            <el-tag v-if="scope.row.type == 4" disable-transitions>农家乐</el-tag>
-            <el-tag v-if="scope.row.type == 5" disable-transitions>民宿</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="orderCreateTime"
-          label="订单创建时间"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="订单完成时间"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="totalPrice"
-          label="成交金额"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="receivable"
-          label="商家应收"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column prop="status" label="状态" align="center" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <el-tag type="info" v-if="scope.row.status == 0" disable-transitions
-              >未提交</el-tag
-            >
-            <el-tag type="success" v-if="scope.row.status == 1" disable-transitions
-              >已结算</el-tag
-            >
-            <el-tag v-if="scope.row.status == 2" disable-transitions>未结算</el-tag>
-            <el-tag type="warning" v-if="scope.row.status == 3" disable-transitions
-              >有争议</el-tag
-            >
-            <el-tag type="danger" v-if="scope.row.status == 4" disable-transitions
-              >废单</el-tag
-            >
-          </template>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
-          <template slot-scope="scope">
-            <el-button
-              type="primary"
-              round
-              icon="el-icon-edit"
-              circle
-              size="small"
-              title="编辑"
-              @click="createOrEditBtn(scope.row.id, scope.row.status)"
-            ></el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
+      <div class="data_list">
+        <el-table
+          :data="themeList"
+          border
+          ref="multipleTable"
+          style="width: 100%"
+          v-loading="loading"
+          :max-height="this.$tableHeight"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column
+            type="selection"
+            width="52"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            type="index"
+            width="50"
+            align="center"
+            label="序号"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            prop="orderNo"
+            label="订单号"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="orderName"
+            label="订单名称"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column label="类型" width="60" align="center">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.type == 0" disable-transitions
+                >酒店</el-tag
+              >
+              <el-tag v-if="scope.row.type == 1" disable-transitions
+                >景点</el-tag
+              >
+              <el-tag v-if="scope.row.type == 2" disable-transitions
+                >线路</el-tag
+              >
+              <el-tag v-if="scope.row.type == 3" disable-transitions
+                >产品</el-tag
+              >
+              <el-tag v-if="scope.row.type == 4" disable-transitions
+                >农家乐</el-tag
+              >
+              <el-tag v-if="scope.row.type == 5" disable-transitions
+                >民宿</el-tag
+              >
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="orderCreateTime"
+            label="订单创建时间"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="createTime"
+            label="订单完成时间"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="totalPrice"
+            label="成交金额"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="receivable"
+            label="商家应收"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="status"
+            label="状态"
+            align="center"
+            show-overflow-tooltip
+          >
+            <template slot-scope="scope">
+              <el-tag
+                type="info"
+                v-if="scope.row.status == 0"
+                disable-transitions
+                >未提交</el-tag
+              >
+              <el-tag
+                type="success"
+                v-if="scope.row.status == 1"
+                disable-transitions
+                >已结算</el-tag
+              >
+              <el-tag v-if="scope.row.status == 2" disable-transitions
+                >未结算</el-tag
+              >
+              <el-tag
+                type="warning"
+                v-if="scope.row.status == 3"
+                disable-transitions
+                >有争议</el-tag
+              >
+              <el-tag
+                type="danger"
+                v-if="scope.row.status == 4"
+                disable-transitions
+                >废单</el-tag
+              >
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="150">
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                round
+                icon="el-icon-edit"
+                circle
+                size="small"
+                title="编辑"
+                @click="createOrEditBtn(scope.row.id, scope.row.status)"
+              ></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 分页操作 -->
+        <div class="pagination">
+          <el-pagination
+            background
+            layout="total, prev, pager, next,jumper"
+            :page-size="page.rows"
+            :total="page.totalCount"
+            @current-change="handlePageChange"
+          ></el-pagination>
+        </div>
       </div>
     </div>
   </div>

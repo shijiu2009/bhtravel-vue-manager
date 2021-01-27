@@ -1,138 +1,146 @@
 <template>
   <div>
-    <div class="handle-box">
-      <!-- 操作按钮 -->
-      <div class="operation">
-        <!-- 批量删除按钮 -->
-        <el-button
-          type="primary"
-          icon="el-icon-delete"
-          class="handle-del mr10"
-          size="mini"
-          @click="delAllSelection"
-          >批量删除</el-button
-        >
-        <!-- 添加按钮 -->
-        <el-button
-          type="primary"
-          icon="el-icon-plus"
-          class="handle-del mr10"
-          size="mini"
-          @click="createOrEditBtn('')"
-          >添加</el-button
-        >
+    <div>
+      <div class="handle-box">
+        <!-- 操作按钮 -->
+        <div class="operation">
+          <!-- 批量删除按钮 -->
+          <el-button
+            type="primary"
+            icon="el-icon-delete"
+            class="handle-del mr10"
+            size="mini"
+            @click="delAllSelection"
+            >批量删除</el-button
+          >
+          <!-- 添加按钮 -->
+          <el-button
+            type="primary"
+            icon="el-icon-plus"
+            class="handle-del mr10"
+            size="mini"
+            @click="createOrEditBtn('')"
+            >添加</el-button
+          >
+        </div>
       </div>
-    </div>
-    <div class="data_list">
-      <el-table
-        :data="themeList"
-        border
-        ref="multipleTable"
-        style="width: 100%"
-        v-loading="loading"
-        :max-height="this.$tableHeight"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column
-          type="index"
-          width="50"
-          align="center"
-          label="序号"
-          sortable
-        ></el-table-column>
-        <el-table-column
-          prop="username"
-          label="登录名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="name"
-          label="中文名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="mobile"
-          label="电话号码"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="email"
-          label="电子邮箱"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="businessName"
-          label="商家名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="创建时间"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
-          <template slot-scope="scope">
-            <el-button
-              type="primary"
-              round
-              icon="el-icon-edit"
-              circle
-              size="small"
-              title="编辑"
-              @click="createOrEditBtn(scope.row.id)"
-            ></el-button>
-            <el-button
-              type="success"
-              round
-              icon="el-icon-eleme"
-              circle
-              size="small"
-              title="修改密码"
-              @click="openDialog(scope.row.id)"
-            ></el-button>
-            <el-button
-              type="danger"
-              round
-              icon="el-icon-delete"
-              circle
-              size="small"
-              title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
-            ></el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- 对话框 -->
-      <el-dialog title="修改密码" :visible.sync="dialogPassword">
-        <div class="demo-input-suffix">
-          新密码：
-          <el-input v-model="newpass1" show-password></el-input>
+      <div class="data_list">
+        <el-table
+          :data="themeList"
+          border
+          ref="multipleTable"
+          style="width: 100%"
+          v-loading="loading"
+          :max-height="this.$tableHeight"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column
+            type="selection"
+            width="52"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            type="index"
+            width="50"
+            align="center"
+            label="序号"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            prop="username"
+            label="登录名称"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="name"
+            label="中文名称"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="mobile"
+            label="电话号码"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="email"
+            label="电子邮箱"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="businessName"
+            label="商家名称"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="createTime"
+            label="创建时间"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column fixed="right" label="操作" width="150">
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                round
+                icon="el-icon-edit"
+                circle
+                size="small"
+                title="编辑"
+                @click="createOrEditBtn(scope.row.id)"
+              ></el-button>
+              <el-button
+                type="success"
+                round
+                icon="el-icon-eleme"
+                circle
+                size="small"
+                title="修改密码"
+                @click="openDialog(scope.row.id)"
+              ></el-button>
+              <el-button
+                type="danger"
+                round
+                icon="el-icon-delete"
+                circle
+                size="small"
+                title="删除"
+                @click.native.prevent="
+                  openDeleteWarning(scope.$index, scope.row.id)
+                "
+              ></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 对话框 -->
+        <el-dialog title="修改密码" :visible.sync="dialogPassword">
+          <div class="demo-input-suffix">
+            新密码：
+            <el-input v-model="newpass1" show-password></el-input>
+          </div>
+          <div class="demo-input-suffix">
+            再次输入新密码：
+            <el-input v-model="newpass2" show-password></el-input>
+          </div>
+          <div slot="footer" class="dialog-footer">
+            <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
+            <el-button type="primary" @click="confirmPassword">确 定</el-button>
+          </div>
+        </el-dialog>
+        <!-- 分页操作 -->
+        <div class="pagination">
+          <el-pagination
+            background
+            layout="total, prev, pager, next,jumper"
+            :page-size="page.rows"
+            :total="page.totalCount"
+            @current-change="handlePageChange"
+          ></el-pagination>
         </div>
-        <div class="demo-input-suffix">
-          再次输入新密码：
-          <el-input v-model="newpass2" show-password></el-input>
-        </div>
-        <div slot="footer" class="dialog-footer">
-          <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmPassword">确 定</el-button>
-        </div>
-      </el-dialog>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
       </div>
     </div>
   </div>
@@ -236,7 +244,7 @@ export default {
               type: "success",
               message: "修改成功!",
             });
-          }else {
+          } else {
             this.$message({
               type: "warning",
               message: result.msg,
