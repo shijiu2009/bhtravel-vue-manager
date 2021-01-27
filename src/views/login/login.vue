@@ -1,38 +1,56 @@
 <template>
   <div class="login">
-    <div>
+    <div class="login-box">
       <div class="login_top">
         <div class="logo">
           <img src="@/assets/images/logo.png" alt />
         </div>
-        <h3 class="title">深圳市大也智能数据有限公司</h3>
+      </div>
+      <div class="login-right">
+        <div class="login_form">
+          <div class="login_icon">北海智慧旅游</div>
+          <el-form
+            ref="form"
+            :model="userInfo"
+            class="login_box"
+            @keyup.enter.native="onSubmit"
+          >
+            <el-form-item>
+              <el-input
+                class="username"
+                placeholder="请输入用户名"
+                prefix-icon="el-icon-user-solid"
+                v-model="userInfo.username"
+              ></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-input
+                placeholder="请输入密码"
+                show-password
+                class="password"
+                prefix-icon="el-icon-key"
+                v-model="userInfo.password"
+              ></el-input>
+            </el-form-item>
+            <el-form-item class="code">
+              <el-input
+                v-model="userInfo.xcode"
+                class="code"
+                placeholder="请输入验证"
+              ></el-input>
+              <div class="code_img" @click="updateCodeImg">
+                <img :src="codeImg" alt />
+              </div>
+            </el-form-item>
+            <el-form-item>
+              <el-button class="onSubmit" @click="onSubmit">
+                <span>登录</span>
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
-    <div class="login_form">
-      <div class="login_icon">
-        <i class="el-icon-user"></i>
-      </div>
-      <el-form ref="form" :model="userInfo" class="login_box" @keyup.enter.native="onSubmit">
-        <el-form-item>
-          <el-input placeholder="请输入用户名" prefix-icon="el-icon-user-solid" v-model="userInfo.username"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input placeholder="请输入密码" show-password prefix-icon="el-icon-key" v-model="userInfo.password"></el-input>
-        </el-form-item>
-        <el-form-item class="code">
-          <el-input v-model="userInfo.xcode" placeholder="请输入验证"></el-input>
-          <div class="code_img" @click="updateCodeImg">
-            <img :src="codeImg" alt />
-          </div>
-        </el-form-item>
-        <el-form-item>
-          <el-button class="onSubmit" @click="onSubmit">
-            <span>登录</span>
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="bot-copy">Copyright © 2020.大也科技 All rights reserved.</div>
     <div class="cloth">
       <img :src="clothUrl" alt />
     </div>
@@ -107,7 +125,7 @@ export default {
       this.$loading.show(); // 显示loading
       this.login(this.userInfo)
         .then((result) => {
-          console.log(result)
+          console.log(result);
           //清空密码和重新生成状态码
           this.userInfo.password = "";
           this.updateCodeImg();
@@ -134,15 +152,24 @@ export default {
   height: 100%;
   position: relative;
 }
-.login_top {
+.login-box {
+  display: flex;
   position: absolute;
-  top: 20%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  height: 90px;
-  width: 100%;
-  line-height: 90px;
-  text-align: center;
+  width: 1252px;
+  height: 670px;
+  background: #ffffff;
+  box-shadow: 0px 35px 80px 0px rgba(55, 127, 177, 0.24);
+  border-radius: 2px;
+}
+.login_top {
+  width: 518px;
+  height: 100%;
+}
+.login-right {
+  flex: 1;
 }
 .login_top .logo {
   display: inline-block;
@@ -173,21 +200,20 @@ export default {
   height: 100%;
 }
 .login_form {
-  position: absolute;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 340px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
-  display: inline-block;
-  border: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  padding: 88px 140px 140px 120px;
+  box-sizing: border-box;
   background-color: #fff;
-  border-radius: 4px;
 }
 .login_icon {
   margin-top: 20px;
   text-align: center;
+  margin-bottom: 32px;
+  font-size: 56px;
+  font-family: SourceHanSansCN;
+  font-weight: 800;
+  color: #2984b8;
 }
 .login_icon i {
   font-size: 50px;
@@ -200,9 +226,9 @@ export default {
 .login_box .el-form-item {
   margin-bottom: 20px;
 }
-.el-form-item.code .el-input {
+/* .el-form-item.code .el-input {
   width: calc(100% - 128px);
-}
+} */
 .el-form-item.code .code_img {
   width: 108px;
   height: 40px;
@@ -214,12 +240,48 @@ export default {
   height: 100%;
   width: 100%;
 }
+.username,
+.password,
+.code {
+  font-size: 24px;
+  font-family: SourceHanSansCN;
+  font-weight: 400;
+  color: #1ba4dd;
+}
+.code >>> .el-form-item__content {
+  display: flex;
+  align-items: center;
+}
+.username >>> .el-input__inner {
+  width: 460px;
+  height: 59px;
+
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+}
+.password >>> .el-input__inner {
+  width: 460px;
+  height: 59px;
+
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+}
+.code >>> .el-input__inner {
+  width: 270px;
+  height: 59px;
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+}
 .onSubmit {
-  background: #3bb6d2;
-  width: 100%;
-  color: #fff;
-  box-sizing: border-box;
-  border: 2px solid #3bb6d2;
+  width: 460px;
+  height: 59px;
+  font-size: 24px;
+  font-family: SourceHanSansCN;
+  font-weight: 400;
+  color: #ffffff;
+  background: linear-gradient(176deg, #43c9fb, #18a2db);
+  box-shadow: 0px 10px 20px 0px rgba(33, 160, 197, 0.24);
+  border-radius: 4px;
 }
 .onSubmit span {
   font-size: 16px !important;

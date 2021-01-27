@@ -1,51 +1,6 @@
 <template>
   <div>
     <div class="handle-box">
-      <div>
-        <!-- 可选择下拉搜索 -->
-        <div class="searChfactor">
-          <el-select size="mini" v-model="queryInfo.job" clearable filterable placeholder="所处位置">
-            <el-option
-              size="mini"
-              v-for="item in loctions.options"
-              :key="item.id"
-              :label="item.codeName"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <!-- 输入搜索条件input框 -->
-        <div class="searChfactor input-box">
-          <el-input
-            v-model="queryInfo.name"
-            placeholder="名称"
-            class="handle-input mr10"
-            size="mini"
-            clearable
-          ></el-input>
-        </div>
-        <!-- 时间选择器 -->
-        <div class="block searChfactor">
-          <el-date-picker
-            v-model="queryInfo.date"
-            size="mini"
-            type="datetimerange"
-            :picker-options="timePicker.pickerOptions"
-            range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          ></el-date-picker>
-        </div>
-        <!-- 搜索确定按钮 -->
-        <el-button
-          class="searChfactor"
-          type="primary"
-          size="mini"
-          icon="el-icon-search"
-          @click="handleSearch"
-        >搜索</el-button>
-      </div>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->

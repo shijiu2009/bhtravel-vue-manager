@@ -3,7 +3,7 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="民宿名称" style="width:490px">
+          <el-form-item label="民宿名称" style="width: 490px">
             <el-input v-model="info.name" @change="infoChange"></el-input>
             <el-tooltip
               :content="tigs.title.content"
@@ -22,7 +22,7 @@
             ></el-alert>
           </el-form-item>
 
-          <el-form-item label="副标题" style="width:490px">
+          <el-form-item label="副标题" style="width: 490px">
             <el-input v-model="info.indexTip"></el-input>
           </el-form-item>
           <!-- <el-form-item label="主题" style="width: 50%">
@@ -45,7 +45,7 @@
               ></el-option>
             </el-select>
           </el-form-item> -->
-          <el-form-item label="开业时间" style="width:490px">
+          <el-form-item label="开业时间" style="width: 490px">
             <el-input v-model="info.openTime"></el-input>
           </el-form-item>
           <!-- <el-form-item label="酒店类型">
@@ -54,8 +54,12 @@
               <el-radio :label="2">民宿</el-radio>
             </el-radio-group>
           </el-form-item> -->
-          <el-form-item label="民宿星级" >
-            <el-select v-model="info.stars" placeholder="请选择" style="width: 100px">
+          <el-form-item label="民宿星级">
+            <el-select
+              v-model="info.stars"
+              placeholder="请选择"
+              style="width: 100px"
+            >
               <el-option
                 v-for="item in starses"
                 :key="item.value"
@@ -155,7 +159,10 @@
             <el-input v-model="info.contact" @change="infoChange"></el-input>
           </el-form-item>
           <el-form-item label="介绍（微信小程序、app）" :required="true">
-            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.info"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="介绍（WEB）" :required="true">
             <quill-editor
@@ -177,7 +184,10 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="预定须知" :required="true">
-            <vue-ueditor-wrap v-model="info.notice" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.notice"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
@@ -187,7 +197,7 @@
           </el-form-item>
           <el-form-item label="房型">
             <el-button type="success" @click="addSub">添加</el-button>
-                            <!-- <el-button
+            <!-- <el-button
                   type="primary"
                   round
                   icon="el-icon-edit"
@@ -202,15 +212,36 @@
                   @click="deleteSub(index)"
                 ></el-button> -->
             <div style="margin-top: -50px">
-              <div :gutter="20" v-for="(eItem, index) in roomlist" :key="index"  style="padding-top:30px;margin-left: -4px;margin-bottom:50px; box-shadow:0px 0px 8px #888;">
-                  <div style="position: relative;top:-20px;left:80px">
-                    <el-button type="primary" @click="openTable(index)" style="">编辑</el-button>
-                    <el-button type="danger" @click="deleteSub(index)">删除</el-button>
-                    <span style="margin-left:40px">第{{roomlist.length-index}}个房型，共{{roomlist.length}}个房型</span>
-                  </div>
+              <div
+                :gutter="20"
+                v-for="(eItem, index) in roomlist"
+                :key="index"
+                style="
+                  padding-top: 30px;
+                  margin-left: -4px;
+                  margin-bottom: 50px;
+                  box-shadow: 0px 0px 8px #888;
+                "
+              >
+                <div style="position: relative; top: -20px; left: 80px">
+                  <el-button type="primary" @click="openTable(index)" style=""
+                    >编辑</el-button
+                  >
+                  <el-button type="danger" @click="deleteSub(index)"
+                    >删除</el-button
+                  >
+                  <span style="margin-left: 40px"
+                    >第{{ roomlist.length - index }}个房型，共{{
+                      roomlist.length
+                    }}个房型</span
+                  >
+                </div>
                 <el-row>
                   <el-form-item label="房型名称" class="input-margin-width">
-                    <el-input v-model="eItem.name" placeholder="请输入内容"></el-input>
+                    <el-input
+                      v-model="eItem.name"
+                      placeholder="请输入内容"
+                    ></el-input>
                   </el-form-item>
                 </el-row>
                 <el-row>
@@ -223,7 +254,11 @@
                   </el-form-item>
                 </el-row>
                 <el-row>
-                  <el-form-item label="床型" class="input-margin-width" style="margin:0">
+                  <el-form-item
+                    label="床型"
+                    class="input-margin-width"
+                    style="margin: 0"
+                  >
                     <el-select v-model="eItem.bedType" placeholder="请选择">
                       <el-option
                         v-for="item in roomTypes"
@@ -235,7 +270,10 @@
                   </el-form-item>
                 </el-row>
                 <el-form-item label="面积" class="input-margin-width">
-                  <el-input v-model="eItem.area" placeholder="请输入内容"></el-input>
+                  <el-input
+                    v-model="eItem.area"
+                    placeholder="请输入内容"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="早餐" class="input-margin-width">
                   <el-select v-model="eItem.breakfast" placeholder="请选择">
@@ -255,7 +293,10 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="排序" class="input-margin-width">
-                  <el-input v-model="eItem.sort" placeholder="请输入排序"></el-input>
+                  <el-input
+                    v-model="eItem.sort"
+                    placeholder="请输入排序"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="下架">
                   <el-radio-group v-model="eItem.down">
@@ -273,19 +314,22 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="平日价格" class="input-margin-width">
-                  <el-form-item label="门店价" style="margin-bottom:10px">
+                  <el-form-item label="门店价" style="margin-bottom: 10px">
                     <el-input
                       v-model="eItem.retailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价"  style="margin-bottom:10px">
+                  <el-form-item
+                    label="小程序销售价"
+                    style="margin-bottom: 10px"
+                  >
                     <el-input
                       v-model="eItem.salePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价"  style="margin-bottom:10px">
+                  <el-form-item label="结算底价" style="margin-bottom: 10px">
                     <el-input
                       v-model="eItem.floorPrice"
                       placeholder="请输入价格"
@@ -293,19 +337,22 @@
                   </el-form-item>
                 </el-form-item>
                 <el-form-item label="周末价格" class="input-margin-width">
-                  <el-form-item label="门店价"  style="margin-bottom:10px">
+                  <el-form-item label="门店价" style="margin-bottom: 10px">
                     <el-input
                       v-model="eItem.weeklyRetailPrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="小程序销售价"  style="margin-bottom:10px">
+                  <el-form-item
+                    label="小程序销售价"
+                    style="margin-bottom: 10px"
+                  >
                     <el-input
                       v-model="eItem.weeklySalePrice"
                       placeholder="请输入价格"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item label="结算底价"  style="margin-bottom:10px">
+                  <el-form-item label="结算底价" style="margin-bottom: 10px">
                     <el-input
                       v-model="eItem.weeklyfloorPrice"
                       placeholder="请输入价格"
@@ -323,9 +370,22 @@
                     <el-checkbox label="1">周日</el-checkbox>
                   </el-checkbox-group> -->
                   <div @click="get_ckbox_index(index)">
-                    <el-checkbox :indeterminate="eItem.isIndeterminate" v-model="eItem.checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="eItem.checkedCities" @change="handleCheckedCitiesChange">
-                      <el-checkbox v-for="city in eItem.cities" :label="city" :key="city" >{{city}}</el-checkbox>
+                    <el-checkbox
+                      :indeterminate="eItem.isIndeterminate"
+                      v-model="eItem.checkAll"
+                      @change="handleCheckAllChange"
+                      >全选</el-checkbox
+                    >
+                    <el-checkbox-group
+                      v-model="eItem.checkedCities"
+                      @change="handleCheckedCitiesChange"
+                    >
+                      <el-checkbox
+                        v-for="city in eItem.cities"
+                        :label="city"
+                        :key="city"
+                        >{{ city }}</el-checkbox
+                      >
                     </el-checkbox-group>
                   </div>
                 </el-form-item>
@@ -351,11 +411,22 @@
             <el-button type="success" @click="addProducts">添加</el-button>
           </el-form-item>
 
-          <el-card class="box-card" style="margin-bottom:20px" v-if="selectProducts.length>0">
-            <span v-for="(item,index) in selectProducts" :key="item.id" class="text item">
-              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
+          <el-card
+            class="box-card"
+            style="margin-bottom: 20px"
+            v-if="selectProducts.length > 0"
+          >
+            <span
+              v-for="(item, index) in selectProducts"
+              :key="item.id"
+              class="text item"
+            >
+              {{ item.name
+              }}<el-button type="text" @click="deleteProduct(index)"
+                >删除</el-button
+              >
             </span>
-          </el-card>  
+          </el-card>
 
           <el-form-item label="首页推荐">
             <el-radio-group v-model="info.indexRecommend">
@@ -413,23 +484,34 @@
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="门市价">
-                <el-input v-model="storePrice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="storePrice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="结算底价">
-                <el-input v-model="flooerprice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="flooerprice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="App售价">
-                <el-input v-model="appPrice" placeholder="请输入内容"></el-input>
+                <el-input
+                  v-model="appPrice"
+                  placeholder="请输入内容"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-button type="success" @click="addTablePrice()">添加</el-button>
-            <el-button type="danger" @click="deleteTablePrice()">全部删除</el-button>
+            <el-button type="danger" @click="deleteTablePrice()"
+              >全部删除</el-button
+            >
           </el-row>
         </el-form>
         <el-table :data="subPrices">
@@ -486,98 +568,11 @@
       </el-dialog>
 
       <!-- 对话框 -->
-      <el-dialog title="关联产品" :visible.sync="dialogTableProducts">
-        <el-row :gutter="20" class="products-div">
-          <el-col :span="6">
-            <label class="products-label">产品名称</label
-            ><el-input v-model="productName" placeholder="产品名称"></el-input>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">分类</label>
-            <el-select v-model="productClass" placeholder="请选择">
-              <el-option :key="1" :label="'美食'" :value="1"></el-option>
-              <el-option :key="2" :label="'特产'" :value="2"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <label class="products-label">是否上架</label>
-            <el-select v-model="productDown" placeholder="请选择">
-              <el-option :key="1" :label="'上架'" :value="1"></el-option>
-              <el-option :key="0" :label="'下架'" :value="0"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <div style="height:59px;display: flex; align-items: flex-end;">
-              <el-button type="primary" @click="searchProducts">搜 索</el-button>
-            </div>
-          </el-col>
-        </el-row>
 
-        <el-table :data="products" ref="productsTable">
-          <el-table-column type="selection"> </el-table-column>
-          <el-table-column property="name" label="名称" width="150">
-            <template slot-scope="scope">
-              <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column property="classId" label="所属分类">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.classId == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.classId == "1" ? "美食" : "特产" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="isOpen" label="开放预定">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.isOpen == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column property="hotSearch" label="热门搜索">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.hotSearch == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.hotSearch == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column label="是否下架">
-            <template slot-scope="scope">
-              <el-tag
-                :type="scope.row.down == '1' ? 'success' : 'primary'"
-                disable-transitions
-                >{{ scope.row.down == "1" ? "是" : "否" }}</el-tag
-              >
-            </template>
-          </el-table-column>
-           <!-- 单独添加 -->
-          <el-table-column label="" >
-           <template slot-scope="scope">
-          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
-           </template>
-          </el-table-column>
-        </el-table>
-        <!-- 分页 -->
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="page.totalCount"
-          :page-size="page.rows"
-          :current-page="page.page"
-          @current-change="changePageProducts"
-        >
-        </el-pagination>
-        <div slot="footer" class="dialog-footer">
-          <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmProducts">确 定</el-button>
-        </div>
-      </el-dialog>
+      <productDialog
+        :dialogTableProduct.sync="dialogTableProducts"
+        @SelectionComplete="SelectionComplete"
+      ></productDialog>
     </div>
   </div>
 </template>
@@ -587,9 +582,11 @@ import api from "@/api/reserveManager/homestay.js";
 import productApi from "@/api/reserveManager/product.js";
 import { mapMutations } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
+
 import baseURL from "@/config/baseUrl.js";
 //百度地图
 import baiduMap from "@/components/baiduMap/baiduMap.vue";
+import productDialog from "@/components/productsDialog";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";
@@ -600,6 +597,7 @@ export default {
     UploadFile,
     VueUeditorWrap,
     baiduMap,
+    productDialog,
   },
   data() {
     return {
@@ -638,20 +636,6 @@ export default {
         endDate: "14:00:00",
       },
       myConfig: ueditor.myConfig,
-      //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 10,
-      },
-      //对话框选项
-      productName: "",
-      productClass: "",
-      productDown: "",
       trips: [],
       roomlist: [],
       ptImgs: [],
@@ -686,7 +670,7 @@ export default {
         isIndeterminate: false,
         checkAll: false,
         checkedCities: [],
-        cities: ['周一','周二','周三','周四','周五','周六','周日'],
+        cities: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
       },
       subPrices: [],
       indexPrices: 0,
@@ -706,17 +690,6 @@ export default {
       appPrice: "",
       products: [],
       themes: [],
-      total: 0,
-      //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 10,
-      },
       selectProducts: [],
       pickerOptions: {
         disabledDate(time) {
@@ -896,39 +869,47 @@ export default {
       deleteTags: "DELETE_TAGSLIST",
     }),
 
-    //单个关联产品点击添加
-    handleDelete(index,item){
-      this.dialogTableProducts = false;
-      this.selectProducts.push(item)
-    },
     handleCheckAllChange(value) {
-      this.roomlist[this.ckboxindex].checkedCities = value ? this.roomlist[this.ckboxindex].cities : [];
+      this.roomlist[this.ckboxindex].checkedCities = value
+        ? this.roomlist[this.ckboxindex].cities
+        : [];
       this.roomlist[this.ckboxindex].isIndeterminate = false;
       if (value) {
-        this.roomlist[this.ckboxindex].weekly = [2,3,4,5,6,7,1]
-      }else{
-        this.roomlist[this.ckboxindex].weekly = []
+        this.roomlist[this.ckboxindex].weekly = [2, 3, 4, 5, 6, 7, 1];
+      } else {
+        this.roomlist[this.ckboxindex].weekly = [];
       }
       // console.log( this.roomlist[this.ckboxindex].weekly);
     },
-    get_ckbox_index(index){
-      this.ckboxindex = index
-      this.ckboxitem =!this.ckboxitem        
+    get_ckbox_index(index) {
+      this.ckboxindex = index;
+      this.ckboxitem = !this.ckboxitem;
       // console.log(this.ckboxindex);
-},
+    },
     handleCheckedCitiesChange(value) {
       // console.log(value);
-      this.roomlist[this.ckboxindex].weekly = []
-      const labelList = {'周一':2,'周二':3,'周三':4,'周四':5,'周五':6,'周六':7,'周日':1,}
-      let that = this
-      value.forEach(function(item){
-        that.roomlist[that.ckboxindex].weekly.push(labelList[item])
-      })
+      this.roomlist[this.ckboxindex].weekly = [];
+      const labelList = {
+        周一: 2,
+        周二: 3,
+        周三: 4,
+        周四: 5,
+        周五: 6,
+        周六: 7,
+        周日: 1,
+      };
+      let that = this;
+      value.forEach(function (item) {
+        that.roomlist[that.ckboxindex].weekly.push(labelList[item]);
+      });
       // console.log(this.roomlist);
       let checkedCount = value.length;
-      this.roomlist[this.ckboxindex].checkAll = checkedCount === this.roomlist[this.ckboxindex].cities.length;
-      this.roomlist[this.ckboxindex].isIndeterminate = checkedCount > 0 && checkedCount < this.roomlist[this.ckboxindex].cities.length;
-      },
+      this.roomlist[this.ckboxindex].checkAll =
+        checkedCount === this.roomlist[this.ckboxindex].cities.length;
+      this.roomlist[this.ckboxindex].isIndeterminate =
+        checkedCount > 0 &&
+        checkedCount < this.roomlist[this.ckboxindex].cities.length;
+    },
     //信息校验
     infoChange: function () {
       let isCheck = true;
@@ -984,107 +965,13 @@ export default {
         .catch((_) => {});
     },
     deleteProduct: function (index) {
-      this.selectProducts.splice(index,1);
-    },
-    searchProducts: function () {
-      this.page.page = 1;
-      if (this.productName != null && this.productName != "") {
-        this.page["name"] = this.productName;
-      } else {
-        this.$delete(this.page, "name");
-      }
-      if (this.productClass != null && this.productClass != "") {
-        this.page["classId"] = this.productClass;
-      } else {
-        this.$delete(this.page, "classId");
-      }
-      if (this.productDown != null && this.productDown != "") {
-        this.page["down"] = this.productDown;
-      } else {
-        this.$delete(this.page, "down");
-      }
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
-    },
-    changePageProducts(index) {
-      this.page.page = index;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
+      this.selectProducts.splice(index, 1);
     },
     addProducts: function () {
       this.dialogTableProducts = true;
-      productApi
-        .getAllList(this.page)
-        .then((result) => {
-          this.loading = false; //关掉加载动画
-          this.products = result.rows;
-          this.page.totalCount = result.total;
-          this.$nextTick(function () {
-            this.products.forEach((product, i) => {
-              this.selectProducts.forEach((selectProduct, j) => {
-                if (
-                  this.products[i] != null &&
-                  this.selectProducts[j] != null &&
-                  this.products[i].id == this.selectProducts[j].id
-                ) {
-                  this.$refs.productsTable.toggleRowSelection(this.products[i], true);
-                }
-              });
-            });
-          });
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
-        });
     },
-    confirmProducts: function () {
-      this.dialogTableProducts = false;
-      this.selectProducts.push.apply(this.selectProducts,this.$refs.productsTable.selection);
+    SelectionComplete: function (val) {
+      this.selectProducts = val;
     },
     openTable(index) {
       this.dialogTableVisible = true;
@@ -1142,11 +1029,13 @@ export default {
       deleteKeys(this.info, "rooms", this);
       for (let i = 0; i < this.uploadGroupOne.fileList.length; i++) {
         if ("response" in this.uploadGroupOne.fileList[i]) {
-          this.info["homestayPicItems[" + i + "].path"] = this.uploadGroupOne.fileList[
-            i
-          ].response.filePath;
+          this.info[
+            "homestayPicItems[" + i + "].path"
+          ] = this.uploadGroupOne.fileList[i].response.filePath;
         } else {
-          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(baseURL.imgUrl);
+          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(
+            baseURL.imgUrl
+          );
           let url = this.uploadGroupOne.fileList[i].url.substr(pos);
           this.info["homestayPicItems[" + i + "].path"] = url;
         }
@@ -1164,7 +1053,9 @@ export default {
         this.info["rooms[" + i + "].id"] = this.roomlist[i].id;
         this.info["rooms[" + i + "].name"] = this.roomlist[i].name;
         this.info["rooms[" + i + "].icon"] = this.roomlist[i].icon;
-        this.info["rooms[" + i + "].retailPrice"] = this.roomlist[i].retailPrice;
+        this.info["rooms[" + i + "].retailPrice"] = this.roomlist[
+          i
+        ].retailPrice;
         this.info["rooms[" + i + "].salePrice"] = this.roomlist[i].salePrice;
         this.info["rooms[" + i + "].floorPrice"] = this.roomlist[i].floorPrice;
         this.info["rooms[" + i + "].bedType"] = this.roomlist[i].bedType;
@@ -1172,7 +1063,9 @@ export default {
         this.info["rooms[" + i + "].network"] = this.roomlist[i].network;
         this.info["rooms[" + i + "].sort"] = this.roomlist[i].sort;
         this.info["rooms[" + i + "].down"] = this.roomlist[i].down;
-        this.info["rooms[" + i + "].weeklySalePrice"] = this.roomlist[i].weeklySalePrice;
+        this.info["rooms[" + i + "].weeklySalePrice"] = this.roomlist[
+          i
+        ].weeklySalePrice;
         this.info["rooms[" + i + "].weeklyRetailPrice"] = this.roomlist[
           i
         ].weeklyRetailPrice;
@@ -1273,7 +1166,10 @@ export default {
             this.$refs.baiduMap.getLngAndLat();
             this.$refs.baiduMap.getProvinces();
             this.roomlist = [];
-            if (result.homestay.titleImg != null && result.homestay.titleImg != "") {
+            if (
+              result.homestay.titleImg != null &&
+              result.homestay.titleImg != ""
+            ) {
               this.uploadGroupTitle.fileList.push({
                 url: baseURL.releaseUrl + result.homestay.titleImg,
               });
@@ -1294,7 +1190,9 @@ export default {
               for (let i = 0; i < result.roomlist.length; i++) {
                 this.roomlist.push(result.roomlist[i]);
                 this.roomlist[i].weekly = result.roomlist[i].weekly.split(",");
-                let uploadGroupRoom = JSON.parse(JSON.stringify(this.uploadGroupRoom));
+                let uploadGroupRoom = JSON.parse(
+                  JSON.stringify(this.uploadGroupRoom)
+                );
                 uploadGroupRoom.fileList.push({
                   url: baseURL.releaseUrl + result.roomlist[i].icon,
                 });
