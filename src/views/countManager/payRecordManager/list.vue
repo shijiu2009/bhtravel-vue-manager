@@ -330,12 +330,12 @@ export default {
             });
           }
         })
-        .catch(() => {
-          this.$message({
-            type: "error",
-            message: "提交失败",
-          });
-        });
+        // .catch(() => {
+        //   this.$message({
+        //     type: "error",
+        //     message: "提交失败",
+        //   });
+        // });
     },
     createOrEditBtn: function (id) {
       //判断是添加还是编辑
