@@ -6,7 +6,7 @@
     <div class="content_box" :class="{isCollapse:isCollapse}">
       <!-- 头部 -->
       <Tags></Tags>
-      <div class="content">
+      <div class="content flex-content">
         <!-- transition页面过度动画 -->
         <transition name="slide-top">
           <keep-alive>
@@ -94,6 +94,7 @@ export default {
   right: 0;
   top: 0px;
   bottom: 0px;
+  background: #EAF4F8;
   transition: left 0.3s ease-in-out;
   overflow: hidden;
   padding-top: 70px;
@@ -101,12 +102,13 @@ export default {
 .content {
   flex: 1;
   width: auto;
+  position: relative;
   padding: 6px 10px 20px 20px;
+  /* margin-bottom: 72px; */
   overflow-y: scroll;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 500px;
-  background: #EAF4F8;
   /* height: calc(100% - 30px); */
 }
 

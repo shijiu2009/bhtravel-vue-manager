@@ -3,7 +3,11 @@
     <div class="login-box">
       <div class="login_top">
         <div class="logo">
-          <img src="@/assets/images/logo.png" alt />
+          <img src="../../../static/images/login-left.png" alt />
+
+        </div>
+        <div class="min-logo">
+          <img src="../../../static/images/login-logo.png" alt="" style="width:100%">
         </div>
       </div>
       <div class="login-right">
@@ -35,7 +39,6 @@
             <el-form-item class="code">
               <el-input
                 v-model="userInfo.xcode"
-                class="code"
                 placeholder="请输入验证"
               ></el-input>
               <div class="code_img" @click="updateCodeImg">
@@ -152,6 +155,11 @@ export default {
   height: 100%;
   position: relative;
 }
+.login >>> .el-input__icon{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 .login-box {
   display: flex;
   position: absolute;
@@ -165,19 +173,20 @@ export default {
   border-radius: 2px;
 }
 .login_top {
-  width: 518px;
+  position: relative;
+  width: 519px;
   height: 100%;
+  overflow: hidden;
 }
 .login-right {
   flex: 1;
+  width: 200px;
 }
 .login_top .logo {
-  display: inline-block;
-  height: 100%;
+  width: 100%;
 }
 .login_top img {
-  height: 100%;
-  float: left;
+  width: 100%;
 }
 .login_top .title {
   font-size: 40px;
@@ -185,6 +194,12 @@ export default {
   transform: translateY(-35%);
   margin-left: 20px;
   color: #fff;
+}
+.min-logo{
+  position: absolute;
+  left: 47px;
+  top: 39px;
+  width: 146px;
 }
 .cloth {
   position: absolute;
@@ -207,10 +222,10 @@ export default {
   background-color: #fff;
 }
 .login_icon {
-  margin-top: 20px;
   text-align: center;
   margin-bottom: 32px;
   font-size: 56px;
+  line-height: 1;
   font-family: SourceHanSansCN;
   font-weight: 800;
   color: #2984b8;
@@ -224,7 +239,7 @@ export default {
   box-sizing: border-box;
 }
 .login_box .el-form-item {
-  margin-bottom: 20px;
+  margin-bottom: 31px;
 }
 /* .el-form-item.code .el-input {
   width: calc(100% - 128px);
@@ -246,7 +261,6 @@ export default {
   font-size: 24px;
   font-family: SourceHanSansCN;
   font-weight: 400;
-  color: #1ba4dd;
 }
 .code >>> .el-form-item__content {
   display: flex;
@@ -259,6 +273,13 @@ export default {
   border: 1px solid #a0a0a0;
   border-radius: 2px;
 }
+.username >>> .el-input__inner:hover {
+  border: 1px solid #ccc;
+}
+.username >>> .el-input__inner:focus {
+  border: 1px solid #1aa3dc;
+  color: #1ba4dd;
+}
 .password >>> .el-input__inner {
   width: 460px;
   height: 59px;
@@ -266,11 +287,33 @@ export default {
   border: 1px solid #a0a0a0;
   border-radius: 2px;
 }
-.code >>> .el-input__inner {
+.password >>> .el-input__inner:hover {
+  border: 1px solid #ccc;
+}
+.password >>> .el-input__inner:focus {
+  border: 1px solid #1aa3dc;
+  color: #1ba4dd;
+}
+.code >>> .el-input {
   width: 270px;
   height: 59px;
+  margin-right: 34px;
+}
+.code >>> .el-input__inner {
+  width: 100%;
+  height: 100%;
   border: 1px solid #a0a0a0;
   border-radius: 2px;
+}
+.code >>> .el-input__inner:hover {
+  border: 1px solid #ccc;
+}
+.code >>> .el-input__inner:focus {
+  border: 1px solid #1aa3dc;
+  color: #1ba4dd;
+}
+.login-box .code {
+  margin-bottom: 57px;
 }
 .onSubmit {
   width: 460px;

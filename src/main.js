@@ -10,7 +10,7 @@ import axios from './config/httpConfig'
 import baseUrl from './config/baseUrl'
 //自定义指令
 import './directives/focus.js'
-
+document.title="北海旅游后台管理";//修改html页面标题
 import loading from './utils/loading.js' // 引入loading
 if (!Vue.$loading) {
   Vue.$loading = loading;
