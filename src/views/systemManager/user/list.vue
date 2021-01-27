@@ -170,11 +170,11 @@ export default {
       multipleSelection: [],
       //对话框
       dialogPassword: false,
-      passwordParams: {
+      passwordParams: [{
         userId: "",
         newpass1: "",
         newpass2: "",
-      },
+      }],
       searchDate: [],
     };
   },
@@ -190,7 +190,7 @@ export default {
     },
     confirmPassword: function () {
       api.changePassword(this.passwordParams).then((result) => {
-        alert(result);
+        alert(result.msg);
       });
       this.dialogPassword = false;
     },
