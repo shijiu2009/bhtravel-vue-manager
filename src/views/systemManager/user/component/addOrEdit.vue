@@ -48,6 +48,14 @@
             </el-input>
           </el-form-item>
 
+          <el-form-item label="头像">
+            <UploadFile
+              @uploadValue="avatarValue"
+              ref="uploadGroupAvatar"
+              :uploadGroup="uploadGroupAvatar"
+            ></UploadFile>
+          </el-form-item>
+
           <el-form-item label="账号状态" style="width: 50%">
             <el-select v-model="info.state" placeholder="请选择">
               <el-option
@@ -125,9 +133,12 @@ import api from "@/api/systemManager/user.js";
 import orgApi from "@/api/systemManager/org.js";
 import roleApi from "@/api/systemManager/role.js";
 import { mapMutations } from "vuex";
+import UploadFile from "@/components/uploadImage/uploadImage.vue";
+import baseURL from "@/config/baseUrl.js";
 export default {
   components: {
     byBrawer,
+    UploadFile,
   },
   data() {
     return {
@@ -141,6 +152,13 @@ export default {
         mobile: "",
         email: "",
         roleIds: [],
+      },
+      //图片上传组件信息
+      uploadGroupAvatar: {
+        //文件列表
+        fileList: [],
+        limitCount: 1,
+        autoUpload: true,
       },
       states: [
         {
@@ -167,10 +185,10 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
-    //所选属性下拉框值改变事件
-    // changeRids(e){
-    //   console.log(e)
-    // },
+    //添加路径
+    avatarValue: function (data) {
+      this.info.avatar = data.filePath;
+    },
     //打开抽屉
     openDrawer() {
       this.$refs.byBrawer.openDrawer(); //打开抽屉
@@ -233,10 +251,14 @@ export default {
               this.condition = false;
               this.info = result.data;
               //合并两个数组
-              console.log(result.data.roleIds);
               this.rids = result.data.roleIds[0];
               if (this.info.orgId) {
                 this.getByOrg(this.info.orgId);
+              }
+              if (this.info.avatar != null && this.info.avatar != "") {
+                this.uploadGroupAvatar.fileList.push({
+                  url: baseURL.releaseUrl + this.info.avatar,
+                });
               }
             } else {
               this.$message.error("权限数据查询失败");
