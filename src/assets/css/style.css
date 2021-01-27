@@ -96,6 +96,8 @@
 /* table表格样式 */
 .flex-content>div:first-child {
     height: calc(100% - 72px);
+    /* margin-bottom: 72px;
+    box-sizing: border-box; */
 }
 
 .flex-content>div:first-child>div:first-child {
@@ -107,6 +109,7 @@
 }
 .data_list{
   height: calc(100% - 76px);
+  overflow-y: auto;
 }
 .handle-box {
     margin-bottom: 10px;

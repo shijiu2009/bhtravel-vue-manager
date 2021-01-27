@@ -104,7 +104,7 @@ export default {
   width: auto;
   position: relative;
   padding: 10px 20px 0px;
-  margin-bottom: 72px;
+  /* margin-bottom: 72px; */
   overflow-y: scroll;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
