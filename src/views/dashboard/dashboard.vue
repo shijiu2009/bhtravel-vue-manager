@@ -1,34 +1,28 @@
 <template>
-  <div style="height:100%">
+  <div style="height:100%;" class="home-ex">
     <el-row :gutter="20" style="height:100%;min-width:1040px;">
       <el-col :span="6"  style="height:100%;">
         <!-- 左侧卡片 -->
-        <el-card shadow="hover" class="mgb20" style=";max-width:400px;min-width:250px;min-height:780px;height:100%">
+        <el-card shadow="hover" class="mgb20" style="max-width:400px;min-width:250px;min-height:780px;height:100%">
           <div class="user-info" >
-            <img src="@/assets/images/img.jpg" class="user-avator" alt />
+            <div class="user-avator">
+            <img :src="userimage" class="user-image" alt />
+            </div>
             <div class="user-info-cont">
-              <div class="user-info-name">{{name}}</div>
-              <div class="user-root">{{role}}</div>
+              <div class="user-info-name">{{store.state.userInfo.username}}</div>
+              <div class="user-root">{{store.state.userInfo.rolename}}</div>
             </div>
 
-          <!-- <div class="user-info-list">
-            上次登录时间：
-            <span>2022-01-01</span>
-          </div>
-          <div class="user-info-list">
-            上次登录地点：
-            <span>南宁</span>
-          </div> -->
           </div>
           <div class="ipbox">
             <div class="txtip-box">
               <div class="ipcont ipleft">
                 <div>上次登录时间</div>
-                <div class="ipcolor">2021-12-15</div>
+                <div class="ipcolor">{{store.state.userInfo.lastLoginTime.slice(0,10)}}</div>
                 </div>
               <div class="ipcont">
                 <div>登录IP</div>
-                <div class="ipcolor">4537888888</div>
+                <div class="ipcolor">{{store.state.userInfo.ip}}</div>
               </div>
             </div>
           </div>
@@ -74,7 +68,7 @@
                 </i>
                 <div class="grid-cont-right">
                   <div class="grid-num-z">1234</div>
-                  <div>用户访问量</div>
+                  <div>景区访问量</div>
                 </div>
               </div>
             </el-card>
@@ -87,7 +81,7 @@
                 </i>
                 <div class="grid-cont-right">
                   <div class="grid-num-z">321</div>
-                  <div>系统消息</div>
+                  <div>酒店访问量</div>
                 </div>
               </div>
             </el-card>
@@ -100,7 +94,7 @@
                 </i>
                 <div class="grid-cont-right">
                   <div class="grid-num-z">5000</div>
-                  <div>数量</div>
+                  <div>线路访问量</div>
                 </div>
               </div>
             </el-card>
@@ -109,11 +103,11 @@
 
         <el-card shadow="hover" style="height: calc(100% - 160px)">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="景区" name="first"></el-tab-pane>
-            <el-tab-pane label="酒店" name="second"></el-tab-pane>
-            <el-tab-pane label="民宿" name="third"></el-tab-pane>
-            <el-tab-pane label="乡村旅游" name="fourth"></el-tab-pane>
-            <el-tab-pane label="路线" name="five"></el-tab-pane>
+            <el-tab-pane :label="tableData[0].num ? '景区(' + tableData[0].num  + ')': '景区'" name="first"></el-tab-pane>
+            <el-tab-pane :label="tableData[1].num ? '酒店 (' + tableData[1].num + ')' : '酒店'" name="second"></el-tab-pane>
+            <el-tab-pane :label="tableData[2].num ? '民宿 ('+ tableData[2].num  + ')' : '民宿'" name="third"></el-tab-pane>
+            <el-tab-pane :label="tableData[3].num ? '乡村旅游 (' + tableData[3].num  + ')' : '乡村旅游'" name="fourth"></el-tab-pane>
+            <el-tab-pane :label="tableData[4].num ? '路线 (' + tableData[4].num  + ')' : '路线'" name="five"></el-tab-pane>
           </el-tabs>
              <el-table    
 
@@ -141,10 +135,7 @@
             </el-table-column>
             <el-table-column label="状态">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">未处理</el-button>
+                <span>{{scope.row.static}}</span>
               </template>
             </el-table-column>
           </el-table>
@@ -176,27 +167,45 @@
 </template>
 
 <script>
+import store from '@/store/modules/user.js'
+
 export default {
   name: "dashboard",
   data() {
     return {
+      store:store,
+      userimage: 'https://travel.gxucreate.com/travelbh' + store.state.userInfo.avatar,//用户头像
       activeName: 'first',//默认选择项
         tableData: [{ //表格
           date: '酒店名称',
           name: '王小虎',
-          address: '1234'
+          address: '1234',
+          static:'未处理',
+          num:0,
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '123455'
+          address: '123455',
+          static:'未处理',
+          num:3,
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '222222'
+          address: '222222',
+          static:'未处理',
+          num:1,
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '44444'
+          address: '44444',
+          static:'未处理',
+          num:null,
+        }, {
+          date: '酒店名称',
+          name: '王小虎',
+          address: '44444',
+          static:'未处理',
+          num:5,
         }],
       //  localStorage.getItem("token")
       name:"我的光",
@@ -296,6 +305,9 @@ export default {
     //选择栏
     handleClick(tab, event) {
         console.log(tab, event);
+            console.log(this.store.state.userInfo);
+            console.log(this.userimage);
+
     },
     //表格
     handleEdit(index, row) {
@@ -333,6 +345,9 @@ export default {
   align-items: center;
   height: 100px;
   
+}
+.home-ex >>> .has-gutter tr th{
+    border-bottom: 1px solid #ccc;
 }
 
 .grid-cont-right {
@@ -395,6 +410,7 @@ export default {
   flex-direction:column;
   padding-bottom: 20px;
   margin-bottom: 20px;
+  height: 240px;
 }
 
 .user-avator {
@@ -404,6 +420,13 @@ export default {
   border-radius: 50%;
   background: #E7F7FF;
   padding: 10px;
+  overflow: hidden;
+}
+.user-image{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
 }
 /* .user-info-name{
   background: red;
@@ -428,6 +451,7 @@ export default {
 .user-info-cont div:first-child {
   font-size: 30px;
   color: #222;
+  text-align: center;
 }
 
 .user-info-list {

@@ -3,11 +3,11 @@
     <div class="openMenu" >
       <router-link :to="{path:'/'}">
         <div class="left-img"> 
-          <div class="img-box">
-            <img src="../../assets/images/home.png" alt="">
-          </div>
-          北海智慧旅游
+        <div class="img-box">
+          <img src="../../assets/images/home.png" alt="">
         </div>
+        北海智慧旅游
+      </div>
       </router-link>
       <div class="header-left">
         <!-- 展开或缩放菜单 -->
@@ -44,7 +44,7 @@
           </div>
           <!-- 用户头像及下拉菜单 -->
           <el-dropdown class="user-avator" trigger="click" @command="handleCommand">
-            <img src="../../assets/images/img.jpg" />
+           <img :src="userimage" alt="">
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="loginout">修改信息</el-dropdown-item>
               <el-dropdown-item command="loginout" @click.native="logoutFun">退出登录</el-dropdown-item>
@@ -58,9 +58,13 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import store from '@/store/modules/user.js'
+
 export default {
   data() {
     return {
+      store,
+      userimage: 'https://travel.gxucreate.com/travelbh' + store.state.userInfo.avatar,
       fullscreen: false, //是否全屏属性
       message: 2, //消息数量
       username: "我的光啊", //用户名称

@@ -101,7 +101,6 @@ export default {
 .content {
   flex: 1;
   width: auto;
-  position: relative;
   padding: 6px 10px 20px 20px;
   overflow-y: scroll;
   -webkit-box-sizing: border-box;
