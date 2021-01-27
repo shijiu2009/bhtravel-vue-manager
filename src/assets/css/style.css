@@ -94,17 +94,27 @@
 }
 
 /* table表格样式 */
-/* .el-table{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-} */
+.flex-content>div:first-child {
+    height: calc(100% - 72px);
+}
+
+.flex-content>div:first-child>div:first-child {
+    height: 100%
+}
+
+.flex-content>div:first-child>div:first-child>div:first-child {
+    height: 100%
+}
+.data_list{
+  height: calc(100% - 76px);
+}
 .handle-box {
     margin-bottom: 10px;
     text-align: left;
 }
-
+/* .el-table{
+   height: 100%;
+} */
 /* .searChfactor {
     display: inline-block;
     margin: 0px 10px 10px 0 !important;
@@ -119,11 +129,10 @@
 }
 
 .pagination {
-    position: sticky;
+    position: fixed;
     bottom: 0px;
-    background-color: #fff;
     z-index: 99;
-    padding: 10px 0px;
+    padding: 20px 0px;
     transition: all 0.5;
     animation: paginationShow 0.5s infinite;
     -webkit-animation: paginationShow 0.5s infinite;
@@ -314,31 +323,40 @@
 .menmiandian {
     margin: 20px 0;
 }
-.input-margin-width{
-    width:490px;
+
+.input-margin-width {
+    width: 490px;
     margin: 20px 0;
 }
+
 /* nav导航颜色 */
-.el-breadcrumb__inner a, .el-breadcrumb__inner.is-link {
-    color:#FFF !important
+.el-breadcrumb__inner a,
+.el-breadcrumb__inner.is-link {
+    color: #FFF !important
 }
-.el-breadcrumb__item:last-child .el-breadcrumb__inner, 
-.el-breadcrumb__item:last-child .el-breadcrumb__inner a, 
-.el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, 
-.el-breadcrumb__item:last-child .el-breadcrumb__inner:hover{
+
+.el-breadcrumb__item:last-child .el-breadcrumb__inner,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner a,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
     color: #FFF !important;
 }
+
 .el-breadcrumb__separator {
     margin: 0 9px;
     color: #FFF !important;
 }
-.el-table, .el-table__expanded-cell{
+
+.el-table,
+.el-table__expanded-cell {
     border: 1px solid #ccc !important;
     border-bottom: none !important;
 }
-.has-gutter tr th{
+
+.has-gutter tr th {
     border-bottom: 1px solid #ccc !important;
 }
+
 /* ---------------------------------------------------------------pzk */
 
 
@@ -358,6 +376,8 @@
 .el-table td {
     border-bottom: 1px solid #ccc !important;
 }
-.el-table:before,.el-table__fixed-right::before{
+
+.el-table:before,
+.el-table__fixed-right::before {
     background-color: #ccc !important;
 }
