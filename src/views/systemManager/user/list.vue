@@ -157,24 +157,13 @@ export default {
       loading: false,
       //搜索栏数据
       screenCondition: {
-        input: ["name"],
-        select: {
-          options: {
-            name: "screenClass",
-            title: "类别",
-            list: [
-              {
-                value: "选项4",
-                label: "龙须面",
-              },
-              {
-                value: "选项5",
-                label: "北京烤鸭",
-              },
-            ],
+        input: [
+          {
+            name: "username",
+            title: "用户名",
           },
-        },
-        date: true,
+        ],
+        date: false,
       },
       userList: [],
       //多选数据
@@ -186,6 +175,7 @@ export default {
         newpass1: "",
         newpass2: "",
       },
+      searchDate: [],
     };
   },
   computed: {
@@ -207,11 +197,37 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getUsers();
+      this.handleSearch(this.searchDate);
     },
     //触发搜索按钮
-    handleSearch: function (screenInfo) {
-      console.log(screenInfo);
+    handleSearch: function (data) {
+      if (data != null && data.date != null && data.date.length > 0) {
+        data["start"] = data.date[0];
+        data["end"] = data.date[1];
+      }
+      if (data["username"] == null || data["username"] == "") {
+        this.$delete(data, "username");
+      }
+      data["page"] = this.page.page;
+      data["totalCount"] = this.page.totalCount;
+      data["rows"] = this.page.rows;
+      this.searchDate = data;
+      api
+        .getList(data)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = 1;
+            this.handleSearch(this.searchDate);
+          }
+          this.loading = false; //关掉加载动画
+          this.userList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("查询出错");
+        });
     },
     createOrEditBtn: function (id) {
       //判断是添加还是编辑
