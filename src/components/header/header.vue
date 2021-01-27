@@ -1,14 +1,15 @@
 <template>
   <div class="header" >
     <div class="openMenu" >
-      <div class="left-img"> 
-        <div class="img-box">
-          <img src="../../assets/images/home.png" alt="">
+      <router-link :to="{path:'/'}">
+        <div class="left-img"> 
+          <div class="img-box">
+            <img src="../../assets/images/home.png" alt="">
+          </div>
+          北海智慧旅游
         </div>
-        北海智慧旅游
-      </div>
+      </router-link>
       <div class="header-left">
-
         <!-- 展开或缩放菜单 -->
         <i class="iconfont icon-caidan" :class="{action:isCollapse}" @click="openMenu" style="color:#fff"></i>
         <!-- 面包屑 -->

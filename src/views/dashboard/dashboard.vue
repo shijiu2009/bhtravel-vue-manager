@@ -1,9 +1,9 @@
 <template>
   <div style="height:100%">
-    <el-row :gutter="20" style="height:100%;">
+    <el-row :gutter="20" style="height:100%;min-width:1040px;">
       <el-col :span="6"  style="height:100%;">
         <!-- 左侧卡片 -->
-        <el-card shadow="hover" class="mgb20" style="min-height:600px; height:96%;max-width:400px;min-width:250px">
+        <el-card shadow="hover" class="mgb20" style=";max-width:400px;min-width:250px;min-height:780px;height:100%">
           <div class="user-info" >
             <img src="@/assets/images/img.jpg" class="user-avator" alt />
             <div class="user-info-cont">
@@ -64,8 +64,8 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="height:100%;">
-        <el-row :gutter="20" class="mgb20">
+      <el-col :span="18" style="min-height:780px;height:100%;">
+         <el-row :gutter="20" class="mgb20"> 
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{padding: '20px'}">
               <div class="grid-content grid-con-1">
@@ -105,9 +105,9 @@
               </div>
             </el-card>
           </el-col>
-        </el-row >
+        </el-row > 
 
-        <el-card shadow="hover" style="height:75%;">
+        <el-card shadow="hover" style="height: calc(100% - 160px)">
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="景区" name="first"></el-tab-pane>
             <el-tab-pane label="酒店" name="second"></el-tab-pane>
@@ -130,8 +130,8 @@
             <el-table-column
               label="订单号"
               >
-              <template slot-scope="">
-                <span>12345678</span>
+              <template slot-scope="scope">
+                <span>{{scope.row.address}}</span>
               </template>
             </el-table-column>
             <el-table-column label="数量">
@@ -184,19 +184,19 @@ export default {
         tableData: [{ //表格
           date: '酒店名称',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          address: '1234'
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          address: '123455'
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
+          address: '222222'
         }, {
           date: '酒店名称',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          address: '44444'
         }],
       //  localStorage.getItem("token")
       name:"我的光",
