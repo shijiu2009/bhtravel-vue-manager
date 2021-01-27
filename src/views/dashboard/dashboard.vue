@@ -103,39 +103,45 @@
 
         <el-card shadow="hover" style="height: calc(100% - 160px)">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane :label="tableData[0].num ? '景区(' + tableData[0].num  + ')': '景区'" name="first"></el-tab-pane>
+            <!-- <el-tab-pane :label="tableData[0].num ? '景区(' + tableData[0].num  + ')': '景区'" name="first"></el-tab-pane>
             <el-tab-pane :label="tableData[1].num ? '酒店 (' + tableData[1].num + ')' : '酒店'" name="second"></el-tab-pane>
             <el-tab-pane :label="tableData[2].num ? '民宿 ('+ tableData[2].num  + ')' : '民宿'" name="third"></el-tab-pane>
             <el-tab-pane :label="tableData[3].num ? '乡村旅游 (' + tableData[3].num  + ')' : '乡村旅游'" name="fourth"></el-tab-pane>
-            <el-tab-pane :label="tableData[4].num ? '路线 (' + tableData[4].num  + ')' : '路线'" name="five"></el-tab-pane>
+            <el-tab-pane :label="tableData[4].num ? '路线 (' + tableData[4].num  + ')' : '路线'" name="five"></el-tab-pane> -->
+             <el-tab-pane label="景区" name="first"></el-tab-pane>
+            <el-tab-pane label="酒店" name="second"></el-tab-pane>
+            <el-tab-pane label="民宿" name="third"></el-tab-pane>
+            <el-tab-pane label="乡村旅游" name="fourth"></el-tab-pane>
+            <el-tab-pane label="路线" name="five"></el-tab-pane>
           </el-tabs>
              <el-table    
-
             :data="tableData"
+             v-loading="loading" 
+             max-height='570'
             style="width: 100%">
             <el-table-column
               label="产品"
               >
               <template slot-scope="scope">
                 <i class="el-icon-info" style="color:#2983B7;"></i>
-                <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                <span style="margin-left: 10px">{{ scope.row.attrName }}</span>
               </template>
             </el-table-column>
             <el-table-column
               label="订单号"
               >
               <template slot-scope="scope">
-                <span>{{scope.row.address}}</span>
+              <span>{{scope.row.checkNo}}</span>
               </template>
             </el-table-column>
             <el-table-column label="数量">
-              <template slot-scope="">
-                <span>×1</span>
+              <template slot-scope="scope">
+                <span>{{scope.row.totalQuantity}}</span>
               </template>
             </el-table-column>
             <el-table-column label="状态">
               <template slot-scope="scope">
-                <span>{{scope.row.static}}</span>
+                <span>{{scope.row.status == 3 ? '未处理' : '未知'}}</span>
               </template>
             </el-table-column>
           </el-table>
@@ -168,47 +174,58 @@
 
 <script>
 import store from '@/store/modules/user.js'
+import api from '@/api/api.js'
 
 export default {
   name: "dashboard",
   data() {
     return {
+      loading:true,
       store:store,
       userimage: 'https://travel.gxucreate.com/travelbh' + store.state.userInfo.avatar,//用户头像
       activeName: 'first',//默认选择项
-        tableData: [{ //表格
-          date: '酒店名称',
-          name: '王小虎',
-          address: '1234',
-          static:'未处理',
-          num:0,
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '123455',
-          static:'未处理',
-          num:3,
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '222222',
-          static:'未处理',
-          num:1,
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '44444',
-          static:'未处理',
-          num:null,
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '44444',
-          static:'未处理',
-          num:5,
-        }],
+      urlarr:[
+      '/api/travel/index/ticketOrderList',
+      '/api/travel/index/coutryProjectOrderList',
+      '/api/travel/index/hotelOrderList',
+      '/api/travel/index/homestayOrderList',
+      '/api/travel/index/peripheryTravelOrderList'
+      ],
+        tableData: [
+        //   { //表格
+        //   date: '酒店名称',
+        //   name: '王小虎',
+        //   address: '1234',
+        //   static:'未处理',
+        //   num:0,
+        // }, {
+        //   date: '酒店名称',
+        //   name: '王小虎',
+        //   address: '123455',
+        //   static:'未处理',
+        //   num:3,
+        // }, {
+        //   date: '酒店名称',
+        //   name: '王小虎',
+        //   address: '222222',
+        //   static:'未处理',
+        //   num:1,
+        // }, {
+        //   date: '酒店名称',
+        //   name: '王小虎',
+        //   address: '44444',
+        //   static:'未处理',
+        //   num:null,
+        // }, {
+        //   date: '酒店名称',
+        //   name: '王小虎',
+        //   address: '44444',
+        //   static:'未处理',
+        //   num:5,
+        // }
+        ],
       //  localStorage.getItem("token")
-      name:"我的光",
+      // name:"我的光",
       todoList: [
         {
           title: "今天要修复100个bug",
@@ -287,13 +304,14 @@ export default {
     // Schart
   },
   computed: {
-    role() {
-      return this.name === "admin" ? "超级管理员" : "普通用户";
-    }
+    // role() {
+    //   return this.name === "admin" ? "超级管理员" : "普通用户";
+    // }
   },
   created() {
     this.handleListener();
     this.changeDate();
+    this.getdata(this.urlarr[0])
   },
   activated() {
     this.handleListener();
@@ -302,12 +320,25 @@ export default {
     
   },
   methods: {
+    //请求表格
+    getdata(url){
+      api.post(url).then((result) => {
+          this.loading = false; //关掉加载动画
+          console.log(result);
+          this.tableData = result.list
+          console.log(this.tableData);
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          console.log('请求失败');
+        });
+    },
     //选择栏
-    handleClick(tab, event) {
-        console.log(tab, event);
-            console.log(this.store.state.userInfo);
-            console.log(this.userimage);
-
+    handleClick(tab) {
+        console.log(tab.index);
+        this.getdata(this.urlarr[tab.index])
+            // console.log(this.store.state.userInfo);
+            // console.log(this.userimage);
     },
     //表格
     handleEdit(index, row) {
