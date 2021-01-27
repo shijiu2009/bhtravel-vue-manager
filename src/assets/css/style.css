@@ -94,6 +94,11 @@
 }
 
 /* table表格样式 */
+/* 表格错位 */
+.el-table .th.gutter {
+    display: table-cell !important;
+}
+
 .flex-content>div:first-child {
     height: calc(100% - 72px);
     /* margin-bottom: 72px;
@@ -107,17 +112,17 @@
 .flex-content>div:first-child>div:first-child>div:first-child {
     height: 100%
 }
-.data_list{
-  height: calc(100% - 76px);
-  overflow-y: auto;
+
+.data_list {
+    height: calc(100% - 76px);
+    overflow-y: auto;
 }
+
 .handle-box {
     margin-bottom: 10px;
     text-align: left;
 }
-/* .el-table{
-   height: 100%;
-} */
+
 /* .searChfactor {
     display: inline-block;
     margin: 0px 10px 10px 0 !important;
