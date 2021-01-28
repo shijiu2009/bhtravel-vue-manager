@@ -29,6 +29,7 @@
         :data="hotelList"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         style="width: 100%"
         v-loading="loading"
         :max-height="this.$tableHeight"
