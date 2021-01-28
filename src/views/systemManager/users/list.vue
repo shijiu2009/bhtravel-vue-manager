@@ -4,7 +4,13 @@
       <div>
         <!-- 可选择下拉搜索 -->
         <div class="searChfactor">
-          <el-select size="mini" v-model="queryInfo.job" clearable filterable placeholder="请选择">
+          <el-select
+            size="mini"
+            v-model="queryInfo.job"
+            clearable
+            filterable
+            placeholder="请选择"
+          >
             <el-option
               size="mini"
               v-for="item in jobList.options"
@@ -44,7 +50,8 @@
           size="mini"
           icon="el-icon-search"
           @click="handleSearch"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </div>
       <!-- 操作按钮 -->
       <div class="operation">
@@ -55,7 +62,8 @@
           class="handle-del mr10"
           size="mini"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -63,12 +71,15 @@
           class="handle-del mr10"
           size="mini"
           @click="editLinkBtn('')"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
       <el-table
-        :data="userList.slice((page.page-1)*page.rows,page.page*page.rows)"
+        :data="
+          userList.slice((page.page - 1) * page.rows, page.page * page.rows)
+        "
         border
         ref="multipleTable"
         style="width: 100%"
@@ -76,8 +87,18 @@
         @selection-change="handleSelectionChange"
       >
         <!-- table标题-->
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
         <el-table-column align="center" label="头像" width="70">
           <template slot-scope="scope">
             <el-image
@@ -90,10 +111,30 @@
           </template>
         </el-table-column>
         <!-- <el-table-column prop="age" label="年龄" align="center" width="50"></el-table-column> -->
-        <el-table-column prop="name" label="姓名" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="nickName" label="公司名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="phone" label="电话" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="email" label="邮箱" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="name"
+          label="姓名"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="nickName"
+          label="公司名称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="phone"
+          label="电话"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="email"
+          label="邮箱"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <!-- 列表操作 -->
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
@@ -122,21 +163,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id, userList)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id, userList)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

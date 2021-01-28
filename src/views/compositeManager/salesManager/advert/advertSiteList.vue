@@ -32,7 +32,8 @@
           size="mini"
           icon="el-icon-search"
           @click="handleSearch"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </div>
       <!-- 操作按钮 -->
       <div class="operation">
@@ -44,7 +45,8 @@
           size="mini"
           v-role="'4006004'"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -53,7 +55,8 @@
           size="mini"
           v-role="'4006002'"
           @click="createOrEditBtn(true)"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -63,13 +66,32 @@
         ref="multipleTable"
         style="width: 100%"
         v-loading="loading"
-        
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="codeName" label="代号" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="account" label="简介" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="codeName"
+          label="代号"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="account"
+          label="简介"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <el-button
@@ -80,7 +102,7 @@
               size="small"
               title="编辑"
               v-role="'4006003'"
-              @click="createOrEditBtn(false,scope.row.id)"
+              @click="createOrEditBtn(false, scope.row.id)"
             ></el-button>
             <el-button
               type="danger"
@@ -95,16 +117,16 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

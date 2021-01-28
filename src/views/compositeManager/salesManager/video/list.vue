@@ -33,7 +33,11 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -48,9 +52,13 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column prop="url" label="视频路径" align="center"></el-table-column>
+        <el-table-column
+          prop="url"
+          label="视频路径"
+          align="center"
+        ></el-table-column>
         <el-table-column label="是否显示" width="150" align="center">
-          <template slot-scope="scope" >
+          <template slot-scope="scope">
             <el-tag
               :type="scope.row.isShow == '1' ? 'success' : 'primary'"
               disable-transitions
@@ -76,21 +84,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

@@ -35,7 +35,11 @@
         :max-height="this.$tableHeight"
       >
         <!-- 固定参数 -->
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -107,16 +111,16 @@
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

@@ -33,7 +33,11 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -64,30 +68,54 @@
         </el-table-column>
         <el-table-column label="所属类型" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.type == '0'" type="primary" disable-transitions>{{
-              "科技馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '1'" type="primary" disable-transitions>{{
-              "博物馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '2'" type="primary" disable-transitions>{{
-              "展览馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '3'" type="primary" disable-transitions>{{
-              "图书馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '4'" type="primary" disable-transitions>{{
-              "文化馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '5'" type="primary" disable-transitions>{{
-              "纪念馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '6'" type="primary" disable-transitions>{{
-              "美术馆"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == '7'" type="primary" disable-transitions>{{
-              "剧场"
-            }}</el-tag>
+            <el-tag
+              v-if="scope.row.type == '0'"
+              type="primary"
+              disable-transitions
+              >{{ "科技馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '1'"
+              type="primary"
+              disable-transitions
+              >{{ "博物馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '2'"
+              type="primary"
+              disable-transitions
+              >{{ "展览馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '3'"
+              type="primary"
+              disable-transitions
+              >{{ "图书馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '4'"
+              type="primary"
+              disable-transitions
+              >{{ "文化馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '5'"
+              type="primary"
+              disable-transitions
+              >{{ "纪念馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '6'"
+              type="primary"
+              disable-transitions
+              >{{ "美术馆" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == '7'"
+              type="primary"
+              disable-transitions
+              >{{ "剧场" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column
@@ -114,21 +142,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -140,7 +170,7 @@ import Screen from "@/components/screen/screen.vue";
 export default {
   name: "travelPlaceList",
   components: {
-    Screen
+    Screen,
   },
   data() {
     return {

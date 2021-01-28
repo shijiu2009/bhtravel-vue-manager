@@ -3,26 +3,87 @@
     <div class="handle-box">
       <Screen :screenCondition="screenCondition"></Screen>
       <div>
-        <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" size="mini" @click="delAllSelection">
-          批量删除</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-delete"
+          class="handle-del mr10"
+          size="mini"
+          @click="delAllSelection"
+        >
+          批量删除</el-button
+        >
         <!-- 添加按钮 -->
-        <el-button type="primary" icon="el-icon-plus" class="handle-del mr10" size="mini" @click="createOrEditBtn('')">
-          添加</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          class="handle-del mr10"
+          size="mini"
+          @click="createOrEditBtn('')"
+        >
+          添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
-      <el-table :data="purviewList" border ref="multipleTable" v-loading="loading"
-        @selection-change="handleSelectionChange" class="adjustTable" :max-height="this.$tableHeight">
+      <el-table
+        :data="purviewList"
+        border
+        ref="multipleTable"
+        v-loading="loading"
+        @selection-change="handleSelectionChange"
+        class="adjustTable"
+        :max-height="this.$tableHeight"
+      >
         <!-- 固定参数 -->
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
 
         <!-- 模块参数 -->
-        <el-table-column prop="aliasname" label="名称" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="pname" label="标题" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="link" label="路径" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="pid" label="权限编码" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="sort" label="排列循序" sortable align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="aliasname"
+          label="名称"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="pname"
+          label="标题"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="link"
+          label="路径"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="pid"
+          label="权限编码"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="sort"
+          label="排列循序"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column label="图标" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <i v-if="scope.row.icon" :class="scope.row.icon"></i>
@@ -30,48 +91,99 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="是否拥有权限" align="center" show-overflow-tooltip>
+        <el-table-column
+          label="是否拥有权限"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag :type="scope.row.ptype==1 ? 'success' : 'primary'" disable-transitions>
-              {{scope.row.ptype==1?"是":"否"}}</el-tag>
+            <el-tag
+              :type="scope.row.ptype == 1 ? 'success' : 'primary'"
+              disable-transitions
+            >
+              {{ scope.row.ptype == 1 ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
 
-        <el-table-column label="是否在菜单栏显示" align="center" show-overflow-tooltip>
+        <el-table-column
+          label="是否在菜单栏显示"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag :type="scope.row.hidden==1 ? 'success' : 'primary'" disable-transitions>
-              {{scope.row.hidden==1?"是":"否"}}</el-tag>
+            <el-tag
+              :type="scope.row.hidden == 1 ? 'success' : 'primary'"
+              disable-transitions
+            >
+              {{ scope.row.hidden == 1 ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
 
-        <el-table-column label="页面是否缓存" align="center" show-overflow-tooltip>
+        <el-table-column
+          label="页面是否缓存"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag :type="scope.row.noCache==1 ? 'success' : 'primary'" disable-transitions>
-              {{scope.row.noCache==1?"是":"否"}}</el-tag>
+            <el-tag
+              :type="scope.row.noCache == 1 ? 'success' : 'primary'"
+              disable-transitions
+            >
+              {{ scope.row.noCache == 1 ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
 
-        <el-table-column label="是否显示在标签" align="center" show-overflow-tooltip>
+        <el-table-column
+          label="是否显示在标签"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag :type="scope.row.noBreadcrumb==1? 'success' : 'primary'" disable-transitions>
-              {{scope.row.noBreadcrumb==1?"是":"否"}}</el-tag>
+            <el-tag
+              :type="scope.row.noBreadcrumb == 1 ? 'success' : 'primary'"
+              disable-transitions
+            >
+              {{ scope.row.noBreadcrumb == 1 ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <!-- 操作 -->
         <el-table-column fixed="right" label="操作" align="center" width="150">
           <div slot-scope="scope">
-            <el-button type="primary" round icon="el-icon-edit" circle size="small" title="编辑"
-              @click="createOrEditBtn(scope.row.pid)"></el-button>
-            <el-button type="danger" round icon="el-icon-delete" circle size="small" title="删除"
-              @click.native.prevent="openDeleteWarning(scope.row.pid)"></el-button>
+            <el-button
+              type="primary"
+              round
+              icon="el-icon-edit"
+              circle
+              size="small"
+              title="编辑"
+              @click="createOrEditBtn(scope.row.pid)"
+            ></el-button>
+            <el-button
+              type="danger"
+              round
+              icon="el-icon-delete"
+              circle
+              size="small"
+              title="删除"
+              @click.native.prevent="openDeleteWarning(scope.row.pid)"
+            ></el-button>
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination background layout="total, prev, pager, next,jumper" :page-size="page.rows"
-          :total="page.totalCount" @current-change="handlePageChange"></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

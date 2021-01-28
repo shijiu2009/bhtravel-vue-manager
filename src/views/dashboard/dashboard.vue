@@ -1,34 +1,28 @@
 <template>
-  <div style="height:100%">
-    <el-row :gutter="20" style="height:100%;">
+  <div style="height:100%;" class="home-ex">
+    <el-row :gutter="20" style="height:100%;min-width:1050px;">
       <el-col :span="6"  style="height:100%;">
         <!-- 左侧卡片 -->
-        <el-card shadow="hover" class="mgb20" style="min-height:600px; height:96%;max-width:400px;min-width:250px">
+        <el-card shadow="hover" class="mgb20" style="max-width:480px;min-width:250px;min-height:820px;height:100%">
           <div class="user-info" >
-            <img src="@/assets/images/img.jpg" class="user-avator" alt />
+            <div class="user-avator">
+            <img :src="userimage" class="user-image" alt />
+            </div>
             <div class="user-info-cont">
-              <div class="user-info-name">{{name}}</div>
-              <div class="user-root">{{role}}</div>
+              <div class="user-info-name">{{store.state.userInfo.username}}</div>
+              <div class="user-root">{{store.state.userInfo.rolename}}</div>
             </div>
 
-          <!-- <div class="user-info-list">
-            上次登录时间：
-            <span>2022-01-01</span>
-          </div>
-          <div class="user-info-list">
-            上次登录地点：
-            <span>南宁</span>
-          </div> -->
           </div>
           <div class="ipbox">
             <div class="txtip-box">
               <div class="ipcont ipleft">
                 <div>上次登录时间</div>
-                <div class="ipcolor">2021-12-15</div>
+                <div class="ipcolor">{{store.state.userInfo.lastLoginTime.slice(0,10)}}</div>
                 </div>
               <div class="ipcont">
                 <div>登录IP</div>
-                <div class="ipcolor">4537888888</div>
+                <div class="ipcolor">{{store.state.userInfo.ip}}</div>
               </div>
             </div>
           </div>
@@ -64,8 +58,8 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="height:100%;">
-        <el-row :gutter="20" class="mgb20">
+      <el-col :span="18" style="min-height:820px;height:100%;">
+         <el-row :gutter="20" class="mgb20"> 
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{padding: '20px'}">
               <div class="grid-content grid-con-1">
@@ -73,8 +67,8 @@
                  <img src="../../assets/images/homer1.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">1234</div>
-                  <div>用户访问量</div>
+                  <div class="grid-num-z">{{topnumData.attractionsViews || 'N'}}</div>
+                  <div>景区访问量</div>
                 </div>
               </div>
             </el-card>
@@ -86,8 +80,8 @@
                    <img src="../../assets/images/homer2.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">321</div>
-                  <div>系统消息</div>
+                  <div class="grid-num-z">{{topnumData.hotelViews || 'N'}}</div>
+                  <div>酒店访问量</div>
                 </div>
               </div>
             </el-card>
@@ -99,107 +93,89 @@
                    <img src="../../assets/images/homer3.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">5000</div>
-                  <div>数量</div>
+                  <div class="grid-num-z">{{topnumData.peripheryTravelViews || 'N'}}</div>
+                  <div>线路访问量</div>
                 </div>
               </div>
             </el-card>
           </el-col>
-        </el-row >
+        </el-row > 
 
-        <el-card shadow="hover" style="height:75%;">
+        <el-card shadow="hover" style="height: calc(100% - 160px)">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="景区" name="first"></el-tab-pane>
+            <!-- <el-tab-pane :label="tableData[0].num ? '景区(' + tableData[0].num  + ')': '景区'" name="first"></el-tab-pane>
+            <el-tab-pane :label="tableData[1].num ? '酒店 (' + tableData[1].num + ')' : '酒店'" name="second"></el-tab-pane>
+            <el-tab-pane :label="tableData[2].num ? '民宿 ('+ tableData[2].num  + ')' : '民宿'" name="third"></el-tab-pane>
+            <el-tab-pane :label="tableData[3].num ? '乡村旅游 (' + tableData[3].num  + ')' : '乡村旅游'" name="fourth"></el-tab-pane>
+            <el-tab-pane :label="tableData[4].num ? '路线 (' + tableData[4].num  + ')' : '路线'" name="five"></el-tab-pane> -->
+             <el-tab-pane label="景区" name="first"></el-tab-pane>
             <el-tab-pane label="酒店" name="second"></el-tab-pane>
             <el-tab-pane label="民宿" name="third"></el-tab-pane>
             <el-tab-pane label="乡村旅游" name="fourth"></el-tab-pane>
             <el-tab-pane label="路线" name="five"></el-tab-pane>
           </el-tabs>
              <el-table    
-
             :data="tableData"
+             v-loading="loading" 
+             max-height='570'
             style="width: 100%">
             <el-table-column
               label="产品"
+              header-align=""
+              min-width='120'
               >
               <template slot-scope="scope">
                 <i class="el-icon-info" style="color:#2983B7;"></i>
-                <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                <span style="margin-left: 10px">{{ scope.row.attrName ||  scope.row.ctName || scope.row.hotelName || scope.row.title }}</span>
               </template>
             </el-table-column>
             <el-table-column
               label="订单号"
               >
-              <template slot-scope="">
-                <span>12345678</span>
+              <template slot-scope="scope">
+              <span>{{scope.row.orderNo}}</span>
               </template>
             </el-table-column>
             <el-table-column label="数量">
-              <template slot-scope="">
-                <span>×1</span>
+              <template slot-scope="scope">
+                <span>×{{scope.row.totalQuantity || scope.row.roomCount || scope.row.quantity || '?'}}</span>
               </template>
             </el-table-column>
             <el-table-column label="状态">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)">未处理</el-button>
+                <span style="color:red">{{scope.row.status == 3 ? '未处理' : '未知'}}</span>
               </template>
             </el-table-column>
           </el-table>
         </el-card>
-        <!-- <el-card shadow="hover" style="height:403px;">
-          <div slot="header" class="clearfix">
-            <span>待办事项</span>
-            <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
-          </div>
-          <el-table :data="todoList" :show-header="false" style="width: 100%;font-size:14px;">
-            <el-table-column width="40">
-              <template slot-scope="scope">
-                <el-checkbox v-model="scope.row.status"></el-checkbox>
-              </template>
-            </el-table-column>
-            <el-table-column>
-              <template slot-scope="scope">
-                <div
-                  class="todo-item"
-                  :class="{'todo-item-del': scope.row.status}"
-                >{{scope.row.title}}</div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card> -->
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import store from '@/store/modules/user.js'
+import api from '@/api/api.js'
+
 export default {
   name: "dashboard",
   data() {
     return {
+      loading:true,
+      store:store,
+      userimage: 'https://travel.gxucreate.com/travelbh' + store.state.userInfo.avatar,//用户头像
       activeName: 'first',//默认选择项
-        tableData: [{ //表格
-          date: '酒店名称',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '酒店名称',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+      topnumData:'',//访问量数据
+      urlarr:[
+      'ticketOrderList',
+      'hotelOrderList',
+      'homestayOrderList',
+      'coutryProjectOrderList',
+      'peripheryTravelOrderList'
+      ],
+      tableData: [],
       //  localStorage.getItem("token")
-      name:"我的光",
+      // name:"我的光",
       todoList: [
         {
           title: "今天要修复100个bug",
@@ -278,13 +254,15 @@ export default {
     // Schart
   },
   computed: {
-    role() {
-      return this.name === "admin" ? "超级管理员" : "普通用户";
-    }
+    // role() {
+    //   return this.name === "admin" ? "超级管理员" : "普通用户";
+    // }
   },
   created() {
     this.handleListener();
     this.changeDate();
+    this.getdata(this.urlarr[0])//表格数据请求
+    this.getnum()
   },
   activated() {
     this.handleListener();
@@ -293,9 +271,34 @@ export default {
     
   },
   methods: {
+    //请求访问量
+    getnum(){
+      api.post('/api/travel/index/getViews').then((result) => {
+        // console.log(result);
+        this.topnumData = result
+      })
+      .catch(() => {
+        console.log('请求失败');
+      });
+    },
+    //请求表格
+    getdata(url){
+      this.loading = true;
+      api.post('/api/travel/index/'+ url).then((result) => {
+          this.loading = false; //关掉加载动画
+          // console.log(result);
+          this.tableData = result.list
+          // console.log(this.tableData);
+        })
+        .catch(() => {
+          // this.loading = false; //关掉加载动画
+          console.log('请求失败');
+        });
+    },
     //选择栏
-    handleClick(tab, event) {
-        console.log(tab, event);
+    handleClick(tab) {
+        // console.log(tab.index);
+        this.getdata(this.urlarr[tab.index])
     },
     //表格
     handleEdit(index, row) {
@@ -333,6 +336,9 @@ export default {
   align-items: center;
   height: 100px;
   
+}
+.home-ex >>> .has-gutter tr th{
+    border-bottom: 1px solid #ccc;
 }
 
 .grid-cont-right {
@@ -395,6 +401,7 @@ export default {
   flex-direction:column;
   padding-bottom: 20px;
   margin-bottom: 20px;
+  height: 240px;
 }
 
 .user-avator {
@@ -404,6 +411,13 @@ export default {
   border-radius: 50%;
   background: #E7F7FF;
   padding: 10px;
+  overflow: hidden;
+}
+.user-image{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
 }
 /* .user-info-name{
   background: red;
@@ -428,6 +442,7 @@ export default {
 .user-info-cont div:first-child {
   font-size: 30px;
   color: #222;
+  text-align: center;
 }
 
 .user-info-list {
@@ -490,12 +505,13 @@ export default {
   color:rgb(85, 77, 77);  font-weight: 900;
 }
 .lebo-box{
-  margin-top:40px;
+  margin-top:60px;
   height: 332px;
   width: 100%;
   display: flex;
   justify-content:center;
   flex-wrap: wrap;
+  /* background: red; */
 }
 .lebo-icon{
   margin: 10px;

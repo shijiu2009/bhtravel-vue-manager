@@ -5,44 +5,125 @@
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
-        <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" size="mini" @click="delAllSelection">
-          批量删除</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-delete"
+          class="handle-del mr10"
+          size="mini"
+          @click="delAllSelection"
+        >
+          批量删除</el-button
+        >
         <!-- 添加按钮 -->
-        <el-button type="primary" icon="el-icon-plus" class="handle-del mr10" size="mini" @click="createOrEditBtn('')">
-          添加</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          class="handle-del mr10"
+          size="mini"
+          @click="createOrEditBtn('')"
+        >
+          添加</el-button
+        >
       </div>
     </div>
 
     <div class="data_list">
-      <el-table :data="knowCityList" border ref="multipleTable" style="width: 100%" v-loading="loading"
-        :max-height="this.$tableHeight" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="title" label="标题" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="sort" label="排序" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="author" label="作者" align="center" show-overflow-tooltip></el-table-column>
+      <el-table
+        :data="knowCityList"
+        border
+        ref="multipleTable"
+        style="width: 100%"
+        v-loading="loading"
+        :max-height="this.$tableHeight"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="title"
+          label="标题"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="sort"
+          label="排序"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="author"
+          label="作者"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column label="是否展现">
           <template slot-scope="scope">
-            <el-tag :type="scope.row.isShow=='1' ? 'success' : 'primary'" disable-transitions>
-              {{scope.row.isShow=="1"?"是":"否"}}</el-tag>
+            <el-tag
+              :type="scope.row.isShow == '1' ? 'success' : 'primary'"
+              disable-transitions
+            >
+              {{ scope.row.isShow == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
-        <el-table-column prop="browseNum" label="浏览次数" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="browseNum"
+          label="浏览次数"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
-            <el-button type="primary" round icon="el-icon-edit" circle size="small" title="编辑"
-              @click="createOrEditBtn(scope.row.id)"></el-button>
-            <el-button type="danger" round icon="el-icon-delete" circle size="small" title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"></el-button>
+            <el-button
+              type="primary"
+              round
+              icon="el-icon-edit"
+              circle
+              size="small"
+              title="编辑"
+              @click="createOrEditBtn(scope.row.id)"
+            ></el-button>
+            <el-button
+              type="danger"
+              round
+              icon="el-icon-delete"
+              circle
+              size="small"
+              title="删除"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination background layout="total, prev, pager, next,jumper" :page-size="page.rows"
-          :total="page.totalCount" @current-change="handlePageChange"></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

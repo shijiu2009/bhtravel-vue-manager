@@ -11,7 +11,8 @@
           class="handle-del mr10"
           size="mini"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -19,7 +20,8 @@
           class="handle-del mr10"
           size="mini"
           @click="editLinkBtn('')"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -31,35 +33,63 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="author" label="作者" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="name"
+          label="名称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="author"
+          label="作者"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column label="是否显示" width="60" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.isShow=='1' ? 'success' : 'primary'"
+              :type="scope.row.isShow == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.isShow=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.isShow == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column label="是否首页显示" width="60" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.isShowIndex=='1' ? 'success' : 'primary'"
+              :type="scope.row.isShowIndex == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.isShowIndex=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.isShowIndex == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column label="分类" width="180" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.oid=='1' ? 'success' : 'primary'"
+              :type="scope.row.oid == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.oid=="1"?"游记":"攻略"}}</el-tag>
+              >{{ scope.row.oid == "1" ? "游记" : "攻略" }}</el-tag
+            >
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <el-button
@@ -78,21 +108,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

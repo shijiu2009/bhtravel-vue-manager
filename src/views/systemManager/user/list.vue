@@ -35,7 +35,11 @@
         :max-height="this.$tableHeight"
       >
         <!-- 固定参数 -->
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -128,16 +132,16 @@
           <el-button type="primary" @click="confirmPassword">确 定</el-button>
         </div>
       </el-dialog>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -170,11 +174,13 @@ export default {
       multipleSelection: [],
       //对话框
       dialogPassword: false,
-      passwordParams: [{
-        userId: "",
-        newpass1: "",
-        newpass2: "",
-      }],
+      passwordParams: [
+        {
+          userId: "",
+          newpass1: "",
+          newpass2: "",
+        },
+      ],
       searchDate: [],
     };
   },
