@@ -33,7 +33,11 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -44,7 +48,7 @@
         <el-table-column
           prop="name"
           label="名称"
-          align="center"  
+          align="center"
           show-overflow-tooltip
         ></el-table-column>
         <el-table-column
@@ -111,21 +115,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
     <Detailed :content="attractionsDetailed" ref="detailedMound"></Detailed>
   </div>
@@ -366,5 +372,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

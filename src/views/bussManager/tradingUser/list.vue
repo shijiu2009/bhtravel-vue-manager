@@ -131,16 +131,16 @@
             <el-button type="primary" @click="confirmPassword">确 定</el-button>
           </div>
         </el-dialog>
-        <!-- 分页操作 -->
-        <div class="pagination">
-          <el-pagination
-            background
-            layout="total, prev, pager, next,jumper"
-            :page-size="page.rows"
-            :total="page.totalCount"
-            @current-change="handlePageChange"
-          ></el-pagination>
-        </div>
+      </div>
+      <!-- 分页操作 -->
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="total, prev, pager, next,jumper"
+          :page-size="page.rows"
+          :total="page.totalCount"
+          @current-change="handlePageChange"
+        ></el-pagination>
       </div>
     </div>
   </div>

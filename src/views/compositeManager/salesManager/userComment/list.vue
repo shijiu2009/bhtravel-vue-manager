@@ -26,7 +26,7 @@
         >
       </div>
     </div>
-    <div>
+    <div class="data_list">
       <el-table
         :data="commentList"
         border
@@ -35,7 +35,11 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -57,35 +61,66 @@
           align="center"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column label="评论对象类别" align="center" show-overflow-tooltip>
+        <el-table-column
+          label="评论对象类别"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.type == 0" type="primary" disable-transitions>{{
-              "酒店"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 1" type="primary" disable-transitions>{{
-              "景点"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 2" type="primary" disable-transitions>{{
-              "线路"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 3" type="primary" disable-transitions>{{
-              "民宿"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 4" type="primary" disable-transitions>{{
-              "农家乐"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 5" type="primary" disable-transitions>{{
-              "民俗文化"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 6" type="primary" disable-transitions>{{
-              "美食"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 7" type="primary" disable-transitions>{{
-              "特产"
-            }}</el-tag>
-            <el-tag v-if="scope.row.type == 8" type="primary" disable-transitions>{{
-              "文化场馆"
-            }}</el-tag>
+            <el-tag
+              v-if="scope.row.type == 0"
+              type="primary"
+              disable-transitions
+              >{{ "酒店" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 1"
+              type="primary"
+              disable-transitions
+              >{{ "景点" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 2"
+              type="primary"
+              disable-transitions
+              >{{ "线路" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 3"
+              type="primary"
+              disable-transitions
+              >{{ "民宿" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 4"
+              type="primary"
+              disable-transitions
+              >{{ "农家乐" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 5"
+              type="primary"
+              disable-transitions
+              >{{ "民俗文化" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 6"
+              type="primary"
+              disable-transitions
+              >{{ "美食" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 7"
+              type="primary"
+              disable-transitions
+              >{{ "特产" }}</el-tag
+            >
+            <el-tag
+              v-if="scope.row.type == 8"
+              type="primary"
+              disable-transitions
+              >{{ "文化场馆" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column label="审核" align="center" show-overflow-tooltip>
@@ -138,16 +173,16 @@
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

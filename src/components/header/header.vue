@@ -72,7 +72,11 @@
             </el-dropdown-menu>
           </el-dropdown>
           <!-- 对话框 -->
-          <el-dialog title="修改密码" :visible.sync="dialogPassword" :modal-append-to-body='false'>
+          <el-dialog
+            title="修改密码"
+            :visible.sync="dialogPassword"
+            :modal-append-to-body="false"
+          >
             <div class="demo-input-suffix">
               新密码：
               <el-input
@@ -110,6 +114,7 @@ export default {
     return {
       dialogPassword: false,
       passwordParams: {
+        userId: this.$store.state.user.userInfo.userId,
         newpass1: "",
         newpass2: "",
       },
@@ -133,12 +138,8 @@ export default {
     },
     ...mapState({
       isCollapse: "isCollapse",
-      userInfo: "userInfo"
     }),
   },
-  // created(){
-  //   console.log(this.userInfo)
-  // },
   methods: {
     ...mapMutations({
       updataCollapse: "UPDATA_COLLAPSE",
@@ -149,13 +150,14 @@ export default {
     // 修改密码
     changePassword() {
       console.log(1);
-      this.dialogPassword= !this.dialogPassword;
+      this.dialogPassword = !this.dialogPassword;
     },
-        confirmPassword: function () {
+    confirmPassword: function () {
       api.changePassword(this.passwordParams).then((result) => {
         alert(result.msg);
       });
       this.dialogPassword = false;
+      this.logoutFun()
     },
     //展开或缩放菜单
     openMenu: function () {

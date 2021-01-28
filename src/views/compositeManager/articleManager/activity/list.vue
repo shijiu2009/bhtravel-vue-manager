@@ -5,37 +5,105 @@
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
-        <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" size="mini"
-          @click="delAllSelection">批量删除</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-delete"
+          class="handle-del mr10"
+          size="mini"
+          @click="delAllSelection"
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
-        <el-button type="primary" icon="el-icon-plus" class="handle-del mr10" size="mini"
-          @click="createOrEditBtn('')">添加</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          class="handle-del mr10"
+          size="mini"
+          @click="createOrEditBtn('')"
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
-      <el-table :data="activityList" border ref="multipleTable" style="width: 100%" v-loading="loading"
-        @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="title" label="名称" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" sortable align="center" show-overflow-tooltip></el-table-column>
-        
+      <el-table
+        :data="activityList"
+        border
+        ref="multipleTable"
+        style="width: 100%"
+        v-loading="loading"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="title"
+          label="名称"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+
         <el-table-column fixed="right" label="操作" width="150">
           <div slot-scope="scope">
-            <el-button type="primary" round icon="el-icon-edit" circle size="small" title="编辑"
-              @click="createOrEditBtn(scope.row.id)"></el-button>
-            <el-button type="success" round icon="el-icon-eleme" circle size="small" title="查看"
-              @click="detailed(scope.$index)"></el-button>
-            <el-button type="danger" round icon="el-icon-delete" circle size="small" title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"></el-button>
+            <el-button
+              type="primary"
+              round
+              icon="el-icon-edit"
+              circle
+              size="small"
+              title="编辑"
+              @click="createOrEditBtn(scope.row.id)"
+            ></el-button>
+            <el-button
+              type="success"
+              round
+              icon="el-icon-eleme"
+              circle
+              size="small"
+              title="查看"
+              @click="detailed(scope.$index)"
+            ></el-button>
+            <el-button
+              type="danger"
+              round
+              icon="el-icon-delete"
+              circle
+              size="small"
+              title="删除"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
+            ></el-button>
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination background layout="total, prev, pager, next,jumper" :page-size="page.rows"
-          :total="page.totalCount" @current-change="handlePageChange"></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
     <Detailed :content="activityDetailed" ref="detailedMound"></Detailed>
   </div>
@@ -50,7 +118,7 @@ export default {
   name: "activityList",
   components: {
     Detailed,
-    Screen
+    Screen,
   },
   data() {
     return {
@@ -198,7 +266,7 @@ export default {
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-       this.handleSearch(this.searchDate);
+      this.handleSearch(this.searchDate);
     },
   },
   created() {

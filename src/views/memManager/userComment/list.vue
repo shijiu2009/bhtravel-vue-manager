@@ -14,7 +14,13 @@
         </div>
         <!-- 可选择下拉搜索 -->
         <div class="searChfactor">
-          <el-select size="mini" v-model="queryInfo.job" clearable filterable placeholder="评论对象类别">
+          <el-select
+            size="mini"
+            v-model="queryInfo.job"
+            clearable
+            filterable
+            placeholder="评论对象类别"
+          >
             <el-option
               size="mini"
               v-for="item in ctypeList"
@@ -44,7 +50,8 @@
           size="mini"
           icon="el-icon-search"
           @click="handleSearch"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </div>
       <!-- 操作按钮 -->
       <div class="operation">
@@ -56,7 +63,8 @@
           size="mini"
           v-role="'4007004'"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -65,10 +73,11 @@
           size="mini"
           v-role="'4007002'"
           @click="createOrEditBtn(true)"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
-    <div>
+    <div class="data_list">
       <el-table
         :data="commentList"
         border
@@ -77,27 +86,76 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="objectName" sortable label="评论对象名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="userName" sortable label="评论人昵称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column label="评论对象类别" align="center" show-overflow-tooltip>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="objectName"
+          sortable
+          label="评论对象名称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="userName"
+          sortable
+          label="评论人昵称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          label="评论对象类别"
+          align="center"
+          show-overflow-tooltip
+        >
           <template slot-scope="scope">
-            <el-tag
-              type="primary"
-              disable-transitions
-            >{{scope.row.type=="0"?"酒店":scope.row.type=="1"?"景区":scope.row.type=="2"?"线路":"产品"}}</el-tag>
+            <el-tag type="primary" disable-transitions>{{
+              scope.row.type == "0"
+                ? "酒店"
+                : scope.row.type == "1"
+                ? "景区"
+                : scope.row.type == "2"
+                ? "线路"
+                : "产品"
+            }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="审核" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.reviewed=='1' ? 'success' : scope.row.reviewed=='0'?'erroe':'danger'"
+              :type="
+                scope.row.reviewed == '1'
+                  ? 'success'
+                  : scope.row.reviewed == '0'
+                  ? 'erroe'
+                  : 'danger'
+              "
               disable-transitions
-            >{{scope.row.reviewed=="0"?"未审核":scope.row.reviewed=="1"?"通过":"不通过"}}</el-tag>
+              >{{
+                scope.row.reviewed == "0"
+                  ? "未审核"
+                  : scope.row.reviewed == "1"
+                  ? "通过"
+                  : "不通过"
+              }}</el-tag
+            >
           </template>
         </el-table-column>
-        <el-table-column prop="content" label="内容" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          prop="content"
+          label="内容"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <div slot-scope="scope">
             <el-button
@@ -107,7 +165,7 @@
               circle
               size="small"
               title="编辑"
-              @click="createOrEditBtn(false,scope.row.id)"
+              @click="createOrEditBtn(false, scope.row.id)"
             ></el-button>
             <el-button
               type="danger"
@@ -121,16 +179,16 @@
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template> 
