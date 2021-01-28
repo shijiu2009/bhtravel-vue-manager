@@ -94,10 +94,13 @@
 }
 
 /* table表格样式 */
+/* 表格错位 */
+.el-table .th.gutter {
+    display: table-cell !important;
+}
+
 .flex-content>div:first-child {
-    height: calc(100% - 72px);
-    /* margin-bottom: 72px;
-    box-sizing: border-box; */
+    height: 100%
 }
 
 .flex-content>div:first-child>div:first-child {
@@ -105,19 +108,20 @@
 }
 
 .flex-content>div:first-child>div:first-child>div:first-child {
+    display: flex;
+    flex-direction: column;
     height: 100%
 }
-.data_list{
-  height: calc(100% - 76px);
-  overflow-y: auto;
+
+.data_list {
+    flex: 1;
 }
+
 .handle-box {
     margin-bottom: 10px;
     text-align: left;
 }
-/* .el-table{
-   height: 100%;
-} */
+
 /* .searChfactor {
     display: inline-block;
     margin: 0px 10px 10px 0 !important;
@@ -132,9 +136,10 @@
 }
 
 .pagination {
-    position: fixed;
+    position: sticky;
     bottom: 0px;
-    z-index: 99;
+    background-color: #EAF4F8;
+    z-index: 4;
     padding: 20px 0px;
     transition: all 0.5;
     animation: paginationShow 0.5s infinite;

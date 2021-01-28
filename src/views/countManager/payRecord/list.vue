@@ -1,82 +1,88 @@
 <template>
   <div>
-    <div class="handle-box">
-      <Screen :screenCondition="screenCondition"></Screen>
-    </div>
-    <div class="data_list">
-      <el-table
-        :data="themeList"
-        border
-        ref="multipleTable"
-        style="width: 100%"
-        v-loading="loading"
-        :max-height="this.$tableHeight"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column
-          type="index"
-          width="50"
-          align="center"
-          label="序号"
-          sortable
-        ></el-table-column>
-        <el-table-column
-          prop="apiCode"
-          label="公众号apiCode"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="orderNo"
-          label="商户订单号"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="fromUser"
-          label="支付账号"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="toUser"
-          label="接收账号"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="trade_no"
-          label="支付网关的订单号"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="totalPrice"
-          label="支付金额"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="记录生成时间"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
-          <template slot-scope="scope">
-            <el-button
-              type="success"
-              round
-              icon="el-icon-eleme"
-              circle
-              size="small"
-              title="详情"
-              @click="showBtn(scope.row.id)"
-            ></el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+    <div>
+      <div class="handle-box">
+        <Screen :screenCondition="screenCondition"></Screen>
+      </div>
+      <div class="data_list">
+        <el-table
+          :data="themeList"
+          border
+          ref="multipleTable"
+          style="width: 100%"
+          v-loading="loading"
+          :max-height="this.$tableHeight"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column
+            type="selection"
+            width="52"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            type="index"
+            width="50"
+            align="center"
+            label="序号"
+            sortable
+          ></el-table-column>
+          <el-table-column
+            prop="apiCode"
+            label="公众号apiCode"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="orderNo"
+            label="商户订单号"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="fromUser"
+            label="支付账号"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="toUser"
+            label="接收账号"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="trade_no"
+            label="支付网关的订单号"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="totalPrice"
+            label="支付金额"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            prop="createTime"
+            label="记录生成时间"
+            align="center"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column fixed="right" label="操作" width="150">
+            <template slot-scope="scope">
+              <el-button
+                type="success"
+                round
+                icon="el-icon-eleme"
+                circle
+                size="small"
+                title="详情"
+                @click="showBtn(scope.row.id)"
+              ></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
       <!-- 分页操作 -->
       <div class="pagination">
         <el-pagination
@@ -247,7 +253,7 @@ export default {
   activated() {
     //flow=true,则刷新界面
     // if (this.$route.params && this.$route.params.flow) {
-      this.getList();
+    this.getList();
     // }
   },
 };

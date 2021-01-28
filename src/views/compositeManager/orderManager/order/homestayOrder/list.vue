@@ -13,7 +13,11 @@
         :max-height="this.$tableHeight"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
         <el-table-column
           type="index"
           width="50"
@@ -65,34 +69,56 @@
         ></el-table-column>
         <el-table-column label="状态" width="80" align="center">
           <template slot-scope="scope">
-            <el-tag type="warning" v-if="scope.row.status == 1" disable-transitions
+            <el-tag
+              type="warning"
+              v-if="scope.row.status == 1"
+              disable-transitions
               >未付款</el-tag
             >
             <el-tag type="info" v-if="scope.row.status == 2" disable-transitions
               >已付款</el-tag
             >
-            <el-tag v-if="scope.row.status == 3" disable-transitions>已确认</el-tag>
-            <el-tag type="success" v-if="scope.row.status == 4" disable-transitions
+            <el-tag v-if="scope.row.status == 3" disable-transitions
+              >已确认</el-tag
+            >
+            <el-tag
+              type="success"
+              v-if="scope.row.status == 4"
+              disable-transitions
               >已完成</el-tag
             >
-            <el-tag type="danger" v-if="scope.row.status == -1" disable-transitions
+            <el-tag
+              type="danger"
+              v-if="scope.row.status == -1"
+              disable-transitions
               >已取消</el-tag
             >
           </template>
         </el-table-column>
         <el-table-column label="退款状态" width="80" align="center">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.refund == 0" disable-transitions>正常</el-tag>
-            <el-tag type="success" v-if="scope.row.refund == 1" disable-transitions
+            <el-tag v-if="scope.row.refund == 0" disable-transitions
+              >正常</el-tag
+            >
+            <el-tag
+              type="success"
+              v-if="scope.row.refund == 1"
+              disable-transitions
               >申请中</el-tag
             >
             <el-tag type="info" v-if="scope.row.refund == 2" disable-transitions
               >退款中</el-tag
             >
-            <el-tag type="warning" v-if="scope.row.refund == 3" disable-transitions
+            <el-tag
+              type="warning"
+              v-if="scope.row.refund == 3"
+              disable-transitions
               >已退款</el-tag
             >
-            <el-tag type="danger" v-if="scope.row.refund == -1" disable-transitions
+            <el-tag
+              type="danger"
+              v-if="scope.row.refund == -1"
+              disable-transitions
               >已取消</el-tag
             >
           </template>
@@ -126,16 +152,16 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>

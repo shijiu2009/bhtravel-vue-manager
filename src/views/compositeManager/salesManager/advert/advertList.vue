@@ -135,7 +135,8 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
+    </div>
+          <!-- 分页操作 -->
       <div class="pagination">
         <el-pagination
           background
@@ -145,7 +146,6 @@
           @current-change="handlePageChange"
         ></el-pagination>
       </div>
-    </div>
   </div>
 </template>
 

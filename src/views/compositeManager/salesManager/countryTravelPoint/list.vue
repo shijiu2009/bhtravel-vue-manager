@@ -10,7 +10,8 @@
           class="handle-del mr10"
           size="mini"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -18,7 +19,8 @@
           class="handle-del mr10"
           size="mini"
           @click="editLinkBtn('')"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -26,15 +28,42 @@
         :data="countryTravelPointList"
         border
         ref="multipleTable"
-        style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="100" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="title" label="标题" width="150" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="ctName" label="所属农家乐" width="200" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="sort" label="排序" width="150" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="selection"
+          width="100"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="100"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="title"
+          label="标题"
+          width="auto"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="ctName"
+          label="所属农家乐"
+          width="auto"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="sort"
+          label="排序"
+          width="150"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <!-- <el-table-column label="二维码图片" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <el-image
@@ -46,14 +75,15 @@
           </template>
         </el-table-column> -->
         <el-table-column label="是否显示" width="100" align="center">
-          <template slot-scope="scope" >
+          <template slot-scope="scope">
             <el-tag
-              :type="scope.row.recommend=='1' ? 'success' : 'primary'"
+              :type="scope.row.recommend == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.recommend=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.recommend == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
-        <el-table-column  label="操作" width="200">
+        <el-table-column label="操作" width="200">
           <template slot-scope="scope">
             <el-button
               type="primary"
@@ -71,21 +101,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -208,9 +240,9 @@ export default {
           });
         });
     },
-   //编辑数据
+    //编辑数据
     editLinkBtn: function (id) {
-       //判断是添加还是编辑
+      //判断是添加还是编辑
       let name = "addCountryTravelPoint";
       if (id) {
         name = "editCountryTravelPoint";

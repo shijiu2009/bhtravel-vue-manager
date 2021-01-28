@@ -34,9 +34,14 @@
         :max-height="this.$tableHeight"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column
-          type="index" :index="indexMethod"
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          :index="indexMethod"
           width="50"
           align="center"
           label="序号"
@@ -96,21 +101,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index, scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -122,7 +129,7 @@ import Screen from "@/components/screen/screen.vue";
 export default {
   name: "peripheryList",
   components: {
-    Screen
+    Screen,
   },
   data() {
     return {
@@ -208,9 +215,9 @@ export default {
     };
   },
   methods: {
-    indexMethod(index){
+    indexMethod(index) {
       //当前页码值*10  加当前索引+1 则为当前列表序号，承接前页索引
-      return(this.page.page-1)*10 +index+1;
+      return (this.page.page - 1) * 10 + index + 1;
     },
     ...mapMutations({
       setTagsList: "SET_TAGSLIST",

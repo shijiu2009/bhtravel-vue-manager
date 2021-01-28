@@ -11,7 +11,8 @@
           class="handle-del mr10"
           size="mini"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -19,7 +20,8 @@
           class="handle-del mr10"
           size="mini"
           @click="editLinkBtn(true)"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -31,26 +33,59 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="address" label="地址" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="opening" label="开放时间" align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="创建时间" align="center" show-overflow-tooltip sortable></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="name"
+          label="名称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="address"
+          label="地址"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="opening"
+          label="开放时间"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          align="center"
+          show-overflow-tooltip
+          sortable
+        ></el-table-column>
         <el-table-column label="开放预定">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.isOpen=='1' ? 'success' : 'primary'"
+              :type="scope.row.isOpen == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.isCheck=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.isCheck == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column label="是否上架">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.down=='0' ? 'success' : 'primary'"
+              :type="scope.row.down == '0' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.down=="0"?"是":"否"}}</el-tag>
+              >{{ scope.row.down == "0" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -62,7 +97,7 @@
               circle
               size="small"
               title="编辑"
-              @click="editLinkBtn(false,scope.row.id)"
+              @click="editLinkBtn(false, scope.row.id)"
             ></el-button>
             <!-- <el-button
               type="success"
@@ -80,21 +115,23 @@
               circle
               size="small"
               title="删除"
-              @click.native.prevent="openDeleteWarning(scope.$index,scope.row.id)"
+              @click.native.prevent="
+                openDeleteWarning(scope.$index, scope.row.id)
+              "
             ></el-button>
           </div>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
     <Detailed :content="countryTravelDetailed" ref="detailedMound"></Detailed>
   </div>
@@ -109,7 +146,7 @@ export default {
   name: "countryTravelList",
   components: {
     Detailed,
-    Screen
+    Screen,
   },
   data() {
     return {
@@ -117,7 +154,7 @@ export default {
       loading: true,
       countryTravelList: [],
       countryTravelDetailed: "",
-       //搜索栏数据
+      //搜索栏数据
       screenCondition: {
         input: [
           {
@@ -277,7 +314,7 @@ export default {
     },
     //编辑数据
     editLinkBtn: function (flow, id) {
-       //判断是添加还是编辑
+      //判断是添加还是编辑
       let name = "addCountryTravel";
       if (id) {
         name = "editCountryTravel";

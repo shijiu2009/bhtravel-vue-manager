@@ -112,16 +112,16 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -134,7 +134,7 @@ export default {
   name: "atlasList",
   data() {
     return {
-      index:0,
+      index: 0,
       //加载
       loading: true,
       atlasList: [],
@@ -285,9 +285,8 @@ export default {
     },
     //点击分页按钮
     handlePageChange: function (index) {
-
       this.page.page = index;
-      this.index = (this.page.page - 1 )* this.page.rows
+      this.index = (this.page.page - 1) * this.page.rows;
       this.getAtlas();
     },
   },
@@ -305,9 +304,9 @@ export default {
 </script>
 
 <style scoped>
-.data_list {
+/* .data_list {
   z-index: -1;
-}
+} */
 .data_list >>> .cell_face.el-image {
   border-radius: 0%;
 }
@@ -317,12 +316,5 @@ export default {
   align-items: center;
   height: 50px;
   width: 50px;
-}
-.pagination {
-  position: sticky;
-  bottom: 0px;
-  background-color: #fff;
-  z-index: 99;
-  padding: 10px 0px;
 }
 </style>

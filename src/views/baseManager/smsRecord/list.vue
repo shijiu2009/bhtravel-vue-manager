@@ -32,7 +32,8 @@
           size="mini"
           icon="el-icon-search"
           @click="handleSearch"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -44,24 +45,64 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="phone" label="手机号" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="ip" label="请求IP" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="message" label="发送状态" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="validates" label="验证码" sortable align="center" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createTime" label="请求时间" sortable align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="phone"
+          label="手机号"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="ip"
+          label="请求IP"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="message"
+          label="发送状态"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="validates"
+          label="验证码"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="请求时间"
+          sortable
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    </div>
+    <!-- 分页 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
     </div>
     <Detailed :content="smsRecordDetailed" ref="detailedMound"></Detailed>
   </div>
