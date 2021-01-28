@@ -33,7 +33,6 @@
         v-loading="loading"
         @selection-change="handleSelectionChange"
         class="adjustTable"
-        :max-height="this.$tableHeight"
       >
         <!-- 固定参数 -->
         <el-table-column

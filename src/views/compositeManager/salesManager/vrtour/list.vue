@@ -31,7 +31,6 @@
         :max-height="this.$tableHeight"
         style="width: 100%"
         v-loading="loading"
-        :max-height="this.$tableHeight"
         @selection-change="handleSelectionChange"
       >
         <el-table-column
