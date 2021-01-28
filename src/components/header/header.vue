@@ -1,3 +1,4 @@
+
 <template>
   <div class="header">
     <div class="openMenu">
@@ -48,7 +49,8 @@
             >
               <router-link to="/">
                 <i class="el-icon-bell" style="color: #fff"></i>
-                <span style="font-size: 14px; color: #fff; margin-left: -6px"
+                <span style="font-size: 14px; color: #fff; margin-left: -6px; 
+                margin-right:8px"
                   >消息</span
                 >
               </router-link>
@@ -58,10 +60,10 @@
           <!-- 用户头像及下拉菜单 -->
           <el-dropdown
             class="user-avator"
-            trigger="click"
+            trigger="hover"
             @command="handleCommand"
           >
-            <img :src="userimage" alt="" />
+            <img class="user-rightimg" :src="userimage" alt="" />
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="changePassword"
                 >修改密码</el-dropdown-item
@@ -80,14 +82,14 @@
       :visible.sync="dialogPassword"
       :modal-append-to-body="false"
     >
-     <el-form ref="form" :model="passwordParams" label-width="auto">
-          <el-form-item label="新密码：">
-            <el-input v-model="passwordParams.newpass1" show-password></el-input>
-          </el-form-item>
-          <el-form-item label="再次输入新密码：">
-            <el-input v-model="passwordParams.newpass2" show-password></el-input>
-          </el-form-item>
-     </el-form>
+      <el-form ref="form" :model="passwordParams" label-width="auto">
+        <el-form-item label="新密码：">
+          <el-input v-model="passwordParams.newpass1" show-password></el-input>
+        </el-form-item>
+        <el-form-item label="再次输入新密码：">
+          <el-input v-model="passwordParams.newpass2" show-password></el-input>
+        </el-form-item>
+      </el-form>
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
         <el-button type="primary" @click="confirmPassword">确 定</el-button>
@@ -100,7 +102,6 @@
 import { mapState, mapMutations, mapActions } from "vuex";
 import api from "@/api/systemManager/user.js";
 import store from "@/store/modules/user.js";
-
 export default {
   data() {
     return {
@@ -310,6 +311,11 @@ export default {
 .user-name {
   cursor: pointer;
 }
+.user-rightimg{
+  cursor: pointer;
+  padding: 1px;
+  background: #5072F2;
+}
 .user-name .el-dropdown-link {
   font-size: 12px;
 }
@@ -320,7 +326,7 @@ export default {
   transform: translate(-2px, -2 px);
 }
 /* 表单行高 */
-.header >>> .el-form-item__content{
+.header >>> .el-form-item__content {
   line-height: 70px !important;
 }
 </style>
