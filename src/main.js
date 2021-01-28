@@ -49,7 +49,7 @@ Vue.prototype.$http = axios
 Vue.prototype.bus = new Vue();
 Vue.config.productionTip = false
 //获取表单高度
-Vue.prototype.$tableHeight = store.state.tableHeight;
+Vue.prototype.$tableHeight = store.getters.getHeight;
 
 Vue.use(ElementUI);
 Vue.use(BaiduMap, {

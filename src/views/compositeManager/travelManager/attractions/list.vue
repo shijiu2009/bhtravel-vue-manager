@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      <Screen :screenCondition="screenCondition"></Screen>
+      <Screen :screenCondition="screenCondition" ref="Screen"></Screen>
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -152,6 +152,7 @@ export default {
   },
   data() {
     return {
+      tableHeight: 0,
       //是否显示加载动画效果
       loading: true,
       attractionsList: [],
@@ -231,6 +232,12 @@ export default {
       multipleSelection: [],
     };
   },
+  // mounted(){
+  //   this.$nextTick(()=>{
+  //     console.log(this.$refs.Screen)
+  //     this.tableHeight = window.innerHeight - this.$refs.multipleTable.$el.offsetTop - this.$refs.Screen.$el.scrollHeight - 140
+  //   })
+  // },
   methods: {
     ...mapMutations({
       setTagsList: "SET_TAGSLIST",

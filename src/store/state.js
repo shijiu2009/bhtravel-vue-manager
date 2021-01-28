@@ -41,9 +41,9 @@ export default {
             ],
         },
     },
+    tagsHeight: 0,
     //tags高度
     get tableHeight() {
-        console.log(window.innerHeight)
         return (window.innerHeight - 57 - 195)
     },
     //分页数据
