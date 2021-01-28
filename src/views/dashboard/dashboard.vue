@@ -58,7 +58,7 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="min-height:820px;height:100%;">
+      <el-col :span="18" style="min-height:820px;height: calc(100% - 24px);">
          <el-row :gutter="20" class="mgb20"> 
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{padding: '20px'}">
