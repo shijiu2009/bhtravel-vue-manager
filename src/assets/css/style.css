@@ -95,10 +95,14 @@
 
 /* table表格样式 */
 /* 表格错位 */
-.el-table .th.gutter {
+body .el-table th.gutter {
     display: table-cell !important;
 }
 
+body .el-table colgroup.gutter {
+    display: table-cell !important;
+}
+/* 内容铺满 */
 .flex-content>div:first-child {
     height: 100%
 }

@@ -1,62 +1,67 @@
 <template>
   <div class="login">
-    <div class="login-box">
-      <div class="login_top">
-        <div class="logo">
-          <img src="../../../static/images/login-left.png" alt />
-
+    <div class="content">
+      <div class="login-box">
+        <div class="login_top">
+          <div class="logo">
+            <img src="../../../static/images/login-left.png" alt />
+          </div>
+          <div class="min-logo">
+            <img
+              src="../../../static/images/login-logo.png"
+              alt=""
+              style="width: 100%"
+            />
+          </div>
         </div>
-        <div class="min-logo">
-          <img src="../../../static/images/login-logo.png" alt="" style="width:100%">
-        </div>
-      </div>
-      <div class="login-right">
-        <div class="login_form">
-          <div class="login_icon">北海智慧旅游</div>
-          <el-form
-            ref="form"
-            :model="userInfo"
-            class="login_box"
-            @keyup.enter.native="onSubmit"
-          >
-            <el-form-item>
-              <el-input
-                class="username"
-                placeholder="请输入用户名"
-                prefix-icon="el-icon-user-solid"
-                v-model="userInfo.username"
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-input
-                placeholder="请输入密码"
-                show-password
-                class="password"
-                prefix-icon="el-icon-key"
-                v-model="userInfo.password"
-              ></el-input>
-            </el-form-item>
-            <el-form-item class="code">
-              <el-input
-                v-model="userInfo.xcode"
-                placeholder="请输入验证"
-              ></el-input>
-              <div class="code_img" @click="updateCodeImg">
-                <img :src="codeImg" alt />
-              </div>
-            </el-form-item>
-            <el-form-item>
-              <el-button class="onSubmit" @click="onSubmit">
-                <span>登录</span>
-              </el-button>
-            </el-form-item>
-          </el-form>
+        <div class="login-right">
+          <div class="login_form">
+            <div class="login_icon">北海智慧旅游</div>
+            <el-form
+              ref="form"
+              :model="userInfo"
+              class="login_box"
+              @keyup.enter.native="onSubmit"
+            >
+              <el-form-item>
+                <el-input
+                  class="username"
+                  placeholder="请输入用户名"
+                  prefix-icon="el-icon-user-solid"
+                  v-model="userInfo.username"
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input
+                  placeholder="请输入密码"
+                  show-password
+                  class="password"
+                  prefix-icon="el-icon-key"
+                  v-model="userInfo.password"
+                ></el-input>
+              </el-form-item>
+              <el-form-item class="code">
+                <el-input
+                  v-model="userInfo.xcode"
+                  placeholder="请输入验证"
+                ></el-input>
+                <div class="code_img" @click="updateCodeImg">
+                  <img :src="codeImg" alt />
+                </div>
+              </el-form-item>
+              <el-form-item>
+                <el-button class="onSubmit" @click="onSubmit">
+                  <span>登录</span>
+                </el-button>
+              </el-form-item>
+            </el-form>
+          </div>
         </div>
       </div>
     </div>
-    <div class="cloth">
+    <!-- <div class="cloth">
       <img :src="clothUrl" alt />
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -151,30 +156,63 @@ export default {
 </script>
 <style scoped>
 .login {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-color: #b8e5f8;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: url("../../../static/images/login_bg.jpg");
 }
-.login >>> .el-input__icon{
+.content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 2px;
+  min-height: 688px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.login >>> .el-input__icon {
   display: flex;
   align-items: center;
   height: 100%;
 }
 .login-box {
   display: flex;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 1252px;
-  height: 670px;
+  width: 1013px;
+  min-width: 0px;
+  height: 513px;
   background: #ffffff;
   box-shadow: 0px 35px 80px 0px rgba(55, 127, 177, 0.24);
   border-radius: 2px;
 }
 .login_top {
   position: relative;
-  width: 519px;
+  width: 417px;
   height: 100%;
   overflow: hidden;
 }
@@ -195,11 +233,11 @@ export default {
   margin-left: 20px;
   color: #fff;
 }
-.min-logo{
+.min-logo {
   position: absolute;
-  left: 47px;
-  top: 39px;
-  width: 146px;
+  left: 18px;
+  top: 24px;
+  width: 89px;
 }
 .cloth {
   position: absolute;
@@ -217,25 +255,24 @@ export default {
 .login_form {
   width: 100%;
   height: 100%;
-  padding: 88px 140px 140px 120px;
+  padding: 67px 106px 104px 104px;
   box-sizing: border-box;
   background-color: #fff;
 }
 .login_icon {
   text-align: center;
   margin-bottom: 32px;
-  font-size: 56px;
-  line-height: 1;
+  font-size: 44px;
   font-family: SourceHanSansCN;
-  font-weight: 800;
+  font-weight: bold;
   color: #2984b8;
+  line-height: 28px;
 }
 .login_icon i {
   font-size: 50px;
   color: #3bb6d2;
 }
 .login_box {
-  padding: 20px 30px;
   box-sizing: border-box;
 }
 .login_box .el-form-item {
@@ -258,7 +295,7 @@ export default {
 .username,
 .password,
 .code {
-  font-size: 24px;
+  font-size: 16px;
   font-family: SourceHanSansCN;
   font-weight: 400;
 }
@@ -267,10 +304,9 @@ export default {
   align-items: center;
 }
 .username >>> .el-input__inner {
-  width: 460px;
-  height: 59px;
-
-  border: 1px solid #a0a0a0;
+  width: 386px;
+  height: 44px;
+  border: 1px solid #1aa3dc;
   border-radius: 2px;
 }
 .username >>> .el-input__inner:hover {
@@ -281,9 +317,8 @@ export default {
   color: #1ba4dd;
 }
 .password >>> .el-input__inner {
-  width: 460px;
-  height: 59px;
-
+  width: 386px;
+  height: 44px;
   border: 1px solid #a0a0a0;
   border-radius: 2px;
 }
@@ -295,8 +330,8 @@ export default {
   color: #1ba4dd;
 }
 .code >>> .el-input {
-  width: 270px;
-  height: 59px;
+  width: 225px;
+  height: 44px;
   margin-right: 34px;
 }
 .code >>> .el-input__inner {
@@ -313,15 +348,11 @@ export default {
   color: #1ba4dd;
 }
 .login-box .code {
-  margin-bottom: 57px;
+  margin-bottom: 38px;
 }
 .onSubmit {
-  width: 460px;
-  height: 59px;
-  font-size: 24px;
-  font-family: SourceHanSansCN;
-  font-weight: 400;
-  color: #ffffff;
+  width: 386px;
+  height: 45px;
   background: linear-gradient(176deg, #43c9fb, #18a2db);
   box-shadow: 0px 10px 20px 0px rgba(33, 160, 197, 0.24);
   border-radius: 4px;

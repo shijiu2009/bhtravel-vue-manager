@@ -104,12 +104,10 @@ export default {
   width: auto;
   position: relative;
   padding: 6px 10px 0px 20px;
-  /* margin-bottom: 72px; */
-  overflow-y: scroll;
+  overflow: scroll;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 500px;
-  /* height: calc(100% - 30px); */
 }
 
 .isCollapse {
