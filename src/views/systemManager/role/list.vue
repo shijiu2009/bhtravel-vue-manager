@@ -29,6 +29,7 @@
         :data="roleList"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         v-loading="loading"
         @selection-change="handleSelectionChange"
         class="adjustTable"

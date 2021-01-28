@@ -141,11 +141,15 @@ export default {
           this.$router.push({ path: "/" });
         })
         .catch((err) => {
+           this.$loading.hide(); // 关闭loading
           //清空密码和重新生成状态码
           this.userInfo.password = "";
           this.updateCodeImg();
-          this.$message.error(err.msg);
-          this.$loading.hide(); // 关闭loading
+          if(err.msg==null || err.msg==""){
+            this.$message.error("用户名或密码错误")
+          }else{
+            this.$message.error(err.msg);
+          }
         });
     },
   },
