@@ -16,6 +16,8 @@
           <div class="user-info">
             <div class="user-avator">
               <img :src="userimage" class="user-image" alt />
+              <div class="pulse"></div>
+              <div class="pulse2"></div>
             </div>
             <div class="user-info-cont">
               <div class="user-info-name">
@@ -503,19 +505,27 @@ export default {
 }
 
 .user-avator {
-  margin: 10px 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #e7f7ff;
+  /* margin: 10px 0; */
+  width: 130px;
+  height: 130px;
+  /* border-radius: 50%; */
+  /* background: #e7f7ff; */
   padding: 10px;
   overflow: hidden;
+  /* background: red; */
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  position: relative;
 }
 .user-image {
-  width: 100%;
-  height: 100%;
+  margin-top: 5px;
+  width: 120px;
+  height: 120px;
   overflow: hidden;
   border-radius: 50%;
+  z-index: 2;
+  background: #C7C7C7;
 }
 /* .user-info-name{
   background: red;
@@ -526,6 +536,82 @@ export default {
   font-size: 14px;
   color: #999;
 }
+
+/* 保持大小不变的小圆圈  */
+/* 产生动画（向外扩散变大）的圆圈  */
+.pulse {
+    position: absolute;
+    width: 120px; 
+    height: 120px;
+    left: 3px;
+    top: 3px;
+    border: 12px solid red;
+    -webkit-border-radius:  50%;
+    -moz-border-radius:  50%;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    -webkit-animation: warn 3s ease-out;
+    -moz-animation: warn 3s ease-out;
+    animation: warn 3s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+.pulse2{
+ position: absolute;
+    width: 120px; 
+    height: 120px;
+    left: 3px;
+    top: 3px;
+    border: 12px solid #e7f7ff;
+    background:  #e7f7ff;
+    border-radius: 50%;
+}
+@keyframes warn {
+  /* 0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(0.1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  } */
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(0.1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+
 .user-root {
   width: 88px;
   height: 30px;

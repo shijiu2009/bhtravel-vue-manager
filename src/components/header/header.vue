@@ -49,7 +49,8 @@
             >
               <router-link to="/">
                 <i class="el-icon-bell" style="color: #fff"></i>
-                <span style="font-size: 14px; color: #fff; margin-left: -6px"
+                <span style="font-size: 14px; color: #fff; margin-left: -6px; 
+                margin-right:8px"
                   >消息</span
                 >
               </router-link>
@@ -59,10 +60,10 @@
           <!-- 用户头像及下拉菜单 -->
           <el-dropdown
             class="user-avator"
-            trigger="click"
+            trigger="hover"
             @command="handleCommand"
           >
-            <img :src="userimage" alt="" />
+            <img class="user-rightimg" :src="userimage" alt="" />
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="changePassword"
                 >修改密码</el-dropdown-item
@@ -309,6 +310,11 @@ export default {
 }
 .user-name {
   cursor: pointer;
+}
+.user-rightimg{
+  cursor: pointer;
+  padding: 1px;
+  background: #5072F2;
 }
 .user-name .el-dropdown-link {
   font-size: 12px;
