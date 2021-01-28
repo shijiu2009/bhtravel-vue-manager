@@ -9,8 +9,8 @@
           style="
             max-width: 480px;
             min-width: 250px;
-            min-height: 820px;
-            height: 100%;
+            min-height: 832px;
+            height: calc(100% + 2px);
           "
         >
           <div class="user-info">
@@ -77,7 +77,7 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="min-height: 820px; height: calc(100% - 24px)">
+      <el-col :span="18" style="min-height: 830px; height: 100%">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '20px' }">
@@ -128,11 +128,46 @@
 
         <el-card shadow="hover" style="height: calc(100% - 160px)">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane :label="`景区 ${topnumData.ticketOrderCounts ? '(' + topnumData.ticketOrderCounts  + ')': ''}`" name="first"></el-tab-pane>
-            <el-tab-pane :label="`酒店 ${topnumData.hotelOrderCounts ? ' (' + topnumData.hotelOrderCounts +  ')' : ''}`" name="second"></el-tab-pane>
-            <el-tab-pane :label="`民宿 ${topnumData.homestayOrderCounts ? ' ('+ topnumData.homestayOrderCounts  + ')' : ''}`" name="third"></el-tab-pane>
-            <el-tab-pane :label="`乡村旅游 ${topnumData.peripheryTravelViews ? ' (' + topnumData.peripheryTravelViews  + ')' : ''}`" name="fourth"></el-tab-pane>
-            <el-tab-pane :label="`路线 ${topnumData.peripheryTravelOrderCounts ? ' (' + topnumData.peripheryTravelOrderCounts  + ')' : ''}`" name="five"></el-tab-pane>
+            <el-tab-pane
+              :label="`景区 ${
+                topnumData.ticketOrderCounts
+                  ? '(' + topnumData.ticketOrderCounts + ')'
+                  : ''
+              }`"
+              name="first"
+            ></el-tab-pane>
+            <el-tab-pane
+              :label="`酒店 ${
+                topnumData.hotelOrderCounts
+                  ? ' (' + topnumData.hotelOrderCounts + ')'
+                  : ''
+              }`"
+              name="second"
+            ></el-tab-pane>
+            <el-tab-pane
+              :label="`民宿 ${
+                topnumData.homestayOrderCounts
+                  ? ' (' + topnumData.homestayOrderCounts + ')'
+                  : ''
+              }`"
+              name="third"
+            ></el-tab-pane>
+            <el-tab-pane
+              :label="`乡村旅游 ${
+                topnumData.peripheryTravelViews
+                  ? ' (' + topnumData.peripheryTravelViews + ')'
+                  : ''
+              }`"
+              name="fourth"
+            ></el-tab-pane>
+            <el-tab-pane
+              :label="`路线 ${
+                topnumData.peripheryTravelOrderCounts
+                  ? ' (' + topnumData.peripheryTravelOrderCounts + ')'
+                  : ''
+              }`"
+              name="five"
+            ></el-tab-pane>
             <!-- <el-tab-pane label="景区" name="first"></el-tab-pane>
             <el-tab-pane label="酒店" name="second"></el-tab-pane>
             <el-tab-pane label="民宿" name="third"></el-tab-pane>
@@ -159,11 +194,31 @@
 
             <el-table-column :label="tabNameArr[tabIndex]">
               <template slot-scope="scope">
-                <span v-if="tabIndex == 0 || tabIndex == 3"><span  v-for="(item,index) in scope.row.items" :key="index">
-                  {{ index > 0 ? '、' + item.ticketName ? item.ticketName : item.projectName : item.ticketName ? item.ticketName : item.projectName }}
-                </span></span>
-                <span v-if="tabIndex == 1 || tabIndex == 2 ">{{scope.row.roomName}}</span>
-                <span v-if="tabIndex == 4"><span  v-for="(item,index) in scope.row.subOrders" :key="index">{{ index > 0 ? '、' + item.psubTitle : item.psubTitle }}</span></span>
+                <span v-if="tabIndex == 0 || tabIndex == 3"
+                  ><span v-for="(item, index) in scope.row.items" :key="index">
+                    {{
+                      index > 0
+                        ? "、" + item.ticketName
+                          ? item.ticketName
+                          : item.projectName
+                        : item.ticketName
+                        ? item.ticketName
+                        : item.projectName
+                    }}
+                  </span></span
+                >
+                <span v-if="tabIndex == 1 || tabIndex == 2">{{
+                  scope.row.roomName
+                }}</span>
+                <span v-if="tabIndex == 4"
+                  ><span
+                    v-for="(item, index) in scope.row.subOrders"
+                    :key="index"
+                    >{{
+                      index > 0 ? "、" + item.psubTitle : item.psubTitle
+                    }}</span
+                  ></span
+                >
               </template>
             </el-table-column>
 
@@ -208,8 +263,8 @@ export default {
     return {
       loading: true,
       store: store,
-      tabIndex:0,//表格index
-      tabNameArr:['门票','房型','房型','门票','价格'],//第二列的表头名称
+      tabIndex: 0, //表格index
+      tabNameArr: ["门票", "房型", "房型", "门票", "价格"], //第二列的表头名称
       userimage:
         "https://travel.gxucreate.com/travelbh" + store.state.userInfo.avatar, //用户头像
       activeName: "first", //默认选择项
@@ -349,17 +404,10 @@ export default {
     handleClick(tab) {
       // console.log(tab.index);
       if (this.tabIndex == tab.index) {
-        return
+        return;
       }
-      this.tabIndex = tab.index
+      this.tabIndex = tab.index;
       this.getdata(this.urlarr[tab.index]);
-    },
-    //表格
-    handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
     },
     changeDate() {
       const now = new Date().getTime();

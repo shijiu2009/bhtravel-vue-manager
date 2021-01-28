@@ -4,6 +4,7 @@
       <div>
         <el-button type="success" size="small" class="confirmBtn" @click="confirmBtn">确定</el-button>
         <el-table :data="purViewList.slice((page.page-1)*page.rows,page.page*page.rows)" border ref="multipleTable"
+        :max-height="this.$tableHeight"
           v-loading="loading" highlight-current-row @row-click="rowClick">
           <el-table-column width="60" align="center">
             <template slot-scope="scope">

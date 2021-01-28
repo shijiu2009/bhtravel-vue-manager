@@ -29,6 +29,7 @@
         :data="list"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"

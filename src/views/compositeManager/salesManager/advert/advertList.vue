@@ -14,7 +14,13 @@
         </div>
         <!-- 可选择下拉搜索 -->
         <div class="searChfactor">
-          <el-select size="mini" v-model="queryInfo.job" clearable filterable placeholder="所处位置">
+          <el-select
+            size="mini"
+            v-model="queryInfo.job"
+            clearable
+            filterable
+            placeholder="所处位置"
+          >
             <el-option
               size="mini"
               v-for="item in loctions.options"
@@ -44,7 +50,8 @@
           size="mini"
           icon="el-icon-search"
           @click="handleSearch"
-        >搜索</el-button>
+          >搜索</el-button
+        >
       </div>
       <!-- 操作按钮 -->
       <div class="operation">
@@ -56,7 +63,8 @@
           size="mini"
           v-role="'4006014'"
           @click="delAllSelection"
-        >批量删除</el-button>
+          >批量删除</el-button
+        >
         <!-- 添加按钮 -->
         <el-button
           type="primary"
@@ -65,7 +73,8 @@
           size="mini"
           v-role="'4006012'"
           @click="createOrEditBtn(true)"
-        >添加</el-button>
+          >添加</el-button
+        >
       </div>
     </div>
     <div class="data_list">
@@ -73,20 +82,35 @@
         :data="advertList"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         style="width: 100%"
         v-loading="loading"
-        
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="52" align="center"></el-table-column>
-        <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>
-        <el-table-column prop="name" label="名称" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column
+          type="selection"
+          width="52"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          type="index"
+          width="50"
+          align="center"
+          label="序号"
+          sortable
+        ></el-table-column>
+        <el-table-column
+          prop="name"
+          label="名称"
+          align="center"
+          show-overflow-tooltip
+        ></el-table-column>
         <el-table-column label="图片" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <el-image
               v-if="scope.row.path"
               class="table-td-thumb cell_face"
-              :src="url+scope.row.path"
+              :src="url + scope.row.path"
               :preview-src-list="[scope.row.path]"
             ></el-image>
           </template>
@@ -99,17 +123,19 @@
         <el-table-column label="是否显示">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.isShow=='1' ? 'success' : 'primary'"
+              :type="scope.row.isShow == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.isShow=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.isShow == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column label="是否排序">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.sort=='1' ? 'success' : 'primary'"
+              :type="scope.row.sort == '1' ? 'success' : 'primary'"
               disable-transitions
-            >{{scope.row.sort=="1"?"是":"否"}}</el-tag>
+              >{{ scope.row.sort == "1" ? "是" : "否" }}</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -121,7 +147,7 @@
               circle
               size="small"
               title="编辑"
-              @click="createOrEditBtn(false,scope.row.id)"
+              @click="createOrEditBtn(false, scope.row.id)"
             ></el-button>
             <el-button
               type="danger"
@@ -136,16 +162,16 @@
         </el-table-column>
       </el-table>
     </div>
-          <!-- 分页操作 -->
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next,jumper"
-          :page-size="page.rows"
-          :total="page.totalCount"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+    <!-- 分页操作 -->
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="total, prev, pager, next,jumper"
+        :page-size="page.rows"
+        :total="page.totalCount"
+        @current-change="handlePageChange"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 

@@ -29,10 +29,10 @@
         :data="purviewList"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         v-loading="loading"
         @selection-change="handleSelectionChange"
         class="adjustTable"
-        :max-height="this.$tableHeight"
       >
         <!-- 固定参数 -->
         <el-table-column
@@ -226,6 +226,9 @@ export default {
       //多选数据
       multipleSelection: [],
     };
+  },
+  created(){
+    console.log(this.$tableHeight)
   },
   computed: {
     ...mapState({

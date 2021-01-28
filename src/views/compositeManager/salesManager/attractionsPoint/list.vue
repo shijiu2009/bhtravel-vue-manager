@@ -28,6 +28,7 @@
         :data="attractionsPointList"
         border
         ref="multipleTable"
+        :max-height="this.$tableHeight"
         v-loading="loading"
         @selection-change="handleSelectionChange"
       >

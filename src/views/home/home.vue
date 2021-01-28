@@ -109,7 +109,6 @@ export default {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 500px;
-  /* height: calc(100% - 30px); */
 }
 
 .isCollapse {

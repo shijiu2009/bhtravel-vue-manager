@@ -95,28 +95,15 @@
 
 /* table表格样式 */
 /* 表格错位 */
-.el-table .th.gutter {
+body .el-table th.gutter {
     display: table-cell !important;
 }
 
-.flex-content>div:first-child {
-    height: 100%
+body .el-table colgroup.gutter {
+    display: table-cell !important;
 }
 
-.flex-content>div:first-child>div:first-child {
-    height: 100%
-}
-
-.flex-content>div:first-child>div:first-child>div:first-child {
-    display: flex;
-    flex-direction: column;
-    height: 100%
-}
-
-.data_list {
-    flex: 1;
-}
-
+/* 内容铺满 */
 .handle-box {
     margin-bottom: 10px;
     text-align: left;
@@ -136,11 +123,10 @@
 }
 
 .pagination {
-    position: sticky;
-    bottom: 0px;
+    position: fixed;
+    bottom: 20px;
     background-color: #EAF4F8;
     z-index: 4;
-    padding: 20px 0px;
     transition: all 0.5;
     animation: paginationShow 0.5s infinite;
     -webkit-animation: paginationShow 0.5s infinite;
