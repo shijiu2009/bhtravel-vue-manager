@@ -26,6 +26,8 @@ instance.defaults.crossDomain = true
 instance.interceptors.request.use(config => {
     
     //根据这个判断是否是上传图片
+    let upload = RegExp(/webuploader/)
+    //根据这个判断是否是修改密码
     let reg = RegExp(/changeUserPasswd/)
     // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加
     const token = localStorage.getItem('token');
@@ -35,13 +37,18 @@ instance.interceptors.request.use(config => {
     if (token) {
         config.headers.token = `${token}`;
     }
+    //判断是否是上传图片
+    if (config.url.search(upload) > 0) {
+        // instance.defaults.headers.post["Content-Type"] = 'multipart/form-data';
+        // config.headers['Content-Type'] = 'multipart/form-data';
+    }
     //判断是否是修改密码
     if (config.url.search(reg) > 0) {
         instance.defaults.headers.post["Content-Type"] = 'application/json';
         config.headers['Content-Type'] = 'application/json';
     }
     //设置默认值，用于判断是否序列化
-    else if (config.data && config.data.qs != 0) {
+    else if (config.data && config.data.qs != 0 && config.url.search(upload) <= 0) {
         //序列化表单数据
         config.data = qs.stringify(config.data);
     }
