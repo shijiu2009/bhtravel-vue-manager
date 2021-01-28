@@ -144,7 +144,7 @@ body .el-table colgroup.gutter {
     bottom: 0px;
     background-color: #EAF4F8;
     z-index: 4;
-    padding: 20px 0px;
+    padding: 20px 0px 0px;
     transition: all 0.5;
     animation: paginationShow 0.5s infinite;
     -webkit-animation: paginationShow 0.5s infinite;
