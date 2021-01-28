@@ -1,9 +1,9 @@
 <template>
   <div style="height:100%;" class="home-ex">
-    <el-row :gutter="20" style="height:100%;min-width:1040px;">
+    <el-row :gutter="20" style="height:100%;min-width:1050px;">
       <el-col :span="6"  style="height:100%;">
         <!-- 左侧卡片 -->
-        <el-card shadow="hover" class="mgb20" style="max-width:400px;min-width:250px;min-height:780px;height:100%">
+        <el-card shadow="hover" class="mgb20" style="max-width:480px;min-width:250px;min-height:820px;height:100%">
           <div class="user-info" >
             <div class="user-avator">
             <img :src="userimage" class="user-image" alt />
@@ -58,7 +58,7 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="min-height:780px;height:100%;">
+      <el-col :span="18" style="min-height:820px;height:100%;">
          <el-row :gutter="20" class="mgb20"> 
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{padding: '20px'}">
@@ -67,7 +67,7 @@
                  <img src="../../assets/images/homer1.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">1234</div>
+                  <div class="grid-num-z">{{topnumData.attractionsViews || 'N'}}</div>
                   <div>景区访问量</div>
                 </div>
               </div>
@@ -80,7 +80,7 @@
                    <img src="../../assets/images/homer2.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">321</div>
+                  <div class="grid-num-z">{{topnumData.hotelViews || 'N'}}</div>
                   <div>酒店访问量</div>
                 </div>
               </div>
@@ -93,7 +93,7 @@
                    <img src="../../assets/images/homer3.png" alt="">
                 </i>
                 <div class="grid-cont-right">
-                  <div class="grid-num-z">5000</div>
+                  <div class="grid-num-z">{{topnumData.peripheryTravelViews || 'N'}}</div>
                   <div>线路访问量</div>
                 </div>
               </div>
@@ -121,52 +121,33 @@
             style="width: 100%">
             <el-table-column
               label="产品"
+              header-align=""
+              min-width='120'
               >
               <template slot-scope="scope">
                 <i class="el-icon-info" style="color:#2983B7;"></i>
-                <span style="margin-left: 10px">{{ scope.row.attrName }}</span>
+                <span style="margin-left: 10px">{{ scope.row.attrName ||  scope.row.ctName || scope.row.hotelName || scope.row.title }}</span>
               </template>
             </el-table-column>
             <el-table-column
               label="订单号"
               >
               <template slot-scope="scope">
-              <span>{{scope.row.checkNo}}</span>
+              <span>{{scope.row.orderNo}}</span>
               </template>
             </el-table-column>
             <el-table-column label="数量">
               <template slot-scope="scope">
-                <span>{{scope.row.totalQuantity}}</span>
+                <span>×{{scope.row.totalQuantity || scope.row.roomCount || scope.row.quantity || '?'}}</span>
               </template>
             </el-table-column>
             <el-table-column label="状态">
               <template slot-scope="scope">
-                <span>{{scope.row.status == 3 ? '未处理' : '未知'}}</span>
+                <span style="color:red">{{scope.row.status == 3 ? '未处理' : '未知'}}</span>
               </template>
             </el-table-column>
           </el-table>
         </el-card>
-        <!-- <el-card shadow="hover" style="height:403px;">
-          <div slot="header" class="clearfix">
-            <span>待办事项</span>
-            <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
-          </div>
-          <el-table :data="todoList" :show-header="false" style="width: 100%;font-size:14px;">
-            <el-table-column width="40">
-              <template slot-scope="scope">
-                <el-checkbox v-model="scope.row.status"></el-checkbox>
-              </template>
-            </el-table-column>
-            <el-table-column>
-              <template slot-scope="scope">
-                <div
-                  class="todo-item"
-                  :class="{'todo-item-del': scope.row.status}"
-                >{{scope.row.title}}</div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card> -->
       </el-col>
     </el-row>
   </div>
@@ -184,46 +165,15 @@ export default {
       store:store,
       userimage: 'https://travel.gxucreate.com/travelbh' + store.state.userInfo.avatar,//用户头像
       activeName: 'first',//默认选择项
+      topnumData:'',//访问量数据
       urlarr:[
-      '/api/travel/index/ticketOrderList',
-      '/api/travel/index/coutryProjectOrderList',
-      '/api/travel/index/hotelOrderList',
-      '/api/travel/index/homestayOrderList',
-      '/api/travel/index/peripheryTravelOrderList'
+      'ticketOrderList',
+      'hotelOrderList',
+      'homestayOrderList',
+      'coutryProjectOrderList',
+      'peripheryTravelOrderList'
       ],
-        tableData: [
-        //   { //表格
-        //   date: '酒店名称',
-        //   name: '王小虎',
-        //   address: '1234',
-        //   static:'未处理',
-        //   num:0,
-        // }, {
-        //   date: '酒店名称',
-        //   name: '王小虎',
-        //   address: '123455',
-        //   static:'未处理',
-        //   num:3,
-        // }, {
-        //   date: '酒店名称',
-        //   name: '王小虎',
-        //   address: '222222',
-        //   static:'未处理',
-        //   num:1,
-        // }, {
-        //   date: '酒店名称',
-        //   name: '王小虎',
-        //   address: '44444',
-        //   static:'未处理',
-        //   num:null,
-        // }, {
-        //   date: '酒店名称',
-        //   name: '王小虎',
-        //   address: '44444',
-        //   static:'未处理',
-        //   num:5,
-        // }
-        ],
+      tableData: [],
       //  localStorage.getItem("token")
       // name:"我的光",
       todoList: [
@@ -311,7 +261,8 @@ export default {
   created() {
     this.handleListener();
     this.changeDate();
-    this.getdata(this.urlarr[0])
+    this.getdata(this.urlarr[0])//表格数据请求
+    this.getnum()
   },
   activated() {
     this.handleListener();
@@ -320,25 +271,34 @@ export default {
     
   },
   methods: {
+    //请求访问量
+    getnum(){
+      api.post('/api/travel/index/getViews').then((result) => {
+        // console.log(result);
+        this.topnumData = result
+      })
+      .catch(() => {
+        console.log('请求失败');
+      });
+    },
     //请求表格
     getdata(url){
-      api.post(url).then((result) => {
+      this.loading = true;
+      api.post('/api/travel/index/'+ url).then((result) => {
           this.loading = false; //关掉加载动画
-          console.log(result);
+          // console.log(result);
           this.tableData = result.list
-          console.log(this.tableData);
+          // console.log(this.tableData);
         })
         .catch(() => {
-          this.loading = false; //关掉加载动画
+          // this.loading = false; //关掉加载动画
           console.log('请求失败');
         });
     },
     //选择栏
     handleClick(tab) {
-        console.log(tab.index);
+        // console.log(tab.index);
         this.getdata(this.urlarr[tab.index])
-            // console.log(this.store.state.userInfo);
-            // console.log(this.userimage);
     },
     //表格
     handleEdit(index, row) {
@@ -545,12 +505,13 @@ export default {
   color:rgb(85, 77, 77);  font-weight: 900;
 }
 .lebo-box{
-  margin-top:40px;
+  margin-top:60px;
   height: 332px;
   width: 100%;
   display: flex;
   justify-content:center;
   flex-wrap: wrap;
+  /* background: red; */
 }
 .lebo-icon{
   margin: 10px;
