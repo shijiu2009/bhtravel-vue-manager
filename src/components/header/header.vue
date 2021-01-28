@@ -71,36 +71,28 @@
               >
             </el-dropdown-menu>
           </el-dropdown>
-          <!-- 对话框 -->
-          <el-dialog
-            title="修改密码"
-            :visible.sync="dialogPassword"
-            :modal-append-to-body="false"
-          >
-            <div class="demo-input-suffix">
-              新密码：
-              <el-input
-                v-model="passwordParams.newpass1"
-                show-password
-              ></el-input>
-            </div>
-            <div class="demo-input-suffix">
-              再次输入新密码：
-              <el-input
-                v-model="passwordParams.newpass2"
-                show-password
-              ></el-input>
-            </div>
-            <div slot="footer" class="dialog-footer">
-              <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-              <el-button type="primary" @click="confirmPassword"
-                >确 定</el-button
-              >
-            </div>
-          </el-dialog>
         </div>
       </div>
     </div>
+    <!-- 对话框 -->
+    <el-dialog
+      title="修改密码"
+      :visible.sync="dialogPassword"
+      :modal-append-to-body="false"
+    >
+     <el-form ref="form" :model="passwordParams" label-width="auto">
+          <el-form-item label="新密码：">
+            <el-input v-model="passwordParams.newpass1" show-password></el-input>
+          </el-form-item>
+          <el-form-item label="再次输入新密码：">
+            <el-input v-model="passwordParams.newpass2" show-password></el-input>
+          </el-form-item>
+     </el-form>
+      <div slot="footer" class="dialog-footer">
+        <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
+        <el-button type="primary" @click="confirmPassword">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -157,7 +149,7 @@ export default {
         alert(result.msg);
       });
       this.dialogPassword = false;
-      this.logoutFun()
+      this.logoutFun();
     },
     //展开或缩放菜单
     openMenu: function () {
@@ -326,5 +318,9 @@ export default {
   margin: 0;
   padding: 0;
   transform: translate(-2px, -2 px);
+}
+/* 表单行高 */
+.header >>> .el-form-item__content{
+  line-height: 70px !important;
 }
 </style>

@@ -227,6 +227,9 @@ export default {
       multipleSelection: [],
     };
   },
+  created(){
+    console.log(this.$tableHeight)
+  },
   computed: {
     ...mapState({
       page: "page",
