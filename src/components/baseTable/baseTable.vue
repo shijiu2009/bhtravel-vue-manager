@@ -11,7 +11,8 @@
     </div>
     <div class="data_list">
       <el-table :data="tableData.slice((page.pageIndex-1)*page.PageSize,page.pageIndex*page.PageSize)" border
-        ref="multipleTable" style="width: 100%" @selection-change="handleSelectionChange" 
+        ref="multipleTable"
+        :max-height="this.$tableHeight" style="width: 100%" @selection-change="handleSelectionChange" 
         class="adjustTable">
         <!-- table标题-->
         <el-table-column type="selection" width="52" align="center"></el-table-column>

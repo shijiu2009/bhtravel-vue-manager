@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      <Screen :screenCondition="screenCondition"></Screen>
+      <!-- <Screen :screenCondition="screenCondition"></Screen> -->
       <div>
         <el-button
           type="primary"
@@ -190,13 +190,13 @@
 
 <script>
 import purViewApi from "@/api/systemManager/purview.js";
-import Screen from "@/components/screen/screen.vue";
+// import Screen from "@/components/screen/screen.vue";
 import { mapState } from "vuex";
 export default {
   name: "purview_list",
-  components: {
-    Screen,
-  },
+  // components: {
+  //   Screen,
+  // },
   data() {
     return {
       //是否显示加载动画效果
