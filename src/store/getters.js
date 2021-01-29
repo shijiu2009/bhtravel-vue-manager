@@ -1,6 +1,6 @@
 const getters = {
     getHeight (state) {
-        return state.tableHeight - state.tagsHeight - 240
+        return state.tableHeight - state.tagsHeight
     },
   }
    

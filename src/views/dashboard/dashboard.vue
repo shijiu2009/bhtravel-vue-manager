@@ -36,28 +36,36 @@
           <div class="l-c-b">
             <div class="lebo-box">
               <div class="lebo-icon">
-                <div class="lebo-img">
-                  <img src="../../assets/images/home1.png" alt="" />
-                </div>
-                <div class="lebo-txt">订单</div>
+                <router-link :to="{ path: OrouterArr[tabIndex] }">
+                  <div class="lebo-img">
+                    <img src="../../assets/images/home1.png" alt="" />
+                  </div>
+                  <div class="lebo-txt">订单</div>
+                </router-link>
               </div>
               <div class="lebo-icon">
-                <div class="lebo-img">
-                  <img src="../../assets/images/home2.png" alt="" />
-                </div>
-                <div class="lebo-txt">投诉</div>
+                <router-link to="/travel/complaintList">
+                  <div class="lebo-img">
+                    <img src="../../assets/images/home2.png" alt="" />
+                  </div>
+                  <div class="lebo-txt">投诉</div>
+                </router-link>
               </div>
               <div class="lebo-icon">
-                <div class="lebo-img">
-                  <img src="../../assets/images/home3.png" alt="" />
-                </div>
-                <div class="lebo-txt">咨询</div>
+                <router-link :to="{ path: ZrouterArr[tabIndex] }">
+                  <div class="lebo-img">
+                    <img src="../../assets/images/home3.png" alt="" />
+                  </div>
+                  <div class="lebo-txt">咨询</div>
+                </router-link>
               </div>
               <div class="lebo-icon">
-                <div class="lebo-img">
-                  <img src="../../assets/images/home4.png" alt="" />
-                </div>
-                <div class="lebo-txt">评论</div>
+                <router-link to="/travel/commentList">
+                  <div class="lebo-img">
+                    <img src="../../assets/images/home4.png" alt="" />
+                  </div>
+                  <div class="lebo-txt">评论</div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -242,6 +250,7 @@
 
 <script>
 import store from "@/store/modules/user.js";
+// import getters from "@/store/getters.js";
 import api from "@/api/api.js";
 
 export default {
@@ -262,7 +271,21 @@ export default {
         "homestayOrderList",
         "coutryProjectOrderList",
         "peripheryTravelOrderList",
-      ],
+      ], //api接口地址
+      OrouterArr: [
+        "/travel/attractionList",
+        "/travel/hotelOrderList",
+        "/travel/homestayOrderList",
+        "/travel/countryTravelOrderList",
+        "/travel/peripheryOrderList",
+      ], //订单路由列表
+      ZrouterArr: [
+        "/travel/ticketOrderCountList",
+        "/travel/hotelRoomOrderCountList",
+        "/travel/homestayRoomOrderCountList",
+        "/travel/countryProjectOrderCountList",
+        "/travel/peripherySubOrderCountList",
+      ], //统计路由列表
       tableData: [],
       //  localStorage.getItem("token")
       todoList: [],
@@ -358,6 +381,9 @@ export default {
 
 
 <style scoped>
+/* a{
+  color:#2992D0;
+} */
 .el-row {
   margin-bottom: 20px;
 }

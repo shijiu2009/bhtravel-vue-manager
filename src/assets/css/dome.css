@@ -116,13 +116,16 @@ h6 {
 
 a {
     text-decoration: none;
+    color:#2992D0
 }
 
 a:hover img {
     border: none;
 }
 
-a:active {}
+a:active {
+    color:red
+}
 
 .clearfix {
     clear: both;
