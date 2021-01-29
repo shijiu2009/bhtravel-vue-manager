@@ -36,7 +36,7 @@
 </template>
 <script>
 import advertApi from "@/api/advert.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 import regular from "@/assets/js/regular.js";
 export default {
   name: "addOrEditAdvertSize",

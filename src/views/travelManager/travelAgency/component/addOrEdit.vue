@@ -155,7 +155,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/travelAgency.js";
-import { mapMutations } from "vuex";
+import { mapMutations,mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import quillConfig from "@/assets/js/quill-config.js";
 import baseURL from "@/config/baseUrl.js";

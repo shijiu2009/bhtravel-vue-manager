@@ -72,8 +72,7 @@
       <el-table
         :data="advertList"
         border
-        ref="multipleTable"
-        :max-height="this.$tableHeight"
+          ref="multipleTable"
         style="width: 100%"
         v-loading="loading"
         

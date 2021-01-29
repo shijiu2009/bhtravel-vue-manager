@@ -1,10 +1,21 @@
 <template>
   <div class="tags" ref="tags" v-if="showTags">
     <ul>
-      <li class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item)}" :key="index">
-        <el-tooltip class="item" effect="light" :content="dropdownTitle([item.meta.parentName,item.meta.title])"
-          placement="bottom">
-          <router-link :to="item.path" class="tags-li-title">{{item.meta.title}}</router-link>
+      <li
+        class="tags-li"
+        v-for="(item, index) in tagsList"
+        :class="{ active: isActive(item) }"
+        :key="index"
+      >
+        <el-tooltip
+          class="item"
+          effect="light"
+          :content="dropdownTitle([item.meta.parentName, item.meta.title])"
+          placement="bottom"
+        >
+          <router-link :to="item.path" class="tags-li-title">{{
+            item.meta.title
+          }}</router-link>
         </el-tooltip>
 
         <span class="tags-li-icon" @click="closeTags(index)">
@@ -27,6 +38,18 @@ export default {
       //some code
       console.log("ok");
     });
+  },
+  watch: {
+    tagsList: {
+      //初始化的时候执行一次
+      immediate: true,
+      handler: function () {
+        this.$nextTick(()=>{
+          console.log(this.$refs.tags.offsetHeight)
+          this.$store.state.tagsHeight =  this.$refs.tags.offsetHeight
+        })
+      },
+    },
   },
   methods: {
     ...mapMutations({
@@ -88,10 +111,11 @@ export default {
         ".adjustTable .el-table__fixed-body-wrapper"
       );
       if (tableRight) {
-        tableRight.style.maxHeight = window.innerHeight - mHeight -104  + "px";
+        tableRight.style.maxHeight = window.innerHeight - mHeight - 104 + "px";
       }
       if (tableWrapper) {
-        tableWrapper.style.maxHeight = window.innerHeight - mHeight - 104 + "px";
+        tableWrapper.style.maxHeight =
+          window.innerHeight - mHeight - 104 + "px";
       }
       this.$tableHeight = window.innerHeight - mHeight;
     },
@@ -136,7 +160,7 @@ export default {
   overflow: hidden;
   /* background: #fff; */
   padding: 5px 10px 5px 10px;
-  background: #EAF4F8;
+  background: #eaf4f8;
   border-bottom: 1px solid #e5e5e5;
   /* box-shadow: 0 5px 10px #ddd; */
 }
@@ -171,7 +195,6 @@ export default {
   background: #f8f8f8;
 }
 
-
 .tags-li-title {
   float: left;
   max-width: 80px;
@@ -199,9 +222,9 @@ export default {
   color: #606266;
 }
 .active {
-  background: #36BDF1;
+  background: #36bdf1;
 }
-.active .tags-li-title{
+.active .tags-li-title {
   color: #fff;
 }
 .active .el-icon-close {

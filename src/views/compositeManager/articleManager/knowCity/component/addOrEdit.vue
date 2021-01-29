@@ -87,7 +87,7 @@
 </template>
 <script>
 import api from "@/api/travelManager/knowCity.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";

@@ -675,7 +675,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //景点对话框选项
       attrName: "",
@@ -689,7 +689,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //农家乐对话框选项
       ctName: "",
@@ -703,7 +703,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //酒店对话框选项
       hName: "",
@@ -717,7 +717,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //民宿对话框选项
       hmName: "",
@@ -731,7 +731,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //线路对话框选项
       pName: "",
@@ -745,7 +745,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //关联用户
       traditem: [],

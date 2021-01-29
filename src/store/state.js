@@ -41,11 +41,9 @@ export default {
             ],
         },
     },
+    tagsHeight: 0,
     //tags高度
-    get tableHeight() {
-        console.log(window.innerHeight)
-        return (window.innerHeight - 57 - 195)
-    },
+    tableHeight:window.innerHeight,
     //分页数据
     page: {
         // 默认显示第几页

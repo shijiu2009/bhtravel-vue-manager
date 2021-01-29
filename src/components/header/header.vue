@@ -49,8 +49,13 @@
             >
               <router-link to="/">
                 <i class="el-icon-bell" style="color: #fff"></i>
-                <span style="font-size: 14px; color: #fff; margin-left: -6px; 
-                margin-right:8px"
+                <span
+                  style="
+                    font-size: 14px;
+                    color: #fff;
+                    margin-left: -6px;
+                    margin-right: 8px;
+                  "
                   >消息</span
                 >
               </router-link>
@@ -147,10 +152,19 @@ export default {
     },
     confirmPassword: function () {
       api.changePassword(this.passwordParams).then((result) => {
-        alert(result.msg);
+        if (result.status) {
+          alert(result.msg);
+          this.dialogPassword = false;
+          this.logoutFun();
+        } else {
+          alert(result.msg);
+          this.passwordParams = {
+            userId: this.$store.state.user.userInfo.userId,
+            newpass1: "",
+            newpass2: "",
+          };
+        }
       });
-      this.dialogPassword = false;
-      this.logoutFun();
     },
     //展开或缩放菜单
     openMenu: function () {
@@ -311,10 +325,10 @@ export default {
 .user-name {
   cursor: pointer;
 }
-.user-rightimg{
+.user-rightimg {
   cursor: pointer;
   padding: 1px;
-  background: #5072F2;
+  background: #5072f2;
 }
 .user-name .el-dropdown-link {
   font-size: 12px;

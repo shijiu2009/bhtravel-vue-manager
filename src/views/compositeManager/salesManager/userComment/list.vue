@@ -30,8 +30,7 @@
       <el-table
         :data="commentList"
         border
-        ref="multipleTable"
-        :max-height="this.$tableHeight"
+          ref="multipleTable"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -189,7 +188,7 @@
 </template>
 <script>
 import commentApi from "@/api/travelManager/userComment.js";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations,mapGetters} from "vuex";
 import Screen from "@/components/screen/screen.vue";
 export default {
   name: "commentList",
@@ -271,7 +270,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       searchDate: [],
     };
@@ -280,6 +279,10 @@ export default {
     ...mapState({
       timePicker: "timePicker",
     }),
+     ...mapGetters([
+      "getHeight",
+      // ...
+    ]),
   },
   methods: {
     ...mapMutations({
@@ -390,9 +393,45 @@ export default {
         this.page.totalCount = result.total;
       });
     },
+     // 防抖函数
+    debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    },
   },
   created() {
     this.getUserComments();
+  },
+  mounted() {
+    let that = this;
+    // 添加resize的回调函数，但是只允许它每300毫秒执行一次
+    window.addEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  beforeDestroy() {
+    // 在组件生命周期结束的时候销毁。
+    let that = this;
+    window.removeEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
   },
   //keep-alive 生命周期，
   activated() {

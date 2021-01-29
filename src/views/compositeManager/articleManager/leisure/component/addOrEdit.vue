@@ -161,7 +161,7 @@
 <script>
 import api from "@/api/publicManager/leisure.js";
 import tApi from "@/api/bussManager/tradingUser.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";
@@ -202,7 +202,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       //对话框选项
       productName: "",

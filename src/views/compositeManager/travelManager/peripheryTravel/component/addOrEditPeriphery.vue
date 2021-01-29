@@ -456,7 +456,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/reserveManager/periphery.js";
-import { mapMutations } from "vuex";
+import { mapMutations,mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import { deleteKeys } from "@/api/deleteKeys.js";
 import baseURL from "@/config/baseUrl.js";

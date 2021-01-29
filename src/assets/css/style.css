@@ -123,8 +123,8 @@ body .el-table colgroup.gutter {
 }
 
 .pagination {
-    position: fixed;
-    bottom: 20px;
+    position: sticky;
+    bottom: -20px;
     background-color: #EAF4F8;
     z-index: 4;
     transition: all 0.5;
@@ -370,4 +370,12 @@ body .el-table colgroup.gutter {
 .el-table:before,
 .el-table__fixed-right::before {
     background-color: #ccc !important;
+}
+
+/* 系统设置空白填充 */
+.custom-tree-container{
+    margin-top: 10px;
+}
+.custom-tree-container .block{
+    width: 100%!important;
 }

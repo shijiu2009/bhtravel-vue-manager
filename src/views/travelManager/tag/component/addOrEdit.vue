@@ -47,7 +47,7 @@
 <script>
 import tagApi from "@/api/tag.js";
 import quillConfig from "@/assets/js/quill-config.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 //富文本框
 // import { quillEditor } from "vue-quill-editor";
 export default {

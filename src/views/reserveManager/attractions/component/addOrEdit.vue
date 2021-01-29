@@ -325,7 +325,7 @@ import attractionsApi from "@/api/reserveManager/attractions.js";
 import productApi from "@/api/reserveManager/product.js";
 import { analysisResolution } from "@/api/analysis.js";
 import quillConfig from "@/assets/js/quill-config.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
 //百度地图

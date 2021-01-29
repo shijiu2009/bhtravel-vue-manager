@@ -21,7 +21,7 @@
 </template>
 <script>
 import api from "@/api/recordInformation.js";
-import { mapMutations } from "vuex";
+import { mapMutations} from "vuex";
 import quillConfig from "@/assets/js/quill-config.js";
 export default {
   name: "recordInformationSetting",

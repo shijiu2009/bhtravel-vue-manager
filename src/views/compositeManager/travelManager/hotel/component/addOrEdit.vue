@@ -587,7 +587,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/reserveManager/hotel.js";
-import { mapMutations } from "vuex";
+import { mapMutations,mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
 //百度地图
