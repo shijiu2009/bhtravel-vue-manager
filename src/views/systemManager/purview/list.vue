@@ -293,6 +293,9 @@ export default {
         .catch(() => {});
     },
   },
+  created() {
+    this.getPurViews();
+  },
   activated() {
     this.getPurViews();
   },

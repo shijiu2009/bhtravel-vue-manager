@@ -139,5 +139,8 @@ export default {
   activated() {
     this.getOrgTree();
   },
+  created() {
+    this.getOrgTree();
+  },
 };
 </script>
