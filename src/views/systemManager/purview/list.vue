@@ -329,6 +329,9 @@ export default {
       }, 300)
     );
   },
+  created() {
+    this.getPurViews();
+  },
   activated() {
     this.getPurViews();
   },
