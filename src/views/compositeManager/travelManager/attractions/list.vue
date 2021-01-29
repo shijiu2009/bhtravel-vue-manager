@@ -29,7 +29,7 @@
         :data="attractionsList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -139,7 +139,7 @@
 </template>
 <script>
 import attractionsApi from "@/api/reserveManager/attractions.js";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import Screen from "@/components/screen/screen.vue";
 //调用详细内容页面
 import Detailed from "./component/detailed";
@@ -232,12 +232,12 @@ export default {
       multipleSelection: [],
     };
   },
-  // mounted(){
-  //   this.$nextTick(()=>{
-  //     console.log(this.$refs.Screen)
-  //     this.tableHeight = window.innerHeight - this.$refs.multipleTable.$el.offsetTop - this.$refs.Screen.$el.scrollHeight - 140
-  //   })
-  // },
+  computed: {
+    ...mapGetters([
+      "getHeight",
+      // ...
+    ]),
+  },
   methods: {
     ...mapMutations({
       setTagsList: "SET_TAGSLIST",
@@ -365,9 +365,45 @@ export default {
       this.page.page = index;
       this.handleSearch(this.searchDate);
     },
+    // 防抖函数
+    debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    },
   },
   created() {
     this.getAttractions();
+  },
+  mounted() {
+    let that = this;
+    // 添加resize的回调函数，但是只允许它每300毫秒执行一次
+    window.addEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  beforeDestroy() {
+    // 在组件生命周期结束的时候销毁。
+    let that = this;
+    window.removeEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
   },
   //keep-alive 生命周期，
   activated() {

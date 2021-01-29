@@ -27,7 +27,7 @@
         :data="themeList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -96,7 +96,7 @@
 
 <script>
 import api from "@/api/reserveManager/theme.js";
-import { mapMutations } from "vuex";
+import { mapMutations,mapGetters } from "vuex";
 
 export default {
   name: "themeList",
@@ -257,8 +257,34 @@ export default {
       this.getList();
     },
   },
-  created() {
+created() {
     this.getList();
+  },
+  computed: {
+    ...mapGetters([
+      "getHeight",
+      // ...
+    ]),
+  },
+  mounted() {
+    let that = this;
+    // 添加resize的回调函数，但是只允许它每300毫秒执行一次
+    window.addEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  beforeDestroy() {
+    // 在组件生命周期结束的时候销毁。
+    let that = this;
+    window.removeEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
   },
   //keep-alive 生命周期，
   activated() {

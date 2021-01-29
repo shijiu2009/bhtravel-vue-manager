@@ -82,7 +82,7 @@
         :data="advertList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -325,6 +325,22 @@ export default {
     handlePageChange: function (index) {
       this.page.page = index;
       this.getAdverts();
+    },
+     // 防抖函数
+    debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     },
   },
   created() {

@@ -29,7 +29,7 @@
         :data="roleList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         v-loading="loading"
         @selection-change="handleSelectionChange"
         class="adjustTable"
@@ -128,7 +128,7 @@
 <script>
 import api from "@/api/systemManager/role.js";
 import Screen from "@/components/screen/screen.vue";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "role_list",
   components: {
@@ -158,6 +158,10 @@ export default {
     ...mapState({
       page: "page",
     }),
+    ...mapGetters([
+      "getHeight",
+      // ...
+    ]),
   },
   methods: {
     //点击分页按钮
@@ -242,12 +246,48 @@ export default {
         })
         .catch(() => {});
     },
+    // 防抖函数
+    debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    },
   },
   activated() {
     this.getList();
   },
   created() {
     this.getList();
+  },
+  mounted() {
+    let that = this;
+    // 添加resize的回调函数，但是只允许它每300毫秒执行一次
+    window.addEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  beforeDestroy() {
+    // 在组件生命周期结束的时候销毁。
+    let that = this;
+    window.removeEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
   },
 };
 </script>

@@ -29,7 +29,7 @@
     </div>
     <div class="data_list">
       <el-table :data="activityList" border ref="multipleTable"
-        :max-height="this.$tableHeight" style="width: 100%" v-loading="loading"
+        :max-height="this.getHeight" style="width: 100%" v-loading="loading"
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="52" align="center"></el-table-column>
         <el-table-column type="index" width="50" align="center" label="序号" sortable></el-table-column>

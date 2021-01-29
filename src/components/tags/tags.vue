@@ -45,6 +45,7 @@ export default {
       immediate: true,
       handler: function () {
         this.$nextTick(()=>{
+          console.log(this.$refs.tags.offsetHeight)
           this.$store.state.tagsHeight =  this.$refs.tags.offsetHeight
         })
       },

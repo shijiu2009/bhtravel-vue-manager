@@ -573,7 +573,7 @@
 <script>
 import api from "@/api/reserveManager/hotel.js";
 import productApi from "@/api/reserveManager/product.js";
-import { mapMutations } from "vuex";
+import { mapMutations,mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import quillConfig from "@/assets/js/quill-config.js";
 import baseURL from "@/config/baseUrl.js";

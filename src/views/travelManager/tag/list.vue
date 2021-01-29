@@ -61,7 +61,7 @@
         :data="tagList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         style="width: 100%"
         v-loading="loading"
         

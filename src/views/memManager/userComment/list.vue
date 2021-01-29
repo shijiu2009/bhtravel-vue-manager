@@ -82,7 +82,7 @@
         :data="commentList"
         border
         ref="multipleTable"
-        :max-height="this.$tableHeight"
+        :max-height="this.getHeight"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -320,6 +320,7 @@ export default {
       this.page.page = index;
       this.getUserComments();
     },
+    
     //获取评论
     getUserComments: function () {
       commentApi.getComments(this.page).then((result) => {
