@@ -3,133 +3,68 @@
     <el-row :gutter="20" style="height: 100%; min-width: 1050px">
       <el-col :span="6" style="height: 100%">
         <!-- 左侧卡片 -->
-        <div
-          class="mgb20top"
-        >
-        <div class="l-c-t">
-          <div class="user-info">
-            <div class="user-avator">
-              <img :src="userimage" class="user-image" alt />
-              <div class="pulse"></div>
-              <div class="pulse2"></div>
-            </div>
-            <div class="user-info-cont">
-              <div class="user-info-name">
-                {{ store.state.userInfo.username }}
+        <div class="mgb20top">
+          <div class="l-c-t">
+            <div class="user-info">
+              <div class="user-avator">
+                <img :src="userimage" class="user-image" alt />
+                <div class="pulse"></div>
+                <div class="pulse2"></div>
               </div>
-              <div class="user-root">{{ store.state.userInfo.rolename }}</div>
+              <div class="user-info-cont">
+                <div class="user-info-name">
+                  {{ store.state.userInfo.username }}
+                </div>
+                <div class="user-root">{{ store.state.userInfo.rolename }}</div>
+              </div>
             </div>
-          </div>
-          <div class="ipbox">
-            <div class="txtip-box">
-              <div class="ipcont ipleft">
-                <div>上次登录时间</div>
-                <div class="ipcolor">
-                  {{ store.state.userInfo.lastLoginTime.slice(0, 10) }}
+            <div class="ipbox">
+              <div class="txtip-box">
+                <div class="ipcont ipleft">
+                  <div>上次登录时间</div>
+                  <div class="ipcolor">
+                    {{ store.state.userInfo.lastLoginTime.slice(0, 10) }}
+                  </div>
+                </div>
+                <div class="ipcont">
+                  <div>登录IP</div>
+                  <div class="ipcolor">{{ store.state.userInfo.ip }}</div>
                 </div>
               </div>
-              <div class="ipcont">
-                <div>登录IP</div>
-                <div class="ipcolor">{{ store.state.userInfo.ip }}</div>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="l-c-b">
-          <div class="lebo-box">
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home1.png" alt="" />
-              </div>
-              <div class="lebo-txt">订单</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home2.png" alt="" />
-              </div>
-              <div class="lebo-txt">投诉</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home3.png" alt="" />
-              </div>
-              <div class="lebo-txt">咨询</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home4.png" alt="" />
-              </div>
-              <div class="lebo-txt">评论</div>
-            </div>
-          </div>
-        </div>
-          <!-- <div class="user-info">
-            <div class="user-avator">
-              <img :src="userimage" class="user-image" alt />
-              <div class="pulse"></div>
-              <div class="pulse2"></div>
-            </div>
-            <div class="user-info-cont">
-              <div class="user-info-name">
-                {{ store.state.userInfo.username }}
-              </div>
-              <div class="user-root">{{ store.state.userInfo.rolename }}</div>
-            </div>
-          </div>
-          <div class="ipbox">
-            <div class="txtip-box">
-              <div class="ipcont ipleft">
-                <div>上次登录时间</div>
-                <div class="ipcolor">
-                  {{ store.state.userInfo.lastLoginTime.slice(0, 10) }}
+          <div class="l-c-b">
+            <div class="lebo-box">
+              <div class="lebo-icon">
+                <div class="lebo-img">
+                  <img src="../../assets/images/home1.png" alt="" />
                 </div>
+                <div class="lebo-txt">订单</div>
               </div>
-              <div class="ipcont">
-                <div>登录IP</div>
-                <div class="ipcolor">{{ store.state.userInfo.ip }}</div>
+              <div class="lebo-icon">
+                <div class="lebo-img">
+                  <img src="../../assets/images/home2.png" alt="" />
+                </div>
+                <div class="lebo-txt">投诉</div>
+              </div>
+              <div class="lebo-icon">
+                <div class="lebo-img">
+                  <img src="../../assets/images/home3.png" alt="" />
+                </div>
+                <div class="lebo-txt">咨询</div>
+              </div>
+              <div class="lebo-icon">
+                <div class="lebo-img">
+                  <img src="../../assets/images/home4.png" alt="" />
+                </div>
+                <div class="lebo-txt">评论</div>
               </div>
             </div>
           </div>
-
-          <div class="lebo-box">
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home1.png" alt="" />
-              </div>
-              <div class="lebo-txt">订单</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home2.png" alt="" />
-              </div>
-              <div class="lebo-txt">投诉</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home3.png" alt="" />
-              </div>
-              <div class="lebo-txt">咨询</div>
-            </div>
-            <div class="lebo-icon">
-              <div class="lebo-img">
-                <img src="../../assets/images/home4.png" alt="" />
-              </div>
-              <div class="lebo-txt">评论</div>
-            </div>
-          </div> -->
         </div>
-        <!-- <el-card shadow="hover" style="height:252px;">
-          <div slot="header" class="clearfix">
-            <span>语言详情</span>
-          </div>Vue
-          <el-progress :percentage="71.3" color="#42b983"></el-progress>JavaScript
-          <el-progress :percentage="24.1" color="#f1e05a"></el-progress>CSS
-          <el-progress :percentage="3.7"></el-progress>HTML
-          <el-progress :percentage="0.9" color="#f56c6c"></el-progress>
-        </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style=" height: 100%; min-height: 430px;">
+      <el-col :span="18" style="height: 100%; min-height: 430px">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '20px' }">
@@ -520,7 +455,7 @@ export default {
   overflow: hidden;
   border-radius: 50%;
   z-index: 2;
-  background: #C7C7C7;
+  background: #c7c7c7;
 }
 /* .user-info-name{
   background: red;
@@ -535,33 +470,33 @@ export default {
 /* 保持大小不变的小圆圈  */
 /* 产生动画（向外扩散变大）的圆圈  */
 .pulse {
-    position: absolute;
-    width: 120px; 
-    height: 120px;
-    left: 3px;
-    top: 3px;
-    border: 12px solid red;
-    -webkit-border-radius:  50%;
-    -moz-border-radius:  50%;
-    border-radius: 50%;
-    z-index: 1;
-    opacity: 0;
-    -webkit-animation: warn 3s ease-out;
-    -moz-animation: warn 3s ease-out;
-    animation: warn 3s ease-out;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 3px;
+  top: 3px;
+  border: 12px solid red;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0;
+  -webkit-animation: warn 3s ease-out;
+  -moz-animation: warn 3s ease-out;
+  animation: warn 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
-.pulse2{
- position: absolute;
-    width: 120px; 
-    height: 120px;
-    left: 3px;
-    top: 3px;
-    border: 12px solid #e7f7ff;
-    background:  #e7f7ff;
-    border-radius: 50%;
+.pulse2 {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 3px;
+  top: 3px;
+  border: 12px solid #e7f7ff;
+  background: #e7f7ff;
+  border-radius: 50%;
 }
 @keyframes warn {
   /* 0% {
@@ -606,7 +541,6 @@ export default {
   }
 }
 
-
 .user-root {
   width: 88px;
   height: 30px;
@@ -648,16 +582,16 @@ export default {
   border-radius: 5px;
   min-height: 430px;
 
- 
-   height: calc(100% + 2px);
+  height: calc(100% + 2px);
 }
-.l-c-t{
+.l-c-t {
   flex: 2;
   /* height: 100%;
   width: 100%; */
   /* background: #1aa2dc; */
+  /* padding-top: 10px; */
 }
-.l-c-b{
+.l-c-b {
   flex: 3;
   /* background: pink; */
   display: flex;
@@ -742,73 +676,52 @@ export default {
 }
 @media screen and (max-height: 800px) {
   .lebo-box {
-  /* margin-top: 60px; */
-  height: 200px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  /* background: red; */
-}
-  .l-c-b{
+    height: 200px;
+    width: 100%;
+  }
+  .l-c-b {
     flex: 3;
     /* background: red; */
   }
   .lebo-icon {
-  margin: 10px;
-  width: 40%;
-  height: 44%;
-  background: linear-gradient(180deg, #f3fcff, #e4f6ff);
-  border-radius: 20px;
-  font-size: 18px;
-  font-family: SourceHanSansCN;
-}
-.lebo-img {
-  margin: 10px;
-  margin-left: 20px;
-  width: 35px;
-  height: 38px;
-  overflow: hidden;
-}
-
+    margin: 10px;
+    width: 40%;
+    height: 44%;
+    font-size: 18px;
+  }
+  .lebo-img {
+    margin: 10px;
+    margin-left: 20px;
+  }
 }
 @media screen and (max-height: 680px) {
   .lebo-box {
-  /* margin-top: 60px; */
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  align-items: center;
-  /* background: red; */
-}
-  .l-c-b{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .l-c-b {
     flex: 3;
   }
   .lebo-icon {
-  margin: 0 2px;
-  margin-top: 14px;
-  width: 22%;
-  height: 84px;
-  background: linear-gradient(180deg, #f3fcff, #e4f6ff);
-  border-radius: 20px;
-  font-size: 14px;
-  font-family: SourceHanSansCN;
+    margin: 0 2px;
+    margin-top: 14px;
+    width: 22%;
+    height: 84px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  .lebo-img {
+    margin: 10px;
+    margin-left: 12px;
+  }
+  .lebo-txt {
+    margin-left: 10px;
+  }
 }
-.lebo-img {
-  margin: 10px;
-  margin-left: 12px;
-  width: 35px;
-  height: 38px;
-  overflow: hidden;
-}
-.lebo-txt{
-  margin-left: 10px;
-}
-
-}
-
 
 .lebo-img img {
   width: 100%;
