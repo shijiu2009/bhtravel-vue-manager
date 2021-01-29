@@ -28,8 +28,7 @@
       <el-table
         :data="userList"
         border
-        ref="multipleTable"
-        :max-height="this.getHeight"
+          ref="multipleTable"
         v-loading="loading"
         @selection-change="handleSelectionChange"
         class="adjustTable"

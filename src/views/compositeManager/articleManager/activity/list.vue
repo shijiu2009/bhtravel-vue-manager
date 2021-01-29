@@ -28,8 +28,7 @@
       <el-table
         :data="activityList"
         border
-        ref="multipleTable"
-        :max-height="this.getHeight"
+          ref="multipleTable"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"

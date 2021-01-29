@@ -70,8 +70,7 @@
       <el-table
         :data="pictureList"
         border
-        ref="multipleTable"
-        :max-height="this.getHeight"
+          ref="multipleTable"
         style="width: 100%"
         v-loading="loading"
         @selection-change="handleSelectionChange"
@@ -182,7 +181,7 @@ export default {
         totalCount: 0,
         // 个数选择器（可修改）
         // 默认每页显示的条数（可修改）
-        rows: 10,
+        rows: 20,
       },
       multipleSelection: [],
       url: this.$baseUrl.releaseUrl,

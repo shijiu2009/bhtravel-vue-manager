@@ -123,8 +123,8 @@ body .el-table colgroup.gutter {
 }
 
 .pagination {
-    position: fixed;
-    bottom: 20px;
+    position: sticky;
+    bottom: -20px;
     background-color: #EAF4F8;
     z-index: 4;
     transition: all 0.5;
