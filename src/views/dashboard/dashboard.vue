@@ -3,17 +3,67 @@
     <el-row :gutter="20" style="height: 100%; min-width: 1050px">
       <el-col :span="6" style="height: 100%">
         <!-- 左侧卡片 -->
-        <el-card
-          shadow="hover"
-          class="mgb20"
-          style="
-            max-width: 480px;
-            min-width: 250px;
-            min-height: 832px;
-            height: calc(100% + 2px);
-          "
+        <div
+          class="mgb20top"
         >
+        <div class="l-c-t">
           <div class="user-info">
+            <div class="user-avator">
+              <img :src="userimage" class="user-image" alt />
+              <div class="pulse"></div>
+              <div class="pulse2"></div>
+            </div>
+            <div class="user-info-cont">
+              <div class="user-info-name">
+                {{ store.state.userInfo.username }}
+              </div>
+              <div class="user-root">{{ store.state.userInfo.rolename }}</div>
+            </div>
+          </div>
+          <div class="ipbox">
+            <div class="txtip-box">
+              <div class="ipcont ipleft">
+                <div>上次登录时间</div>
+                <div class="ipcolor">
+                  {{ store.state.userInfo.lastLoginTime.slice(0, 10) }}
+                </div>
+              </div>
+              <div class="ipcont">
+                <div>登录IP</div>
+                <div class="ipcolor">{{ store.state.userInfo.ip }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="l-c-b">
+          <div class="lebo-box">
+            <div class="lebo-icon">
+              <div class="lebo-img">
+                <img src="../../assets/images/home1.png" alt="" />
+              </div>
+              <div class="lebo-txt">订单</div>
+            </div>
+            <div class="lebo-icon">
+              <div class="lebo-img">
+                <img src="../../assets/images/home2.png" alt="" />
+              </div>
+              <div class="lebo-txt">投诉</div>
+            </div>
+            <div class="lebo-icon">
+              <div class="lebo-img">
+                <img src="../../assets/images/home3.png" alt="" />
+              </div>
+              <div class="lebo-txt">咨询</div>
+            </div>
+            <div class="lebo-icon">
+              <div class="lebo-img">
+                <img src="../../assets/images/home4.png" alt="" />
+              </div>
+              <div class="lebo-txt">评论</div>
+            </div>
+          </div>
+        </div>
+          <!-- <div class="user-info">
             <div class="user-avator">
               <img :src="userimage" class="user-image" alt />
               <div class="pulse"></div>
@@ -66,8 +116,8 @@
               </div>
               <div class="lebo-txt">评论</div>
             </div>
-          </div>
-        </el-card>
+          </div> -->
+        </div>
         <!-- <el-card shadow="hover" style="height:252px;">
           <div slot="header" class="clearfix">
             <span>语言详情</span>
@@ -79,7 +129,7 @@
         </el-card> -->
       </el-col>
       <!-- 右侧 -->
-      <el-col :span="18" style="min-height: 830px; height: 100%">
+      <el-col :span="18" style=" height: 100%; min-height: 430px;">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card shadow="hover" :body-style="{ padding: '20px' }">
@@ -280,63 +330,8 @@ export default {
       ],
       tableData: [],
       //  localStorage.getItem("token")
-      // name:"我的光",
-      todoList: [
-        {
-          title: "今天要修复100个bug",
-          status: false,
-        },
-        {
-          title: "今天要修复100个bug",
-          status: false,
-        },
-        {
-          title: "今天要写100行代码加几个bug吧",
-          status: false,
-        },
-        {
-          title: "今天要修复100个bug",
-          status: false,
-        },
-        {
-          title: "今天要修复100个bug",
-          status: true,
-        },
-        {
-          title: "今天要写100行代码加几个bug吧",
-          status: true,
-        },
-      ],
-      data: [
-        {
-          name: "2018/09/04",
-          value: 1083,
-        },
-        {
-          name: "2018/09/05",
-          value: 941,
-        },
-        {
-          name: "2018/09/06",
-          value: 1139,
-        },
-        {
-          name: "2018/09/07",
-          value: 816,
-        },
-        {
-          name: "2018/09/08",
-          value: 327,
-        },
-        {
-          name: "2018/09/09",
-          value: 228,
-        },
-        {
-          name: "2018/09/10",
-          value: 1065,
-        },
-      ],
+      todoList: [],
+      data: [],
       options: {
         title: "最近七天每天的用户访问量",
         showValue: false,
@@ -499,9 +494,9 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  height: 240px;
+  /* padding-bottom: 20px;
+  margin-bottom: 20px; */
+  height: 75%;
 }
 
 .user-avator {
@@ -642,6 +637,33 @@ export default {
 .mgb20 {
   margin-bottom: 20px;
 }
+.mgb20top {
+  margin-bottom: 20px;
+  max-width: 480px;
+  min-width: 250px;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 5px;
+  min-height: 430px;
+
+ 
+   height: calc(100% + 2px);
+}
+.l-c-t{
+  flex: 2;
+  /* height: 100%;
+  width: 100%; */
+  /* background: #1aa2dc; */
+}
+.l-c-b{
+  flex: 3;
+  /* background: pink; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .todo-item {
   font-size: 14px;
@@ -689,7 +711,7 @@ export default {
   font-weight: 900;
 }
 .lebo-box {
-  margin-top: 60px;
+  /* margin-top: 60px; */
   height: 332px;
   width: 100%;
   display: flex;
@@ -707,7 +729,6 @@ export default {
   font-family: SourceHanSansCN;
   font-weight: 400;
   color: #2983b7;
-
   /* padding: 25px; */
 }
 .lebo-img {
@@ -716,12 +737,83 @@ export default {
   height: 38px;
   overflow: hidden;
 }
-.lebo-img img {
-  width: 100%;
-}
 .lebo-txt {
   margin-left: 20px;
 }
+@media screen and (max-height: 800px) {
+  .lebo-box {
+  /* margin-top: 60px; */
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* background: red; */
+}
+  .l-c-b{
+    flex: 3;
+    /* background: red; */
+  }
+  .lebo-icon {
+  margin: 10px;
+  width: 40%;
+  height: 44%;
+  background: linear-gradient(180deg, #f3fcff, #e4f6ff);
+  border-radius: 20px;
+  font-size: 18px;
+  font-family: SourceHanSansCN;
+}
+.lebo-img {
+  margin: 10px;
+  margin-left: 20px;
+  width: 35px;
+  height: 38px;
+  overflow: hidden;
+}
+
+}
+@media screen and (max-height: 680px) {
+  .lebo-box {
+  /* margin-top: 60px; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  /* background: red; */
+}
+  .l-c-b{
+    flex: 3;
+  }
+  .lebo-icon {
+  margin: 0 2px;
+  margin-top: 14px;
+  width: 22%;
+  height: 84px;
+  background: linear-gradient(180deg, #f3fcff, #e4f6ff);
+  border-radius: 20px;
+  font-size: 14px;
+  font-family: SourceHanSansCN;
+}
+.lebo-img {
+  margin: 10px;
+  margin-left: 12px;
+  width: 35px;
+  height: 38px;
+  overflow: hidden;
+}
+.lebo-txt{
+  margin-left: 10px;
+}
+
+}
+
+
+.lebo-img img {
+  width: 100%;
+}
+
 .grid-num-z {
   margin-left: -4px;
   font-size: 40px;

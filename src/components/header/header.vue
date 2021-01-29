@@ -41,7 +41,7 @@
             </el-tooltip>
           </div>
           <!-- 消息中心 -->
-          <div class="btn-bell header-btn">
+          <div class="btn-bell header-btn" >
             <el-tooltip
               effect="dark"
               :content="message ? `有${message}条未读消息` : `消息中心`"
@@ -115,7 +115,7 @@ export default {
       userimage:
         "https://travel.gxucreate.com/travelbh" + store.state.userInfo.avatar,
       fullscreen: false, //是否全屏属性
-      message: 2, //消息数量
+      message: '', //消息数量
       username: "我的光啊", //用户名称
     };
   },
