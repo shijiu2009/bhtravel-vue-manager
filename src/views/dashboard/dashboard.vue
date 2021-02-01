@@ -548,6 +548,7 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  
 }
 
 /* 保持大小不变的小圆圈  */
@@ -582,26 +583,6 @@ export default {
   border-radius: 50%;
 }
 @keyframes warn {
-  /* 0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  25% {
-    transform: scale(0);
-    opacity: 0.1;
-  }
-  50% {
-    transform: scale(0.1);
-    opacity: 0.3;
-  }
-  75% {
-    transform: scale(0.5);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  } */
   0% {
     transform: scale(0);
     opacity: 0;
@@ -670,11 +651,13 @@ export default {
   height: calc(100% + 2px);
 }
 .l-c-t {
-  flex: 2;
+  /* flex: 2; */
   /* height: 100%;
   width: 100%; */
   /* background: #1aa2dc; */
   /* padding-top: 10px; */
+    height: 345px;
+
 }
 .l-c-b {
   flex: 3;
@@ -682,6 +665,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .todo-item {
