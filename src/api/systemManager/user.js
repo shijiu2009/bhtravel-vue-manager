@@ -13,9 +13,13 @@ let getDetail = (data) => {
 let changePassword = (data) => {
     return api.post("/api/manager/user/changeUserPasswd", data);
 }
+let changePasswordMerchant = (data) => {
+    return api.post("/api/travel/tradingUser/changePasswd", data);
+}
 
 export default {
     getList,
     getDetail,
-    changePassword
+    changePassword,
+    changePasswordMerchant
 }

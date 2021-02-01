@@ -55,6 +55,7 @@ const user = {
                         console.log(result);
                         commit('SET_TOKEN', result.data.token);
                         //对象串化
+                        result.data._root = true
                         localStorage.setItem("userInfo", JSON.stringify(result.data))
                         //对象解析
                         // console.log(JSON.parse(localStorage.getItem('userInfo')))

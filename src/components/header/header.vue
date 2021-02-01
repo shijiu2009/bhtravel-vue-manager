@@ -41,7 +41,7 @@
             </el-tooltip>
           </div>
           <!-- 消息中心 -->
-          <div class="btn-bell header-btn" >
+          <div class="btn-bell header-btn">
             <el-tooltip
               effect="dark"
               :content="message ? `有${message}条未读消息` : `消息中心`"
@@ -120,7 +120,7 @@ export default {
       userimage:
         "https://travel.gxucreate.com/travelbh" + store.state.userInfo.avatar,
       fullscreen: false, //是否全屏属性
-      message: '', //消息数量
+      message: "", //消息数量
       username: "我的光啊", //用户名称
     };
   },
@@ -151,20 +151,37 @@ export default {
       this.dialogPassword = !this.dialogPassword;
     },
     confirmPassword: function () {
-      api.changePassword(this.passwordParams).then((result) => {
-        if (result.status) {
-          alert(result.msg);
-          this.dialogPassword = false;
-          this.logoutFun();
-        } else {
-          alert(result.msg);
-          this.passwordParams = {
-            userId: this.$store.state.user.userInfo.userId,
-            newpass1: "",
-            newpass2: "",
-          };
-        }
-      });
+      if (this.store.state.userInfo._root) {
+        api.changePassword(this.passwordParams).then((result) => {
+          if (result.status) {
+            alert(result.msg);
+            this.dialogPassword = false;
+            this.logoutFun();
+          } else {
+            alert(result.msg);
+            this.passwordParams = {
+              userId: this.$store.state.user.userInfo.userId,
+              newpass1: "",
+              newpass2: "",
+            };
+          }
+        });
+      } else {
+        api.changePasswordMerchant(this.passwordParams).then((result) => {
+          if (result.status) {
+            alert(result.msg);
+            this.dialogPassword = false;
+            this.logoutFun();
+          } else {
+            alert(result.msg);
+            this.passwordParams = {
+              userId: this.$store.state.user.userInfo.userId,
+              newpass1: "",
+              newpass2: "",
+            };
+          }
+        });
+      }
     },
     //展开或缩放菜单
     openMenu: function () {
