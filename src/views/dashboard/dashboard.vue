@@ -23,7 +23,11 @@
                 <div class="ipcont ipleft">
                   <div>上次登录时间</div>
                   <div class="ipcolor">
-                    {{ store.state.userInfo.lastLoginTime ? store.state.userInfo.lastLoginTime.slice(0, 10) : '' }}
+                    {{
+                      store.state.userInfo.lastLoginTime
+                        ? store.state.userInfo.lastLoginTime.slice(0, 10)
+                        : ""
+                    }}
                   </div>
                 </div>
                 <div class="ipcont">
@@ -36,11 +40,12 @@
           <div class="l-c-b">
             <div class="lebo-box">
               <div class="lebo-icon">
-                <router-link :to="{ path: OrouterArr[tabIndex] }">
+                <!-- <router-link :to="{ path: OrouterArr[tabIndex] }"> -->
+                <router-link to="/travel/travelNotesList">
                   <div class="lebo-img">
                     <img src="../../assets/images/home1.png" alt="" />
                   </div>
-                  <div class="lebo-txt">订单</div>
+                  <div class="lebo-txt">游记</div>
                 </router-link>
               </div>
               <div class="lebo-icon">
@@ -52,11 +57,12 @@
                 </router-link>
               </div>
               <div class="lebo-icon">
-                <router-link :to="{ path: ZrouterArr[tabIndex] }">
+                <!-- <router-link :to="{ path: ZrouterArr[tabIndex] }"> -->
+                <router-link to="/travel/leisureList">
                   <div class="lebo-img">
                     <img src="../../assets/images/home3.png" alt="" />
                   </div>
-                  <div class="lebo-txt">统计</div>
+                  <div class="lebo-txt">娱乐</div>
                 </router-link>
               </div>
               <div class="lebo-icon">
@@ -272,20 +278,20 @@ export default {
         "coutryProjectOrderList",
         "peripheryTravelOrderList",
       ], //api接口地址
-      OrouterArr: [
-        "/travel/attractionList",
-        "/travel/hotelOrderList",
-        "/travel/homestayOrderList",
-        "/travel/countryTravelOrderList",
-        "/travel/peripheryOrderList",
-      ], //订单路由列表
-      ZrouterArr: [
-        "/travel/ticketOrderCountList",
-        "/travel/hotelRoomOrderCountList",
-        "/travel/homestayRoomOrderCountList",
-        "/travel/countryProjectOrderCountList",
-        "/travel/peripherySubOrderCountList",
-      ], //统计路由列表
+      // OrouterArr: [
+      //   "/travel/attractionList",
+      //   "/travel/hotelOrderList",
+      //   "/travel/homestayOrderList",
+      //   "/travel/countryTravelOrderList",
+      //   "/travel/peripheryOrderList",
+      // ], //订单路由列表
+      // ZrouterArr: [
+      //   "/travel/ticketOrderCountList",
+      //   "/travel/hotelRoomOrderCountList",
+      //   "/travel/homestayRoomOrderCountList",
+      //   "/travel/countryProjectOrderCountList",
+      //   "/travel/peripherySubOrderCountList",
+      // ], //统计路由列表
       tableData: [],
       //  localStorage.getItem("token")
       todoList: [],
@@ -630,7 +636,6 @@ export default {
   margin-top: 10px;
   display: flex;
   padding: 0 10px;
-
 }
 .user-info-cont div:first-child {
   font-size: 30px;

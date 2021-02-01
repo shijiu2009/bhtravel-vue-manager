@@ -32,7 +32,7 @@ const user = {
         },
         SAVE_USER:(state,userinfo)=>{
             state.userInfo = userinfo;
-            console.log(state.userInfo)
+            // console.log(state.userInfo)
         }
     },
     actions: {
@@ -52,7 +52,7 @@ const user = {
                 //登录
                 login.login(data).then((result) => {
                     if (result.status) {
-                        console.log(result);
+                        // console.log(result);
                         commit('SET_TOKEN', result.data.token);
                         //对象串化
                         result.data._root = true
@@ -74,7 +74,7 @@ const user = {
                         }).then((result) => {
                             if (result.success) {
                                 commit('SET_TOKEN', result.token);
-                                console.log(result);
+                                // console.log(result);
                                 //对象串化
                                 localStorage.setItem("userInfo", JSON.stringify(result))
                                 // console.log(JSON.parse(localStorage.getItem('userInfo')))

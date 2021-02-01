@@ -151,37 +151,26 @@ export default {
       this.dialogPassword = !this.dialogPassword;
     },
     confirmPassword: function () {
+      let _api
       if (this.store.state.userInfo._root) {
-        api.changePassword(this.passwordParams).then((result) => {
-          if (result.status) {
-            alert(result.msg);
-            this.dialogPassword = false;
-            this.logoutFun();
-          } else {
-            alert(result.msg);
-            this.passwordParams = {
-              userId: this.$store.state.user.userInfo.userId,
-              newpass1: "",
-              newpass2: "",
-            };
-          }
-        });
+        _api = api.changePassword;
       } else {
-        api.changePasswordMerchant(this.passwordParams).then((result) => {
-          if (result.status) {
-            alert(result.msg);
-            this.dialogPassword = false;
-            this.logoutFun();
-          } else {
-            alert(result.msg);
-            this.passwordParams = {
-              userId: this.$store.state.user.userInfo.userId,
-              newpass1: "",
-              newpass2: "",
-            };
-          }
-        });
+        _api = api.changePasswordMerchant;
       }
+      _api(this.passwordParams).then((result) => {
+        if (result.status) {
+          alert(result.msg);
+          this.dialogPassword = false;
+          this.logoutFun();
+        } else {
+          alert(result.msg);
+          this.passwordParams = {
+            userId: this.$store.state.user.userInfo.userId,
+            newpass1: "",
+            newpass2: "",
+          };
+        }
+      });
     },
     //展开或缩放菜单
     openMenu: function () {
