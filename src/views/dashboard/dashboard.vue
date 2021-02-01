@@ -23,7 +23,7 @@
                 <div class="ipcont ipleft">
                   <div>上次登录时间</div>
                   <div class="ipcolor">
-                    {{ store.state.userInfo.lastLoginTime.slice(0, 10) }}
+                    {{ store.state.userInfo.lastLoginTime ? store.state.userInfo.lastLoginTime.slice(0, 10) : '' }}
                   </div>
                 </div>
                 <div class="ipcont">
@@ -56,7 +56,7 @@
                   <div class="lebo-img">
                     <img src="../../assets/images/home3.png" alt="" />
                   </div>
-                  <div class="lebo-txt">咨询</div>
+                  <div class="lebo-txt">统计</div>
                 </router-link>
               </div>
               <div class="lebo-icon">
@@ -317,11 +317,12 @@ export default {
     // }
   },
   created() {
+    // console.log(this.$store.state.userInfo.ip);
     this.handleListener();
     this.changeDate();
     this.getdata(this.urlarr[0]); //表格数据请求
     this.getnum();
-    console.log(this.$store.state.tableHeight);
+    // console.log(this.$store.state.tableHeight);
   },
   activated() {
     this.handleListener();
@@ -537,6 +538,10 @@ export default {
   flex: 1;
   font-size: 14px;
   color: #999;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* 保持大小不变的小圆圈  */
@@ -614,7 +619,7 @@ export default {
 }
 
 .user-root {
-  width: 88px;
+  /* width: 88px; */
   height: 30px;
   background: linear-gradient(153deg, #40c6f9, #1aa2dc);
   box-shadow: 0px 0px 66px 0px rgba(66, 139, 201, 0.24);
@@ -623,6 +628,9 @@ export default {
   line-height: 30px;
   color: #fff;
   margin-top: 10px;
+  display: flex;
+  padding: 0 10px;
+
 }
 .user-info-cont div:first-child {
   font-size: 30px;

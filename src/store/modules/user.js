@@ -71,9 +71,13 @@ const user = {
                             name: data.username,
                             passwd: passwd
                         }).then((result) => {
-                            console.log(result);
                             if (result.success) {
                                 commit('SET_TOKEN', result.token);
+                                console.log(result);
+                                //对象串化
+                                localStorage.setItem("userInfo", JSON.stringify(result))
+                                // console.log(JSON.parse(localStorage.getItem('userInfo')))
+                                commit('SAVE_USER',result)
                                 resolve({
                                     status: true
                                 });
