@@ -152,19 +152,26 @@ export default {
     },
     confirmPassword: function () {
       let _api
+      let getpro = this.passwordParams
       if (this.store.state.userInfo._root) {
         _api = api.changePassword;
+
       } else {
         _api = api.changePasswordMerchant;
+        getpro = {}
+        getpro.id = this.passwordParams.userId
+        getpro.newpass1 = this.passwordParams.newpass1
+        getpro.newpass2 = this.passwordParams.newpass2
       }
-      _api(this.passwordParams).then((result) => {
-        if (result.status) {
-          alert(result.msg);
+      _api(getpro).then((result) => {
+        if (result.status || result.success) {
+          console.log(result);
+          alert(result.msg ? result.msg : '密码修改成功');
           this.dialogPassword = false;
           this.logoutFun();
         } else {
-          alert(result.msg);
-          this.passwordParams = {
+          alert(result.msg ? result.msg : '密码修改失败');
+        this.passwordParams = {
             userId: this.$store.state.user.userInfo.userId,
             newpass1: "",
             newpass2: "",
