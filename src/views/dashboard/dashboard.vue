@@ -172,7 +172,7 @@
           <el-table
             :data="tableData"
             v-loading="loading"
-            max-height="570"
+            :max-height="$store.state.tableHeight - 392"
             style="width: 100%"
           >
             <el-table-column label="产品" header-align="" width="280">
@@ -321,6 +321,7 @@ export default {
     this.changeDate();
     this.getdata(this.urlarr[0]); //表格数据请求
     this.getnum();
+    console.log(this.$store.state.tableHeight);
   },
   activated() {
     this.handleListener();
@@ -337,6 +338,7 @@ export default {
         })
         .catch(() => {
           console.log("请求失败");
+          this.$message.error("请求失败");
         });
     },
     //请求表格
@@ -346,13 +348,14 @@ export default {
         .post("/api/travel/index/" + url)
         .then((result) => {
           this.loading = false; //关掉加载动画
-          console.log(result);
+          // console.log(result);
           this.tableData = result.list;
           // console.log(this.tableData);
         })
         .catch(() => {
-          // this.loading = false; //关掉加载动画
+          this.loading = false; //关掉加载动画
           console.log("请求失败");
+          this.$message.error("请求失败");
         });
     },
     //选择栏
@@ -374,8 +377,51 @@ export default {
       });
     },
     handleListener() {},
+    //防抖函数
     renderChart() {},
+    debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    },
   },
+  mounted() {
+    let that = this;
+    // 添加resize的回调函数，但是只允许它每300毫秒执行一次
+    window.addEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  beforeDestroy() {
+    // 在组件生命周期结束的时候销毁。
+    let that = this;
+    window.removeEventListener(
+      "resize",
+      this.debounce(function () {
+        that.$store.state.tableHeight = window.innerHeight;
+      }, 300)
+    );
+  },
+  //keep-alive 生命周期，
+  // activated() {
+  //   //flow=true,则刷新界面
+  //   if (this.$route.params && this.$route.params.flow) {
+  //     this.getList();
+  //   }
+  // },
 };
 </script>
 
