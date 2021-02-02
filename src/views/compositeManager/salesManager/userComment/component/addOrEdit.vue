@@ -4,22 +4,56 @@
       <el-form ref="form" :model="commentInfo" label-width="108px">
         <div class="form_item">
           <el-form-item label="评论对象类别" :required="true">
-            <el-input v-model="ctypeList[commentInfo.type].label" style="width:400px" disabled></el-input>
+            <el-input
+              v-model="ctypeList[commentInfo.type].label"
+              style="width: 400px"
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="评论对象id" :required="true">
-            <el-input v-model="commentInfo.objectId" style="width:400px" disabled></el-input>
+            <el-input
+              v-model="commentInfo.objectId"
+              style="width: 400px"
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="评论对象名称" :required="true">
-            <el-input v-model="commentInfo.objectName" style="width:400px" disabled></el-input>
+            <el-input
+              v-model="commentInfo.objectName"
+              style="width: 400px"
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="评论用户ID" :required="true">
-            <el-input v-model="commentInfo.userId" style="width:400px" disabled></el-input>
+            <el-input
+              v-model="commentInfo.userId"
+              style="width: 400px"
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="评论用户账号" :required="true">
-            <el-input v-model="commentInfo.userName" style="width:400px" disabled></el-input>
+            <el-input
+              v-model="commentInfo.userName"
+              style="width: 400px"
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="星级" :required="true" class="rank">
             <el-rate v-model="commentInfo.star" show-text disabled> </el-rate>
+          </el-form-item>
+          <el-form-item
+            label="评论图片"
+            :required="true"
+            class="rank"
+            v-if="photos.length > 0"
+          >
+            <div class="block" v-for="image in photos" :key="image">
+              <el-image
+                style="width: 100px; height: 100px"
+                :src="image"
+                :fit="'fit'"
+              ></el-image>
+            </div>
           </el-form-item>
           <el-form-item label="审核" :required="true">
             <el-select v-model="commentInfo.reviewed" placeholder="请选择">
@@ -31,7 +65,7 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="评论内容" :required="true" >
+          <el-form-item label="评论内容" :required="true">
             <el-input
               type="textarea"
               rows="10"
@@ -93,6 +127,8 @@ export default {
         replyContent: "", //回复内容
         reply: 0,
       },
+      //图片集
+      photos: [],
       //提示信息
       tips: {},
       // 评论对象类别列表
@@ -194,6 +230,9 @@ export default {
           .detailedComment({ id: this.$route.params.id })
           .then((result) => {
             this.commentInfo = result.comment;
+            if (this.commentInfo.photos != null && this.commentInfo.photos != "") {
+              this.photos = this.commentInfo.photos.split(",");
+            }
           })
           .catch(() => {
             this.$message.error("数据获取失败");
@@ -265,12 +304,12 @@ export default {
 </script>
 
 <style scoped>
-.rank{
+.rank {
   display: flex;
   align-items: center;
 }
-.rank >>> .el-form-item__content{
+.rank >>> .el-form-item__content {
   margin-left: 0px !important;
 }
-</style>>
-
+</style>
+>
