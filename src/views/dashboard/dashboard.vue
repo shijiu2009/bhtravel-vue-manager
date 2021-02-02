@@ -155,8 +155,8 @@
             ></el-tab-pane>
             <el-tab-pane
               :label="`乡村旅游 ${
-                topnumData.peripheryTravelViews
-                  ? ' (' + topnumData.peripheryTravelViews + ')'
+                topnumData.coutryProjectOrderCounts
+                  ? ' (' + topnumData.coutryProjectOrderCounts + ')'
                   : ''
               }`"
               name="fourth"
