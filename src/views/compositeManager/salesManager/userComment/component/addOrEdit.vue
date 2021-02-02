@@ -47,10 +47,11 @@
             class="rank"
             v-if="photos.length > 0"
           >
-            <div class="block" v-for="image in photos" :key="image">
+            <div class="block" v-for="url in photos" :key="url">
               <el-image
+                v-if="url != null && url != ''"
                 style="width: 100px; height: 100px"
-                :src="image"
+                :src="url"
                 :fit="'fit'"
               ></el-image>
             </div>
