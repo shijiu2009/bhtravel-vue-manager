@@ -231,6 +231,7 @@ export default {
           .detailedComment({ id: this.$route.params.id })
           .then((result) => {
             this.commentInfo = result.comment;
+            this.photos = [];
             if (this.commentInfo.photos != null && this.commentInfo.photos != "") {
               this.photos = this.commentInfo.photos.split(",");
             }
