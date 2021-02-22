@@ -83,10 +83,7 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="提前预定天数">
-                <el-input-number
-                  v-model="info.advanceDay"
-                  :min="0"
-                ></el-input-number>
+                <el-input-number v-model="info.advanceDay" :min="0"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -98,10 +95,7 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="游玩人数">
-                <el-input-number
-                  v-model="info.players"
-                  :min="0"
-                ></el-input-number>
+                <el-input-number v-model="info.players" :min="0"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -115,10 +109,7 @@
             <el-input-number v-model="info.days" :min="0"></el-input-number>
           </el-form-item> -->
           <el-form-item label="预定须知" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.notice"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
+            <vue-ueditor-wrap v-model="info.notice" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
@@ -127,10 +118,7 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="产品特色" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.edge"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
+            <vue-ueditor-wrap v-model="info.edge" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="费用说明" :required="true">
             <vue-ueditor-wrap
@@ -291,16 +279,11 @@
               class="text item"
             >
               {{ item.name
-              }}<el-button type="text" @click="deleteProduct(index)"
-                >删除</el-button
-              >
+              }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
           <el-form-item label="热门推荐" class="buttom-con">
-            <el-radio-group
-              v-model="info.indexRecommend"
-              class="buttom-con-son"
-            >
+            <el-radio-group v-model="info.indexRecommend" class="buttom-con-son">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
@@ -342,11 +325,7 @@
       </el-form>
 
       <!-- 对话框 -->
-      <el-dialog
-        title="套餐价格"
-        :visible.sync="dialogTableVisible"
-        class="dialog"
-      >
+      <el-dialog title="套餐价格" :visible.sync="dialogTableVisible" class="dialog">
         <el-form>
           <el-row>
             <el-col :span="12">
@@ -365,34 +344,23 @@
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="门市价">
-                <el-input
-                  v-model="storePrice"
-                  placeholder="请输入内容"
-                ></el-input>
+                <el-input v-model="storePrice" placeholder="请输入内容"></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="结算底价">
-                <el-input
-                  v-model="flooerprice"
-                  placeholder="请输入内容"
-                ></el-input>
+                <el-input v-model="flooerprice" placeholder="请输入内容"></el-input>
               </el-form-item>
             </el-col>
             <el-col :offset="1" :span="3">
               <el-form-item label="App售价">
-                <el-input
-                  v-model="appPrice"
-                  placeholder="请输入内容"
-                ></el-input>
+                <el-input v-model="appPrice" placeholder="请输入内容"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-button type="success" @click="addTablePrice()">添加</el-button>
-            <el-button type="danger" @click="deleteTablePrice()"
-              >全部删除</el-button
-            >
+            <el-button type="danger" @click="deleteTablePrice()">全部删除</el-button>
           </el-row>
         </el-form>
         <el-table :data="subPrices">
@@ -456,7 +424,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/reserveManager/periphery.js";
-import { mapMutations,mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import { deleteKeys } from "@/api/deleteKeys.js";
 import baseURL from "@/config/baseUrl.js";
@@ -473,7 +441,7 @@ export default {
     UploadFile,
     VueUeditorWrap,
     baiduMap,
-    productDialog
+    productDialog,
   },
   data() {
     return {
@@ -577,8 +545,7 @@ export default {
       pickerOptions: {
         disabledDate(time) {
           return (
-            time.getTime() <
-            new Date(new Date(new Date().toLocaleDateString()).getTime())
+            time.getTime() < new Date(new Date(new Date().toLocaleDateString()).getTime())
           );
         },
         // shortcuts: [
@@ -785,9 +752,7 @@ export default {
         this.info["psubList[" + i + "].id"] = this.psubList[i].id;
         this.info["psubList[" + i + "].info"] = this.psubList[i].info;
         this.info["psubList[" + i + "].title"] = this.psubList[i].title;
-        this.info["psubList[" + i + "].theDefault"] = this.psubList[
-          i
-        ].theDefault;
+        this.info["psubList[" + i + "].theDefault"] = this.psubList[i].theDefault;
         this.info["psubList[" + i + "].peoNum"] = this.psubList[i].peoNum;
         this.info["psubList[" + i + "].price"] = this.psubList[i].price;
         this.info["psubList[" + i + "].sort"] = this.psubList[i].sort;
@@ -798,9 +763,9 @@ export default {
             this.info[
               "psubList[" + i + "].prices[" + j + "].storePrice"
             ] = this.cachePrices[i][j].storePrice;
-            this.info[
-              "psubList[" + i + "].prices[" + j + "].price"
-            ] = this.cachePrices[i][j].price;
+            this.info["psubList[" + i + "].prices[" + j + "].price"] = this.cachePrices[
+              i
+            ][j].price;
             this.info[
               "psubList[" + i + "].prices[" + j + "].flooerprice"
             ] = this.cachePrices[i][j].flooerprice;
@@ -825,9 +790,7 @@ export default {
             i
           ].response.filePath;
         } else {
-          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(
-            baseURL.imgUrl
-          );
+          var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(baseURL.imgUrl);
           let url = this.uploadGroupOne.fileList[i].url.substr(pos);
           this.info["ptImgs[" + i + "].path"] = url;
         }
@@ -885,6 +848,10 @@ export default {
     },
     //获取详情信息
     getAdvert: function () {
+      this.priceTime = "";
+      this.storePrice = "";
+      this.flooerprice = "";
+      this.appPrice = "";
       this.uploadGroupOne.fileList = [];
       this.uploadGroupTitle.fileList = [];
       this.uploadGroupThumb.fileList = [];
@@ -910,10 +877,7 @@ export default {
               this.psubList = result.publist;
             }
             for (let i = 0; i < result.publist.length; i++) {
-              if (
-                result.publist[i].prices != null &&
-                result.publist[i].prices != ""
-              ) {
+              if (result.publist[i].prices != null && result.publist[i].prices != "") {
                 this.cachePrices[i] = result.publist[i].prices;
               }
             }
