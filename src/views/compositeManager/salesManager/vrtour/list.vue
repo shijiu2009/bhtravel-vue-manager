@@ -311,9 +311,10 @@ export default {
   //keep-alive 生命周期，
   activated() {
     //flow=true,则刷新界面
-    if (this.$route.params && this.$route.params.flow) {
+    console.log(this.$route.params)
+    // if (this.$route.params && this.$route.params.flow) {
       this.getList();
-    }
+    // }
   },
 };
 </script>
