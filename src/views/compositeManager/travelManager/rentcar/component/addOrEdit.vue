@@ -4,11 +4,11 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="名称">
-            <el-input v-model="info.name" style="width:400px"></el-input>
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="车型">
-            <el-input v-model="info.type" style="width:400px"></el-input>
+            <el-input v-model="info.type" style="width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="天数">
@@ -16,19 +16,19 @@
           </el-form-item>
 
           <el-form-item label="价格">
-            <el-input v-model="info.price" style="width:400px"></el-input>
+            <el-input v-model="info.price" style="width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="级别">
-            <el-input v-model="info.level" style="width:400px"></el-input>
+            <el-input v-model="info.level" style="width: 400px"></el-input>
           </el-form-item>
 
           <!-- <el-form-item label="座位">
             <el-input v-model="info.seat"></el-input>
           </el-form-item> -->
 
-          <el-form-item label="电话" >
-            <el-input v-model="info.phone" style="width:400px"></el-input>
+          <el-form-item label="电话">
+            <el-input v-model="info.phone" style="width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="排序">
@@ -176,6 +176,7 @@ export default {
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -183,11 +184,13 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     //获取详情信息
     getAdvert: function () {
@@ -198,7 +201,10 @@ export default {
             this.uploadGroupTitle.fileList = [];
             this.uploadGroupThumb.fileList = [];
             this.info = result.rentcar;
-            if (result.rentcar.titleimgurl != null && result.rentcar.titleimgurl != "") {
+            if (
+              result.rentcar.titleimgurl != null &&
+              result.rentcar.titleimgurl != ""
+            ) {
               this.uploadGroupTitle.fileList.push({
                 url: baseURL.releaseUrl + result.rentcar.titleimgurl,
               });

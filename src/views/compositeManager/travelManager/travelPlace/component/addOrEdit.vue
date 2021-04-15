@@ -3,8 +3,12 @@
     <div class="form-box">
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
-          <el-form-item label="文旅场所名称" >
-            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
+          <el-form-item label="文旅场所名称">
+            <el-input
+              v-model="info.name"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -40,7 +44,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="开馆日期">
-            <el-input v-model="info.openDay" style="width:400px"></el-input>
+            <el-input v-model="info.openDay" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="开馆时间">
             <el-time-picker
@@ -74,7 +78,8 @@
           </el-row>
           <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
           <el-form-item label="介绍（微信小程序、app）" :required="true">
-            <vue-ueditor-wrap style="width:731px"
+            <vue-ueditor-wrap
+              style="width: 731px"
               v-model="info.contentMini"
               :config="myConfig"
             ></vue-ueditor-wrap>
@@ -110,7 +115,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/travelPlace.js";
-import { mapMutations,mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
 //百度地图
@@ -233,11 +238,13 @@ export default {
       this.info.countyxcode = this.baiduInfo.countyxcode;
       for (let i = 0; i < this.uploadGroupPhotos.fileList.length; i++) {
         if ("response" in this.uploadGroupPhotos.fileList[i]) {
-          this.info["photos[" + i + "].imgPath"] = this.uploadGroupPhotos.fileList[
-            i
-          ].response.filePath;
+          this.info[
+            "photos[" + i + "].imgPath"
+          ] = this.uploadGroupPhotos.fileList[i].response.filePath;
         } else {
-          var pos = this.uploadGroupPhotos.fileList[i].url.lastIndexOf(baseURL.imgUrl);
+          var pos = this.uploadGroupPhotos.fileList[i].url.lastIndexOf(
+            baseURL.imgUrl
+          );
           let url = this.uploadGroupPhotos.fileList[i].url.substr(pos);
           this.info["photos[" + i + "].imgPath"] = url;
         }
@@ -275,6 +282,7 @@ export default {
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -282,11 +290,13 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     //获取详情信息
     getTravelPlace: function () {
@@ -304,15 +314,23 @@ export default {
           this.$refs.baiduMap.getClickInfo;
           this.$refs.baiduMap.getLngAndLat();
           this.$refs.baiduMap.getProvinces();
-          if (result.travelPlace.imgPath != null && result.travelPlace.imgPath != "") {
+          if (
+            result.travelPlace.imgPath != null &&
+            result.travelPlace.imgPath != ""
+          ) {
             this.uploadGroupTitle.fileList.push({
               url: baseURL.releaseUrl + result.travelPlace.imgPath,
             });
           }
-          if (result.travelPlace.photos != null && result.travelPlace.photos != "") {
+          if (
+            result.travelPlace.photos != null &&
+            result.travelPlace.photos != ""
+          ) {
             for (let i = 0; i < result.travelPlace.photos.length; i++) {
               // this.photos.push(result.travelPlace.photos[i]);
-              let uploadGroupPhotos = JSON.parse(JSON.stringify(this.uploadGroupPhotos));
+              let uploadGroupPhotos = JSON.parse(
+                JSON.stringify(this.uploadGroupPhotos)
+              );
               this.uploadGroupPhotos.fileList.push({
                 url: baseURL.releaseUrl + result.travelPlace.photos[i].imgPath,
               });
@@ -381,7 +399,7 @@ export default {
 </script>
 
 <style scoped>
-.info_box  >>> .el-form-item__content{
+.info_box >>> .el-form-item__content {
   width: 400px;
 }
 </style>

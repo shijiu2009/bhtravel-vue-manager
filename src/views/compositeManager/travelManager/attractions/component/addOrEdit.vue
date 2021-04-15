@@ -328,7 +328,10 @@
           <el-button @click="close">取消</el-button>
         </el-form-item>
       </el-form>
-      <productDialog :dialogTableProduct.sync="dialogTableProducts" @SelectionComplete="SelectionComplete"></productDialog>
+      <productDialog
+        :dialogTableProduct.sync="dialogTableProducts"
+        @SelectionComplete="SelectionComplete"
+      ></productDialog>
     </div>
   </div>
 </template>
@@ -352,11 +355,11 @@ export default {
     baiduMap,
     UploadFile,
     VueUeditorWrap,
-    productDialog
+    productDialog,
   },
   data() {
     return {
-      dialogTableProducts:false,
+      dialogTableProducts: false,
       info: {
         id: "",
         name: "",
@@ -599,6 +602,7 @@ export default {
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -606,6 +610,7 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     // 添加产品
@@ -613,8 +618,8 @@ export default {
       //弹框的显示隐藏
       this.dialogTableProducts = true;
     },
-    SelectionComplete:function (val) {
-      this.selectProducts = val
+    SelectionComplete: function (val) {
+      this.selectProducts = val;
     },
     //添加门票
     addTicket: function () {
@@ -646,6 +651,7 @@ export default {
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     deleteProduct: function (index) {
       this.selectProducts.splice(index, 1);

@@ -24,10 +24,10 @@
             </el-select>
           </el-form-item> -->
           <el-form-item label="美食名称">
-            <el-input v-model="info.name" style="width:400px"></el-input>
+            <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
           <el-form-item label="副标题">
-            <el-input v-model="info.subTitle" style="width:400px"></el-input>
+            <el-input v-model="info.subTitle" style="width: 400px"></el-input>
           </el-form-item>
           <!-- <el-form-item label="今日显示价">
             <el-input v-model="info.todayPrice" style="width:400px"></el-input>
@@ -72,15 +72,29 @@
               {{ o.name }}
             </span>
           </el-card> -->
-          <el-card class="box-card" style="margin-bottom:20px" v-if="selectTradingUsers.length>0">
-            <span v-for="(item,index) in selectTradingUsers" :key="item.id" class="text item">
-              {{ item.name }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
+          <el-card
+            class="box-card"
+            style="margin-bottom: 20px"
+            v-if="selectTradingUsers.length > 0"
+          >
+            <span
+              v-for="(item, index) in selectTradingUsers"
+              :key="item.id"
+              class="text item"
+            >
+              {{ item.name
+              }}<el-button type="text" @click="deleteProduct(index)"
+                >删除</el-button
+              >
             </span>
           </el-card>
           <br />
 
           <el-form-item label="美食详情(微信,App)" :required="true">
-            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
+            <vue-ueditor-wrap
+              v-model="info.info"
+              :config="myConfig"
+            ></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="美食详情(web)" :required="true">
             <vue-ueditor-wrap v-model="info.infoWeb" :config="myConfig"></vue-ueditor-wrap>
@@ -114,43 +128,61 @@
       <!-- 对话框 -->
       <el-dialog title="关联商家" :visible.sync="dialogTableTradingUsers">
         <el-row :gutter="20" class="products-div">
-        <el-col :span="12">
-          <label class="products-label">商家名称</label
-          ><el-input v-model="productName" placeholder="商家名称"></el-input>
-        </el-col>
-        <el-col :span="6">
-            <div style="height:59px;display: flex; align-items: flex-end;">
-              <el-button type="primary" @click="searchProducts">搜 索</el-button>
+          <el-col :span="12">
+            <label class="products-label">商家名称</label
+            ><el-input v-model="productName" placeholder="商家名称"></el-input>
+          </el-col>
+          <el-col :span="6">
+            <div style="height: 59px; display: flex; align-items: flex-end">
+              <el-button type="primary" @click="searchProducts"
+                >搜 索</el-button
+              >
             </div>
-        </el-col>
-      </el-row>
+          </el-col>
+        </el-row>
 
         <el-table :data="tradingUsers" ref="tradingUsersTable">
           <el-table-column type="selection"> </el-table-column>
           <el-table-column property="username" label="登录名称" width="150">
             <template slot-scope="scope">
-              <el-input :placeholder="scope.row.username" :disabled="true"></el-input>
+              <el-input
+                :placeholder="scope.row.username"
+                :disabled="true"
+              ></el-input>
             </template>
           </el-table-column>
           <el-table-column property="name" label="登录中文名" width="150">
             <template slot-scope="scope">
-              <el-input :placeholder="scope.row.name" :disabled="true"></el-input>
+              <el-input
+                :placeholder="scope.row.name"
+                :disabled="true"
+              ></el-input>
             </template>
           </el-table-column>
           <el-table-column property="mobile" label="联系电话" width="150">
             <template slot-scope="scope">
-              <el-input :placeholder="scope.row.mobile" :disabled="true"></el-input>
+              <el-input
+                :placeholder="scope.row.mobile"
+                :disabled="true"
+              ></el-input>
             </template>
           </el-table-column>
           <el-table-column property="email" label="电子邮箱" width="150">
             <template slot-scope="scope">
-              <el-input :placeholder="scope.row.email" :disabled="true"></el-input>
+              <el-input
+                :placeholder="scope.row.email"
+                :disabled="true"
+              ></el-input>
             </template>
           </el-table-column>
-           <el-table-column label="" >
-           <template slot-scope="scope">
-          <el-button type="primary"  @click="handleDelete(scope.$index, scope.row)">添加</el-button>
-           </template>
+          <el-table-column label="">
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                @click="handleDelete(scope.$index, scope.row)"
+                >添加</el-button
+              >
+            </template>
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -165,7 +197,9 @@
         </el-pagination>
         <div slot="footer" class="dialog-footer">
           <!-- <el-button @click="dialogTableVisible = false">取 消</el-button> -->
-          <el-button type="primary" @click="confirmTradingUsers">确 定</el-button>
+          <el-button type="primary" @click="confirmTradingUsers"
+            >确 定</el-button
+          >
         </div>
       </el-dialog>
     </div>
@@ -270,13 +304,13 @@ export default {
     ...mapMutations({
       deleteTags: "DELETE_TAGSLIST",
     }),
-    handleDelete(index,item){
+    handleDelete(index, item) {
       // console.log(index,item);
       this.dialogTableTradingUsers = false;
-      this.selectTradingUsers.push(item)
+      this.selectTradingUsers.push(item);
     },
     deleteProduct: function (index) {
-      this.selectTradingUsers.splice(index,1);
+      this.selectTradingUsers.splice(index, 1);
     },
     searchProducts: function () {
       this.page.page = 1;
@@ -438,6 +472,7 @@ export default {
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -445,11 +480,13 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     //获取详情信息
     getAdvert: function () {
@@ -518,7 +555,7 @@ export default {
 </script>
 
 <style scoped>
-.rank >>> .el-form-item__content{
+.rank >>> .el-form-item__content {
   display: flex;
   align-items: center;
   height: 40px;

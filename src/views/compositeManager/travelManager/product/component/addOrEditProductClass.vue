@@ -4,13 +4,25 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="分类名称">
-            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.name"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="分类别名">
-            <el-input v-model="info.nickname" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.nickname"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="排序">
-            <el-input v-model="info.sort" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.sort"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
         </div>
         <!-- 操作按钮 -->
@@ -26,8 +38,7 @@
 import api from "@/api/productClass.js";
 import { mapMutations } from "vuex";
 export default {
-  components: {
-  },
+  components: {},
   name: "addOrEditAtlas",
   data() {
     return {
@@ -99,25 +110,26 @@ export default {
             });
           } else {
             if (this.info.id) {
-              if(result.fielderrors){
-                let errors = ''
-                for(let i=0;i<result.fielderrors.length;i++){
-                  let error = result.fielderrors[i].error
-                  errors += error+'\n'
+              if (result.fielderrors) {
+                let errors = "";
+                for (let i = 0; i < result.fielderrors.length; i++) {
+                  let error = result.fielderrors[i].error;
+                  errors += error + "\n";
                 }
                 this.$message.error(errors);
               }
             } else {
-              if(result.fielderrors){
-                let errors = ''
-                for(let i=0;i<result.fielderrors.length;i++){
-                  let error = result.fielderrors[i].error
-                  errors += error+'\n'
+              if (result.fielderrors) {
+                let errors = "";
+                for (let i = 0; i < result.fielderrors.length; i++) {
+                  let error = result.fielderrors[i].error;
+                  errors += error + "\n";
                 }
                 this.$message.error(errors);
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -125,11 +137,13 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     //获取详情信息
     getAdvert: function () {

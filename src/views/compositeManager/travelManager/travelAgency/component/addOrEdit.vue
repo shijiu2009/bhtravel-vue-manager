@@ -4,7 +4,11 @@
       <el-form ref="form" :model="info" label-width="100px">
         <div class="form_item">
           <el-form-item label="旅行社名称">
-            <el-input v-model="info.name" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.name"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
             <el-tooltip
               :content="tigs.title.content"
               placement="bottom"
@@ -22,10 +26,18 @@
             ></el-alert>
           </el-form-item>
           <el-form-item label="诚信分">
-            <el-input v-model="info.score" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.score"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-form-item label="联系方式">
-            <el-input v-model="info.contact" @change="infoChange" style="width:400px"></el-input>
+            <el-input
+              v-model="info.contact"
+              @change="infoChange"
+              style="width: 400px"
+            ></el-input>
           </el-form-item>
           <el-row>
             <el-col :span="8">
@@ -50,7 +62,7 @@
           </el-form-item> -->
           <el-form-item label="介绍（微信小程序、app）" :required="true">
             <vue-ueditor-wrap
-             style="width:731px"
+              style="width: 731px"
               v-model="info.contentMini"
               :config="myConfig"
             ></vue-ueditor-wrap>
@@ -75,7 +87,7 @@
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 <script>
 import api from "@/api/travelAgency.js";
-import { mapMutations,mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
 //百度地图
@@ -202,6 +214,7 @@ export default {
               }
             }
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         })
         .catch(() => {
           if (this.info.id) {
@@ -209,11 +222,13 @@ export default {
           } else {
             this.$message.error("数据添加失败");
           }
+          document.getElementsByClassName("content")[0].scrollTop = 0;
         });
     },
     //取消按钮事件
     close: function () {
       this.$router.go(-1);
+      document.getElementsByClassName("content")[0].scrollTop = 0;
     },
     //获取详情信息
     getTravelAgency: function () {
@@ -294,7 +309,7 @@ export default {
 </script>
 
 <style scoped>
-.info_box >>> .el-form-item__content{
+.info_box >>> .el-form-item__content {
   width: 400px;
 }
 </style>
