@@ -4,7 +4,7 @@
       <el-form ref="form" :model="info" label-width="90px">
         <div class="form_item">
           <el-form-item label="名称">
-            <el-input v-model="info.title" style="max-width:400px"></el-input>
+            <el-input v-model="info.title" style="max-width: 400px"></el-input>
           </el-form-item>
 
           <el-form-item label="封面图片">
@@ -209,7 +209,7 @@ export default {
       uploadGroupVR: {
         //文件列表
         fileList: [],
-        limitCount: 1,
+        limitCount: 20,
       },
       uploadGroupTitle: {
         //文件列表
@@ -247,7 +247,13 @@ export default {
       this.info.video = data.filePath;
     },
     uploadVR: function (data) {
-      this.info.url = data.filePath;
+      let fileUrl = data.filePath;
+      let fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+      this.uploadGroupVR.fileList.push({
+        name: fileName,
+        url: fileUrl,
+      });
+      // this.info.url += data.filePath + ",";
     },
     showChange: function () {
       if (this.info.typeId == 1) {
@@ -310,6 +316,11 @@ export default {
     },
     //提交表单
     onSubmit: function () {
+      this.info.url = ""
+      for (let i = 0; i < this.uploadGroupVR.fileList.length; i++) {
+        this.info.url += this.uploadGroupVR.fileList[i].url + ",";
+      }
+
       api
         .addOrEdit(this.info)
         .then((result) => {
@@ -361,16 +372,21 @@ export default {
         api
           .detailed({ id: this.$route.params.id })
           .then((result) => {
+            this.uploadGroupVR.fileList = [];
             this.uploadGroupTitle.fileList = [];
             this.info = result.vrtour;
             let file = result.vrtour.url;
-            let fileName = file.substring(file.lastIndexOf("/") + 1);
-            this.uploadGroupVR.fileList = [
-              {
-                name: fileName,
-                url: result.vrtour.url,
-              },
-            ];
+            let fileList = file.split(",");
+            for (let i = 0; i < fileList.length; i++) {
+              if (fileList[i] != null && fileList[i] != "") {
+                let fileUrl = fileList[i];
+                let fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+                this.uploadGroupVR.fileList.push({
+                  name: fileName,
+                  url: fileUrl,
+                });
+              }
+            }
             let file2 = result.vrtour.video;
             let fileName2 = file2.substring(file2.lastIndexOf("/") + 1);
             this.uploadGroup.fileList = [

@@ -95,6 +95,12 @@ export default {
     },
     //文件列表移除文件时的钩子
     handleRemove: function (file, fileList) {
+      for(let i=0;i<this.uploadGroup.fileList.length;i++){
+        let fileData = this.uploadGroup.fileList[i]
+        if(file.url == fileData.url){
+          this.uploadGroup.fileList.splice(i,1)
+        }
+      }
       this.hideUpload = fileList.length >= this.uploadGroup.limitCount;
     },
   },
