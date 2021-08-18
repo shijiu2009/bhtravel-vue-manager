@@ -6,13 +6,13 @@
           <el-form-item label="标题">
             <el-input v-model="info.title"></el-input>
           </el-form-item>
-          <el-form-item label="作者">
+          <!-- <el-form-item label="作者">
             <el-input v-model="info.author"></el-input>
           </el-form-item>
           <el-form-item label="简介">
             <el-input v-model="info.summary"></el-input>
-          </el-form-item>
-          <el-form-item label="发布时间">
+          </el-form-item> -->
+          <!-- <el-form-item label="发布时间">
             <el-date-picker
               v-model="info.createTime"
               align="right"
@@ -21,7 +21,7 @@
               :picker-options="pickerOptions"
             >
             </el-date-picker>
-          </el-form-item>
+          </el-form-item> -->
           <el-row>
             <el-col :span="8">
               <el-col :span="10">

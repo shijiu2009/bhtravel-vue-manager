@@ -422,6 +422,10 @@ export default {
       // if (!isCheck) {
       //   return;
       // }
+      this.info.tradingIds = "";
+      for (let i = 0; i < this.selectTradingUsers.length; i++) {
+        this.info.tradingIds += this.selectTradingUsers[i].id + ",";
+      }
       api
         .addOrEdit(this.info)
         .then((result) => {

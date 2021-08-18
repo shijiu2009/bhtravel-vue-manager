@@ -83,12 +83,12 @@
               v-model="commentInfo.replyContent"
             ></el-input>
           </el-form-item>
-          <el-form-item label="是否回复">
+          <!-- <el-form-item label="是否回复">
             <el-radio-group v-model="commentInfo.reply">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
-          </el-form-item>
+          </el-form-item> -->
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -126,7 +126,7 @@ export default {
         reviewed: "", //是否通过审核 0未审核 1通过 2不通过
         content: "", //评论内容
         replyContent: "", //回复内容
-        reply: 0,
+        reply: 1,
       },
       //图片集
       photos: [],

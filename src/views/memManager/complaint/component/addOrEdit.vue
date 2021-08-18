@@ -39,12 +39,12 @@
           <el-form-item label="回复人员帐号">
             <el-input v-model="info.replyname" disabled></el-input>
           </el-form-item>
-          <el-form-item label="是否显示">
+          <!-- <el-form-item label="是否显示">
             <el-radio-group v-model="info.isShow">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
-          </el-form-item>
+          </el-form-item> -->
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -84,7 +84,7 @@ export default {
         mail: "",
         reply: "",
         replyname: "",
-        isShow: 0,
+        isShow: 1,
       },
       myConfig: ueditor.myConfig,
     };

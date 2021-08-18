@@ -85,7 +85,7 @@
         ></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
-            <el-button
+            <!-- <el-button
               type="primary"
               round
               icon="el-icon-edit"
@@ -93,7 +93,7 @@
               size="small"
               title="编辑"
               @click="createOrEditBtn(scope.row.id)"
-            ></el-button>
+            ></el-button> -->
             <el-button
               type="danger"
               round

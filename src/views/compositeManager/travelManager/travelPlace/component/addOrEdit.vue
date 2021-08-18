@@ -41,6 +41,7 @@
               <el-radio :label="5">纪念馆</el-radio>
               <el-radio :label="6">美术馆</el-radio>
               <el-radio :label="7">剧场</el-radio>
+              <el-radio :label="8">体育馆</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="开馆日期">

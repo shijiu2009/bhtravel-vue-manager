@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="handle-box">
-      <Screen :screenCondition="screenCondition"></Screen>
+      <!-- <Screen :screenCondition="screenCondition"></Screen> -->
       <!-- 操作按钮 -->
       <div class="operation">
         <!-- 批量删除按钮 -->
@@ -26,7 +26,7 @@
     </div>
     <div class="data_list">
       <el-table
-        :data="themeList"
+        :data="activityList"
         border
           ref="multipleTable"
         style="width: 100%"
@@ -46,38 +46,22 @@
           sortable
         ></el-table-column>
         <el-table-column
-          prop="name"
+          prop="title"
           label="名称"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column>
-        <!-- <el-table-column
-          prop="type"
-          label="座位"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column> -->
-        <!-- <el-table-column prop="seat" label="座位" align="center" show-overflow-tooltip></el-table-column> -->
-        <!-- <el-table-column
-          prop="level"
-          label="车型"
-          align="center"
-          show-overflow-tooltip
-        ></el-table-column> -->
-        <el-table-column
-          prop="phone"
-          label="电话"
+          sortable
           align="center"
           show-overflow-tooltip
         ></el-table-column>
         <el-table-column
           prop="createTime"
           label="创建时间"
+          sortable
           align="center"
           show-overflow-tooltip
         ></el-table-column>
+
         <el-table-column fixed="right" label="操作" width="150">
-          <template slot-scope="scope">
+          <div slot-scope="scope">
             <el-button
               type="primary"
               round
@@ -87,6 +71,15 @@
               title="编辑"
               @click="createOrEditBtn(scope.row.id)"
             ></el-button>
+            <!-- <el-button
+              type="success"
+              round
+              icon="el-icon-eleme"
+              circle
+              size="small"
+              title="查看"
+              @click="detailed(scope.$index)"
+            ></el-button> -->
             <el-button
               type="danger"
               round
@@ -98,11 +91,11 @@
                 openDeleteWarning(scope.$index, scope.row.id)
               "
             ></el-button>
-          </template>
+          </div>
         </el-table-column>
       </el-table>
     </div>
-    <!-- 分页操作 -->
+    <!-- 分页 -->
     <div class="pagination">
       <el-pagination
         background
@@ -112,102 +105,59 @@
         @current-change="handlePageChange"
       ></el-pagination>
     </div>
+    <Detailed :content="activityDetailed" ref="detailedMound"></Detailed>
   </div>
 </template>
-
 <script>
-import api from "@/api/travelManager/rentcar.js";
-import { mapMutations, mapGetters } from "vuex";
-import Screen from "@/components/screen/screen.vue";
+import api from "@/api/project.js";
+import { mapState, mapMutations, mapGetters } from "vuex";
+//调用详细内容页面
+import Detailed from "./component/detailed";
+// import Screen from "@/components/screen/screen.vue";
 export default {
-  name: "rentcarList",
+  name: "projectList",
   components: {
-    Screen,
+    Detailed,
+    // Screen,
   },
   data() {
     return {
-      //加载
-      loading: true,
-      themeList: [],
-
       //搜索栏数据
       screenCondition: {
         input: [
           {
-            name: "name",
-            title: "名称",
-          },
-          {
-            name: "level",
-            title: "级别",
+            name: "title",
+            title: "主题名称",
           },
         ],
         date: false,
       },
-      //时间选择器
-      timePicker: {
-        //   快捷选项
-        pickerOptions: {
-          shortcuts: [
-            {
-              text: "最近一周",
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                picker.$emit("pick", [start, end]);
-              },
-            },
-            {
-              text: "最近一个月",
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                picker.$emit("pick", [start, end]);
-              },
-            },
-            {
-              text: "最近三个月",
-              onClick(picker) {
-                const end = new Date();
-                const start = new Date();
-                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                picker.$emit("pick", [start, end]);
-              },
-            },
-          ],
-        },
-      },
-      //分页数据
-      page: {
-        // 默认显示第几页
-        page: 1,
-        // 总条数，根据接口获取数据长度(注意：这里不能为空)
-        totalCount: 0,
-        // 个数选择器（可修改）
-        // 默认每页显示的条数（可修改）
-        rows: 20,
-      },
+      //是否显示加载动画效果
+      loading: true,
+      activityList: [],
+      activityDetailed: "",
+      //多选数据
       multipleSelection: [],
-      url: this.$baseUrl.releaseUrl,
-      imgList: [],
     };
+  },
+  computed: {
+    ...mapState({
+      timePicker: "timePicker",
+      page: "page",
+    }),
+    ...mapGetters([
+      "getHeight",
+      // ...
+    ]),
   },
   methods: {
     ...mapMutations({
       setTagsList: "SET_TAGSLIST",
+      deleteInclude: "DELETE_INCLUDE",
     }),
     //触发搜索按钮
     handleSearch: function (data) {
       if (data != null) {
-        if (data.date != null && data.date.length > 0) {
-          data["startTime"] = data.date[0];
-          data["endTime"] = data.date[1];
-        } else {
-          data["startTime"] = null;
-          data["endTime"] = null;
-        }
         data["page"] = this.page.page;
         data["totalCount"] = this.page.totalCount;
         data["rows"] = this.page.rows;
@@ -216,7 +166,7 @@ export default {
         data = this.page;
       }
       api
-        .getList(data)
+        .getActivitys(data)
         .then((result) => {
           //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
           if (result.rows.length == 0 && this.page.page > 1) {
@@ -224,7 +174,7 @@ export default {
             this.handleSearch(this.searchDate);
           }
           this.loading = false; //关掉加载动画
-          this.themeList = result.rows;
+          this.activityList = result.rows;
           this.page.totalCount = result.total;
         })
         .catch(() => {
@@ -262,7 +212,7 @@ export default {
           return api.deleted({ ids: id });
         })
         .then(() => {
-          this.getList();
+          this.getActivitys();
           this.$message({
             type: "success",
             message: "删除成功!",
@@ -277,43 +227,50 @@ export default {
     },
     createOrEditBtn: function (id) {
       //判断是添加还是编辑
-      let name = "addRentcar";
+      let name = "addProject";
       if (id) {
-        name = "editRentcar";
+        name = "editProject";
       }
       this.$router.push({
         name: name,
         params: { id: id },
       });
     },
-    //获取线路列表
-    getList: function () {
-      this.loading = true;
-      api
-        .getList(this.page)
+    //打开查看页面
+    detailed: function (i) {
+      this.$refs.detailedMound
+        .updataComtent(this.activityList[i])
         .then((result) => {
-          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
-          if (result.rows.length == 0 && this.page.page > 1) {
-            this.page.page = this.page.page - 1;
-            this.getList();
-          }
-          this.loading = false; //关掉加载动画
-          this.themeList = result.rows;
-          this.page.totalCount = result.total;
-        })
-        .catch(() => {
-          this.loading = false; //关掉加载动画
-          this.$message.error("查询出错");
+          console.log(result);
         });
     },
     // 多选操作
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
+    getActivitys: function () {
+      this.loading = true;
+      api
+        .getActivitys(this.page)
+        .then((result) => {
+          //当页面只有一条数据且并不是第一页时，防止删除的时候页面无法获得数据
+          if (result.rows.length == 0 && this.page.page > 1) {
+            this.page.page = this.page.page - 1;
+            this.getActivitys();
+          }
+          this.loading = false; //关掉加载动画
+          this.activityList = result.rows;
+          this.page.totalCount = result.total;
+        })
+        .catch(() => {
+          this.loading = false; //关掉加载动画
+          this.$message.error("活动列表获取失败");
+        });
+    },
     //点击分页按钮
     handlePageChange: function (index) {
       this.page.page = index;
-      this.getList();
+      this.handleSearch(this.searchDate);
     },
     // 防抖函数
     debounce(func, wait, immediate) {
@@ -332,14 +289,8 @@ export default {
       };
     },
   },
-created() {
-    this.getList();
-  },
-  computed: {
-    ...mapGetters([
-      "getHeight",
-      // ...
-    ]),
+  created() {
+    this.getActivitys();
   },
   mounted() {
     let that = this;
@@ -363,10 +314,11 @@ created() {
   },
   //keep-alive 生命周期，
   activated() {
-    //flow=true,则刷新界面
+    //flow：true,则刷新界面，
     if (this.$route.params && this.$route.params.flow) {
-      this.getList();
+      this.getActivitys();
     }
   },
 };
+// activated,deactivated这两个生命周期函数一定是要在使用了keep-alive组件后才会有的
 </script>

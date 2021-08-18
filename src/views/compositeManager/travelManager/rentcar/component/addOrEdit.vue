@@ -7,21 +7,25 @@
             <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
 
-          <el-form-item label="车型">
+          <!-- <el-form-item label="副标题">
+            <el-input v-model="info.synopsis" style="width: 400px"></el-input>
+          </el-form-item> -->
+
+          <!-- <el-form-item label="座位">
             <el-input v-model="info.type" style="width: 400px"></el-input>
-          </el-form-item>
+          </el-form-item> -->
 
-          <el-form-item label="天数">
+          <!-- <el-form-item label="天数">
             <el-input-number v-model="info.days" :min="0"></el-input-number>
-          </el-form-item>
+          </el-form-item> -->
 
-          <el-form-item label="价格">
+          <!-- <el-form-item label="价格">
             <el-input v-model="info.price" style="width: 400px"></el-input>
-          </el-form-item>
+          </el-form-item> -->
 
-          <el-form-item label="级别">
+          <!-- <el-form-item label="车型">
             <el-input v-model="info.level" style="width: 400px"></el-input>
-          </el-form-item>
+          </el-form-item> -->
 
           <!-- <el-form-item label="座位">
             <el-input v-model="info.seat"></el-input>
@@ -30,6 +34,12 @@
           <el-form-item label="电话">
             <el-input v-model="info.phone" style="width: 400px"></el-input>
           </el-form-item>
+
+          <!-- <el-form-item label="地址">
+            <el-input v-model="info.address" style="width: 400px"></el-input>
+          </el-form-item> -->
+
+          <baiduMap :baiduInfo="baiduInfo" ref="baiduMap"></baiduMap>
 
           <el-form-item label="排序">
             <el-input-number v-model="info.sort" :min="0"></el-input-number>
@@ -69,12 +79,12 @@
             ></vue-ueditor-wrap>
           </el-form-item>
 
-          <el-form-item label="简介">
+          <!-- <el-form-item label="简介">
             <vue-ueditor-wrap
               v-model="info.synopsis"
               :config="myConfig"
             ></vue-ueditor-wrap>
-          </el-form-item>
+          </el-form-item> -->
         </div>
         <!-- 操作按钮 -->
         <el-form-item>
@@ -90,11 +100,14 @@ import api from "@/api/travelManager/rentcar.js";
 import { mapMutations } from "vuex";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
 import baseURL from "@/config/baseUrl.js";
+//百度地图
+import baiduMap from "@/components/baiduMap/baiduMap.vue";
 //富文本框
 import VueUeditorWrap from "vue-ueditor-wrap";
 import ueditor from "@/assets/js/ueditorConfig.js";
 export default {
   components: {
+    baiduMap,
     UploadFile,
     VueUeditorWrap,
   },
@@ -114,6 +127,11 @@ export default {
         level: "",
         price: "",
         synopsis: "",
+      },
+      baiduInfo: {
+        address: "",
+        longitude: "",
+        latitude: "",
       },
       myConfig: ueditor.myConfig,
       //图片上传组件信息
@@ -144,6 +162,9 @@ export default {
     },
     //提交表单
     onSubmit: function () {
+      this.info.address = this.baiduInfo.address;
+      this.info.longitude = this.baiduInfo.longitude;
+      this.info.latitude = this.baiduInfo.latitude;
       api
         .addOrEdit(this.info)
         .then((result) => {
@@ -201,10 +222,12 @@ export default {
             this.uploadGroupTitle.fileList = [];
             this.uploadGroupThumb.fileList = [];
             this.info = result.rentcar;
-            if (
-              result.rentcar.titleimgurl != null &&
-              result.rentcar.titleimgurl != ""
-            ) {
+            this.baiduInfo.address = result.rentcar.address;
+            this.baiduInfo.longitude = result.rentcar.longitude;
+            this.baiduInfo.latitude = result.rentcar.latitude;
+            this.$refs.baiduMap.getClickInfo;
+            this.$refs.baiduMap.getLngAndLat();
+            if (result.rentcar.titleimgurl != null && result.rentcar.titleimgurl != "") {
               this.uploadGroupTitle.fileList.push({
                 url: baseURL.releaseUrl + result.rentcar.titleimgurl,
               });
@@ -221,6 +244,7 @@ export default {
       } else {
         //重置参数
         Object.keys(this.info).map((key) => (this.info[key] = ""));
+        Object.keys(this.baiduInfo).map((key) => (this.info[key] = ""));
         this.info = {
           id: "",
           name: "",
@@ -234,6 +258,11 @@ export default {
           level: "",
           price: "",
           synopsis: "",
+        };
+        this.baiduInfo = {
+          address: "",
+          longitude: "",
+          latitude: "",
         };
         this.uploadGroupTitle.fileList = [];
         this.uploadGroupThumb.fileList = [];

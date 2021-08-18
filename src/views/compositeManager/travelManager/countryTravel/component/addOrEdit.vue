@@ -6,6 +6,12 @@
           <el-form-item label="农家乐名称">
             <el-input v-model="info.name" style="width: 400px"></el-input>
           </el-form-item>
+          <el-form-item label="类型">
+            <el-radio-group v-model="info.type" @change="typeChange">
+              <el-radio :label="1">乡村旅游</el-radio>
+              <el-radio :label="2">农家乐</el-radio>
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="首页提示语">
             <el-input v-model="info.indexTip" style="width: 400px"></el-input>
           </el-form-item>
@@ -97,10 +103,7 @@
             <el-input v-model="info.todayPrice"></el-input>
           </el-form-item> -->
           <el-form-item label="预定须知" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.notice"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
+            <vue-ueditor-wrap v-model="info.notice" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="推荐理由" :required="true">
             <vue-ueditor-wrap
@@ -109,10 +112,7 @@
             ></vue-ueditor-wrap>
           </el-form-item>
           <el-form-item label="介绍（微信小程序、APP）" :required="true">
-            <vue-ueditor-wrap
-              v-model="info.info"
-              :config="myConfig"
-            ></vue-ueditor-wrap>
+            <vue-ueditor-wrap v-model="info.info" :config="myConfig"></vue-ueditor-wrap>
           </el-form-item>
           <!-- <el-form-item label="公告" :required="true">
             <quill-editor
@@ -136,9 +136,7 @@
                 :key="index"
                 style="box-shadow: 0px 0px 8px #888; padding: 10px"
               >
-                <el-button type="danger" @click="deleteTitket(index)"
-                  >删除</el-button
-                >
+                <el-button type="danger" @click="deleteTitket(index)">删除</el-button>
                 <span style="margin-left: 40px"
                   >第{{ tickets.length - index }}个项目，共{{
                     tickets.length
@@ -176,16 +174,10 @@
                     ></el-input>
                   </el-form-item>
                   <el-form-item label="门店价">
-                    <el-input
-                      v-model="eItem.price"
-                      placeholder="请输入价格"
-                    ></el-input>
+                    <el-input v-model="eItem.price" placeholder="请输入价格"></el-input>
                   </el-form-item>
                   <el-form-item label="排序">
-                    <el-input
-                      v-model="eItem.sort"
-                      placeholder="请输入价格"
-                    ></el-input>
+                    <el-input v-model="eItem.sort" placeholder="请输入价格"></el-input>
                   </el-form-item>
                   <el-form-item label="是否下架">
                     <el-radio-group v-model="eItem.down">
@@ -228,9 +220,7 @@
               class="text item"
             >
               {{ item.name
-              }}<el-button type="text" @click="deleteProduct(index)"
-                >删除</el-button
-              >
+              }}<el-button type="text" @click="deleteProduct(index)">删除</el-button>
             </span>
           </el-card>
 
@@ -302,6 +292,7 @@ export default {
       info: {
         id: "",
         name: "",
+        type: 1,
         // isCheck: 0,
         maxCustom: "",
         nowCustom: "",
@@ -430,24 +421,12 @@ export default {
           label: "广西五星级乡村旅游区",
         },
         {
-          value: 2,
-          label: "广西五星级农家乐",
-        },
-        {
           value: 3,
           label: "广西四星级乡村旅游区",
         },
         {
-          value: 4,
-          label: "广西四星级农家乐",
-        },
-        {
           value: 5,
           label: "广西三星级乡村旅游区",
-        },
-        {
-          value: 6,
-          label: "广西三星级农家乐",
         },
       ],
       //对话框
@@ -480,19 +459,14 @@ export default {
     //提交表单
     onSubmit: function () {
       deleteKeys(this.info, "projects", this);
-      if (
-        this.uploadGroupOne.fileList != null &&
-        this.uploadGroupOne.fileList != ""
-      ) {
+      if (this.uploadGroupOne.fileList != null && this.uploadGroupOne.fileList != "") {
         for (let i = 0; i < this.uploadGroupOne.fileList.length; i++) {
           if ("response" in this.uploadGroupOne.fileList[i]) {
             this.info["items[" + i + "].path"] = this.uploadGroupOne.fileList[
               i
             ].response.filePath;
           } else {
-            var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(
-              baseURL.imgUrl
-            );
+            var pos = this.uploadGroupOne.fileList[i].url.lastIndexOf(baseURL.imgUrl);
             let url = this.uploadGroupOne.fileList[i].url.substr(pos);
             this.info["items[" + i + "].path"] = url;
           }
@@ -560,9 +534,7 @@ export default {
     //添加项目
     addTicket: function () {
       let ticket = JSON.parse(JSON.stringify(this.ticket));
-      ticket.uploadGroupTicket = JSON.parse(
-        JSON.stringify(this.uploadGroupTicket)
-      );
+      ticket.uploadGroupTicket = JSON.parse(JSON.stringify(this.uploadGroupTicket));
       this.tickets.unshift(JSON.parse(JSON.stringify(ticket)));
     },
     //添加路径
@@ -611,6 +583,47 @@ export default {
         this.info.bstars = "";
       }
     },
+    typeChange: function () {
+      if (this.info.type == 1) {
+        this.starts = [
+          {
+            value: "",
+            label: "--无--",
+          },
+          {
+            value: 1,
+            label: "广西五星级乡村旅游区",
+          },
+          {
+            value: 3,
+            label: "广西四星级乡村旅游区",
+          },
+          {
+            value: 5,
+            label: "广西三星级乡村旅游区",
+          },
+        ];
+      } else {
+        this.starts = [
+          {
+            value: "",
+            label: "--无--",
+          },
+          {
+            value: 2,
+            label: "广西五星级农家乐",
+          },
+          {
+            value: 4,
+            label: "广西四星级农家乐",
+          },
+          {
+            value: 6,
+            label: "广西三星级农家乐",
+          },
+        ];
+      }
+    },
     //获取详情信息
     getDetail: function () {
       if (this.$route.params && this.$route.params.id) {
@@ -622,7 +635,45 @@ export default {
             this.uploadGroupTicket.fileList = [];
             this.uploadGroupOne.fileList = [];
             this.tickets = [];
-
+             if (result.type == 1) {
+              this.starts = [
+                {
+                  value: "",
+                  label: "--无--",
+                },
+                {
+                  value: 1,
+                  label: "广西五星级乡村旅游区",
+                },
+                {
+                  value: 3,
+                  label: "广西四星级乡村旅游区",
+                },
+                {
+                  value: 5,
+                  label: "广西三星级乡村旅游区",
+                },
+              ];
+            } else {
+              this.starts = [
+                {
+                  value: "",
+                  label: "--无--",
+                },
+                {
+                  value: 2,
+                  label: "广西五星级农家乐",
+                },
+                {
+                  value: 4,
+                  label: "广西四星级农家乐",
+                },
+                {
+                  value: 6,
+                  label: "广西三星级农家乐",
+                },
+              ];
+            }
             this.info = result.countryTravel;
             this.baiduInfo.address = this.info.address;
             this.baiduInfo.longitude = this.info.longitude;
@@ -633,6 +684,7 @@ export default {
             this.$refs.baiduMap.getClickInfo;
             this.$refs.baiduMap.getLngAndLat();
             this.$refs.baiduMap.getProvinces();
+           
             if (
               result.countryTravel.indexImg != null &&
               result.countryTravel.indexImg != ""
@@ -641,10 +693,7 @@ export default {
                 url: baseURL.releaseUrl + result.countryTravel.indexImg,
               });
             }
-            if (
-              result.countryTravel.icon != null &&
-              result.countryTravel.icon != ""
-            ) {
+            if (result.countryTravel.icon != null && result.countryTravel.icon != "") {
               this.uploadGroupThumb.fileList.push({
                 url: baseURL.releaseUrl + result.countryTravel.icon,
               });

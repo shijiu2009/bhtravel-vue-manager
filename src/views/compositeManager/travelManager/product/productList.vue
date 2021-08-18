@@ -222,6 +222,8 @@ export default {
         // 默认每页显示的条数（可修改）
         rows: 20,
         classId: 1,
+        //按创建时间排序
+        orderBy: 2,
       },
       searchDate: [],
       multipleSelection: [],

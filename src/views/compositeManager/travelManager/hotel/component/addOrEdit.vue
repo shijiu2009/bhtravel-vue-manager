@@ -638,7 +638,7 @@ export default {
         hotelPicItems: [],
         products: [],
         openTime: "",
-        status: 0,
+        status: 1,
         startDate: "18:00:00",
         endDate: "14:00:00",
       },
