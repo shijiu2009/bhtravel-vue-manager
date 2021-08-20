@@ -50,7 +50,7 @@ instance.interceptors.request.use(config => {
     //设置默认值，用于判断是否序列化
     else if (config.data && config.data.qs != 0 && config.url.search(upload) <= 0) {
         //序列化表单数据
-        config.data = qs.stringify(config.data);
+        config.data = qs.stringify(config.data, {allowDots: true});
     }
     return config;
 }, err => {

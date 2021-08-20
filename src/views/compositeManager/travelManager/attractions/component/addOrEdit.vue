@@ -570,6 +570,7 @@ export default {
       this.info.proxcode = this.baiduInfo.proxcode;
       this.info.cityxcode = this.baiduInfo.cityxcode;
       this.info.countyxcode = this.baiduInfo.countyxcode;
+      console.log(this.info)
       attractionsApi
         .addOrEditAttractions(this.info)
         .then((result) => {

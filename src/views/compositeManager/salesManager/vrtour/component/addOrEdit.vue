@@ -35,7 +35,7 @@
           </el-form-item>
 
           <el-row>
-            <el-col :span="3">
+            <el-col :span="4">
               <el-form-item label="视频"></el-form-item>
             </el-col>
             <UploadFileVideo
@@ -45,7 +45,7 @@
           </el-row>
 
           <el-row>
-            <el-col :span="3">
+            <el-col :span="4">
               <el-form-item label="全景图"></el-form-item>
             </el-col>
             <UploadFileVideo
@@ -60,6 +60,72 @@
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
+
+          <el-form-item>
+            <el-button @click="addDomain">全景图添加</el-button>
+          </el-form-item>
+
+          <el-form-item label="图片信息"
+          v-for="(domain, index) in info.panos"
+          :key="index">
+              <el-row>
+                <el-col :span="4">
+                  <el-input
+                    id="lat"
+                    style="display: inline-block; width: 80%"
+                    v-model="domain.code"
+                    placeholder="code："
+                  ></el-input>
+                </el-col>
+                <el-col :span="8">
+                  <UploadFilePic
+                    @uploadValue="(file) => picValue(file, domain)"
+                    ref="uploadGroupPic"
+                    :uploadGroup="panoUploadGroup[index]"
+                  ></UploadFilePic>
+                </el-col>
+                <el-col :span="12">
+                  <el-row v-for="(item, i) in domain.markers"
+                    :key="i">
+                    <el-col :span="6">
+                      <el-input
+                        id="lng"
+                        style="display: inline-block; width: 80%"
+                        v-model="item.name"
+                        placeholder="名称："
+                      ></el-input>
+                    </el-col>
+                    <el-col :span="6">
+                      <el-input
+                        id="lat"
+                        style="display: inline-block; width: 80%"
+                        v-model="item.xaxis"
+                        placeholder="x坐标："
+                      ></el-input>
+                    </el-col>
+                    <el-col :span="6">
+                      <el-input
+                        id="lat"
+                        style="display: inline-block; width: 80%"
+                        v-model="item.yaxis"
+                        placeholder="y坐标："
+                      ></el-input>
+                    </el-col>
+                    <el-col :span="6">
+                      <el-input
+                        id="lat"
+                        style="display: inline-block; width: 80%"
+                        v-model="item.code"
+                        placeholder="code:"
+                      ></el-input>
+                    </el-col>
+                  </el-row>
+                </el-col>
+              </el-row>
+              <el-button @click="addMarkers(index)">markers组添加</el-button>
+          </el-form-item>
+          
+
         </div>
 
         <!-- 对话框 -->
@@ -178,17 +244,27 @@ import api from "@/api/travelManager/vrtour.js";
 import { mapMutations } from "vuex";
 import UploadFileVideo from "@/components/uploadVideo/uploadVideo.vue";
 import UploadFile from "@/components/uploadImage/uploadImage.vue";
+import UploadFilePic from "@/components/uploadPic/uploadPic.vue";
 import baseURL from "@/config/baseUrl.js";
 import attractionApi from "@/api/reserveManager/attractions.js";
 import countryTravelApi from "@/api/reserveManager/countryTravel.js";
 export default {
   components: {
     UploadFile,
+    UploadFilePic,
     UploadFileVideo,
   },
   name: "addOrEditVrtour",
   data() {
     return {
+      panoUploadGroup: [
+        {
+          //文件列表
+          fileList: [],
+          limitCount: 1,
+          autoUpload: true,
+        }
+      ],
       info: {
         id: "",
         title: "",
@@ -199,6 +275,20 @@ export default {
         cid: "",
         isShow: 0,
         typeId: 1,
+        panos: [
+          {
+            code: '',//图片唯一code
+            imgUrl: '',//图片地址
+            markers: [
+              {
+                name: '', //名称
+                xaxis: '',//x轴
+                yaxis: '',//y轴
+                code: '',//图片唯一code
+              },
+            ]
+          }
+        ],
       },
       //視頻上传组件信息
       uploadGroup: {
@@ -212,6 +302,12 @@ export default {
         limitCount: 20,
       },
       uploadGroupTitle: {
+        //文件列表
+        fileList: [],
+        limitCount: 1,
+        autoUpload: true,
+      },
+      uploadGroupPic: {
         //文件列表
         fileList: [],
         limitCount: 1,
@@ -243,6 +339,10 @@ export default {
     titleValue: function (data) {
       this.info.titleimg = data.filePath;
     },
+    //添加路径
+    picValue: function (file, data) {
+      data.imgUrl = file.filePath;
+    },
     uploadValue: function (data) {
       this.info.video = data.filePath;
     },
@@ -265,6 +365,39 @@ export default {
         this.showCountryTravels = true;
         this.info.aid = "";
       }
+    },
+    // 增加复选框
+    addDomain() {
+      this.info.panos.push({
+        code: '',//图片唯一code
+        imgUrl: '',
+        markers: [
+          {
+            name: '', //名称
+            xaxis: '',//x轴
+            yaxis: '',//y轴
+            code: '',//图片唯一code
+          },
+        ]
+      });
+
+      this.panoUploadGroup.push({
+        fileList: [],
+        limitCount: 1,
+        autoUpload: true,
+      })
+    },
+    addMarkers(i){
+      console.log(this.info.panos)
+      console.log(i)
+      this.info.panos[i].markers.push(
+         {
+            name: '', //名称
+            xaxis: '',//x轴
+            yaxis: '',//y轴
+            code: '',//图片唯一code
+          },
+      )
     },
     //景点
     addAttractions: function () {
@@ -320,6 +453,9 @@ export default {
       for (let i = 0; i < this.uploadGroupVR.fileList.length; i++) {
         this.info.url += this.uploadGroupVR.fileList[i].url + ",";
       }
+      console.log("传参数")
+      console.log(this.info)
+      this.info = JSON.parse(JSON.stringify(this.info))
 
       api
         .addOrEdit(this.info)
@@ -374,6 +510,7 @@ export default {
           .then((result) => {
             this.uploadGroupVR.fileList = [];
             this.uploadGroupTitle.fileList = [];
+            this.uploadGroupPic.fileList = [];
             this.info = result.vrtour;
             let file = result.vrtour.url;
             let fileList = file.split(",");
@@ -397,6 +534,9 @@ export default {
             ];
             if (result.vrtour.titleimg != null && result.vrtour.titleimg != "") {
               this.uploadGroupTitle.fileList.push({
+                url: baseURL.releaseUrl + result.vrtour.titleimg,
+              });
+              this.uploadGroupPic.fileList.push({
                 url: baseURL.releaseUrl + result.vrtour.titleimg,
               });
             }
@@ -438,6 +578,20 @@ export default {
           cid: "",
           isShow: 0,
           typeId: 1,
+          panos: [
+            {
+              code: '',
+              imgUrl: '',
+              markers: [
+                {
+                  name: '', //名称
+                  xaxis: '',//x轴
+                  yaxis: '',//y轴
+                  code: '',//图片唯一code
+                },
+              ]
+            }
+          ],
         };
       }
     },

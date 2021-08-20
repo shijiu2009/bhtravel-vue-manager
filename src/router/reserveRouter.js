@@ -83,7 +83,7 @@ let router = [{
         }
     },
     {
-        path: "//travel/periphery/edit",
+        path: "/travel/periphery/edit",
         name: "editPeriphery",
         component: EditPeriphery,
         meta: {
